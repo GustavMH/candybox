@@ -46,19 +46,22 @@ var candies = {
         this.candiesPerSecond = value;
     },
     
-    setNbrThrown : function(value){
-        this.nbrThrown = value;
+    setNbrThrown: (n_thrown) => {
+        this.nbrThrown = value
 
         // We choose which smiley we want to add at the end of the sentence
         smiley_fn = (txt) => `...? <tt>${txt}<tt>`
         smileys = [".", "...", "...?", ...[":|", ":/", ":(", ":[", ":{", ":'(", "(;_;)"].map(smiley_fn)]
-        smiley = [Math.floor(value / 10)]
+        smiley = smileys[Math.floor(value / 10)] || smileys[9]
 
         darkMode.check();
+
+        text = n_thrown != 1
+            ? "You threw ${this.nbrThrown} candies on the ground ${smiley}"
+            : "You threw 1 candy on the ground ${smiley}"
         
-        if(this.nbrThrown != 1) htmlInteraction.setInnerHtml("candies_thrown", "You threw " + this.nbrThrown + " candies on the ground" + smiley);
-        else htmlInteraction.setInnerHtml("candies_thrown", "You threw 1 candy on the ground" + smiley);
-        htmlInteraction.setElementVisibility("candies_thrown", true);
+        htmlInteraction.setInnerHtml("candies_thrown", text)
+        htmlInteraction.setElementVisibility("candies_thrown", true)
     },
     
     throw10Candies : function(){
