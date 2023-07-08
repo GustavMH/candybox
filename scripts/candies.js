@@ -48,18 +48,11 @@ var candies = {
     
     setNbrThrown : function(value){
         this.nbrThrown = value;
-        
+
         // We choose which smiley we want to add at the end of the sentence
-        if(this.nbrThrown <= 10) smiley = ".";
-        else if(this.nbrThrown <= 20) smiley = "...";
-        else if(this.nbrThrown <= 30) smiley = "...?";
-        else if(this.nbrThrown <= 40) smiley = "...? <tt>:|</tt>";
-        else if(this.nbrThrown <= 50) smiley = "...? <tt>:/</tt>";
-        else if(this.nbrThrown <= 60) smiley = "...? <tt>:(</tt>";
-        else if(this.nbrThrown <= 70) smiley = "...? <tt>:[</tt>";
-        else if(this.nbrThrown <= 80) smiley = "...? <tt>:{</tt>";
-        else if(this.nbrThrown <= 90) smiley = "...? <tt>:'(</tt>";
-        else smiley = "...? <tt>(;_;)</tt>";
+        smiley_fn = (txt) => `...? <tt>${txt}<tt>`
+        smileys = [".", "...", "...?", ...[":|", ":/", ":(", ":[", ":{", ":'(", "(;_;)"].map(smiley_fn)]
+        smiley = [Math.floor(value / 10)]
 
         darkMode.check();
         
