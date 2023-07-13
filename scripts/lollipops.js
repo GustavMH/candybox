@@ -67,8 +67,12 @@ var lollipops = {
     
     setNbrOwned : function(value){
         this.nbrOwned = value;
-        if(this.nbrOwned != 1) htmlInteraction.setInnerHtml("lollipops", "You have " + this.nbrOwned + " lollipops!");
-        else htmlInteraction.setInnerHtml("lollipops", "You have 1 lollipop!");
+
+        text = this.nbrOwned != 1
+            ? `You have ${this.nbrOwned} lollipops!`
+            : "You have 1 lollipop!"
+
+        htmlInteraction.setInnerHtml("lollipops", text);
         htmlInteraction.setElementVisibility("lollipops", true);
         buttons.checkLollipops();
         cauldron.updateActionsInfoOnPage();
