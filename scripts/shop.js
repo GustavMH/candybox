@@ -22,33 +22,30 @@ var shop = {
         }
         if(candies.nbrOwned >= 150){
             // If we don't have any sword and there's no sword to sell yet, we show the wooden sword
-            if(sword.name == "none" && this.currentSwordButtonId == "none"){
+            if(sword.name == "none" && this.currentSwordButtonId == "none") {
                 this.showProduct("wooden_sword");
             }
         }
     },
     
-    setBuy10LollipopsButtonShown : function(value){
+    setBuy10LollipopsButtonShown : function(value) {
         this.buy10LollipopsButtonShown = value;
     },
     
-    clickedOnHat : function(){
-        switch(this.ticklingStep){
-            case 0:
-                this.setMerchantSpeech("Hey ! You touched my hat !");
-            break;
-            case 1:
-                this.setMerchantSpeech("Stop that, stop that ! You're tickling me !");
-            break;
-            case 2:
-                this.setMerchantSpeech("Hahahaha ! I'm so ticklish !");
-            break;
-            case 3:
-                this.setMerchantSpeech("Listen, listen : I give you 100 candies ! But stop that please !");
-                candies.setNbrOwned(candies.nbrOwned + 100);
-            break;
-        }
-        
+    clickedOnHat : function() {
+        texts = [
+            "Hey ! You touched my hat !",
+            "Stop that, stop that ! You're tickling me !",
+            "Hahahaha ! I'm so ticklish !",
+            "Listen, listen : I give you 100 candies ! But stop that please !"
+        ]
+        text = texts[this.ticklingStep]
+
+        if (text) this.setMerchantSpeech(text)
+
+        if (this.ticklingStep == 3)
+            candies.setNbrOwned(candies.nbrOwned + 100);
+
         this.setTicklingStep(this.ticklingStep + 1);
     },
     
@@ -56,55 +53,33 @@ var shop = {
         this.ticklingStep = value;
     },
     
-    setClickingOnLollipopStep : function(value){
+    setClickingOnLollipopStep : function(value) {
         this.clickingOnLollipopStep = value;
-        
-        // Set the buttons value if the step is 0 or the price is reducing or is reduced
-        if(this.clickingOnLollipopStep <= 4){
-            this.oneLollipopPrice = 60;
-            this.tenLollipopsPrice = 500;
-            htmlInteraction.setInnerHtml("buy_1_lollipop", "Buy a lollipop (60 candies)");
-            htmlInteraction.setInnerHtml("buy_10_lollipops", "Buy 10 lollipop (500 candies)");
-        }
-        else if(this.clickingOnLollipopStep >= 5 && this.clickingOnLollipopStep < 15){
-            this.oneLollipopPrice = 60 - (this.clickingOnLollipopStep - 4);
-            this.tenLollipopsPrice = 500 - (this.clickingOnLollipopStep - 4) * 5;
-            htmlInteraction.setInnerHtml("buy_1_lollipop", "Buy a lollipop (" + this.oneLollipopPrice + " candies)");
-            htmlInteraction.setInnerHtml("buy_10_lollipops", "Buy 10 lollipop (" + this.tenLollipopsPrice + " candies)");
-        }
-        else{
-            this.oneLollipopPrice = 60 - (14 - 4);
-            this.tenLollipopsPrice = 500 - (14 - 4) * 5;
-            htmlInteraction.setInnerHtml("buy_1_lollipop", "Buy a lollipop (" + this.oneLollipopPrice + " candies)");
-            htmlInteraction.setInnerHtml("buy_10_lollipops", "Buy 10 lollipop (" + this.tenLollipopsPrice + " candies)");
-        }
+
+        /* Reduces price based of no. of times top of lollipop is clicked */
+        price_mod = Math.min(Math.max(0, value - 4), 10)
+
+        this.oneLollipopPrice = 60 - price_mod
+        this.tenLollipopsPrice = 500 - price_mod * 5
+        htmlInteraction.setInnerHtml("buy_1_lollipop", `Buy a lollipop (${this.oneLollipopPrice} candies)`)
+        htmlInteraction.setInnerHtml("buy_10_lollipops", `Buy 10 lollipop (${this.tenLollipopsPrice} candies)`)
     },
     
-    clickedOnLollipop : function(){
-        this.setClickingOnLollipopStep(this.clickingOnLollipopStep + 1);
-        
-        // Possibly change the merchant speech
-        switch(this.clickingOnLollipopStep){
-            case 1:
-                this.setMerchantSpeech("Hey ! Don't touch the products !");
-            break;
-            case 2:
-                this.setMerchantSpeech("Seriously, don't touch this lollipop.");
-            break;
-            case 3:
-                this.setMerchantSpeech("Don't touch it ! Other customers may lick it after that, that's gross !");
-            break;
-            case 4:
-                this.setMerchantSpeech("Stop now or I'll be force to do something.");
-            break;
-            case 15:
-                this.setMerchantSpeech("I can't make a lower price... Please stop.");
-            break;
-        }
-        
-        if(this.clickingOnLollipopStep >= 5 && this.clickingOnLollipopStep < 15){
-            this.setMerchantSpeech("Okay, okay, I lower the price, but stop touching it !");
-        }
+    clickedOnLollipop : function() {
+        this.setClickingOnLollipopStep(this.clickingOnLollipopStep + 1)
+
+        ts = [
+            "Hey ! Don't touch the products !",
+            "Seriously, don't touch this lollipop.",
+            "Don't touch it ! Other customers may lick it after that, that's gross !",
+            "Stop now or I'll be force to do something.",
+            "I can't make a lower price... Please stop.",
+            "Okay, okay, I lower the price, but stop touching it !"
+        ]
+        texts = [...ts.slice(0,4), ...Array(10).fill(ts[5]), ts[4]]
+        text  = texts[this.clickingOnLollipopStep]
+
+        if (text) this.setMerchantSpeech(text)
     },
     
     showProduct : function(id){
