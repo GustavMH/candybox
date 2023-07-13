@@ -39,20 +39,20 @@ var main = {
         quest.onloadAfter(); // This must be call after other loads because it needs the different quests to be loaded
         
         // Loading save from cookie
-		if(cookie.readCookie("CandyCookie") != null)
-		{
-			cookie.setData();
-		}
-		else
-		{
-			console.log("INFO: Couldn't find a Cookie.");
-		}
-		
+        if(cookie.readCookie("CandyCookie") != null)
+        {
+            cookie.setData();
+        }
+        else
+        {
+            console.log("INFO: Couldn't find a Cookie.");
+        }
+
                         
         // First actions
         window.setInterval(this.oneTenthSecInterval.bind(this), 100);
         window.setInterval(this.secInterval.bind(this), 1000);
-		cookie.cookiehandler = window.setInterval(cookie.autoSave, 1000);
+        cookie.cookiehandler = window.setInterval(cookie.autoSave, 1000);
     },
     
     oneTenthSecInterval : function(){
