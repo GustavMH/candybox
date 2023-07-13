@@ -29,40 +29,35 @@ var lollipops = {
     },
     
     getFlavour : function(){
-        var fruits = ["apple", "strawberry", "grape", "blackberry", "orange", "watermelon", "banana", "pear", "cherry", "raspberry", "mandarin", "lime", "peach", "apricot", "blueberry", "kiwifruit", "lychee", "pineapple"];
-        var uncommon = ["chocolate", "cookie", "pancake", "water", "tomato", "kitten"];
-        var unrealistic = ["leprechaun", "korrigan", "lollipop", "snow", "storm", "door", "dracula"];
-        var abstract = ["gluttony", "desire", "love", "causality", "fatalism", "cuteness"];
-        
-        var chances = [];
-        if(this.nbrBought < 10) chances = [1];
-        else if(this.nbrBought < 10) chances = [1];
-        else if(this.nbrBought < 15) chances = [0.9, 1];
-        else if(this.nbrBought < 20) chances = [0.8, 1];
-        else if(this.nbrBought < 25) chances = [0.7, 1];
-        else if(this.nbrBought < 30) chances = [0.5, 1];
-        else if(this.nbrBought < 35) chances = [0.4, 0.9, 1];
-        else if(this.nbrBought < 40) chances = [0.3, 0.8, 1];
-        else if(this.nbrBought < 45){
-            if(this.nbrBought == 42 && random.flipACoin()) return "space";
-            else chances = [0.2, 0.7, 1];
+        /* Get a flavour based on how many lollipops have been bought.
+         * The flavour is determined by a CPD, encoding the propability
+         * for each flavour category, from 0 to 1, the CPD is new for every
+         * 50 lollipops bought. */
+
+        flavours = {
+            fruits : ["apple", "strawberry", "grape", "blackberry", "orange", "watermelon", "banana", "pear", "cherry", "raspberry", "mandarin", "lime", "peach", "apricot", "blueberry", "kiwifruit", "lychee", "pineapple"],
+            uncommon : ["chocolate", "cookie", "pancake", "water", "tomato", "kitten"],
+            unrealistic : ["leprechaun", "korrigan", "lollipop", "snow", "storm", "door", "dracula"],
+            abstract : ["gluttony", "desire", "love", "causality", "fatalism", "cuteness"]
         }
-        else if(this.nbrBought < 50) chances = [0.1, 0.6, 1];
-        else if(this.nbrBought < 55) chances = [0.1, 0.5, 1];
-        else if(this.nbrBought < 60) chances = [0.1, 0.4, 0.9];
-        else if(this.nbrBought < 65) chances = [0.1, 0.3, 0.8];
-        else if(this.nbrBought < 70) chances = [0.1, 0.2, 0.7];
-        else if(this.nbrBought < 75) chances = [0.1, 0.2, 0.6];
-        else if(this.nbrBought < 80) chances = [0.1, 0.2, 0.5];
-        else if(this.nbrBought < 85) chances = [0.1, 0.2, 0.4];
-        else if(this.nbrBought == 1337 && random.flipACoin()) return "leet";
-        else chances = [0.1, 0.2, 0.3];
-        
-        var r = random.getRandomFloat()
-        if(r < chances[0]) return random.pickRandomly(fruits);
-        else if(r < chances[1]) return random.pickRandomly(uncommon);
-        else if(r < chances[2]) return random.pickRandomly(unrealistic);
-        else return random.pickRandomly(abstract);
+
+        all_chances = [
+            [1], [1], [0.9, 1], [0.8, 1], [0.7, 1], [0.5, 1], [0.4, 0.9, 1], [0.3, 0.8, 1],
+            [0.2, 0.7, 1], [0.1, 0.6, 1], [0.1, 0.5, 1], [0.1, 0.4, 0.9], [0.1, 0.3, 0.8],
+            [0.1, 0.2, 0.7], [0.1, 0.2, 0.6], [0.1, 0.2, 0.5], [0.1, 0.2, 0.4], [0.1, 0.2, 0.3],
+        ]
+
+        if (this.nbrBought == 42 && random.flipACoin())   return "space"
+        if (this.nbrBought == 1337 && random.flipACoin()) return "leet"
+
+        const r = random.getRandomFloat()
+        const chances = all_chances[Math.floor(this.nbrBought / 50)] || all_chances[17]
+
+        if (r < chances[0]) return random.pickRandomly(flavours.fruits);
+        if (r < chances[1]) return random.pickRandomly(flavours.uncommon);
+        if (r < chances[2]) return random.pickRandomly(flavours.unrealistic);
+
+        return random.pickRandomly(flavours.abstract);
     },
     
     delivery : function(){

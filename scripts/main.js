@@ -39,12 +39,9 @@ var main = {
         quest.onloadAfter(); // This must be call after other loads because it needs the different quests to be loaded
         
         // Loading save from cookie
-        if(cookie.readCookie("CandyCookie") != null)
-        {
+        if(cookie.readCookie("CandyCookie") != null) {
             cookie.setData();
-        }
-        else
-        {
+        } else {
             console.log("INFO: Couldn't find a Cookie.");
         }
 
@@ -62,17 +59,17 @@ var main = {
 
     secInterval : function(){
         // Candies
-        if(objects.list.oldAmulet.have == false) candies.setNbrOwned(candies.nbrOwned + candies.candiesPerSecond);
-        else candies.setNbrOwned(candies.nbrOwned + candies.candiesPerSecond*3);
+        let candy_rate = objects.list.oldAmulet.have ? 3 : 1
+        candies.setNbrOwned(candies.nbrOwned + candies.candiesPerSecond * candy_rate);
         
         // Quest tired time
-        if(objects.list.pinkRing.have == false) quest.setTiredTime(quest.tiredTime - 1);
-        else quest.setTiredTime(quest.tiredTime - 2);
+        let recover_rate = objects.list.pinkRing.have ? 2 : 1
+        quest.setTiredTime(quest.tiredTime - recover_rate);
         
         // Lollipop farm
         if(farm.productionDelayType == "sec"){
-            if(objects.list.hornOfPlenty.have == false) lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction);
-            else lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction*3);
+            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
         
         // Cauldron
@@ -106,24 +103,24 @@ var main = {
     minInterval : function(){
         // Lollipop farm
         if(farm.productionDelayType == "min"){
-            if(objects.list.hornOfPlenty.have == false) lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction);
-            else lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction*3);
+            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
     },
     
     hourInterval : function(){
         // Lollipop farm
         if(farm.productionDelayType == "hour"){
-            if(objects.list.hornOfPlenty.have == false) lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction);
-            else lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction*3);
+            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
     },
     
     dayInterval : function(){
         // Lollipop farm
         if(farm.productionDelayType == "day"){
-            if(objects.list.hornOfPlenty.have == false) lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction);
-            else lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction*3);
+            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
     },
     
