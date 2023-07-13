@@ -28,17 +28,25 @@ var candies = {
         }
         
         this.nbrOwned = value;
-        if(this.nbrOwned != 1) htmlInteraction.setInnerHtml("candies", "You have " + this.nbrOwned + " candies!");
-        else htmlInteraction.setInnerHtml("candies", "You have 1 candy!");
+
+        text = this.nbrOwned != 1
+            ? `You have ${this.nbrOwned} candies!`
+            : `You have 1 candy!`
+
+        htmlInteraction.setInnerHtml("candies", text);
         buttons.checkCandies();
         shop.check();
         cauldron.updateActionsInfoOnPage();
     },
     
-    setNbrEaten : function(value){
-        this.nbrEaten = value;
-        if(this.nbrEaten != 1) htmlInteraction.setInnerHtml("candies_eaten", "You have eaten " + this.nbrEaten + " candies!");
-        else htmlInteraction.setInnerHtml("candies_eaten", "You have eaten 1 candy!");
+    setNbrEaten : function(n_eaten){
+        this.nbrEaten = n_eaten;
+
+        text = n_eaten != 1
+            ? `You have eaten ${this.nbrEaten} candies!`
+            : "You have eaten 1 candy!"
+
+        htmlInteraction.setInnerHtml("candies_eaten", text);
         htmlInteraction.setElementVisibility("candies_eaten", true);
     },
     
@@ -46,25 +54,28 @@ var candies = {
         this.candiesPerSecond = value;
     },
     
-    setNbrThrown: (n_thrown) => {
-        this.nbrThrown = value
+    setNbrThrown : (n_thrown) => {
+        console.log(n_thrown)
+        this.nbrThrown = n_thrown
 
         // We choose which smiley we want to add at the end of the sentence
         smiley_fn = (txt) => `...? <tt>${txt}<tt>`
-        smileys = [".", "...", "...?", ...[":|", ":/", ":(", ":[", ":{", ":'(", "(;_;)"].map(smiley_fn)]
-        smiley = smileys[Math.floor(value / 10)] || smileys[9]
+        smileys = [".", "...", "...?",
+                   ...[":|", ":/", ":(", ":[", ":{", ":'(", "(;_;)"].map(smiley_fn)]
+        smiley = smileys[Math.floor(n_thrown / 10)] || smileys[9]
 
         darkMode.check();
 
         text = n_thrown != 1
-            ? "You threw ${this.nbrThrown} candies on the ground ${smiley}"
-            : "You threw 1 candy on the ground ${smiley}"
+            ? `You threw ${this.nbrThrown} candies on the ground ${smiley}`
+            : `You threw 1 candy on the ground ${smiley}`
         
         htmlInteraction.setInnerHtml("candies_thrown", text)
         htmlInteraction.setElementVisibility("candies_thrown", true)
     },
     
     throw10Candies : function(){
+        console.log(this)
         if(this.nbrOwned >= 10){ // If we have at least 10 candies
             this.setNbrOwned(this.nbrOwned - 10);
             this.setNbrThrown(this.nbrThrown + 10);
