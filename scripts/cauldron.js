@@ -51,6 +51,7 @@ var cauldron = {
     weAreBoiling : false, // True if the player is boiling right now
     candiesWhenWeBeganAction : 0, // Number of candies in the cauldron when we began mixing
     lollipopsWhenWeBeganAction : 0, // Idem lollipops
+    actions: [],
     actionsList : [{type:"none"}, {type:"none"}, {type:"none"}], // List of actions
     actionTimer : 0, // Count the number of seconds an action lasts
     
@@ -86,26 +87,14 @@ var cauldron = {
     
     resetCauldronText : function(){
         // Init the text var by putting lots of blank spaces
-        this.textCauldron = [];
-        for(var i = 0; i < this.cauldron.h; i++){
-            this.textCauldron.push(""); // We add a line
-            for(var j = 0; j < this.cauldron.w; j++){
-                this.textCauldron[i] += " "; // We add a blank space in this line
-            }
-            this.textCauldron[i] += "\n"; // We add the end of line
-        }
+        const { h, w } = this.cauldron
+        this.textCauldron = Array(h).fill(Array(w).fill(" ").join("") + "\n")
     },
     
     resetBookText : function(){
         // Init the text var by putting lots of blank spaces
-        this.textBook = [];
-        for(var i = 0; i < this.book.h; i++){
-            this.textBook.push(""); // We add a line
-            for(var j = 0; j < this.book.w; j++){
-                this.textBook[i] += " "; // We add a blank space in this line
-            }
-            this.textBook[i] += "\n"; // We add the end of line
-        }
+        const { h, w } = this.book
+        this.textBook = Array(h).fill(Array(w).fill(" ").join("") + "\n")
     },
     
     setBookPage : function(value){
@@ -240,38 +229,24 @@ var cauldron = {
     setActionTimer : function(value){
         // We set the value
         this.actionTimer = value;
+        /* TODO mere kompakt branching */
         
         // We change on the page
-        if(this.weAreMixing){
-            if(this.actionTimer < 60){
-                // If we just began mixing or we're mixing something
-                if(this.actionTimer < 5 || (this.candiesInTheCauldron != 0 || this.lollipopsInTheCauldron != 0)){
-                    // We show the timer
-                    htmlInteraction.setInnerHtml("cauldron_timer", this.actionTimer);
-                }
-                // Else
-                else{
-                    // We show a special message
-                    htmlInteraction.setInnerHtml("cauldron_timer", this.actionTimer + " ... You do realize that you're not mixing anything, right ?");
-                }
-            }
-            else
-                htmlInteraction.setInnerHtml("cauldron_timer", "too much mixing, your arms are hurting.");
+        if(this.weAreMixing) {
+            timer = this.actionTimer
+            somethingInCauldron = (this.candiesInTheCauldron != 0 || this.lollipopsInTheCauldron != 0)
+
+            text = timer < 60
+                ? timer > 5 && !somethingInCauldron
+                    ? timer + " ... You do realize that you're not mixing anything, right ?"
+                    : timer
+                : "too much mixing, your arms are hurting."
+
+            htmlInteraction.setInnerHtml("cauldron_timer", text)
         }
 
-        texts = [
-            "cold.",
-            "lukewarm.",
-            "hot..",
-            "very hot...",
-            "very very hot !",
-            "bubbles begin to appear...",
-            "bubbles begin to appear... and..",
-            "BOILING !",
-            "the water is burnt ! How is that even possible ?"
-        ]
-        intervals = [0,3,6,9,11,13,14,15,32]
         if (this.weAreBoiling) {
+            const { intervals, texts } = data.text.cauldron_boiling
             text = texts[intervals.indexOf(this.actionTimer)]
             if (text) htmlInteraction.setInnerHtml("cauldron_timer", text)
         }
@@ -279,14 +254,12 @@ var cauldron = {
     
     setWeAreMixing : function(value){
         // If we want to stop mixing
-        if(value == false && this.weAreMixing == true){
+        if(!value && this.weAreMixing){
             // Then we stop
             this.weAreMixing = false;
             // We register the mixing
             this.registerAction("mix", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
-        }
-        // Else, if we want to begin mixing
-        else if(value == true && this.weAreMixing == false){
+        } else if(value && !this.weAreMixing) {
             // Then we begin
             this.weAreMixing = true;
             this.disableActionsButtons();
@@ -329,104 +302,115 @@ var cauldron = {
         var resultsText = "";
         
         // We store actions into vars for easier use
-        var lastAc = this.actionsList[this.actionsList.length - 1];
-        var lastLastAc = this.actionsList[this.actionsList.length - 2];
-        var lastLastLastAc = this.actionsList[this.actionsList.length - 3];
-        
+        const [ac_0, ac_1, ac_2] = this.actionsList
+
+        /* { mix: time, n_candies: 100 } save action timestamp*/
+
+        const check_recipe = (recipe, actions) => {
+            check = data.recipes[0][0]
+            if(ac_0.type == check.type
+               && ac_0.nbrLollipos == check.n_lollipops)
+            {
+
+            }
+
+        }
+
+
         // Check for minor health potion
-        if(lastAc.type == "mix" // Last action was mixing
-        && lastAc.nbrLollipops == 0 // We mixed no lollipop
-        && lastAc.nbrCandies > 0 // We mixed at least one candy
-        && lastAc.nbrCandies % 100 == 0 // The candies we mixed were a multiple of 100
-        && lastAc.nbrCandies == this.candiesInTheCauldron && lastAc.nbrLollipops == this.lollipopsInTheCauldron // We didn't add anything while mixing
-        && lastAc.timer >= 11 && lastAc.timer <= 19){ // It took between 11 and 19 seconds
-            potions.getPotions(potions.list.health, Math.floor(lastAc.nbrCandies/100)); // We add the potions to our stock
-            resultsList.push({type:"minor health", nbr:Math.floor(lastAc.nbrCandies/100)}); // We add the result to the list
+        if(ac_0.type == "mix" // Last action was mixing
+           && ac_0.nbrLollipops == 0 // We mixed no lollipop
+           && ac_0.nbrCandies > 0 // We mixed at least one candy
+           && ac_0.nbrCandies % 100 == 0 // The candies we mixed were a multiple of 100
+           && ac_0.nbrCandies == this.candiesInTheCauldron && ac_0.nbrLollipops == this.lollipopsInTheCauldron // We didn't add anything while mixing
+           && ac_0.timer >= 11 && ac_0.timer <= 19){ // It took between 11 and 19 seconds
+            potions.getPotions(potions.list.health, Math.floor(ac_0.nbrCandies/100)); // We add the potions to our stock
+            resultsList.push({type:"minor health", nbr: Math.floor(ac_0.nbrCandies/100)}); // We add the result to the list
         }
         
         // Check for major health potion
-        if(lastAc.type == "mix" // Last action was mixing
-        && lastAc.nbrLollipops > 0 // We mixed at least one lollipop
-        && lastAc.nbrLollipops % 100 == 0 // The lollipops we mixed were a multiple of 100
-        && lastAc.nbrCandies == 0 // We mixed no candy
-        && lastAc.nbrLollipops == this.lollipopsInTheCauldron // We didn't add any lollipop while mixing
-        && this.candiesInTheCauldron == lastAc.nbrLollipops // While mixing, we added as many candies as we had lollipops at the beginning
-        && lastAc.timer >= 16 && lastAc.timer <= 24){ // It took between 16 and 24 seconds
-            potions.getPotions(potions.list.majorHealth, Math.floor(lastAc.nbrLollipops/100)); // We add the potions to our stock
-            resultsList.push({type:"major health", nbr:Math.floor(lastAc.nbrLollipops/100)}); // We add the result to the list
+        if(ac_0.type == "mix" // Last action was mixing
+        && ac_0.nbrLollipops > 0 // We mixed at least one lollipop
+        && ac_0.nbrLollipops % 100 == 0 // The lollipops we mixed were a multiple of 100
+        && ac_0.nbrCandies == 0 // We mixed no candy
+        && ac_0.nbrLollipops == this.lollipopsInTheCauldron // We didn't add any lollipop while mixing
+        && this.candiesInTheCauldron == ac_0.nbrLollipops // While mixing, we added as many candies as we had lollipops at the beginning
+        && ac_0.timer >= 16 && ac_0.timer <= 24){ // It took between 16 and 24 seconds
+            potions.getPotions(potions.list.majorHealth, Math.floor(ac_0.nbrLollipops/100)); // We add the potions to our stock
+            resultsList.push({type:"major health", nbr:Math.floor(ac_0.nbrLollipops/100)}); // We add the result to the list
         }
         
         // Check for turtle potion
         if(
         /* LAST ACTION */
-        lastAc.type == "boil" // Last action was boiling
-        && lastAc.nbrCandies == 0 // We boiled no candy
-        && lastAc.nbrLollipops > 0 // We boiled at least one lollipop
-        && lastAc.nbrLollipops % 20000 == 0 // The lollipops we boiled were a multiple of 20000
-        && lastAc.nbrLollipops == this.lollipopsInTheCauldron // We didn't add any lollipop while boiling
-        && lastAc.nbrCandies == this.candiesInTheCauldron // We didn't add any candy while boiling
-        && lastAc.timer >= 15 && lastAc.timer < 32 // It was boiling when we stopped boiling
+        ac_0.type == "boil" // Last action was boiling
+        && ac_0.nbrCandies == 0 // We boiled no candy
+        && ac_0.nbrLollipops > 0 // We boiled at least one lollipop
+        && ac_0.nbrLollipops % 20000 == 0 // The lollipops we boiled were a multiple of 20000
+        && ac_0.nbrLollipops == this.lollipopsInTheCauldron // We didn't add any lollipop while boiling
+        && ac_0.nbrCandies == this.candiesInTheCauldron // We didn't add any candy while boiling
+        && ac_0.timer >= 15 && ac_0.timer < 32 // It was boiling when we stopped boiling
         /* LAST LAST ACTION */
-        && lastLastAc.type == "mix" // Last last action was mixing
+        && ac_1.type == "mix" // Last last action was mixing
         /* LAST LAST LAST ACTION */
-        && lastLastLastAc.type == "boil" // Last last last action was boiling
-        && lastLastLastAc.nbrCandies == 0 // We boiled no candy
-        && lastLastLastAc.nbrLollipops > 0 // We boiled at least one lollipop
-        && lastLastLastAc.nbrLollipops % 10000 == 0 // The lollipops we boiled were a multiple of 10000
-        && lastLastLastAc.timer >= 15 && lastLastLastAc.timer < 32 // It was boiling when we stopped boiling
+        && ac_2.type == "boil" // Last last last action was boiling
+        && ac_2.nbrCandies == 0 // We boiled no candy
+        && ac_2.nbrLollipops > 0 // We boiled at least one lollipop
+        && ac_2.nbrLollipops % 10000 == 0 // The lollipops we boiled were a multiple of 10000
+        && ac_2.timer >= 15 && ac_2.timer < 32 // It was boiling when we stopped boiling
         /* STUFF BETWEEN ACTIONS */
-        && lastAc.nbrLollipops == 2 * lastLastLastAc.nbrLollipops){ // We boiled at the end twice more lollipops than what we boiled at first
-            potions.getPotions(potions.list.turtle, Math.floor(lastAc.nbrLollipops/20000)); // We add the potions to our stock
-            resultsList.push({type:"turtle", nbr:Math.floor(lastAc.nbrLollipops/20000)}); // We add the result to the list
+        && ac_0.nbrLollipops == 2 * ac_2.nbrLollipops){ // We boiled at the end twice more lollipops than what we boiled at first
+            potions.getPotions(potions.list.turtle, Math.floor(ac_0.nbrLollipops/20000)); // We add the potions to our stock
+            resultsList.push({type:"turtle", nbr:Math.floor(ac_0.nbrLollipops/20000)}); // We add the result to the list
         }
         
         // Check for invulnerability potion
-        if(lastAc.type == "mix" // Last action was mixing
-        && lastAc.nbrLollipops == 0 // We mixed no lollipop
-        && lastAc.nbrCandies > 0 // We mixed at least one candy
-        && lastAc.nbrCandies % 2000 == 0 // The candies we mixed were a multiple of 2000
-        && lastAc.nbrCandies == this.candiesInTheCauldron && lastAc.nbrLollipops == this.lollipopsInTheCauldron // We didn't add anything while mixing
-        && lastAc.timer >= 60){ // It took >= 60 seconds
-            potions.getPotions(potions.list.invulnerability, Math.floor(lastAc.nbrCandies/2000)); // We add the potions to our stock
-            resultsList.push({type:"invulnerability", nbr:Math.floor(lastAc.nbrCandies/2000)}); // We add the result to the list
+        if(ac_0.type == "mix" // Last action was mixing
+        && ac_0.nbrLollipops == 0 // We mixed no lollipop
+        && ac_0.nbrCandies > 0 // We mixed at least one candy
+        && ac_0.nbrCandies % 2000 == 0 // The candies we mixed were a multiple of 2000
+        && ac_0.nbrCandies == this.candiesInTheCauldron && ac_0.nbrLollipops == this.lollipopsInTheCauldron // We didn't add anything while mixing
+        && ac_0.timer >= 60){ // It took >= 60 seconds
+            potions.getPotions(potions.list.invulnerability, Math.floor(ac_0.nbrCandies/2000)); // We add the potions to our stock
+            resultsList.push({type:"invulnerability", nbr:Math.floor(ac_0.nbrCandies/2000)}); // We add the result to the list
         }
         
         // Check for cloning potion
-        if(lastAc.type == "boil" // Last action was boiling
-        && lastAc.nbrLollipops == 0 // We boiled no lollipop
-        && lastAc.nbrCandies == 0 // We boiled no candy
+        if(ac_0.type == "boil" // Last action was boiling
+        && ac_0.nbrLollipops == 0 // We boiled no lollipop
+        && ac_0.nbrCandies == 0 // We boiled no candy
         && this.lollipopsInTheCauldron == 0 // We didn't add any lollipop while boiling
         && this.convertCandiesToPotionsForTheCloningPotion(this.candiesInTheCauldron) > 0 // With the candies we added while boiling (or after), we can make at least one potion
-        && lastAc.timer >= 32){ // The water burnt while boiling
+        && ac_0.timer >= 32){ // The water burnt while boiling
             potions.getPotions(potions.list.cloning, this.convertCandiesToPotionsForTheCloningPotion(this.candiesInTheCauldron)); // We add the potions to our stock
             resultsList.push({type:"cloning", nbr:this.convertCandiesToPotionsForTheCloningPotion(this.candiesInTheCauldron)}); // We add the result to the list
         }
         
         // Check for G.M.O.O.H. potion
-        if(lastAc.type == "mix" // Last action was mixing
-        && lastAc.nbrLollipops > 0 // We mixed at least one lollipop
-        && lastAc.nbrLollipops % 500 == 0 // The lollipops we mixed were a multiple of 500
-        && lastAc.nbrCandies == 10000 // We mixed 10000 candies
-        && this.candiesInTheCauldron == lastAc.nbrCandies // We didn't add any candy while mixing
-        && this.lollipopsInTheCauldron == lastAc.nbrLollipops){ // We didn't add any lollipop while mixing
-            potions.getPotions(potions.list.gmooh, Math.floor(lastAc.nbrLollipops/500)); // We add the potions to our stock
-            resultsList.push({type:"G.M.O.O.H.", nbr:Math.floor(lastAc.nbrLollipops/500)}); // We add the result to the list
+        if(ac_0.type == "mix" // Last action was mixing
+        && ac_0.nbrLollipops > 0 // We mixed at least one lollipop
+        && ac_0.nbrLollipops % 500 == 0 // The lollipops we mixed were a multiple of 500
+        && ac_0.nbrCandies == 10000 // We mixed 10000 candies
+        && this.candiesInTheCauldron == ac_0.nbrCandies // We didn't add any candy while mixing
+        && this.lollipopsInTheCauldron == ac_0.nbrLollipops){ // We didn't add any lollipop while mixing
+            potions.getPotions(potions.list.gmooh, Math.floor(ac_0.nbrLollipops/500)); // We add the potions to our stock
+            resultsList.push({type:"G.M.O.O.H.", nbr:Math.floor(ac_0.nbrLollipops/500)}); // We add the result to the list
         }
         
         // Check for superman potion
-        if(lastAc.type == "mix" // Last action was mixing
-        && lastAc.nbrLollipops == 0 // We mixed no lollipop
-        && lastAc.nbrCandies > 0 // We mixed at least one candy
-        && lastAc.nbrCandies % 180 == 0 // The candies we mixed were a multiple of 180
-        && lastAc.nbrCandies == this.candiesInTheCauldron && lastAc.nbrLollipops == this.lollipopsInTheCauldron){ // We didn't add anything while mixing
-            potions.getPotions(potions.list.superman, Math.floor(lastAc.nbrCandies/180)); // We add the potions to our stock
-            resultsList.push({type:"superman", nbr:Math.floor(lastAc.nbrCandies/180)}); // We add the result to the list
+        if(ac_0.type == "mix" // Last action was mixing
+        && ac_0.nbrLollipops == 0 // We mixed no lollipop
+        && ac_0.nbrCandies > 0 // We mixed at least one candy
+        && ac_0.nbrCandies % 180 == 0 // The candies we mixed were a multiple of 180
+        && ac_0.nbrCandies == this.candiesInTheCauldron && ac_0.nbrLollipops == this.lollipopsInTheCauldron){ // We didn't add anything while mixing
+            potions.getPotions(potions.list.superman, Math.floor(ac_0.nbrCandies/180)); // We add the potions to our stock
+            resultsList.push({type:"superman", nbr:Math.floor(ac_0.nbrCandies/180)}); // We add the result to the list
         }
         
         // Check for seed
-        if(lastAc.type == "boil" // Last action was boiling
-        && lastAc.nbrLollipops == 0 // We boiled no lollipop
-        && lastAc.nbrCandies == 0 // We boiled no candy
+        if(ac_0.type == "boil" // Last action was boiling
+        && ac_0.nbrLollipops == 0 // We boiled no lollipop
+        && ac_0.nbrCandies == 0 // We boiled no candy
         && this.lollipopsInTheCauldron == 0 // We didn't add any lollipop while boiling
         && this.candiesInTheCauldron > 0 // We added at least one candy while or after boiling
         && this.candiesInTheCauldron % 650 == 0){ // The candies we added while or after boiling are a multiple of 650
@@ -437,25 +421,25 @@ var cauldron = {
         // Check for jelly
         if(
         /* ACTIONS TYPES */
-        lastAc.type == "boil" // Last action was boiling
-        && lastLastAc.type == "mix" // Last last action was mixing
-        && lastLastLastAc.type == "boil" // Last last last action was boiling
+        ac_0.type == "boil" // Last action was boiling
+        && ac_1.type == "mix" // Last last action was mixing
+        && ac_2.type == "boil" // Last last last action was boiling
         /* LAST LAST LAST ACTION */
-        && lastLastLastAc.nbrLollipops == 0 // No lollipop
-        && lastLastLastAc.nbrCandies > 0 // At least one candy
-        && lastLastLastAc.nbrCandies % 600 == 0 // Candies multiple of 600
+        && ac_2.nbrLollipops == 0 // No lollipop
+        && ac_2.nbrCandies > 0 // At least one candy
+        && ac_2.nbrCandies % 600 == 0 // Candies multiple of 600
         /* LAST LAST ACTION */
-        && lastLastAc.nbrLollipops > 0 // At least one lollipop
-        && lastLastAc.nbrLollipops % 6000 == 0 // Lollipops mutiple of 6000
-        && lastLastAc.nbrLollipops == 10*lastLastLastAc.nbrCandies // Lollipops = 10*candies of last last last action
-        && lastLastAc.nbrCandies == lastLastLastAc.nbrCandies // As many candies as last last last action
+        && ac_1.nbrLollipops > 0 // At least one lollipop
+        && ac_1.nbrLollipops % 6000 == 0 // Lollipops mutiple of 6000
+        && ac_1.nbrLollipops == 10*ac_2.nbrCandies // Lollipops = 10*candies of last last last action
+        && ac_1.nbrCandies == ac_2.nbrCandies // As many candies as last last last action
         /* LAST ACTION */
-        && lastAc.nbrLollipops == lastLastAc.nbrLollipops // As many lollipops as last last action
-        && lastAc.nbrCandies == lastLastLastAc.nbrCandies*2 // Twice more candies than last last last action
-        && lastAc.nbrLollipops == this.lollipopsInTheCauldron // We didn't add any lollipop
-        && lastAc.nbrCandies == this.candiesInTheCauldron){ // We didn't add any candy
-            potions.getPotions(potions.list.jelly, Math.floor(lastAc.nbrCandies/600)); // We add the potions to our stock
-            resultsList.push({type:"jelly", nbr:Math.floor(lastAc.nbrCandies/600), special:true, plural:"jellies"}); // We add the result to the list
+        && ac_0.nbrLollipops == ac_1.nbrLollipops // As many lollipops as last last action
+        && ac_0.nbrCandies == ac_2.nbrCandies*2 // Twice more candies than last last last action
+        && ac_0.nbrLollipops == this.lollipopsInTheCauldron // We didn't add any lollipop
+        && ac_0.nbrCandies == this.candiesInTheCauldron){ // We didn't add any candy
+            potions.getPotions(potions.list.jelly, Math.floor(ac_0.nbrCandies/600)); // We add the potions to our stock
+            resultsList.push({type:"jelly", nbr:Math.floor(ac_0.nbrCandies/600), special:true, plural:"jellies"}); // We add the result to the list
         }
         
         // We show the result on the page if there's any result
