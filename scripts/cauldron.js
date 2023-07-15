@@ -9,30 +9,42 @@ var cauldron = {
     textActions : "",
     textLeftPage : [],
     textRightPage : [],
-    cauldronPosX : 10, // X position of the cauldron in the system
-    cauldronPosY : 7, // Y position of the cauldron in the system
-    cauldronWidth : 58, // Width of the cauldron <pre>
-    cauldronHeight : 16, // Height
-    bookWidth : 58, // Width of the book <pre>
-    bookHeight : 17, // Height
-    smokeBool : false, // If true, there is a smoke right now above the cauldron
-    smokePosX : 0, // X position of this smoke
-    smokePosY : 0, // Y position
-    smokeOrientation : true, // Can be true or false, depending on the smoke orientation (two orientations possible, that's why it's a boolean)
-    bookPosX : 0, // X position of the book
-    bookPosY : 0, // Y position of the book
+    cauldron: {x: 10, y: 7, w: 58, h: 16},
+    //cauldronPosX : 10, // X position of the cauldron in the system
+    //cauldronPosY : 7, // Y position of the cauldron in the system
+    //cauldronWidth : 58, // Width of the cauldron <pre>
+    //cauldronHeight : 16, // Height
+    smoke : {
+        on: false,
+        orientation: true,
+        x: 0,
+        y: 0
+    },
+    //smokeBool : false, // If true, there is a smoke right now above the cauldron
+    //smokePosX : 0, // X position of this smoke
+    //smokePosY : 0, // Y position
+    //smokeOrientation : true, // Can be true or false, depending on the smoke orientation (two orientations possible, that's why it's a boolean)
+    book : {x: 0, y: 0, w: 58, h: 17,
+            page_1: {x: 9,  y: 1},
+            page_2: {x: 43, y: 1},
+            page_L: {x: 8,  y: 3},
+            page_R: {x: 29, y: 3}},
+    //bookPosX : 0, // X position of the book
+    //bookPosY : 0, // Y position of the book
+    //bookWidth : 58, // Width of the book <pre>
+    //bookHeight : 17, // Height
     bookPage : 0, // Current book page
     maxBookPage : 26, // Max book page
-    bookFirstPageNumberPosX : 9, // X position of the first page number of the book (relative to the book)
-    bookFirstPageNumberPosY : 1, // Y
-    bookSecondPageNumberPosX : 43, // X second page
-    bookSecondPageNumberPosY : 1, // Y
+    //bookFirstPageNumberPosX : 9, // X position of the first page number of the book (relative to the book)
+    //bookFirstPageNumberPosY : 1, // Y
+    //bookSecondPageNumberPosX : 43, // X second page
+    //bookSecondPageNumberPosY : 1, // Y
     bookChangePageButtonPosX : 2, // X position of the book's buttons used to change pge
     bookChangePageButtonPosY : 16, // Y
-    bookLeftPagePosX : 8, // X position of the left page of the book
-    bookLeftPagePosY : 3, // Y
-    bookRightPagePosX : 29, // X right page
-    bookRightPagePosY : 3, // Y
+    //bookLeftPagePosX : 8, // X position of the left page of the book
+    //bookLeftPagePosY : 3, // Y
+    //bookRightPagePosX : 29, // X right page
+    //bookRightPagePosY : 3, // Y
     candiesInTheCauldron : 0, // Number of candies present in the cauldron
     lollipopsInTheCauldron : 0, // Idem for lollipops
     weAreMixing : false, // True if the player is mixing right now
@@ -75,9 +87,9 @@ var cauldron = {
     resetCauldronText : function(){
         // Init the text var by putting lots of blank spaces
         this.textCauldron = [];
-        for(var i = 0; i < this.cauldronHeight; i++){
+        for(var i = 0; i < this.cauldron.h; i++){
             this.textCauldron.push(""); // We add a line
-            for(var j = 0; j < this.cauldronWidth; j++){
+            for(var j = 0; j < this.cauldron.w; j++){
                 this.textCauldron[i] += " "; // We add a blank space in this line
             }
             this.textCauldron[i] += "\n"; // We add the end of line
@@ -87,9 +99,9 @@ var cauldron = {
     resetBookText : function(){
         // Init the text var by putting lots of blank spaces
         this.textBook = [];
-        for(var i = 0; i < this.bookHeight; i++){
+        for(var i = 0; i < this.book.h; i++){
             this.textBook.push(""); // We add a line
-            for(var j = 0; j < this.bookWidth; j++){
+            for(var j = 0; j < this.book.w; j++){
                 this.textBook[i] += " "; // We add a blank space in this line
             }
             this.textBook[i] += "\n"; // We add the end of line
@@ -102,120 +114,9 @@ var cauldron = {
             // We set it
             this.bookPage = value;
             // We set the text of the pages
-            switch(this.bookPage){
-                case 0:
-                    this.textLeftPage = this.asciiFirstPage;
-                    this.textRightPage = this.asciiSecondPage;
-                break;
-                case 1:
-                    this.textLeftPage = this.asciiThirdPage;
-                    this.textRightPage = this.asciiFourthPage;
-                break;
-                case 2:
-                    this.textLeftPage = this.asciiFifthPage;
-                    this.textRightPage = this.asciiSixthPage;
-                break;
-                case 3:
-                    this.textLeftPage = this.asciiSeventhPage;
-                    this.textRightPage = this.asciiEighthPage;
-                break;
-                case 4:
-                    this.textLeftPage = this.asciiNinthPage;
-                    this.textRightPage = this.asciiTenthPage;
-                break;
-                case 5:
-                    this.textLeftPage = this.asciiMinorHealthPotionP1;
-                    this.textRightPage = this.asciiMinorHealthPotionP2;
-                break;
-                case 6:
-                    this.textLeftPage = this.asciiMinorHealthPotionP3;
-                    this.textRightPage = this.asciiMinorHealthPotionP4;
-                break;
-                case 7:
-                    this.textLeftPage = this.asciiMajorHealthPotionP1;
-                    this.textRightPage = this.asciiMajorHealthPotionP2;
-                break;
-                case 8:
-                    this.textLeftPage = this.asciiMajorHealthPotionP3;
-                    this.textRightPage = this.asciiMajorHealthPotionP4;
-                break;
-                case 9:
-                    this.textLeftPage = this.asciiInvulnerabilityPotionP1;
-                    this.textRightPage = this.asciiInvulnerabilityPotionP2;
-                break;
-                case 10:
-                    this.textLeftPage = this.asciiInvulnerabilityPotionP3;
-                    this.textRightPage = [];
-                break;
-                case 11:
-                    this.textLeftPage = this.asciiTurtlePotionP1;
-                    this.textRightPage = this.asciiTurtlePotionP2;
-                break;
-                case 12:
-                    this.textLeftPage = this.asciiTurtlePotionP3;
-                    this.textRightPage = this.asciiTurtlePotionP4;
-                break;
-                case 13:
-                    this.textLeftPage = this.asciiTurtlePotionP5;
-                    this.textRightPage = this.asciiTurtlePotionP6;
-                break;
-                case 14:
-                    this.textLeftPage = this.asciiCloningPotionP1;
-                    this.textRightPage = this.asciiCloningPotionP2;
-                break;
-                case 15:
-                    this.textLeftPage = this.asciiCloningPotionP3;
-                    this.textRightPage = this.asciiCloningPotionP4;
-                break;
-                case 16:
-                    this.textLeftPage = this.asciiCloningPotionP5;
-                    this.textRightPage = this.asciiCloningPotionP6;
-                break;
-                case 17:
-                    this.textLeftPage = this.asciiGMOOHPotionP1;
-                    this.textRightPage = this.asciiGMOOHPotionP2;
-                break;
-                case 18:
-                    this.textLeftPage = this.asciiGMOOHPotionP3;
-                    this.textRightPage = this.asciiGMOOHPotionP4;
-                break;
-                case 19:
-                    this.textLeftPage = this.asciiSupermanPotionP1;
-                    this.textRightPage = this.asciiSupermanPotionP2;
-                break;
-                case 20:
-                    this.textLeftPage = this.asciiSupermanPotionP3;
-                    this.textRightPage = this.asciiSupermanPotionP4; // je t'aime <3
-                break;
-                case 21:
-                    this.textLeftPage = this.asciiSeedP1;
-                    this.textRightPage = this.asciiSeedP2;
-                break;
-                case 22:
-                    this.textLeftPage = this.asciiSeedP3;
-                    this.textRightPage = this.asciiSeedP4;
-                break;
-                case 23:
-                    this.textLeftPage = this.asciiJellyP1;
-                    this.textRightPage = this.asciiJellyP2;
-                break;
-                case 24:
-                    this.textLeftPage = this.asciiJellyP3;
-                    this.textRightPage = this.asciiJellyP4;
-                break;
-                case 25:
-                    this.textLeftPage = this.asciiJellyP5;
-                    this.textRightPage = [];
-                break;
-                case 26:
-                    this.textLeftPage = this.asciiEndP1;
-                    this.textRightPage = this.asciiEndP2;
-                break;
-                default:
-                    this.textLeftPage = [];
-                    this.textRightPage = [];
-                break;
-            }
+            page = value * 2
+            this.textLeftPage  = data.ascii.book_pages[page]
+            this.textRightPage = data.ascii.book_pages[page + 1]
             // We update the book on page
             this.updateBookOnPage();
         }
@@ -230,33 +131,35 @@ var cauldron = {
     },
     
     drawBook : function(){
+        const { x, y, page_1, page_2, page_L, page_R } = this.book
         // Draw the book itself
-        for(i = 0; i < this.asciiBook.length; i++){
-            this.textBook[this.bookPosY + i] = this.textBook[this.bookPosY + i].replaceAt(this.bookPosX, this.asciiBook[i]);
+        for(i = 0; i < data.ascii.book.length; i++){
+            this.textBook[y + i] = this.textBook[y + i].replaceAt(x, data.ascii.book[i]);
         }
         
         // Draw the page numbers
-        this.textBook[this.bookPosY + this.bookFirstPageNumberPosY] = this.textBook[this.bookPosY + this.bookFirstPageNumberPosY].replaceAt(this.bookPosX + this.bookFirstPageNumberPosX, "" + this.bookPage * 2);
-        this.textBook[this.bookPosY + this.bookSecondPageNumberPosY] = this.textBook[this.bookPosY + this.bookSecondPageNumberPosY].replaceAt(this.bookPosX + this.bookSecondPageNumberPosX, "" + (this.bookPage * 2 + 1));
+        this.textBook[y + page_1.y] = this.textBook[y + page_1.y].replaceAt(x + page_1.x, "" + this.bookPage * 2);
+        this.textBook[y + page_2.y] = this.textBook[y + page_2.y].replaceAt(x + page_2.x, "" + (this.bookPage * 2 + 1));
     
         // Draw the previous and next page buttons
-        this.textBook[this.bookPosY + this.bookChangePageButtonPosY] = this.textBook[this.bookPosY + this.bookChangePageButtonPosY].replaceAt(this.bookPosX + this.bookChangePageButtonPosX, "<button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>");
+        this.textBook[y + this.bookChangePageButtonPosY] = this.textBook[y + this.bookChangePageButtonPosY].replaceAt(x + this.bookChangePageButtonPosX, "<button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>");
     
         // Draw the left page text
         for(i = 0; i < this.textLeftPage.length; i++){
-            this.textBook[this.bookLeftPagePosY + i] = this.textBook[this.bookLeftPagePosY + i].replaceAt(this.bookPosX + this.bookLeftPagePosX, this.textLeftPage[i]);
+            this.textBook[page_L.y + i] = this.textBook[page_L.y + i].replaceAt(x + page_L.x, this.textLeftPage[i]);
         }
         
         // Idem right
         for(i = 0; i < this.textRightPage.length; i++){
-            this.textBook[this.bookRightPagePosY + i] = this.textBook[this.bookRightPagePosY + i].replaceAt(this.bookPosX + this.bookRightPagePosX, this.textRightPage[i]);
+            this.textBook[page_R.y + i] = this.textBook[page_R.y + i].replaceAt(x + page_R.x, this.textRightPage[i]);
         }
     },
     
     drawCauldron : function(){
+        const { x, y } = this.cauldron
         // We draw the cauldron
-        for(i = 0; i < this.asciiCauldron.length; i++){
-            this.textCauldron[this.cauldronPosY + i] = this.textCauldron[this.cauldronPosY + i].replaceAt(this.cauldronPosX, this.asciiCauldron[i]);
+        for(i = 0; i < data.ascii.cauldron.length; i++){
+            this.textCauldron[y + i] = this.textCauldron[y + i].replaceAt(x, data.ascii.cauldron[i]);
         }
         
         // We add the smoke
@@ -264,42 +167,37 @@ var cauldron = {
     },
     
     drawSmoke : function(){
+        const { x, y, on, orientation } = this.smoke
         // Finally, if there's a smoke, we draw it
-        if(this.smokeBool == true){
-            if(this.smokeOrientation == true){
-                this.textCauldron[this.smokePosY] = this.textCauldron[this.smokePosY].replaceAt(this.smokePosX, "(");
-                this.textCauldron[this.smokePosY-1] = this.textCauldron[this.smokePosY-1].replaceAt(this.smokePosX + 1, ")");
-            }
-            else{
-                this.textCauldron[this.smokePosY] = this.textCauldron[this.smokePosY].replaceAt(this.smokePosX + 1, ")");
-                this.textCauldron[this.smokePosY-1] = this.textCauldron[this.smokePosY-1].replaceAt(this.smokePosX, "(");
+        if (on) {
+            if (orientation) {
+                this.textCauldron[y]   = this.textCauldron[y]  .replaceAt(x,     "(")
+                this.textCauldron[y-1] = this.textCauldron[y-1].replaceAt(x + 1, ")")
+            } else {
+                this.textCauldron[y]   = this.textCauldron[y]  .replaceAt(x + 1, ")")
+                this.textCauldron[y-1] = this.textCauldron[y-1].replaceAt(x,     "(")
             }
         }
     },
     
     moveSmoke : function(){
         // If we have the cauldron
-        if(objects.list.cauldron.have){
-            // If there's no smoke yet, we create one
-            if(this.smokeBool == false){
-                this.smokeBool = true; // Bool is true
-                this.smokePosX = this.cauldronPosX + 7 + random.getRandomIntUpTo(10); // PosX
-                this.smokePosY = this.cauldronPosY; // PosY
-                // Random orientation
-                if(random.flipACoin()) this.smokeOrientation = true;
-                else this.smokeOrientation = false;
-            }
-            // Else, there's a smoke
-            else{
-                // We make it go up
-                this.smokePosY -= 1;
-                // We switch its orientation
-                if(this.smokeOrientation == true) this.smokeOrientation = false;
-                else this.smokeOrientation = true;
-                // If it's too high : there's no smoke anymore
-                if(this.cauldronPosY - this.smokePosY > 3){
-                    this.smokeBool = false;
+        if(objects.list.cauldron.have) {
+            if(!this.smoke.on) {
+                this.smoke = {
+                    on: true,
+                    x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
+                    y: this.cauldron.y,
+                    orientation: random.flipACoin()
                 }
+            } else {
+                // We make it go up
+                this.smoke.y -= 1
+                // We switch its orientation
+                this.smoke.orientation = !this.smoke.orientation
+                // If it's too high, there's no smoke anymore
+                if(this.cauldron.y - this.smoke.y > 3)
+                    this.smoke.on = false
             }
         }
         
@@ -360,25 +258,22 @@ var cauldron = {
             else
                 htmlInteraction.setInnerHtml("cauldron_timer", "too much mixing, your arms are hurting.");
         }
-        else if(this.weAreBoiling){
-            if(this.actionTimer < 3)
-                htmlInteraction.setInnerHtml("cauldron_timer", "cold.");
-            else if(this.actionTimer < 6)
-                htmlInteraction.setInnerHtml("cauldron_timer", "lukewarm.");
-            else if(this.actionTimer < 9)
-                htmlInteraction.setInnerHtml("cauldron_timer", "hot..");
-            else if(this.actionTimer < 11)
-                htmlInteraction.setInnerHtml("cauldron_timer", "very hot...");
-            else if(this.actionTimer < 13)
-                htmlInteraction.setInnerHtml("cauldron_timer", "very very hot !");
-            else if(this.actionTimer < 14)
-                htmlInteraction.setInnerHtml("cauldron_timer", "bubbles begin to appear...");
-            else if(this.actionTimer < 15)
-                htmlInteraction.setInnerHtml("cauldron_timer", "bubbles begin to appear... and..");
-            else if(this.actionTimer < 32)
-                htmlInteraction.setInnerHtml("cauldron_timer", "BOILING !");
-            else
-                htmlInteraction.setInnerHtml("cauldron_timer", "the water is burnt ! How is that even possible ?");
+
+        texts = [
+            "cold.",
+            "lukewarm.",
+            "hot..",
+            "very hot...",
+            "very very hot !",
+            "bubbles begin to appear...",
+            "bubbles begin to appear... and..",
+            "BOILING !",
+            "the water is burnt ! How is that even possible ?"
+        ]
+        intervals = [0,3,6,9,11,13,14,15,32]
+        if (this.weAreBoiling) {
+            text = texts[intervals.indexOf(this.actionTimer)]
+            if (text) htmlInteraction.setInnerHtml("cauldron_timer", text)
         }
     },
     
@@ -735,735 +630,4 @@ var cauldron = {
         htmlInteraction.setInnerHtml("cauldron_actions", this.textActions);
     },
     
-    // Ascii
-    asciiCauldron : 
-[
-"       ___________",
-"      (___________)",
-"       /         \\",
-"      /           \\",
-"     |             |",
-" ____\\             /____",
-"()____\'.__     __.\'____()",
-"     .\'` .\'```\'. `-.",
-"    ().\'`       `\'.()"
-],
-
-    asciiBook :
-[
-"      ___________________   ___________________",
-"  .-/|       ~~**~~      \\ /      ~~**~~       |\\-.",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||                    :                    ||||",
-"  ||||___________________ : ___________________||||",
-"  ||/====================\\:/====================\\||",
-"  `---------------------~___~--------------------\'\'"
-],
-
-    asciiFirstPage :
-[
-"Welcome to the",
-"potions brewing",
-"manual for",
-"beginners !",
-"",
-" (second edition)",
-"",
-" __  __  __  __ ",
-" )(  )(  )(  )( ",
-"(__)(__)(__)(__)"
-],
-
-    asciiSecondPage :
-[
-"",
-"The present",
-"manual will focus",
-"on potions that",
-"require materials",
-"such as : ",
-" - candies",
-" - lollipops",
-],
-
-    asciiThirdPage :
-[
-" The three rules",
-"of potion brewing",
-"-----------------",
-"",
-"1. The effect of",
-"a potion depends",
-"on its content as",
-"well as on the",
-"steps followed to",
-"prepare it."
-],
-
-    asciiFourthPage :
-[
-"2. You can do",
-"several potions",
-"in one go.",
-"",
-"3. It's possible",
-"to mix",
-"instructions to",
-"brew potions of",
-"different types",
-"in one go."
-],
-
-    asciiFifthPage :
-[
-"Table of contents",
-"-----------------",
-" Pages 10 to 20",
-" (Good potions)",
-"-----------------",
-"",
-" 10-13",
-"Minor health",
-"potion"
-],
-
-    asciiSixthPage :
-[
-"",
-" 14-17",
-"Major health",
-"potion",
-"",
-" 18-20",
-"Invulnerability",
-"potion"
-],
-
-    asciiSeventhPage :
-[
-"Table of contents",
-"-----------------",
-" Pages 22 to 41",
-"(Strange potions)",
-"-----------------",
-"",
-" 22-27",
-"Turtle potion"
-],
-
-    asciiEighthPage :
-[
-" 28-33",
-"Cloning potion",
-"",
-" 34-37",
-"G.M.O.O.H.",
-"potion",
-"",
-" 38-41",
-"Superman potion",
-],
-
-    asciiNinthPage :
-[
-"Table of contents",
-"-----------------",
-" Pages 42 to 50",
-"(Various magical",
-"objects you can",
-"  brew in your",
-"   cauldron)",
-"-----------------"
-],
-
-    asciiTenthPage :
-[
-"",
-"",
-" 42-45",
-"Magical seed",
-"",
-"",
-" 46-50",
-"Magical jelly",
-],
-
-    asciiMinorHealthPotionP1 :
-[
-"Minor health pot.",
-"-----------------",
-"The minor health",
-"potion is the",
-"easiest to brew",
-"for beginners.",
-"",
-"Used during a",
-"quest, it will",
-"make you recover"
-],
-
-    asciiMinorHealthPotionP2 :
-[
-"50 health points.",
-"",
-"For one potion,",
-"you will need 100",
-"candies.",
-"",
-"Put them in the",
-"cauldron and mix",
-"during about 15",
-"seconds."
-],
-
-    asciiMinorHealthPotionP3 :
-[
-"You can mix a",
-"little more or",
-"less longer, it",
-"doesn't matter so",
-"much.",
-"",
-"When you're done,",
-"put the resulting",
-"mixture into",
-"bottles."
-],
-
-    asciiMinorHealthPotionP4 :
-[
-"Congratulations !",
-"You just made",
-"your first minor",
-"health potion !",
-"",
-"",
-"N.B. : use 200",
-"candies for 2",
-"potions, 300 for",
-"3, etc."
-],
-
-    asciiMajorHealthPotionP1 :
-[
-"Major health pot.",
-"-----------------",
-"The major health",
-"potion is a bit",
-"harder to make",
-"than the previous",
-"one.",
-"",
-"But it's also",
-"a lot more",
-],
-
-    asciiMajorHealthPotionP2 :
-[
-"efficient : by",
-"drinking it",
-"during a quest,",
-"you will gain",
-"100 health points",
-"instead of 50.",
-"",
-"How to make a",
-"major health",
-"potion :"
-],
-
-    asciiMajorHealthPotionP3 :
-[
-"1. Put 100",
-"lollipops into",
-"your cauldron.",
-"",
-"2. Begin mixing",
-"forcefully.",
-"",
-"3. While you're",
-"mixing, add 100",
-"candies into the",
-],
-
-    asciiMajorHealthPotionP4 :
-[
-"cauldron.",
-"",
-"4. Stop mixing",
-"after 20 seconds.",
-"",
-"5. Put the result",
-"into bottles.",
-"",
-"6. You're done !"
-],
-
-    asciiInvulnerabilityPotionP1 :
-[
-" Invulnerability",
-"     potion",
-"-----------------",
-"",
-"This potion,",
-"although being",
-"quite easy to",
-"brew, require a",
-"lot of candies."
-],
-
-    asciiInvulnerabilityPotionP2 :
-[
-"The recipe is",
-"simple : just",
-"put 2000 candies",
-"inside your",
-"cauldron and mix",
-"them until your",
-"arms hurt.",
-"",
-"This potion will",
-"make you"
-],
-
-    asciiInvulnerabilityPotionP3 :
-[
-"invincible for",
-"some time,",
-"during which you",
-"won't feel any",
-"pain or physical",
-"damage."
-],
-
-    asciiTurtlePotionP1 :
-[
-"  Turtle potion",
-"-----------------",
-"A turtle !",
-"A turtle !",
-"Do you want to",
-"become a turtle ?",
-"",
-"You'll be able to",
-"become one with",
-"this fantastic"
-],
-
-    asciiTurtlePotionP2 :
-[
-"potion !",
-"",
-"When you will be",
-"a turtle, you",
-"will resist a lot",
-"more to physical",
-"damage. But you",
-"will be slower,",
-"too."
-],
-
-    asciiTurtlePotionP3 :
-[
-"Now, let's get",
-"down to business.",
-"",
-"Put 10000",
-"lollipops in your",
-"cauldron. Do not",
-"add any candy, or",
-"your potion will",
-"be a failure."
-],
-
-    asciiTurtlePotionP4 :
-[
-"Now, heat up the",
-"cauldron until",
-"your preparation",
-"is boiling.",
-"",
-"When it's boiling,",
-"stop heating it",
-"up and mix a",
-"little bit."
-],
-
-    asciiTurtlePotionP5 :
-[
-"Add the same",
-"quantity of",
-"lollipops as you",
-"put at the",
-"beginning, and,",
-"one more time,",
-"heat up",
-"everything until",
-"it's boiling."
-],
-
-    asciiTurtlePotionP6 :
-[
-"Stop boiling,",
-"put into a bottle,",
-"begin a quest,",
-"drink the potion,",
-"you're a turtle !!",
-"",
-"   _  .----.",
-"  (_\\/      \\_,",
-"    \'uu----uu~\'"
-],
-
-    asciiCloningPotionP1 :
-[
-"  Cloning potion",
-"-----------------",
-"There's a little",
-"bit of candies in",
-"everyone of us.",
-"",
-"This is actually",
-"a physical law of",
-"our universe."
-],
-
-    asciiCloningPotionP2 :
-[
-"Now, candies are",
-"a very malleable",
-"material.",
-"",
-"These two facts",
-"led us to the",
-"realisation of",
-"this cloning",
-"potion."
-],
-
-    asciiCloningPotionP3 :
-[
-"The potion will",
-"copy your inner",
-"structure and",
-"make a clone of",
-"you almost",
-"entirely made",
-"of candies",
-"(there's a bit of",
-"water, too)."
-],
-
-    asciiCloningPotionP4 :
-[
-"Steps :",
-"",
-"Burn the water in",
-"your cauldron.",
-"",
-"Then, while it's",
-"still burning,",
-"add as many",
-"candies as you",
-"can."
-],
-
-    asciiCloningPotionP5 :
-[
-"It's simple : the",
-"more candies you",
-"put, the more",
-"potions you'll",
-"get !",
-"",
-"(be sure to put",
-"   a minimum",
-"quantity, though)"
-],
-
-    asciiCloningPotionP6 :
-[
-"  \\o/  ->  \\o/",
-"",
-"   ^        |",
-"   |        V",
-"",
-"  \\o/  <-  \\o/",
-"",
-"  \"The circle",
-"    of life\""
-],
-
-    asciiGMOOHPotionP1 :
-[
-"G.M.O.O.H. potion",
-"-----------------",
-"G.M.O.O.H. means",
-"\"Get Me Out Of",
-"Here\".",
-"",
-"This potion is to",
-"be used in",
-"critical",
-"situations."
-],
-
-    asciiGMOOHPotionP2 :
-[
-"It will teleport",
-"you to another",
-"location.",
-"",
-"Maybe it will",
-"be safer, maybe",
-"it won't. Who",
-"knows ?",
-"Quite exciting",
-"isn't it ?"
-],
-
-    asciiGMOOHPotionP3 :
-[
-"First, put in",
-"your cauldron a",
-"base quantity of",
-"10 000 candies.",
-"",
-"Then, add 500",
-"lollipops for",
-"each potion you",
-"want to brew."
-],
-
-    asciiGMOOHPotionP4 :
-[
-"Never change the",
-"base quantity of",
-"10 000 candies.",
-"",
-"Then, mix a little",
-"bit and put into",
-"bottles.",
-"",
-"Enjoy your random",
-"potions !"
-],
-
-    asciiSupermanPotionP1 :
-[
-" Superman potion",
-"-----------------",
-"This potion will",
-"transform you",
-"into Superman,",
-"providing you",
-"a fantastic cape.",
-"",
-"Some people say",
-"that this isn't"
-],
-
-    asciiSupermanPotionP2 :
-[
-"useful.",
-"",
-"We respond them",
-"that it is just",
-"so cooooool !",
-"",
-"Anyway, to make",
-"one :",
-"",
-"Put 180 candies"
-],
-
-    asciiSupermanPotionP3 :
-[
-"in your cauldron.",
-"",
-"Mix them.",
-"",
-"Think about",
-"Superman.",
-"",
-"Think once again.",
-"",
-"Put into bottle."
-],
-
-    asciiSupermanPotionP4 :
-[
-"You're done !",
-"",
-"   ___________",
-"  /.\'_______` \\",
-" /( <_______`-\'\\",
-" `.`.______  \\.\'",
-"   `..-.___>.\'",
-"     `.__ .\'",
-"       `.\'"
-],
-
-    asciiSeedP1 :
-[
-"      Seed",
-"-----------------",
-"According to an",
-"ancient legend,",
-"trees would be",
-"the source of all",
-"candies in the",
-"whole world.",
-"",
-"There would exist"
-],
-
-    asciiSeedP2 :
-[
-"somewhere in the",
-"universe a giant",
-"tree, which",
-"remains unnamed.",
-"",
-"This tree would",
-"provide its",
-"discoverer an",
-"infinite flow of",
-"candies."
-],
-
-    asciiSeedP3 :
-[
-"Anyway, we didn't",
-"find it yet, but",
-"we found that it",
-"was possible to",
-"craft a magical",
-"seed so that it",
-"grows a resistant",
-"tree. And this",
-"can be useful",
-"during a quest."
-],
-
-    asciiSeedP4 :
-[
-"Heat up the water",
-"in your cauldron.",
-"",
-"Add 650 candies,",
-"stop boiling and",
-"put the seed into",
-"a bottle.",
-"",
-"Now, plant some",
-"trees !"
-],
-
-    asciiJellyP1 :
-[
-"      Jelly",
-"-----------------",
-"Did you ever",
-"thought about",
-"some kind of bomb",
-"that you could",
-"use during a",
-"quest ? If so,",
-"then this magical",
-"jelly should"
-],
-
-    asciiJellyP2 :
-[
-"please you !",
-"",
-"It is a bit hard",
-"to prepare, but",
-"it's quite",
-"powerful.",
-"",
-"This jelly",
-"explodes on",
-"contact and deals"
-],
-
-    asciiJellyP3 :
-[
-"high damage.",
-"",
-"There are three",
-"peparation steps",
-"which correspond",
-"to the three",
-"layers of the",
-"jelly.",
-"",
-"First step :"
-],
-
-    asciiJellyP4 :
-[
-"Put 600 candies,",
-"boil the water,",
-"stop boiling.",
-"",
-"Second step :",
-"",
-"Add 6 000",
-"lollipops,",
-"mix,",
-"stop mixing."
-],
-
-    asciiJellyP5 :
-[
-"Third step :",
-"",
-"Repeat first step.",
-"",
-"Note that you can",
-"only place the",
-"jelly behind you.",
-"",
-"Good luck for",
-"your quests !"
-],
-
-    asciiEndP1 :
-[
-"   ~ The end ~",
-"-----------------",
-"",
-"   Thanks for",
-"    reading !",
-"",
-"We hope this book",
-"helped you. Feel",
-"     free to",
-"redistribute it !",
-],
-
-    asciiEndP2 :
-[
-"Co-authors :",
-"",
-"- the sorceress",
-"- the necromancer",
-"- a shoemaker",
-"- a mathematician",
-"- ???",
-"",
-" Happy brewing ~"
-]
-
 };
