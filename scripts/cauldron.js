@@ -122,18 +122,20 @@ var cauldron = {
     drawBook : function(){
         const { x, y, page_1, page_2, page_L, page_R } = this.book
         nav_buttons_text = "<button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>"
-        // Draw the book itself
-        this.textBook = layer_text(this.textBook, data.ascii.book, x, y)
-        // Draw the page numbers
-        this.textBook = layer_text(this.textBook, "" +  this.bookPage * 2,      page_1.x, page_1.y)
-        this.textBook = layer_text(this.textBook, "" + (this.bookPage * 2 + 1), page_2.x, page_2.y)
-
-        // Draw the previous and next page buttons
-        this.textBook = layer_text(this.textBook, nav_buttons_text, this.bookChangePageButtonPosX, this.bookChangePageButtonPosY)
-
-        // Draw the page text
-        this.textBook = layer_text(this.textBook, this.textLeftPage,  page_L.x, page_L.y)
-        this.textBook = layer_text(this.textBook, this.textRightPage, page_R.x, page_R.y)
+        this.textBook = layer_texts(
+            this.textBook,
+            [
+                // Draw the book itself
+                [data.ascii.book, x, y],
+                // Draw the page numbers
+                ["" +  this.bookPage * 2,      page_1.x, page_1.y]
+                ["" + (this.bookPage * 2 + 1), page_2.x, page_2.y]
+                // Draw the previous and next page buttons
+                [nav_buttons_text, this.bookChangePageButtonPosX, this.bookChangePageButtonPosY]
+                // Draw the page text
+                [this.textLeftPage,  page_L.x, page_L.y]
+                [this.textRightPage, page_R.x, page_R.y]
+            ])
     },
     
     drawCauldron : function(){
