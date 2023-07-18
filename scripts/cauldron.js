@@ -121,36 +121,26 @@ var cauldron = {
     
     drawBook : function(){
         const { x, y, page_1, page_2, page_L, page_R } = this.book
+        nav_buttons_text = "<button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>"
         // Draw the book itself
-        for(i = 0; i < data.ascii.book.length; i++){
-            this.textBook[y + i] = this.textBook[y + i].replaceAt(x, data.ascii.book[i]);
-        }
-        
+        this.textBook = layer_text(this.textBook, data.ascii.book, x, y)
         // Draw the page numbers
-        this.textBook[y + page_1.y] = this.textBook[y + page_1.y].replaceAt(x + page_1.x, "" + this.bookPage * 2);
-        this.textBook[y + page_2.y] = this.textBook[y + page_2.y].replaceAt(x + page_2.x, "" + (this.bookPage * 2 + 1));
-    
+        this.textBook = layer_text(this.textBook, "" +  this.bookPage * 2,      page_1.x, page_1.y)
+        this.textBook = layer_text(this.textBook, "" + (this.bookPage * 2 + 1), page_2.x, page_2.y)
+
         // Draw the previous and next page buttons
-        this.textBook[y + this.bookChangePageButtonPosY] = this.textBook[y + this.bookChangePageButtonPosY].replaceAt(x + this.bookChangePageButtonPosX, "<button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>");
-    
-        // Draw the left page text
-        for(i = 0; i < this.textLeftPage.length; i++){
-            this.textBook[page_L.y + i] = this.textBook[page_L.y + i].replaceAt(x + page_L.x, this.textLeftPage[i]);
-        }
-        
-        // Idem right
-        for(i = 0; i < this.textRightPage.length; i++){
-            this.textBook[page_R.y + i] = this.textBook[page_R.y + i].replaceAt(x + page_R.x, this.textRightPage[i]);
-        }
+        this.textBook = layer_text(this.textBook, nav_buttons_text, this.bookChangePageButtonPosX, this.bookChangePageButtonPosY)
+
+        // Draw the page text
+        this.textBook = layer_text(this.textBook, this.textLeftPage,  page_L.x, page_L.y)
+        this.textBook = layer_text(this.textBook, this.textRightPage, page_R.x, page_R.y)
     },
     
     drawCauldron : function(){
         const { x, y } = this.cauldron
         // We draw the cauldron
-        for(i = 0; i < data.ascii.cauldron.length; i++){
-            this.textCauldron[y + i] = this.textCauldron[y + i].replaceAt(x, data.ascii.cauldron[i]);
-        }
-        
+        this.textCauldron = layer_text(this.textCauldron, data.ascii.cauldron, x, y)
+
         // We add the smoke
         this.drawSmoke();
     },
@@ -159,13 +149,8 @@ var cauldron = {
         const { x, y, on, orientation } = this.smoke
         // Finally, if there's a smoke, we draw it
         if (on) {
-            if (orientation) {
-                this.textCauldron[y]   = this.textCauldron[y]  .replaceAt(x,     "(")
-                this.textCauldron[y-1] = this.textCauldron[y-1].replaceAt(x + 1, ")")
-            } else {
-                this.textCauldron[y]   = this.textCauldron[y]  .replaceAt(x + 1, ")")
-                this.textCauldron[y-1] = this.textCauldron[y-1].replaceAt(x,     "(")
-            }
+            block = orientation ? ["( "," )"] : [" )","( "]
+            this.textCauldron = layer_text(this.textCauldron, block, x, y-1)
         }
     },
     
@@ -253,44 +238,30 @@ var cauldron = {
     },
     
     setWeAreMixing : function(value){
-        // If we want to stop mixing
-        if(!value && this.weAreMixing){
-            // Then we stop
-            this.weAreMixing = false;
-            // We register the mixing
+        this.weAreMixing = value;
+
+        if(!value){
             this.registerAction("mix", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
-        } else if(value && !this.weAreMixing) {
-            // Then we begin
-            this.weAreMixing = true;
+        } else {
             this.disableActionsButtons();
-            // We set the text
             htmlInteraction.setInnerHtml("cauldron_action_text", "Mixing... <span id=\"cauldron_timer\"></span><br/><br/>");
-            // We set the timer
             this.setActionTimer(0);
-            // We store some info
+
             this.candiesWhenWeBeganAction = this.candiesInTheCauldron;
             this.lollipopsWhenWeBeganAction = this.lollipopsInTheCauldron;
         }
     },
     
     setWeAreBoiling : function(value){
-        // If we want to stop Boiling
-        if(value == false && this.weAreBoiling == true){
-            // Then we stop
-            this.weAreBoiling = false;
-            // We register the Boiling
+        this.weAreBoiling = value;
+
+        if(!value){
             this.registerAction("boil", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
-        }
-        // Else, if we want to begin Boiling
-        else if(value == true && this.weAreBoiling == false){
-            // Then we begin
-            this.weAreBoiling = true;
+        } else {
             this.disableActionsButtons();
-            // We set the text
             htmlInteraction.setInnerHtml("cauldron_action_text", "Boiling... <span id=\"cauldron_timer\"></span><br/><br/>");
-            // We set the timer
             this.setActionTimer(0);
-            // We store some info
+
             this.candiesWhenWeBeganAction = this.candiesInTheCauldron;
             this.lollipopsWhenWeBeganAction = this.lollipopsInTheCauldron;
         }
@@ -481,31 +452,27 @@ var cauldron = {
     },
     
     disableActionsButtons : function(){
-        // We disable the mixing button
         htmlInteraction.disableButton("cauldron_mix");
-        // We disable the put into bottles button
         htmlInteraction.disableButton("cauldron_put_into_bottles");
-        // We disable the boiling button
         htmlInteraction.disableButton("cauldron_boil");
-        // We enable the stopping button
+
         htmlInteraction.enableButton("cauldron_stop");
     },
     
     enableActionsButtons : function(){
-        // We re enable the mixing button
         htmlInteraction.enableButton("cauldron_mix");
-        // We re enable the put into bottles button
         htmlInteraction.enableButton("cauldron_put_into_bottles");
-        // We re enable the boiling button
         htmlInteraction.enableButton("cauldron_boil");
-        // We disable the button
+
         htmlInteraction.disableButton("cauldron_stop");
     },
     
     stopActions : function(){
         // Stop all actions
-        this.setWeAreMixing(false);
-        this.setWeAreBoiling(false);
+        if (this.weAreMxing)
+            this.setWeAreMixing(false)
+        if (this.weAreBoiling)
+            this.setWeAreBoiling(false);
         
         // Re enable buttons
         this.enableActionsButtons();
