@@ -121,21 +121,21 @@ var cauldron = {
     
     drawBook : function(){
         const { x, y, page_1, page_2, page_L, page_R } = this.book
-        nav_buttons_text = "<button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>"
         this.textBook = layer_texts(
             this.textBook,
             [
                 // Draw the book itself
                 [data.ascii.book, x, y],
                 // Draw the page numbers
-                ["" +  this.bookPage * 2,      page_1.x, page_1.y]
-                ["" + (this.bookPage * 2 + 1), page_2.x, page_2.y]
-                // Draw the previous and next page buttons
-                [nav_buttons_text, this.bookChangePageButtonPosX, this.bookChangePageButtonPosY]
+                [["" +  this.bookPage * 2],      page_1.x, page_1.y],
+                [["" + (this.bookPage * 2 + 1)], page_2.x, page_2.y],
                 // Draw the page text
-                [this.textLeftPage,  page_L.x, page_L.y]
+                [this.textLeftPage,  page_L.x, page_L.y],
                 [this.textRightPage, page_R.x, page_R.y]
             ])
+
+        // Draw the previous and next page buttons
+        this.textBook.push("   <button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>")
     },
     
     drawCauldron : function(){
@@ -157,26 +157,23 @@ var cauldron = {
     },
     
     moveSmoke : function(){
-        // If we have the cauldron
-        if(objects.list.cauldron.have) {
-            if(!this.smoke.on) {
-                this.smoke = {
-                    on: true,
-                    x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
-                    y: this.cauldron.y,
-                    orientation: random.flipACoin()
-                }
-            } else {
-                // We make it go up
-                this.smoke.y -= 1
-                // We switch its orientation
-                this.smoke.orientation = !this.smoke.orientation
-                // If it's too high, there's no smoke anymore
-                if(this.cauldron.y - this.smoke.y > 3)
-                    this.smoke.on = false
+        if(!this.smoke.on) {
+            this.smoke = {
+                on: true,
+                x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
+                y: this.cauldron.y,
+                orientation: random.flipACoin()
             }
+        } else {
+            // We make it go up
+            this.smoke.y -= 1
+            // We switch its orientation
+            this.smoke.orientation = !this.smoke.orientation
+            // If it's too high, there's no smoke anymore
+            if(this.cauldron.y - this.smoke.y > 3)
+                this.smoke.on = false
         }
-        
+
         this.updateCauldronOnPage();
     },
     

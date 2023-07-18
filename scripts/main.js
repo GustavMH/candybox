@@ -73,7 +73,7 @@ var main = {
         }
         
         // Cauldron
-        cauldron.moveSmoke();
+        if(objects.list.cauldron.have) cauldron.moveSmoke();
         cauldron.increaseActionTimer();
         
         // We increase nbrOfSeconds variables
