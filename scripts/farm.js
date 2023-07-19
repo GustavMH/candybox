@@ -27,8 +27,8 @@ var farm = {
         this.plantingButtonsStep = value;
 
         button_fn = (n) => `<button class='home_button' id='plant_${n}_lp' onClick='farm.plantLollipops(${n});'>${n}</button>`
-        const text = range(value).map((_, n) => `Plant ${button_fn(10**n)} lp`)
-        html.setInner("lp_buttons", text)
+        const inner_text = range(value).map((_, n) => button_fn(10**n)).join("")
+        html.setInner("lp_buttons", `Plant ${inner_text} lp`)
 
         // Check the buttons
         buttons.checkLollipopsPlantingButtons();
