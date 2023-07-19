@@ -152,11 +152,7 @@ var potions = {
     makeJelly : function(){
         return land.create(data.mobs.jelly)
     },
-    
-    makeClone : function(hp, max_hp){
-        return land.create(data.mobs.clone)
-    },
-    
+
     makeCandyTree : function(){
         var hp = 0;
         
@@ -358,19 +354,19 @@ var potions = {
     
     turtle : function(){
         if(this.list.turtle.nbrOwned > 0){
-        // We decrement nbrOwned
-        this.list.turtle.nbrOwned -= 1;
-        
-        // We set the countdown
-        quest.potionUseCountdown += this.getCountdown();
-        
-        // We tell the quest that we are now in berserk mode
-        quest.beginTurtle();
-        
-        // We update the quest and the potions on page
-        quest.updateOnPage();
-        this.updateOnPage();
-    }
+            // We decrement nbrOwned
+            this.list.turtle.nbrOwned -= 1;
+
+            // We set the countdown
+            quest.potionUseCountdown += this.getCountdown();
+
+            // We tell the quest that we are now in berserk mode
+            quest.beginTurtle();
+
+            // We update the quest and the potions on page
+            quest.updateOnPage();
+            this.updateOnPage();
+        }
     },
     
     jelly : function(){
@@ -422,7 +418,7 @@ var potions = {
             quest.potionUseCountdown += 100;
         
             // We place a clone
-            quest.things[index+1] = this.makeClone(quest.things[index].hp, quest.things[index].max_hp);
+            quest.things[index+1] = land.create(data.mobs.clone)
         
             // We update the quest and the potions on page
             quest.updateOnPage();
@@ -467,25 +463,15 @@ var potions = {
     
     // When this function is called, quest.stop() was done just before, so we can launch a new quest if we want ;)
     gmoohEffect : function(){
-        // We decrement nbrOwned
         this.list.gmooh.nbrOwned -= 1;
-        
         quest.setTiredTime(0);
-        
-        switch(random.getRandomIntUpTo(3)){
-            case 0:
-                quest.begin(false, land.getLandIndexFromName("The peaceful forest"));
-            break;
-            case 1:
-                quest.begin(false, land.getLandIndexFromName("cowLevel"));
-            break;
-            case 2:
-                quest.begin(false, land.getLandIndexFromName("sea"));
-            break;
-            case 3:
-                quest.begin(false, land.getLandIndexFromName("desert"));
-            break;
-        }
+        land_name = [
+            "The peaceful forest",
+            "cowLevel",
+            "sea",
+            "desert"
+        ][random.getRandomIntUpTo(3)]
+        quest.begin(false, land.getLandIndexFromName(land_name));
     }
     
 };

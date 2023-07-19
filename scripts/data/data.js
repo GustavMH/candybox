@@ -5,63 +5,64 @@ data = {
     mobs: {
         chuckNorris: ("mob", "CHN", 1000, 1000, "Chuck Norris", "Chuck Norris. You just can't beat him.", [])
         necromancer: ("mob", "NEC", 150, 150, "magic staff", "A necromancer. She summons ghosts and dead stuff.", [drops.createDrop("object", "candiesConverter", true), drops.createDrop("object", "cauldron", true)])
-        ghost: ("GHO", 5, 5, "spectral magic", "A Ghost. It halves the life of human beings.", [])
-        pileOfCorpses: ("POC", [140, 220, 20], [140, 220, 20], "none", "A pile of corpses. It doesn't hurt you, but damn, it's hard to remove !", [])
-        guard: ("GUA", 25, 25, "spear", "One of the castle's guards.", [drops.createDrop("candies", random.getRandomIntUpTo(40))])
-        knight: ("KNI", 70, 70, "sharp sword", "A knight with a huge armor.", [drops.createDrop("candies", 230 + random.getRandomIntUpTo(70)), drops.createDrop("object", "plateArmour", random.oneChanceOutOf(10))])
-        cheatedGardenGnome: ("CGG", 70, 70, "ultra plasma gun", "A cheated garden gnome. Since when garden gnomes have guns like that ?", [])
-        spikyDoor: ("|-|", 300, 300, "spikes", "A strong door. Hard to break. There are spikes on it, it hurts !", []);
-        door: ("|-|", 300, 300, "none", "A strong door. Hard to break.", [])
-        banshee: ("BSH", 160, 160, "?", "A banshee, omen of death.", [])
-        demon: ("DEM", 90, 90, "demon claws", "A demon.", [])
-        devil: ("DEV", 250, 250, "religion", "It's the devil itself !", [drops.createDrop("candies", 100000)])
-        teleportingGate: (" * ", 120, 120, "none", "A teleporting gate, made by the devil itself.", [])
-        bug: (random.pickRandomly(["B", "U", "G"]) + random.pickRandomly(["B", "U", "G"]) + random.pickRandomly(["B", "U", "G"]), 300 + random.getRandomIntUpTo(10000000), 300, random.pickRandomly(["itself", "religion", "flames", "sharp teeth", "cursed sword", "claws", "dagger", "fins", "hooves", "magic staff", "horn", "silver sword", "chocolate sword", "demon claws"]), "A bug !", [drops.createDrop("candies", 100000000)])
-        dev: ("DEV", 100000000000000, 100000000000000, "bugs", "The developper (hey, he made this game !)", [drops.createDrop("candies", 1000000)])
-        komodoDragon: ("KOM", 5, 5, "foots and tail", "A Komodo dragon. Did you heard about island gigantism ?", []),
-        rhinoceros: ("RHI", 160, 160, "horn", "A " + random.pickRandomly(["white", "black", "indian", "javan", "sumatran"]) + " rhinoceros. Watch out for his horn !", []),
-        gaur: ("GAU", 80, 80, "horns", "A Gaur. This large bovine looks like a bison.", []),
-        dromornisStirtoni: ("DST", 70, 70, "giant beak", "A Dromornis Stirtoni ! A 400kg flightless bird !", []),
-        gorilla: ("GOR", 50, 50, "its fists", "A Gorilla. Gorillas occasionally engage in homosexual interactions.", []),
-        capybara: ("CPY", 20, 20, "its teeth", "A capybara : the largest rodent in the world !", []),
-        doedicurus: ("DOE", 120, 120, "spiky tail", "A Doedicurus : your favorite glyptodont !", []),
-        stoneWall: ("WAL", 300, 300, "stone", "A stone wall.", []),
-        walledOffZombieWarrior: ("WZW", [150, 250, 10], [150, 250, 10], "cursed sword", "A walled off zombie warrior. He probably did something bad to end up here.", [drops.createDrop("candies", random.getRandomIntUpTo(1) * 4000), drops.createDrop("object", "oldAmulet", true)]),
-        fireball: ("FBL", 1, 1, "itself", "A fireball !! Watch out !", []),
-        fakeDoorMonster: ("| |", 70, 70, "sharp teeth", "It's not a door ! It's a monster ! (an ugly one)", []),
-        unicorn: ("UNI", 100, 100, "magical horn", "A unicorn !! They exist !", []),
-        charlieTheUnicorn: ("UNI", 100, 100, "magical horn", "A unicorn !! It has no kidney.", [drops.createDrop("object", "magicalHorn", true)]),
-        troll: ("TRL", 250, 250, "enormous fist", "A troll. It is huge, but it lacks precision.", []),
-        dragon: (",((", 1000, 1000, "flames", "A dragon !! Kill him and the castle will be yours.", []),
-        tree: ("|||", 5, 5, "none", "A tree. It sometimes drops a candy.", [drops.createDrop("candies", random.getRandomIntUpTo(1)), drops.createDrop("object", "key", random.oneChanceOutOf(2))])
-        yourself: ("\\o/", quest.things[index].hp, quest.things[index].max_hp, sword.name, "You", [])
-        cow: ("COW", 12, 12, "horns", "A cow ! Mooooo !", [drops.createDrop("candies", 100)]),
-        cowKing: ("COW", 180, 180, "horns", "The cow king ! It looks like a normal cow, but it isn't...", [drops.createDrop("candies", 1000), drops.createDrop("object", "hornOfPlenty", true)]),
-        basicChest: ("CHS", 80, 80, "none", "A chest !! Very rare.", [drops.createDrop("candies", 300 + random.getRandomIntUpTo(500)), drops.createDrop("object", "key", true), drops.createDrop("object", "boots", random.oneChanceOutOf(3)), drops.createDrop("object", "swampMap", random.oneChanceOutOf(3)), drops.createDrop("object", "hutMap", random.oneChanceOutOf(3))]),
-        openChest: ("CHS", 1, 1, "none", "An open chest, full of candies !", [drops.createDrop("candies", 6000 + random.getRandomIntUpTo(2000))]),
-        eel: ("EEL", 3, 3, "electric tail", "An eel. Weak, but aggressive.", [drops.createDrop("candies", 50 + random.getRandomIntUpTo(50))])
-        fish: ("F~H", [9, 12, 1], [9, 12, 1], "fins", "A fish. Easy to beat.", [drops.createDrop("candies", 5)])
-        octopus: ("OCT", 45, 45, "tentacles", "An octopus guardian. It looks dangerous.", [])
-        theWhale: ("The Whale.", 100, 100, "giant tail", "The Whale does not like to be disturbed.", [drops.createDrop("candies", 400 + random.getRandomIntUpTo(400)), drops.createDrop("object", "key", true), drops.createDrop("object", "hutMap", true), drops.createDrop("object", "swampMap", true), drops.createDrop("object", "boots", true), drops.createDrop("object", "wellMap", true), drops.createDrop("object", "magicianHat", true), drops.createDrop("object", "pinkRing", true), drops.createDrop("object", "forgeMap", true)])
-        woodPony: ("WPY", 12, 12, "hooves", "A wood poney ! It's a poney ! It the woods !", [drops.createDrop("candies", 42)])
-        sickGoblin: ("GSB", 20, 5 + random.getRandomIntUpTo(5), "claws", "A sick goblin. It smells.", [drops.createDrop("candies", 3 + random.getRandomIntUpTo(3))])
-        nastyGoblin: ("GOB", 20, 20, "claws", "A nasty goblin.", [drops.createDrop("candies", 3 + random.getRandomIntUpTo(3))])
-        tenaciousGoblin: ("GTB", 30, 30, "dagger", "A tenacious goblin. Oh, he has a dagger, too.", [drops.createDrop("candies", 9 + random.getRandomIntUpTo(9)), drops.createDrop("object", "key", random.oneChanceOutOf(2)), drops.createDrop("object", "boots", random.oneChanceOutOf(5)), drops.createDrop("object", "swampMap", random.oneChanceOutOf(5)), drops.createDrop("object", "hutMap", random.oneChanceOutOf(5))])
+        ghost: ("mob", "GHO", 5, 5, "spectral magic", "A Ghost. It halves the life of human beings.", [])
+        pileOfCorpses: ("mob", "POC", [140, 220, 20], [140, 220, 20], "none", "A pile of corpses. It doesn't hurt you, but damn, it's hard to remove !", [])
+        guard: ("mob", "GUA", 25, 25, "spear", "One of the castle's guards.", [drops.createDrop("candies", random.getRandomIntUpTo(40))])
+        knight: ("mob", "KNI", 70, 70, "sharp sword", "A knight with a huge armor.", [drops.createDrop("candies", 230 + random.getRandomIntUpTo(70)), drops.createDrop("object", "plateArmour", random.oneChanceOutOf(10))])
+        cheatedGardenGnome: ("mob", "CGG", 70, 70, "ultra plasma gun", "A cheated garden gnome. Since when garden gnomes have guns like that ?", [])
+        spikyDoor: ("mob", "|-|", 300, 300, "spikes", "A strong door. Hard to break. There are spikes on it, it hurts !", []);
+        door: ("mob", "|-|", 300, 300, "none", "A strong door. Hard to break.", [])
+        banshee: ("mob", "BSH", 160, 160, "?", "A banshee, omen of death.", [])
+        demon: ("mob", "DEM", 90, 90, "demon claws", "A demon.", [])
+        devil: ("mob", "DEV", 250, 250, "religion", "It's the devil itself !", [drops.createDrop("candies", 100000)])
+        teleportingGate: ("mob", " * ", 120, 120, "none", "A teleporting gate, made by the devil itself.", [])
+        bug: ("mob", "BUG", [300, 10000300, 1], 300, random.pickRandomly(["itself", "religion", "flames", "sharp teeth", "cursed sword", "claws", "dagger", "fins", "hooves", "magic staff", "horn", "silver sword", "chocolate sword", "demon claws"]), "A bug !", [drops.createDrop("candies", 100000000)])
+        dev: ("mob", "DEV", 100000000000000, 100000000000000, "bugs", "The developper (hey, he made this game !)", [drops.createDrop("candies", 1000000)])
+        komodoDragon: ("mob", "KOM", 5, 5, "foots and tail", "A Komodo dragon. Did you heard about island gigantism ?", []),
+        rhinoceros: ("mob", "RHI", 160, 160, "horn", "A " + random.pickRandomly(["white", "black", "indian", "javan", "sumatran"]) + " rhinoceros. Watch out for his horn !", []),
+        gaur: ("mob", "GAU", 80, 80, "horns", "A Gaur. This large bovine looks like a bison.", []),
+        dromornisStirtoni: ("mob", "DST", 70, 70, "giant beak", "A Dromornis Stirtoni ! A 400kg flightless bird !", []),
+        gorilla: ("mob", "GOR", 50, 50, "its fists", "A Gorilla. Gorillas occasionally engage in homosexual interactions.", []),
+        capybara: ("mob", "CPY", 20, 20, "its teeth", "A capybara : the largest rodent in the world !", []),
+        doedicurus: ("mob", "DOE", 120, 120, "spiky tail", "A Doedicurus : your favorite glyptodont !", []),
+        stoneWall: ("mob", "WAL", 300, 300, "stone", "A stone wall.", []),
+        walledOffZombieWarrior: ("mob", "WZW", [150, 250, 10], [150, 250, 10], "cursed sword", "A walled off zombie warrior. He probably did something bad to end up here.", [drops.createDrop("candies", random.getRandomIntUpTo(1) * 4000), drops.createDrop("object", "oldAmulet", true)]),
+        fireball: ("mob", "FBL", 1, 1, "itself", "A fireball !! Watch out !", []),
+        fakeDoorMonster: ("mob", "| |", 70, 70, "sharp teeth", "It's not a door ! It's a monster ! (an ugly one)", []),
+        unicorn: ("mob", "UNI", 100, 100, "magical horn", "A unicorn !! They exist !", []),
+        charlieTheUnicorn: ("mob", "UNI", 100, 100, "magical horn", "A unicorn !! It has no kidney.", [drops.createDrop("object", "magicalHorn", true)]),
+        troll: ("mob", "TRL", 250, 250, "enormous fist", "A troll. It is huge, but it lacks precision.", []),
+        dragon: ("mob", ",((", 1000, 1000, "flames", "A dragon !! Kill him and the castle will be yours.", []),
+        tree: ("mob", "|||", 5, 5, "none", "A tree. It sometimes drops a candy.", [drops.createDrop("candies", random.getRandomIntUpTo(1)), drops.createDrop("object", "key", random.oneChanceOutOf(2))])
+        yourself: ("mob", "\\o/", null, null, "", "You", [])
+        cow: ("mob", "COW", 12, 12, "horns", "A cow ! Mooooo !", [drops.createDrop("candies", 100)]),
+        cowKing: ("mob", "COW", 180, 180, "horns", "The cow king ! It looks like a normal cow, but it isn't...", [drops.createDrop("candies", 1000), drops.createDrop("object", "hornOfPlenty", true)]),
+        basicChest: ("mob", "CHS", 80, 80, "none", "A chest !! Very rare.", [drops.createDrop("candies", 300 + random.getRandomIntUpTo(500)), drops.createDrop("object", "key", true), drops.createDrop("object", "boots", random.oneChanceOutOf(3)), drops.createDrop("object", "swampMap", random.oneChanceOutOf(3)), drops.createDrop("object", "hutMap", random.oneChanceOutOf(3))]),
+        openChest: ("mob", "CHS", 1, 1, "none", "An open chest, full of candies !", [drops.createDrop("candies", 6000 + random.getRandomIntUpTo(2000))]),
+        eel: ("mob", "EEL", 3, 3, "electric tail", "An eel. Weak, but aggressive.", [drops.createDrop("candies", 50 + random.getRandomIntUpTo(50))])
+        fish: ("mob", "F~H", [9, 12, 1], [9, 12, 1], "fins", "A fish. Easy to beat.", [drops.createDrop("candies", 5)])
+        octopus: ("mob", "OCT", 45, 45, "tentacles", "An octopus guardian. It looks dangerous.", [])
+        theWhale: ("mob", "The Whale.", 100, 100, "giant tail", "The Whale does not like to be disturbed.", [drops.createDrop("candies", 400 + random.getRandomIntUpTo(400)), drops.createDrop("object", "key", true), drops.createDrop("object", "hutMap", true), drops.createDrop("object", "swampMap", true), drops.createDrop("object", "boots", true), drops.createDrop("object", "wellMap", true), drops.createDrop("object", "magicianHat", true), drops.createDrop("object", "pinkRing", true), drops.createDrop("object", "forgeMap", true)])
+        woodPony: ("mob", "WPY", 12, 12, "hooves", "A wood poney ! It's a poney ! It the woods !", [drops.createDrop("candies", 42)])
+        sickGoblin: ("mob", "GSB", 20, [5, 10, 1], "claws", "A sick goblin. It smells.", [drops.createDrop("candies", 3 + random.getRandomIntUpTo(3))])
+        nastyGoblin: ("mob", "GOB", 20, 20, "claws", "A nasty goblin.", [drops.createDrop("candies", 3 + random.getRandomIntUpTo(3))])
+        tenaciousGoblin: ("mob", "GTB", 30, 30, "dagger", "A tenacious goblin. Oh, he has a dagger, too.", [drops.createDrop("candies", 9 + random.getRandomIntUpTo(9)), drops.createDrop("object", "key", random.oneChanceOutOf(2)), drops.createDrop("object", "boots", random.oneChanceOutOf(5)), drops.createDrop("object", "swampMap", random.oneChanceOutOf(5)), drops.createDrop("object", "hutMap", random.oneChanceOutOf(5))])
 
         // Ally
-        candyMonster: ("CND", [80, 5, sword.specialPower], [80, 5, sword.specialPower], "exploding candies", "A candy monster. He throws candies on his ennemies.", [])
-        imp: ("IMP", [15, 25, 1], [15, 25, 1], "its whole body", "An imp.", []),
-        irc: ("ORC", 30, 30, "bludgeon", "An orc. It looks stupid.", []),
-        draugr: ("DRG", 35, 35, "various bones", "A draugr. It seems to be dead, but it's still moving..", []),
-        chupacabra: ("CBA", 30, 30, "fangs", "A chupacabra. A real goat sucker !", []),
-        golem: ("GOL", 100, 100, "rock", "A golem. Solid, solid golem.", []),
-        chimera: ("CHI", [50, 57, 1], [50, 57, 1], "fire", "A chimera : lion, serpent and goat at the same time.", []),
-        clone: ("\\o/", max_hp, hp, "cloned sword", "A clone of you.", [])
+        candyMonster: ("ally", "CND", null, null, "exploding candies", "A candy monster. He throws candies on his ennemies.", [])
+        imp: ("ally", "IMP", [15, 25, 1], [15, 25, 1], "its whole body", "An imp.", []),
+        irc: ("ally", "ORC", 30, 30, "bludgeon", "An orc. It looks stupid.", []),
+        draugr: ("ally", "DRG", 35, 35, "various bones", "A draugr. It seems to be dead, but it's still moving..", []),
+        chupacabra: ("ally", "CBA", 30, 30, "fangs", "A chupacabra. A real goat sucker !", []),
+        golem: ("ally", "GOL", 100, 100, "rock", "A golem. Solid, solid golem.", []),
+        chimera: ("ally", "CHI", [50, 57, 1], [50, 57, 1], "fire", "A chimera : lion, serpent and goat at the same time.", []),
+
+        clone: ("ally", "\\o/", null, null, "cloned sword", "A clone of you.", [])
 
         // trap
-        jelly: ("JEL", 1, 1, "powerful explosion", "A jelly !! Go away !", [])
-        yggdrasil: ("/Y\\", 10000, 10000, "none", "Yggdrasill is its name, a tall tree, showered with shining loam.", [drops.createDrop("candies", 10000)])
-        tree: ("\\|/", [500, 900, 100], [500, 900, 100], "none", "A candy tree. I hope you're carrying a good axe.", [])
+        jelly: ("trap", "JEL", 1, 1, "powerful explosion", "A jelly !! Go away !", [])
+        yggdrasil: ("trap", "/Y\\", 10000, 10000, "none", "Yggdrasill is its name, a tall tree, showered with shining loam.", [drops.createDrop("candies", 10000)])
+        tree: ("trap", "\\|/", [500, 900, 100], [500, 900, 100], "none", "A candy tree. I hope you're carrying a good axe.", [])
 
         // Fake
         {type:"fake", text:"\\o/", max_hp:0, hp:0, weapon:"none", description:"", drops:[]}

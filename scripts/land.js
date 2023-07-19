@@ -1,6 +1,4 @@
 var land = {
-    
-    // Variables
     list : [],
     ponyTime : false,
 
@@ -8,10 +6,28 @@ var land = {
         const pony_opts = this.ponyTime ? {text: "PON", description: "A pony"} : {}
         const fake_opts = opts.type == "fake" ? {text: `\o/`, description: "", max_hp:0, hp:0,} : {}
 
-        return {...opts, fake_opts, ...pony_opts}
+        let name = opts.name;
+        if (name == "BUG") {
+            a = () => random.pickRandomly(["B", "U", "G"])
+            name = a() + a() + a()
+        }
+
+        let hp = opts.hp
+        let max_hp = opts.max_hp
+        let weapon = opts.weapon
+        if (name == "\\o/") {
+            hp = quest.things[index].hp,
+            max_hp = quest.things[index].max_hp
+            weapon = sword.name
+        }
+        if (name = "CND") {
+            hp = 80 + 5*sword.specialPower
+        }
+
+
+        return {...opts, ...fake_opts, ...pony_opts}
     }
     
-    // Functions
     addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction){
         this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
     },
@@ -54,5 +70,4 @@ var land = {
     load : function(){
         return this.list[quest.currentLandIndex].loadFunction();
     }
-    
 };
