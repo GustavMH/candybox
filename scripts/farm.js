@@ -6,7 +6,7 @@ var farm = {
     lollipopsPerDay : 0, // How many lollipops the farm produce every day
     lollipopsProduction : 0, // How many lollipops the farm produce every day, hour, min, sec.. depending on the production delay type
     maxLollipopsPerDay : 8640000, // = 100/sec
-    flagsList : [" ~ ", " * ", "cnd", " ! ", " + ", " ? ", "/|\\"], // List of ascii flags which can appear on the farm
+    flags : [" ~ ", " * ", "cnd", " ! ", " + ", " ? ", "/|\\"], // List of ascii flags which can appear on the farm
     currentFlagIndex : 0, // Index in the list of the current flag shown
     plantingButtonsStep : 0, // Step of the lollipops planting buttons : (= which buttons are shown, 1000, 100.. ?)
     
@@ -41,10 +41,10 @@ var farm = {
     
     setCurrentFlagIndex : function(value){
         // Set the new value and correct it if incorrect
-        this.currentFlagIndex = value % this.flagList.length
+        this.currentFlagIndex = value % this.flags.length
 
         // Update on the page
-        html.setInner("farm_big_lollipop", this.flagsList[this.currentFlagIndex]);
+        html.setInner("farm_big_lollipop", this.flags[this.currentFlagIndex]);
     },
     
     checkVisibility : function(){

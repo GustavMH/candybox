@@ -83,38 +83,22 @@ var shop = {
     },
     
     showProduct : function(id){
-        switch(id){
-            // If it's a special product
-            case "wooden_sword":
-                html.setInner("sword_with_button", sword.asciiWoodenSwordWithButton);
-                this.currentSwordButtonId = "buy_wooden_sword";
-                this.currentSwordPrice = 150;
-            break;
-            case "copper_sword":
-                html.setInner("sword_with_button", sword.asciiCopperSwordWithButton);
-                this.currentSwordButtonId = "buy_copper_sword";
-                this.currentSwordPrice = 300;
-            break;
-            case "iron_sword":
-                html.setInner("sword_with_button", sword.asciiIronSwordWithButton);
-                this.currentSwordButtonId = "buy_iron_sword";
-                this.currentSwordPrice = 500;
-            break;
-            case "silver_sword":
-                html.setInner("sword_with_button", sword.asciiSilverSwordWithButton);
-                this.currentSwordButtonId = "buy_silver_sword";
-                this.currentSwordPrice = 1000;
-            break;
-            case "diamond_sword":
-                html.setInner("sword_with_button", sword.asciiDiamondSwordWithButton);
-                this.currentSwordButtonId = "buy_diamond_sword";
-                this.currentSwordPrice = 2000;
-            break;
-            // Else, we just show the html element corresponding to the received id
-            default:
-                html.setElementVisibility(id, true);
-                html.setElementDisplay(id, "block");
-            break;
+        const special_product = ({
+            "wooden_sword":  [data.ascii.swords.woodenWithButton,  "buy_wooden_sword",  150],
+            "copper_sword":  [data.ascii.swords.copperWithButton,  "buy_copper_sword",  300],
+            "iron_sword":    [data.ascii.swords.ironWithButton,    "buy_iron_sword",    500],
+            "silver_sword":  [data.ascii.swords.silverWithButton,  "buy_silver_sword",  1000],
+            "diamond_sword": [data.ascii.swords.diamondWithButton, "buy_diamond_sword", 2000],
+        })[id]
+
+        if (special_product) {
+            const [ascii, button_id, price] = special_product
+            html.setInner("sword_with_button", ascii)
+            this.currentSwordButtonId = button_id
+            this.currentSwordPrice = price
+        } else {
+            html.setElementVisibility(id, true);
+            html.setElementDisplay(id, "block");
         }
     },
     

@@ -3,6 +3,28 @@ data = {
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
     text: {
+        merchant_swords: {
+            "wooden sword": {
+                accept: "Great! This wooden sword isn't the best, for sure, but it really didn't cost so much.",
+                decline: "You don't have enough candies. You should save up candies to buy it : swords are useful nowadays."
+            },
+            "copper sword": {
+                accept: "This copper sword is quite heavy, but it slays efficiently.",
+                decline: "You need 300 candies to buy that sword! Did you know that copper slowly reacts with atmospheric oxygen forming a layer of brown-black copper oxide?"
+            },
+            "iron sword": {
+                accept: "This iron sword could cut almost anything, if you're strong enough to use it.",
+                decline: "You need more candies for the iron sword. Iron is strong. Iron is reliable. Iron will obey your slaying desire."
+            },
+            "silver sword": {
+                accept: "One thousand candies for meeee! Uh, I mean, this silver sword is even stronger than the iron one! You had to buy it.",
+                decline: "One thousand candies for the silver sword! My marginal profit can't handle less than that."
+            },
+            "diamond sword": {
+                accept: "Diamond! This is the best sword I can sell you. It will cut rocks as if they were made of butter.",
+                decline: "You need more candies. The diamond sword is quite expensive, but it's worth it!"
+            }
+        },
         brewing_val_errors: [
             "The value you entered for candies is not a number.",
             "The value you entered for lollipops is not a number.",
@@ -49,6 +71,303 @@ data = {
         }
     },
     ascii: {
+        swords: {
+            woodenWithButton : "\
+      .\n\
+     / \\\n\
+     | |\n\
+     | |  <button class=\"home_button\" id=\"buy_wooden_sword\" onClick=\"sword.buyThisSword(\'wooden sword\');\">Buy the wooden sword (150 candies)</button>\n\
+     | |\n\
+     | |\n\
+   `--8--\'\n\
+      8\n\
+      0",
+
+            wooden : "Wooden sword\n\
+     .\n\
+    / \\\n\
+    | |\n\
+    | |\n\
+    | |\n\
+    | |\n\
+  `--8--\'\n\
+     8\n\
+     0",
+
+            copperWithButton : "\
+      .\n\
+     /:\\\n\
+     |||\n\
+     |||  <button class=\"home_button\" id=\"buy_copper_sword\" onClick=\"sword.buyThisSword(\'copper sword\');\">Buy the copper sword (300 candies)</button>\n\
+     |||\n\
+     |||\n\
+   `--8--\'\n\
+      8\n\
+      0",
+
+            copper : "Copper sword\n\
+     .\n\
+    /:\\\n\
+    |||\n\
+    |||\n\
+    |||\n\
+    |||\n\
+  `--8--\'\n\
+     8\n\
+     0",
+
+            ironWithButton : "\
+      /|\n\
+     |\\|\n\
+     |||\n\
+     |||  <button class=\"home_button\" id=\"buy_iron_sword\" onClick=\"sword.buyThisSword(\'iron sword\');\">Buy the iron sword (500 candies)</button>\n\
+     |||\n\
+     |||\n\
+     |||\n\
+     |||\n\
+  ~-[{o}]-~\n\
+     |/|\n\
+     |/|\n\
+     `0\'",
+
+            iron : "Iron sword\n\
+    /|\n\
+   |\\|\n\
+   |||\n\
+   |||\n\
+   |||\n\
+   |||\n\
+   |||\n\
+   |||\n\
+~-[{o}]-~\n\
+   |/|\n\
+   |/|\n\
+   `0\'",
+
+            silverWithButton : "\
+     |\\\n\
+     |/|\n\
+     |||\n\
+     [|]  <button class=\"home_button\" id=\"buy_silver_sword\" onClick=\"sword.buyThisSword(\'silver sword\');\">Buy the silver sword (1000 candies)</button>\n\
+     |||\n\
+     [|]\n\
+     |||\n\
+     |||\n\
+  \\_[[O]]_/\n\
+     |/|\n\
+     |/|\n\
+     `0\'",
+
+            silver : "Silver sword\n\n\
+    |\\\n\
+    |/|\n\
+    |||\n\
+    [|]\n\
+    |||\n\
+    [|]\n\
+    |||\n\
+    |||\n\
+ \\_[[O]]_/\n\
+    |/|\n\
+    |/|\n\
+    `0\'",
+
+            diamondWithButton : "\
+      /|\n\
+     |;|\n\
+     |:|\n\
+     |;|  <button class=\"home_button\" id=\"buy_diamond_sword\" onClick=\"sword.buyThisSword(\'diamond sword\');\">Buy the diamond sword (2000 candies)</button>\n\
+     |:|\n\
+     |;|\n\
+     |:|\n\
+     |;|\n\
+     |:|\n\
+  \\_[[C]]_/\n\
+     |N|\n\
+     |D|\n\
+     `0\'",
+
+            diamond : "Diamond sword\n\n\
+      /|\n\
+     |;|\n\
+     |:|\n\
+     |;|\n\
+     |:|\n\
+     |;|\n\
+     |:|\n\
+     |;|\n\
+     |:|\n\
+  \\_[[C]]_/\n\
+     |N|\n\
+     |D|\n\
+     `0\'",
+
+            candyDiamond : "Candy diamond sword\n\n\
+        /|\n\
+       |o|\n\
+       |:|\n\
+       |o|\n\
+       |:|\n\
+       |o|\n\
+       |:|\n\
+       |o|\n\
+   o   |:|   o\n\
+    \\_[[C]]_/\n\
+       |N|\n\
+       |D|\n\
+       'O'",
+
+            polishedCandyDiamond : "Polished candy diamond sword\n\n\
+            /|\n\
+           |o|\n\
+           | |\n\
+           |o|\n\
+           | |\n\
+           |o|\n\
+           | |\n\
+           |o|\n\
+       o   | |   o\n\
+        \\_([-])_/\n\
+           | |\n\
+           | |\n\
+           'O'",
+
+            chocolate : "Chocolate sword\n\n\
+       /|\n\
+      |o|\n\
+      |~|\n\
+      |o|\n\
+      |~|\n\
+      |o|\n\
+      |~|\n\
+      |o|\n\
+  o   |~|   o\n\
+   \\~([-])~/\n\
+      |~|\n\
+      |~|\n\
+      'O'",
+
+            sharpChocolate : "Sharp chocolate sword\n\n\
+         /|\n\
+        |^|\n\
+        |~|\n\
+        |^|\n\
+        |~|\n\
+        |^|\n\
+        |~|\n\
+        |^|\n\
+    .   |~|   .\n\
+     \\~([-])~/\n\
+        |~|\n\
+        |~|\n\
+        'O'",
+
+            ofFlames : "Sword of Flames\n\n\
+       _\n\
+      /#|\n\
+     |##|\n\
+     |##|\n\
+     |#F|\n\
+     |L#|\n\
+     |#A|\n\
+     |M#|\n\
+     |#E|\n\
+     |S#|\n\
+     |##|\n\
+     |##|\n\
+ _   |##|   _\n\
+ \\\\-([--])-//\n\
+     |``|\n\
+     |``|\n\
+     |``|\n\
+     \"##\"",
+
+            ofLife : "Sword of Life\n\n\
+   _    _\n\
+  ( `\\/' )\n\
+  `\\    /'\n\
+    |\\/|\n\
+    |  |\n\
+    |~ |\n\
+    |  |\n\
+    | ~|\n\
+    |  |\n\
+    |  |\n\
+    | ~|\n\
+    |~ |\n\
+    |  |\n\
+    | ~|\n\
+/~~([--])~~\\\n\
+    |  |\n\
+    |  |\n\
+    |  |\n\
+    \"OO\"",
+
+            ofSummoning : "Sword of Summoning\n\n\
+       _\n\
+      /*|      _\n\
+     |% |     / \\\n\
+     |  |    /& /\n\
+     | &|   /  /\n\
+     |  |  /  /\n\
+     |% | / %/\n\
+     |  |/  /\n\
+     | * & /\n\
+     |    /\n\
+     |& */\n\
+     |  |\n\
+     |_%|\n\
+  ~~([__])~~\n\
+     |*%|\n\
+     |%&|\n\
+     |*&|\n\
+     \'42\'",
+
+            ofLiflamesummoning : "Sword of Liflamesummoning\n\n\
+      _    _\n\
+     ( `\\/' )\n\
+     `\\    /'\n\
+       |\\/|      _\n\
+       |% |     /#\\\n\
+       |  |    /&#/\n\
+       | &|   /##/\n\
+       |  |  /##/\n\
+       |% | /#%/\n\
+       |  |/##/\n\
+       | * &#/\n\
+       |   #/\n\
+       |& */\n\
+       |  |\n\
+       |_%|\n\
+    ~~([__])~~\n\
+       |l%|\n\
+       |%f|\n\
+       |s%|\n\
+       \'42\'",
+
+            ofRandomness : "  Sword of Randomness\n\n\
+      _    _\n\
+ À    ( `\\/' )\n\
+    À `\\ e  /'\n\
+    À À  |\\/|      _\n\
+    À   |% |     /#\\\n\
+    À  qsd |  |    /&#/\n\
+       | &|   /##/\n\
+       ÀÀ|  |  /##/\n\
+       |% | /s%/\n\
+      f |  |À/##/\n\
+       | $*À &#/\n\
+  r     |   #/\n\
+       |& */\n\
+      ù |  |\n\
+   dfg    |_%|\n\
+    ~~(É[__])~~\n\
+       |l%|\n\
+      A |%f|\n\
+       |s%sdd|\n\
+       \'42\'"
+
+        },
         cauldron : [
                 "       ___________",
                 "      (___________)",
