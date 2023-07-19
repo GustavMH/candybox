@@ -3,10 +3,10 @@ var cauldron = {
     // Variables
     textCauldron : [],
     textBook : [],
-    textActionsInfo : "",
-    textActionsPut : "",
-    textActionsInCauldron : "",
-    textActions : "",
+    //textActionsInfo : "",
+    //textActionsPut : "",
+    //textActionsInCauldron : "",
+    //textActions : "",
     textLeftPage : [],
     textRightPage : [],
     cauldron: {x: 10, y: 7, w: 58, h: 16},
@@ -24,188 +24,158 @@ var cauldron = {
     //smokePosX : 0, // X position of this smoke
     //smokePosY : 0, // Y position
     //smokeOrientation : true, // Can be true or false, depending on the smoke orientation (two orientations possible, that's why it's a boolean)
-    book : {x: 0, y: 0, w: 58, h: 17,
-            page_1: {x: 9,  y: 1},
-            page_2: {x: 43, y: 1},
-            page_L: {x: 8,  y: 3},
-            page_R: {x: 29, y: 3}},
-    //bookPosX : 0, // X position of the book
-    //bookPosY : 0, // Y position of the book
-    //bookWidth : 58, // Width of the book <pre>
-    //bookHeight : 17, // Height
-    bookPage : 0, // Current book page
-    maxBookPage : 26, // Max book page
-    //bookFirstPageNumberPosX : 9, // X position of the first page number of the book (relative to the book)
-    //bookFirstPageNumberPosY : 1, // Y
-    //bookSecondPageNumberPosX : 43, // X second page
-    //bookSecondPageNumberPosY : 1, // Y
-    bookChangePageButtonPosX : 2, // X position of the book's buttons used to change pge
-    bookChangePageButtonPosY : 16, // Y
-    //bookLeftPagePosX : 8, // X position of the left page of the book
-    //bookLeftPagePosY : 3, // Y
-    //bookRightPagePosX : 29, // X right page
-    //bookRightPagePosY : 3, // Y
-    candiesInTheCauldron : 0, // Number of candies present in the cauldron
-    lollipopsInTheCauldron : 0, // Idem for lollipops
-    weAreMixing : false, // True if the player is mixing right now
-    weAreBoiling : false, // True if the player is boiling right now
-    candiesWhenWeBeganAction : 0, // Number of candies in the cauldron when we began mixing
-    lollipopsWhenWeBeganAction : 0, // Idem lollipops
-    actions: [],
-    actionsList : [{type:"none"}, {type:"none"}, {type:"none"}], // List of actions
-    actionTimer : 0, // Count the number of seconds an action lasts
-    
-    // Functions
-    registerAction : function(type, nbrCandies, nbrLollipops, timer){
-        // We add the action to the list
-        this.actionsList.push({type:type, nbrCandies:nbrCandies, nbrLollipops:nbrLollipops, timer:timer});
-        
-        // We delete one action if there's too much actions in the list
-        if(this.actionsList.length > 3){
-            this.actionsList.splice(0, 1);
-        }
-    },
-    
-    onload : function(){
-        this.setBookPage(0);
-    },
-    
-    checkVisibility : function(){
-        if(objects.list.cauldron.have){
-            // Show the cauldron tab, which have to be hidden before this point
-            tabs.enable(3);
-        
-            // And we update everything on page
-            this.updateCauldronOnPage();
-            this.updateBookOnPage();
-            this.updateActionsInfoOnPage();
-            this.updateActionsPutOnPage();
-            this.updateActionsInCauldronOnPage();
-            this.updateActionsOnPage();
-        }
-    },
-    
-    resetCauldronText : function(){
-        // Init the text var by putting lots of blank spaces
-        const { h, w } = this.cauldron
-        this.textCauldron = Array(h).fill(Array(w).fill(" ").join("") + "\n")
-    },
-    
-    resetBookText : function(){
-        // Init the text var by putting lots of blank spaces
-        const { h, w } = this.book
-        this.textBook = Array(h).fill(Array(w).fill(" ").join("") + "\n")
-    },
-    
-    setBookPage : function(value){
-        // If the new value is correct
-        if(value >= 0 && value <= this.maxBookPage){
-            // We set it
-            this.bookPage = value;
-            // We set the text of the pages
-            page = value * 2
-            this.textLeftPage  = data.ascii.book_pages[page]
-            this.textRightPage = data.ascii.book_pages[page + 1]
-            // We update the book on page
-            this.updateBookOnPage();
-        }
-    },
-    
-    previousPage : function(){
-        this.setBookPage(this.bookPage-1);
-    },
-    
-    nextPage : function(){
-        this.setBookPage(this.bookPage+1);
-    },
-    
-    drawBook : function(){
-        const { x, y, page_1, page_2, page_L, page_R } = this.book
-        this.textBook = layer_texts(
-            this.textBook,
-            [
-                // Draw the book itself
-                [data.ascii.book, x, y],
-                // Draw the page numbers
-                [["" +  this.bookPage * 2],      page_1.x, page_1.y],
-                [["" + (this.bookPage * 2 + 1)], page_2.x, page_2.y],
-                // Draw the page text
-                [this.textLeftPage,  page_L.x, page_L.y],
-                [this.textRightPage, page_R.x, page_R.y]
-            ])
+book : {x: 0, y: 0, w: 58, h: 17,
+        page_1: {x: 9,  y: 1},
+        page_2: {x: 43, y: 1},
+        page_L: {x: 8,  y: 3},
+        page_R: {x: 29, y: 3}},
+//bookPosX : 0, // X position of the book
+//bookPosY : 0, // Y position of the book
+//bookWidth : 58, // Width of the book <pre>
+//bookHeight : 17, // Height
+bookPage : 0, // Current book page
+maxBookPage : 26, // Max book page
+//bookFirstPageNumberPosX : 9, // X position of the first page number of the book (relative to the book)
+//bookFirstPageNumberPosY : 1, // Y
+//bookSecondPageNumberPosX : 43, // X second page
+//bookSecondPageNumberPosY : 1, // Y
+bookChangePageButtonPosX : 2, // X position of the book's buttons used to change pge
+bookChangePageButtonPosY : 16, // Y
+//bookLeftPagePosX : 8, // X position of the left page of the book
+//bookLeftPagePosY : 3, // Y
+//bookRightPagePosX : 29, // X right page
+//bookRightPagePosY : 3, // Y
+candiesInTheCauldron : 0, // Number of candies present in the cauldron
+lollipopsInTheCauldron : 0, // Idem for lollipops
+weAreMixing : false, // True if the player is mixing right now
+weAreBoiling : false, // True if the player is boiling right now
+candiesWhenWeBeganAction : 0, // Number of candies in the cauldron when we began mixing
+lollipopsWhenWeBeganAction : 0, // Idem lollipops
+actions: [],
+actionsList : [{type:"none"}, {type:"none"}, {type:"none"}], // List of actions
+actionTimer : 0, // Count the number of seconds an action lasts
 
-        // Draw the previous and next page buttons
-        this.textBook.push("   <button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>")
-    },
-    
-    drawCauldron : function(){
-        const { x, y } = this.cauldron
-        // We draw the cauldron
-        this.textCauldron = layer_text(this.textCauldron, data.ascii.cauldron, x, y)
+// Functions
+registerAction : function(type, nbrCandies, nbrLollipops, timer){
+    // We add the action to the list
+    this.actionsList.push({type:type, nbrCandies:nbrCandies, nbrLollipops:nbrLollipops, timer:timer});
 
-        // We add the smoke
-        this.drawSmoke();
-    },
-    
-    drawSmoke : function(){
-        const { x, y, on, orientation } = this.smoke
-        // Finally, if there's a smoke, we draw it
-        if (on) {
-            block = orientation ? ["( "," )"] : [" )","( "]
-            this.textCauldron = layer_text(this.textCauldron, block, x, y-1)
-        }
-    },
-    
-    moveSmoke : function(){
-        if(!this.smoke.on) {
-            this.smoke = {
-                on: true,
-                x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
-                y: this.cauldron.y,
-                orientation: random.flipACoin()
-            }
-        } else {
-            // We make it go up
-            this.smoke.y -= 1
-            // We switch its orientation
-            this.smoke.orientation = !this.smoke.orientation
-            // If it's too high, there's no smoke anymore
-            if(this.cauldron.y - this.smoke.y > 3)
-                this.smoke.on = false
-        }
+    // We delete one action if there's too much actions in the list
+    if(this.actionsList.length > 3){
+        this.actionsList.splice(0, 1);
+    }
+},
 
+onload : function(){
+    this.setBookPage(0);
+},
+
+checkVisibility : function(){
+    if(objects.list.cauldron.have){
+        // Show the cauldron tab, which have to be hidden before this point
+        tabs.enable(3);
+
+        // And we update everything on page
         this.updateCauldronOnPage();
-    },
-    
-    drawActionsInfo : function(){
-        this.textActionsInfo = "<br/><b>What you have :</b><br/>";
-        
-        // Add candies and lollipops info
-        this.textActionsInfo += "    Candies :   " + candies.nbrOwned;
-        this.textActionsInfo += "<br/>    Lollipops : " + lollipops.nbrOwned;
-    },
-    
-    drawActionsPut : function(){
-        this.textActionsPut = "<b>What you want to put in the cauldron :</b><br/><br/>"
-        this.textActionsPut += "<input id=\"cauldron_candies_quantity\" type=\"text\" size=\"10\"/> candies<br/>";
-        this.textActionsPut += "<input id=\"cauldron_lollipops_quantity\" type=\"text\" size=\"10\"/> lollipops<br/>";
-        this.textActionsPut += "<button onclick=\"cauldron.putInTheCauldron()\">Put all that in the cauldron</button> <span id=\"cauldron_comment\"></span><br/>";
-    },
-    
-    drawActionsInCauldron : function(){
-        this.textActionsInCauldron += "<b>What is in the cauldron :</b><br/>";
-        this.textActionsInCauldron += "    Candies :   " + this.candiesInTheCauldron;
-        this.textActionsInCauldron += "<br/>    Lollipops : " + this.lollipopsInTheCauldron + "<br/>";
-    },
-    
-    drawActions : function(){
-        this.textActions += "<b>What you can do with it :</b><br/>";
-        this.textActions += "<button id=\"cauldron_mix\" onclick=\"cauldron.setWeAreMixing(true)\">Mix</button><button id=\"cauldron_boil\" onclick=\"cauldron.setWeAreBoiling(true)\">Boil</button><button disabled=\"disabled\" id=\"cauldron_stop\" onclick=\"cauldron.stopActions()\">Stop</button><br/><br/>";
-        this.textActions += "<span id=\"cauldron_action_text\"></span>";
-        this.textActions += "<button id=\"cauldron_put_into_bottles\" onclick=\"cauldron.putIntoBottles()\">Put everything into bottles</button><br/><br/>";
-        this.textActions += "<span id=\"cauldron_results_text\"></span>";
-    },
-    
+        this.updateBookOnPage();
+        this.updateActionsInfoOnPage();
+        this.updateActionsPutOnPage();
+        this.updateActionsInCauldronOnPage();
+        this.updateActionsOnPage();
+    }
+},
+
+resetCauldronText : function(){
+    // Init the text var by putting lots of blank spaces
+    const { h, w } = this.cauldron
+    this.textCauldron = Array(h).fill(Array(w).fill(" ").join("") + "\n")
+},
+
+resetBookText : function(){
+    // Init the text var by putting lots of blank spaces
+    const { h, w } = this.book
+    this.textBook = Array(h).fill(Array(w).fill(" ").join("") + "\n")
+},
+
+setBookPage : function(value){
+    // If the new value is correct
+    if(value >= 0 && value <= this.maxBookPage){
+        // We set it
+        this.bookPage = value;
+        // We set the text of the pages
+        page = value * 2
+        this.textLeftPage  = data.ascii.book_pages[page]
+        this.textRightPage = data.ascii.book_pages[page + 1]
+        // We update the book on page
+        this.updateBookOnPage();
+    }
+},
+
+previousPage : function(){
+    this.setBookPage(this.bookPage-1);
+},
+
+nextPage : function(){
+    this.setBookPage(this.bookPage+1);
+},
+
+drawBook : function(){
+    const { x, y, page_1, page_2, page_L, page_R } = this.book
+    this.textBook = layer_texts(
+        this.textBook,
+        [
+            // Draw the book itself
+            [data.ascii.book, x, y],
+            // Draw the page numbers
+            [["" +  this.bookPage * 2],      page_1.x, page_1.y],
+            [["" + (this.bookPage * 2 + 1)], page_2.x, page_2.y],
+            // Draw the page text
+            [this.textLeftPage,  page_L.x, page_L.y],
+            [this.textRightPage, page_R.x, page_R.y]
+        ])
+
+    // Draw the previous and next page buttons
+    this.textBook.push("   <button onclick=\"cauldron.previousPage()\">Previous page</button>                       <button onclick=\"cauldron.nextPage()\">Next page</button>")
+},
+
+drawCauldron : function(){
+    const { x, y } = this.cauldron
+    // We draw the cauldron
+    this.textCauldron = layer_text(this.textCauldron, data.ascii.cauldron, x, y)
+
+    // We add the smoke
+    this.drawSmoke();
+},
+
+drawSmoke : function(){
+    const { x, y, on, orientation } = this.smoke
+    // Finally, if there's a smoke, we draw it
+    if (on) {
+        block = orientation ? ["( "," )"] : [" )","( "]
+        this.textCauldron = layer_text(this.textCauldron, block, x, y-1)
+    }
+},
+
+moveSmoke : function(){
+    if(!this.smoke.on) {
+        this.smoke = {
+            on: true,
+            x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
+            y: this.cauldron.y,
+            orientation: random.flipACoin()
+        }
+    } else {
+        // We make it go up
+        this.smoke.y -= 1
+        // We switch its orientation
+        this.smoke.orientation = !this.smoke.orientation
+        // If it's too high, there's no smoke anymore
+        if(this.cauldron.y - this.smoke.y > 3)
+            this.smoke.on = false
+    }
+
+    this.updateCauldronOnPage();
+},
     increaseActionTimer : function(){
         this.setActionTimer(this.actionTimer + 1);
     },
@@ -557,27 +527,23 @@ var cauldron = {
     },
     
     updateActionsInfoOnPage : function(){
-        this.textActionsInfo = "";
-        this.drawActionsInfo();
-        htmlInteraction.setInnerHtml("cauldron_actions_info", this.textActionsInfo);
+        htmlInteraction.setInnerHtml("cauldron_actions_info", data.text.brewing_actions.info);
+        htmlInteraction.setInnerHtml("candies_n", candies.nbrOwned)
+        htmlInteraction.setInnerHtml("lollipops_n", lollipops.nbrOwned)
     },
     
     updateActionsPutOnPage : function(){
-        this.textActionsPut = "";
-        this.drawActionsPut();
-        htmlInteraction.setInnerHtml("cauldron_actions_put", this.textActionsPut);
+        htmlInteraction.setInnerHtml("cauldron_actions_put", data.text.brewing_actions.put);
     },
     
     updateActionsInCauldronOnPage : function(){
-        this.textActionsInCauldron = "";
-        this.drawActionsInCauldron();
-        htmlInteraction.setInnerHtml("cauldron_actions_in_cauldron", this.textActionsInCauldron);
+        htmlInteraction.setInnerHtml("cauldron_actions_in_cauldron", data.text.brewing_actions.in_cauldron)
+        htmlInteraction.setInnerHtml("candies_in_cauldron",  this.candiesInTheCauldron)
+        htmlInteraction.setInnerHtml("lollipops_in_cauldron", this.lollipopsInTheCauldron)
     },
     
     updateActionsOnPage : function(){
-        this.textActions = "";
-        this.drawActions();
-        htmlInteraction.setInnerHtml("cauldron_actions", this.textActions);
+        htmlInteraction.setInnerHtml("cauldron_actions", data.text.brewing_actions.actions);
     },
     
 };

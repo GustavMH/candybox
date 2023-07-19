@@ -3,6 +3,28 @@ data = {
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
     text: {
+        brewing_actions: {
+            info:
+            `<br/><b>What you have :</b>
+    Candies :   <span id='candies_n'></span>
+    Lollipops : <span id='lollipops_n'></span>`,
+            put:
+            `<b>What you want to put in the cauldron :</b><br/>
+<input id=\"cauldron_candies_quantity\" type=\"text\" size=\"10\"/> candies
+<input id=\"cauldron_lollipops_quantity\" type=\"text\" size=\"10\"/> lollipops
+<button onclick=\"cauldron.putInTheCauldron()\">Put all that in the cauldron</button> <span id=\"cauldron_comment\"></span>`,
+            in_cauldron:
+            `<b>What is in the cauldron :</b>
+   Candies :   <span id='candies_in_cauldron'></span>
+   Lollipops : <span id='lollipops_in_cauldron'></span>`,
+            actions:
+            `<b>What you can do with it :</b><br/>
+<button id=\"cauldron_mix\" onclick=\"cauldron.setWeAreMixing(true)\">Mix</button><button id=\"cauldron_boil\" onclick=\"cauldron.setWeAreBoiling(true)\">Boil</button><button disabled=\"disabled\" id=\"cauldron_stop\" onclick=\"cauldron.stopActions()\">Stop</button><br/><br/>
+<span id=\"cauldron_action_text\"></span>
+<button id=\"cauldron_put_into_bottles\" onclick=\"cauldron.putIntoBottles()\">Put everything into bottles</button><br/><br/>
+<span id=\"cauldron_results_text\"></span>`
+
+        },
         cauldron_boiling: {
             texts: [
                 "cold.",

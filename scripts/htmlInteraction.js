@@ -19,7 +19,8 @@ var htmlInteraction = {
     },
     
     setInnerHtml : function(id, value){
-        document.getElementById(id).innerHTML = value;
+        elem = document.getElementById(id)
+        if (elem) elem.innerHTML = value;
         darkMode.update();
     },
     
