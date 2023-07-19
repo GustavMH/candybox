@@ -41,21 +41,18 @@ var farm = {
     
     setCurrentFlagIndex : function(value){
         // Set the new value and correct it if incorrect
-        this.currentFlagIndex = value;
-        if(this.currentFlagIndex >= this.flagsList.length || this.currentFlagIndex < 0) this.currentFlagIndex = 0;
-        
+        this.currentFlagIndex = value % this.flagList.length
+
         // Update on the page
         html.setInner("farm_big_lollipop", this.flagsList[this.currentFlagIndex]);
     },
     
     checkVisibility : function(){
-        if(objects.list.key.have){
-            html.setElementVisibility("farm", true);
-        }
+        if(objects.list.key.have) html.setElementVisibility("farm", true);
     },
     
     plantLollipops : function(number){
-        if(lollipops.nbrOwned >= number){
+        if(lollipops.nbrOwned >= number) {
             lollipops.setNbrOwned(lollipops.nbrOwned - number);
             this.setLollipopsPlanted(this.lollipopsPlanted + number);
         }
@@ -73,23 +70,16 @@ var farm = {
         this.calculateLollipopsProductionFromLollipopsPerDay();
     },
     
-    calculateLollipopsProductionFromLollipopsPerDay : function(){
-        if(this.lollipopsPerDay < 24){
-            this.setProductionDelayType("day");
-            this.setLollipopsProduction(Math.floor(this.lollipopsPerDay));
-        }
-        else if(this.lollipopsPerDay < 1440){
-            this.setProductionDelayType("hour");
-            this.setLollipopsProduction(Math.floor(this.lollipopsPerDay/24));
-        }
-        else if(this.lollipopsPerDay < 86400){
-            this.setProductionDelayType("min");
-            this.setLollipopsProduction(Math.floor(this.lollipopsPerDay/1440));
-        }
-        else{
-            this.setProductionDelayType("sec");
-            this.setLollipopsProduction(Math.floor(this.lollipopsPerDay/86400));
-        }
+    calculateLollipopsProductionFromLollipopsPerDay : function() {
+        const [ _, delay_type, divisor ] = [
+            [24,       "day",  1],
+            [1440,     "hour", 24],
+            [86400,    "min",  1440],
+            [Infinity, "sec",  86400]
+        ].find(([lpd]) => this.lollipopsPerDay < lpd)
+
+        this.setLollipopsProduction(Math.floor(this.lollipopsPerDay / divisor ))
+        this.setProductionDelayType(delay_type)
     },
 
     setProductionDelayType: function(value){
@@ -97,6 +87,7 @@ var farm = {
     },
     
     setLollipopsProduction : function(value){
+        /* TODO bug sets production to n/none */
         this.lollipopsProduction = value;
         html.setInner("lp_production", "Production : " + this.lollipopsProduction + " lp/" + this.productionDelayType);
     },
