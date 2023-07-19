@@ -1,7 +1,4 @@
 var hell = {
-
-    // Variables
-    
     size : 45,
     lavaLakeStep : 0,
     buffers : [[], [], [], [], [], [], []], // The three things buffers
@@ -11,8 +8,6 @@ var hell = {
     monstersGap : 7, // Gap between the devil and appearing monsters
     step : 0,
 
-    // Functions
-    
     onload : function(){
         land.addLand("Hell", this.size, 6, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
     },
@@ -339,12 +334,10 @@ var hell = {
 
         // Add the i & k instructions
         text += "<span style=\"color:red;\"><b>Press i to go up and k to go down.</b></span> (if it doesn't work, click on the page to gain focus)";
-        
         text += "\n";
         
         // Open the span
         text += "<span style=\"font-size:10px;\">";
-        
         text += "\n";
         
         // We add buffers
@@ -353,16 +346,15 @@ var hell = {
                 for(var j = 0; j < this.size; j++){
                     if(this.buffers[i][j].type != "none"){
                         text += this.buffers[i][j].text;
-                    }
-                    else text += "   ";
+                    } else
+                        text += "   ";
                 }
-            }
-            else{
+            } else {
                 for(var j = 0; j < this.size; j++){
                     if(quest.things[j].type != "none"){
                         text += quest.things[j].text;
-                    }
-                    else text += "   ";
+                    } else
+                        text += "   ";
                 }
             }
         
