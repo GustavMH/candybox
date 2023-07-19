@@ -12,30 +12,6 @@ var land = {
     }
     
     // Functions
-    createMob : function(text, max_hp, hp, weapon, description, drops){
-        if(this.ponyTime == false)
-            return {type:"mob", text:text, max_hp:max_hp, hp:hp, weapon:weapon, description:description, drops:drops};
-        else return {type:"mob", text:"PON", max_hp:max_hp, hp:hp, weapon:weapon, description:"A pony", drops:drops};
-    },
-    
-    createFakeCharacter : function(){
-        if(this.ponyTime == false)
-            return {type:"fake", text:"\\o/", max_hp:0, hp:0, weapon:"none", description:"", drops:[]};
-        else return {type:"fake", text:"PON", max_hp:0, hp:0, weapon:"none", description:"A pony", drops:[]};
-    },
-    
-    createAlly : function(text, max_hp, hp, weapon, description, drops){
-        if(this.ponyTime == false)
-            return {type:"ally", text:text, max_hp:max_hp, hp:hp, weapon:weapon, description:description, drops:drops};
-        else return {type:"ally", text:"PON", max_hp:max_hp, hp:hp, weapon:weapon, description:"A pony", drops:drops};
-    },
-    
-    createTrap : function(text, max_hp, hp, weapon, description, drops){
-        if(this.ponyTime == false)
-            return {type:"trap", text:text, max_hp:max_hp, hp:hp, weapon:weapon, description:description, drops:drops};
-        else return {type:"trap", text:"PON", max_hp:max_hp, hp:hp, weapon:weapon, description:"A pony", drops:drops};
-    },
-    
     addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction){
         this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
     },

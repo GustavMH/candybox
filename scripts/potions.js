@@ -150,11 +150,11 @@ var potions = {
     },
     
     makeJelly : function(){
-        return land.createTrap("JEL", 1, 1, "powerful explosion", "A jelly !! Go away !", []);
+        return land.create(data.mobs.jelly)
     },
     
     makeClone : function(hp, max_hp){
-        return land.createAlly("\\o/", max_hp, hp, "cloned sword", "A clone of you.", []);
+        return land.create(data.mobs.clone)
     },
     
     makeCandyTree : function(){
@@ -162,11 +162,9 @@ var potions = {
         
         // One chance out of 100 to spawn the Yggdrasil \o/
         if(random.oneChanceOutOf(100)){
-            return land.createTrap("/Y\\", 10000, 10000, "none", "Yggdrasill is its name, a tall tree, showered with shining loam.", [drops.createDrop("candies", 10000)]);
-        }
-        else{
-            hp = 500 + 100 * random.getRandomIntUpTo(4); // 500 / 600 / 700 / 800 / 900
-            return land.createTrap("\\|/", hp, hp, "none", "A candy tree. I hope you're carrying a good axe.", []);
+            return land.create(data.mobs.yggdrasil);
+        } else {
+            return land.create(data.mobs.tree);
         }
     },
     

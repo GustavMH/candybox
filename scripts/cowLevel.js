@@ -41,13 +41,13 @@ var cowLevel = {
     
     load : function(){
         // Add the cow king
-        quest.things[5 + random.getRandomIntUpTo(this.size - 6)] = this.makeCowKing();
+        quest.things[5 + random.getRandomIntUpTo(this.size - 6)] = land.create(data.mobs.cowKing)
         
         // Add cows
         for(var i = 1; i < this.size - 1; i++){
             if(quest.things[i].type == "none"){
                 if(random.flipACoin()){
-                     quest.things[i] = this.makeCow();
+                    quest.things[i] = land.create(data.mobs.cow)
                 }
             }
         }
@@ -72,14 +72,5 @@ var cowLevel = {
         }
         
         return text;
-    },
-    
-    makeCow : function(){
-        return land.createMob("COW", 12, 12, "horns", "A cow ! Mooooo !", [drops.createDrop("candies", 100)]);
-    },
-    
-    makeCowKing : function(){
-        return land.createMob("COW", 180, 180, "horns", "The cow king ! It looks like a normal cow, but it isn't...", [drops.createDrop("candies", 1000), drops.createDrop("object", "hornOfPlenty", true)]);
     }
-    
 };

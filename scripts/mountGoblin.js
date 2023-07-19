@@ -21,14 +21,12 @@ var mountGoblin = {
                     if(random.oneChanceOutOf(this.basicChestProbability)){
                         this.setBasicChestProbability(this.basicChestProbability + 50);
                         quest.things[i] = quest.makeBasicChest();
-                    }
-                    // 1 chance out of 7 we spaw a GSB
-                    else if(random.oneChanceOutOf(7)) quest.things[i] = land.createMob("GSB", 20, 5 + random.getRandomIntUpTo(5), "claws", "A sick goblin. It smells.", [drops.createDrop("candies", 3 + random.getRandomIntUpTo(3))]);
+                    } // 1 chance out of 7 we spaw a GSB
+                    else if(random.oneChanceOutOf(7)) quest.things[i] = land.create(data.mobs);
                     // Else we spawn a GOB
-                    else quest.things[i] = land.createMob("GOB", 20, 20, "claws", "A nasty goblin.", [drops.createDrop("candies", 3 + random.getRandomIntUpTo(3))]);
-                }
-                else{
-                    quest.things[i] = land.createMob("GTB", 30, 30, "dagger", "A tenacious goblin. Oh, he has a dagger, too.", [drops.createDrop("candies", 9 + random.getRandomIntUpTo(9)), drops.createDrop("object", "key", random.oneChanceOutOf(2)), drops.createDrop("object", "boots", random.oneChanceOutOf(5)), drops.createDrop("object", "swampMap", random.oneChanceOutOf(5)), drops.createDrop("object", "hutMap", random.oneChanceOutOf(5))]);
+                    else quest.things[i] = land.create(data.mobs);
+                } else {
+                    quest.things[i] = land.create(data.mobs);
                 }
             }
         }

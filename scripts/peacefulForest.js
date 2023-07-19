@@ -47,7 +47,7 @@ var peacefulForest = {
                 // 1 chance out of x we spawn a wood poney !!!! (if we didn't already add one)
                 if(random.oneChanceOutOf(300) && addedAPoney == false){
                     addedAPoney = true;
-                    quest.things[i] = this.makeWoodPoney();
+                    quest.things[i] = land.create(data.mobs.woodPony)
                 }
                 // 1 chance out of x we spawn a CHS (chest !!)
                 else if(random.oneChanceOutOf(this.basicChestProbability)){
@@ -55,7 +55,7 @@ var peacefulForest = {
                     quest.things[i] = quest.makeBasicChest();
                 }
                 // Else we spawn a tree
-                else quest.things[i] = land.createMob("|||", 5, 5, "none", "A tree. It sometimes drops a candy.", [drops.createDrop("candies", random.getRandomIntUpTo(1)), drops.createDrop("object", "key", random.oneChanceOutOf(2))]);
+                else quest.things[i] = land.create(data.mobs.tree);
             }
         }
         
@@ -69,6 +69,7 @@ var peacefulForest = {
     },
     
     getText : function(){
+        /* TODO .join ? */
         var text = "";
         
         for(var i = 0; i < quest.things.length; i++){
@@ -76,10 +77,5 @@ var peacefulForest = {
         }
         
         return text;
-    },
-    
-    makeWoodPoney : function(){
-        return land.createMob("WPY", 12, 12, "hooves", "A wood poney ! It's a poney ! It the woods !", [drops.createDrop("candies", 42)]);
     }
-    
 };

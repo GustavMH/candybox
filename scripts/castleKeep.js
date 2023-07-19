@@ -116,8 +116,8 @@ var castleKeep = {
         }
         this.text.push(line);
         
-        for(var i = 0; i < this.asciiDragon.length; i++){
-            this.text[i + 1] = this.text[i + 1].replaceAt(54, this.asciiDragon[i]);
+        for(var i = 0; i < data.ascii.dragon.length; i++){
+            this.text[i + 1] = this.text[i + 1].replaceAt(54, data.ascii.dragon[i]);
         }
     },
     
@@ -212,15 +212,15 @@ var castleKeep = {
                             this.text[i] = this.text[i].replaceAt(1 + this.firstCharacterPosition*3 + 9*3, "WAL");
                         }
                         // We add the mobs (walls and walled off zombie warrior)
-                        quest.things[7] = this.makeStoneWall();
-                        quest.things[9] = this.makeStoneWall();
-                        quest.things[8] = this.makeWalledOffZombieWarrior();
+                        quest.things[7] = land.create(data.mobs.stoneWall)
+                        quest.things[9] = land.create(data.mobs.stoneWall)
+                        quest.things[8] = land.create(data.mobs.walledOffZombieWarrior)
                     break;
                     // Fireball room
                     case 4:
                         for(var i = this.realSize - 8; i < this.realSize - 1; i++){
                             if(random.flipACoin()){
-                                quest.things[i] = this.makeFireball();
+                                quest.things[i] = land.create(data.mobs.fireball)
                             }
                         }
                         this.mobsAreMoving = true;
@@ -228,18 +228,18 @@ var castleKeep = {
                     // Fake door room
                     case 5:
                         this.createDoorHere(this.firstCharacterPosition + 8);
-                        quest.things[8] = this.makeFakeDoorMonster();
+                        quest.things[8] = land.create(data.mobs.FakeDoorMonster)
                     break;
                     // Unicorn room
                     case 6:
-                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = this.makeCharlieTheUnicorn();
-                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = this.makeUnicorn();
-                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = this.makeUnicorn();
+                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = land.create(data.mobs.charlieTheUnicorn)
+                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = land.create(data.mobs.unicorn)
+                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = land.create(data.mobs.unicorn)
                         this.mobsAreMoving = true;
                     break;
                     // Troll room
                     case 7:
-                        quest.things[6 + random.getRandomIntUpTo(this.realSize - 8)] = this.makeTroll();
+                        quest.things[6 + random.getRandomIntUpTo(this.realSize - 8)] = land.create(data.mobs.troll)
                         this.mobsAreMoving = true;
                     break;
                 }
@@ -255,7 +255,7 @@ var castleKeep = {
             break;
             // Boss room
             case 6:
-                quest.things[17] = this.makeDragon();
+                quest.things[17] = land.create(data.mobs.dragon)
             break;
         }
     },
@@ -264,88 +264,5 @@ var castleKeep = {
         this.text[this.floorPosition-2] = this.text[this.floorPosition-2].replaceAt(1 + position*3, " _ ");
         this.text[this.floorPosition-1] = this.text[this.floorPosition-1].replaceAt(1 + position*3, "|.|");
         this.text[this.floorPosition] = this.text[this.floorPosition].replaceAt(1 + position*3, "| |");
-    },
-    
-    makeKomodoDragon : function(){
-        return land.createMob("KOM", 5, 5, "foots and tail", "A Komodo dragon. Did you heard about island gigantism ?", []);
-    },
-                                    
-    makeRhinoceros : function(){
-        return land.createMob("RHI", 160, 160, "horn", "A " + random.pickRandomly(["white", "black", "indian", "javan", "sumatran"]) + " rhinoceros. Watch out for his horn !", []);
-    },
-    
-    makeGaur : function(){
-        return land.createMob("GAU", 80, 80, "horns", "A Gaur. This large bovine looks like a bison.", []);
-    },
-    
-    makeDromornisStirtoni : function(){
-        return land.createMob("DST", 70, 70, "giant beak", "A Dromornis Stirtoni ! A 400kg flightless bird !", []);
-    },
-    
-    makeGorilla : function(){
-        return land.createMob("GOR", 50, 50, "its fists", "A Gorilla. Gorillas occasionally engage in homosexual interactions.", []);
-    },
-    
-    makeCapybara : function(){
-        return land.createMob("CPY", 20, 20, "its teeth", "A capybara : the largest rodent in the world !", []);
-    },
-    
-    makeDoedicurus : function(){
-        return land.createMob("DOE", 120, 120, "spiky tail", "A Doedicurus : your favorite glyptodont !", []);
-    },
-    
-    makeStoneWall : function(){
-        return land.createMob("WAL", 300, 300, "stone", "A stone wall.", []);
-    },
-    
-    makeWalledOffZombieWarrior : function(){
-        var hp = 150 + random.getRandomIntUpTo(10) * 10;
-        return land.createMob("WZW", hp, hp, "cursed sword", "A walled off zombie warrior. He probably did something bad to end up here.", [drops.createDrop("candies", random.getRandomIntUpTo(1) * 4000), drops.createDrop("object", "oldAmulet", true)]);
-    },
-    
-    makeFireball : function(){
-        return land.createMob("FBL", 1, 1, "itself", "A fireball !! Watch out !", []);
-    },
-    
-    makeFakeDoorMonster : function(){
-        return land.createMob("| |", 70, 70, "sharp teeth", "It's not a door ! It's a monster ! (an ugly one)", []);
-    },
-    
-    makeUnicorn : function(){
-        return land.createMob("UNI", 100, 100, "magical horn", "A unicorn !! They exist !", []);
-    },
-    
-    makeCharlieTheUnicorn : function(){
-        return land.createMob("UNI", 100, 100, "magical horn", "A unicorn !! It has no kidney.", [drops.createDrop("object", "magicalHorn", true)]);
-    },
-    
-    makeTroll : function(){
-        return land.createMob("TRL", 250, 250, "enormous fist", "A troll. It is huge, but it lacks precision.", []);
-    },
-    
-    makeDragon : function(){
-        return land.createMob(",((", 1000, 1000, "flames", "A dragon !! Kill him and the castle will be yours.", []);
-    },
-    
-    asciiDragon :
-[
-"    _///_,",
-"   / ` \' \'>",
-"  o\'  __/_\'>",
-" /  _/  )_\\\'>",
-"\"__/   /_/\\_>",
-"  ____/_/_/_/",
-" /,---, _/ /",
-"\"\"  /_/_/_/",
-"   /_(_(_(_                 \\",
-"  (   \\_\\_\\\\_               )\\",
-"   \\\'__\\_\\_\\_\\__            ).\\",
-"   //____|___\\__)           )_/",
-"   |  _  \\\'___\'_(           /\'",
-"    \\_ (-\'\\\'___\'_\\      __,\'_\'",
-"    __) \\  \\\\___(_   __/.__,\'",
-"_,((,-,__\\__\'\", __\\_/. __,\'",
-"              \'\"./_._._-\'"
-]
-
+    }
 };

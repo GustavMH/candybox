@@ -422,47 +422,7 @@ var quest = {
     makeNoneThing : function(){
         return {type:"none", text:"___"};
     },
-    
-    makeBasicChest : function(){
-        return land.createMob("CHS", 80, 80, "none", "A chest !! Very rare.", [drops.createDrop("candies", 300 + random.getRandomIntUpTo(500)), drops.createDrop("object", "key", true), drops.createDrop("object", "boots", random.oneChanceOutOf(3)), drops.createDrop("object", "swampMap", random.oneChanceOutOf(3)), drops.createDrop("object", "hutMap", random.oneChanceOutOf(3))]);
-    },
-    
-    makeOpenChest : function(){
-        return land.createMob("CHS", 1, 1, "none", "An open chest, full of candies !", [drops.createDrop("candies", 6000 + random.getRandomIntUpTo(2000))]);
-    },
-    
-    makeImp : function(){
-        var hp = 15 + random.getRandomIntUpTo(10);
-        return land.createAlly("IMP", hp, hp, "its whole body", "An imp.", []);
-    },
-    
-    makeOrc : function(){
-        return land.createAlly("ORC", 30, 30, "bludgeon", "An orc. It looks stupid.", []);
-    },
-    
-    makeDraugr : function(){
-        return land.createAlly("DRG", 35, 35, "various bones", "A draugr. It seems to be dead, but it's still moving..", []);
-    },
-    
-    makeChupacabra : function(){
-        return land.createAlly("CBA", 30, 30, "fangs", "A chupacabra. A real goat sucker !", []);
-    },
-    
-    makeGolem : function(){
-        return land.createAlly("GOL", 100, 100, "rock", "A golem. Solid, solid golem.", []);
-    },
-    
-    makeChimera : function(){
-        var hp = 50 + random.getRandomIntUpTo(7);
-        return land.createAlly("CHI", hp, hp, "fire", "A chimera : lion, serpent and goat at the same time.", []);
-    },
-    
-    makeCandyMonster : function(){
-        var hp = 80 + 5*sword.specialPower;
-        
-        return land.createAlly("CND", hp, hp, "exploding candies", "A candy monster. He throws candies on his ennemies.", []);
-    },
-    
+
     makeFakeCharacter : function(){
         return land.createFakeCharacter();
     },
