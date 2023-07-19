@@ -23,3 +23,29 @@ print_block(block_a)
 print_block(block_b)
 print_block(layer_text(block_a, block_b, 4, 2))
 */
+
+format_speech = (text, size) => {
+    // split chunk center join
+    center = text
+        .split(" ")
+        .reduce(([fst, ...rst], cur) => {
+            candidate = fst + " " + cur
+            if (candidate.length > size)
+                return [cur, fst, ...rst]
+            return [candidate, ...rst]
+        }, [""])
+        .reverse()
+        .map(line => {
+            pad = (size - line.length) / 2
+            pad_l = " ".repeat(Math.floor(pad))
+            pad_r = " ".repeat(Math.ceil(pad))
+            return pad_l + line + pad_r
+        })
+        .join("\n  ")
+
+    return `"${center}"`
+}
+
+/* EXAMPLE USE
+format_speech("Hello, I'm the candy merchant.", 20)
+ */

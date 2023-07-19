@@ -17,9 +17,7 @@ var shop = {
     },
     
     check : function(){
-        if(candies.nbrOwned >= this.oneLollipopPrice){
-            this.setShown(true);
-        }
+        if(candies.nbrOwned >= this.oneLollipopPrice) this.setShown(true);
         if(candies.nbrOwned >= 150){
             // If we don't have any sword and there's no sword to sell yet, we show the wooden sword
             if(sword.name == "none" && this.currentSwordButtonId == "none") {
@@ -118,7 +116,7 @@ var shop = {
     },
     
     setMerchantSpeech : function(text){
-        html.setInner("merchant_speech", speech.makeSpeechFromText(text, 20, " "));
+        html.setInner("merchant_speech", format_speech(text, 20, " "));
     }
     
 };

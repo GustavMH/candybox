@@ -24,7 +24,7 @@ var forge = {
    \'-._/__..-\'\n\n"
 
         // The speech
-        text += speech.makeSpeechFromText(this.speech, 23, "");
+        text += format_speech(this.speech, 23, "");
 
         text += "\n\n";
 

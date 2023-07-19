@@ -69,11 +69,11 @@ var hut = {
         // Speech & spells drawing
         switch(this.step){
             case 1:
-                text += speech.makeSpeechFromText(this.speech, 24, "");
+                text += format_speech(this.speech, 24, "");
                 text += "\n\n<button onClick=\"hut.acceptProposition();\">Well... that might be interesting</button>";
             break;
             case 2:
-                text += speech.makeSpeechFromText(this.speech, 24, "");
+                text += format_speech(this.speech, 24, "");
                 text += this.getSpellsButtons();
             break;
         }

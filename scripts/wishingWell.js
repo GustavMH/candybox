@@ -37,7 +37,7 @@ var wishingWell = {
             case 1:
                 // Speech
                 text += "\n";
-                text += speech.makeSpeechFromText(this.speech, 23, "");
+                text += format_speech(this.speech, 23, "");
                 
                 // Buttons
                 text += "\n\n<button onClick=\"wishingWell.candiesBy5();\">Multiply my candies by 5</button>";
@@ -47,7 +47,7 @@ var wishingWell = {
             case 2:
                 // Speech
                 text += "\n";
-                text += speech.makeSpeechFromText(this.speech, 23, "");
+                text += format_speech(this.speech, 23, "");
             break;
         }
         

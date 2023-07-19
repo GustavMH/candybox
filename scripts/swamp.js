@@ -10,59 +10,59 @@ var swamp = {
         var answer_form = "\n\n<input id=\"answer\" type=\"text\" onchange=\"swamp.answer()\" /> <span id=\"swamp_comment\"></span>";
         switch(this.step){
             case 4:
-                text = speech.makeSpeechFromText("Hello. I'm The Frog. I can provide you candies, and lots of things. I know how much you love candies. But I feel alone in this swamp. I'd like to play with you before. If you answer my questions correctly, the sweetest sweets will be yours.", 29, "");
+                text = format_speech("Hello. I'm The Frog. I can provide you candies, and lots of things. I know how much you love candies. But I feel alone in this swamp. I'd like to play with you before. If you answer my questions correctly, the sweetest sweets will be yours.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(5);\">Let's go, then</button>";
             break;
             case 5:
-                text = speech.makeSpeechFromText("First question : do you _really_ love candies?", 29, "");
+                text = format_speech("First question : do you _really_ love candies?", 29, "");
                 text += answer_form;
             break;
             case 6:
-                text = speech.makeSpeechFromText("Perfect. Here's 10 candies. Many more candies are waiting for you.", 29, "");
+                text = format_speech("Perfect. Here's 10 candies. Many more candies are waiting for you.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(7);\">Second question!</button>";
             break;
             case 7:
-                text = speech.makeSpeechFromText("Second question : if A implies B and B implies C, and D implies A, and E implies D, what does A imply?", 29, "");
+                text = format_speech("Second question : if A implies B and B implies C, and D implies A, and E implies D, what does A imply?", 29, "");
                 text += answer_form;
             break;
             case 8:
-                text = speech.makeSpeechFromText("Great. You seem to understand basic logic. Here's 100 candies.", 29, "");
+                text = format_speech("Great. You seem to understand basic logic. Here's 100 candies.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(9);\">Next question!</button>";
             break;
             case 9:
-                text = speech.makeSpeechFromText("Third question. Consider 10 days. If I give you 1 candy on the first day, and each day I give you twice more candies than the previous day, how much candies will I give you on day number 10?", 29, "");
+                text = format_speech("Third question. Consider 10 days. If I give you 1 candy on the first day, and each day I give you twice more candies than the previous day, how much candies will I give you on day number 10?", 29, "");
                 text += answer_form;
             break;
             case 10:
-                text = speech.makeSpeechFromText("Exactly. Let's speed up the process : here's your 512 candies right now! Playing with you is so exciting! Next question is for 1000 candies.", 29, "");
+                text = format_speech("Exactly. Let's speed up the process : here's your 512 candies right now! Playing with you is so exciting! Next question is for 1000 candies.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(11);\">Candiiiiies!</button>";
             break;
             case 11:
-                text = speech.makeSpeechFromText("Fourth question : if you could be whatever you want, what would you be?", 29, "");
+                text = format_speech("Fourth question : if you could be whatever you want, what would you be?", 29, "");
                 text += answer_form;
             break;
             case 12:
-                text = speech.makeSpeechFromText("Correct! Everyone wants to be a frog. Here's your 1000 candies.", 29, "");
+                text = format_speech("Correct! Everyone wants to be a frog. Here's your 1000 candies.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(13);\">Any more enigma?</button>";
             break;
             case 13:
-                text = speech.makeSpeechFromText("Here's a story : there's a fox, a lion and a wolf inside a lunar crater. The fox is about to bite the lion, which is about to bite the wolf, which is about to bite the fox. It's snowing and a shrub is watching the scene. Who's enjoying the story?", 29, "");
+                text = format_speech("Here's a story : there's a fox, a lion and a wolf inside a lunar crater. The fox is about to bite the lion, which is about to bite the wolf, which is about to bite the fox. It's snowing and a shrub is watching the scene. Who's enjoying the story?", 29, "");
                 text += answer_form;
             break;
             case 14:
-                text = speech.makeSpeechFromText("Right, you were enjoying it! At least, I hope so. Here's a chocolate bar for you. It's very precious.", 29, "");
+                text = format_speech("Right, you were enjoying it! At least, I hope so. Here's a chocolate bar for you. It's very precious.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(15);\">Thanks, Frog!</button>";
             break;
             case 15:
-                text = speech.makeSpeechFromText("Now, just type the answer to that question and I'll give you a very special present : what is the only thing to go beyond the limits of our universe ?", 29, "");
+                text = format_speech("Now, just type the answer to that question and I'll give you a very special present : what is the only thing to go beyond the limits of our universe ?", 29, "");
                 text += answer_form;
             break;
             case 16:
-                text = speech.makeSpeechFromText("Yes it is ! Now, here's 5 very special potions. They'll be very useful during quests.", 29, "");
+                text = format_speech("Yes it is ! Now, here's 5 very special potions. They'll be very useful during quests.", 29, "");
                 text += "\n\n<button id=\"answer\" onClick=\"swamp.setStep(17);\">Yay !!</button>";
             break;
             default:
-                text = speech.makeSpeechFromText("I have no more sweets to give you. It was a real pleasure to play with you. Thanks a lot.", 29, "");
+                text = format_speech("I have no more sweets to give you. It was a real pleasure to play with you. Thanks a lot.", 29, "");
             break;
         }
         
