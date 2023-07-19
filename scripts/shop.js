@@ -61,8 +61,8 @@ var shop = {
 
         this.oneLollipopPrice = 60 - price_mod
         this.tenLollipopsPrice = 500 - price_mod * 5
-        htmlInteraction.setInnerHtml("buy_1_lollipop", `Buy a lollipop (${this.oneLollipopPrice} candies)`)
-        htmlInteraction.setInnerHtml("buy_10_lollipops", `Buy 10 lollipop (${this.tenLollipopsPrice} candies)`)
+        html.setInner("buy_1_lollipop", `Buy a lollipop (${this.oneLollipopPrice} candies)`)
+        html.setInner("buy_10_lollipops", `Buy 10 lollipop (${this.tenLollipopsPrice} candies)`)
     },
     
     clickedOnLollipop : function() {
@@ -86,42 +86,42 @@ var shop = {
         switch(id){
             // If it's a special product
             case "wooden_sword":
-                htmlInteraction.setInnerHtml("sword_with_button", sword.asciiWoodenSwordWithButton);
+                html.setInner("sword_with_button", sword.asciiWoodenSwordWithButton);
                 this.currentSwordButtonId = "buy_wooden_sword";
                 this.currentSwordPrice = 150;
             break;
             case "copper_sword":
-                htmlInteraction.setInnerHtml("sword_with_button", sword.asciiCopperSwordWithButton);
+                html.setInner("sword_with_button", sword.asciiCopperSwordWithButton);
                 this.currentSwordButtonId = "buy_copper_sword";
                 this.currentSwordPrice = 300;
             break;
             case "iron_sword":
-                htmlInteraction.setInnerHtml("sword_with_button", sword.asciiIronSwordWithButton);
+                html.setInner("sword_with_button", sword.asciiIronSwordWithButton);
                 this.currentSwordButtonId = "buy_iron_sword";
                 this.currentSwordPrice = 500;
             break;
             case "silver_sword":
-                htmlInteraction.setInnerHtml("sword_with_button", sword.asciiSilverSwordWithButton);
+                html.setInner("sword_with_button", sword.asciiSilverSwordWithButton);
                 this.currentSwordButtonId = "buy_silver_sword";
                 this.currentSwordPrice = 1000;
             break;
             case "diamond_sword":
-                htmlInteraction.setInnerHtml("sword_with_button", sword.asciiDiamondSwordWithButton);
+                html.setInner("sword_with_button", sword.asciiDiamondSwordWithButton);
                 this.currentSwordButtonId = "buy_diamond_sword";
                 this.currentSwordPrice = 2000;
             break;
             // Else, we just show the html element corresponding to the received id
             default:
-                htmlInteraction.setElementVisibility(id, true);
-                htmlInteraction.setElementDisplay(id, "block");
+                html.setElementVisibility(id, true);
+                html.setElementDisplay(id, "block");
             break;
         }
     },
     
     show : function(){
         // We show the shop
-        if(htmlInteraction.isElementVisible("shop") == false){ // If the shop isn't already visible
-            htmlInteraction.setElementVisibility("shop", true);
+        if(html.isElementVisible("shop") == false){ // If the shop isn't already visible
+            html.setElementVisibility("shop", true);
             this.setMerchantSpeech("Hello, I'm the candy merchant. I would do anything for candies. My lollipops are delicious!");
         }
         
@@ -144,17 +144,17 @@ var shop = {
         // If it's a special product
         if(id == "sword"){
             this.currentSwordButtonId = "none";
-            htmlInteraction.setInnerHtml("sword_with_button", "");
+            html.setInner("sword_with_button", "");
         }
         // Else
         else{
-            htmlInteraction.setElementVisibility(id, false);
-            htmlInteraction.setElementDisplay(id, "none");
+            html.setElementVisibility(id, false);
+            html.setElementDisplay(id, "none");
         }
     },
     
     setMerchantSpeech : function(text){
-        htmlInteraction.setInnerHtml("merchant_speech", speech.makeSpeechFromText(text, 20, " "));
+        html.setInner("merchant_speech", speech.makeSpeechFromText(text, 20, " "));
     }
     
 };

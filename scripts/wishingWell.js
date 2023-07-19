@@ -53,7 +53,7 @@ var wishingWell = {
         
         text += "\n\n<button onClick=\"wishingWell.leave();\">Leave the wishing well</button>";
         
-        htmlInteraction.setInnerHtml("map", text);
+        html.setInner("map", text);
     },
     
     potionsAndScrolls : function(){
@@ -148,7 +148,7 @@ var wishingWell = {
     leave : function(){
         this.shown = false;
         
-        htmlInteraction.setInnerHtml("map", "");
+        html.setInner("map", "");
         //buttons.enableHomeButtons();
     }
     

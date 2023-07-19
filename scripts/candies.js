@@ -33,7 +33,7 @@ var candies = {
             ? `You have ${this.nbrOwned} candies!`
             : `You have 1 candy!`
 
-        htmlInteraction.setInnerHtml("candies", text);
+        html.setInner("candies", text);
         buttons.checkCandies();
         shop.check();
         cauldron.updateActionsInfoOnPage();
@@ -46,8 +46,8 @@ var candies = {
             ? `You have eaten ${this.nbrEaten} candies!`
             : "You have eaten 1 candy!"
 
-        htmlInteraction.setInnerHtml("candies_eaten", text);
-        htmlInteraction.setElementVisibility("candies_eaten", true);
+        html.setInner("candies_eaten", text);
+        html.setElementVisibility("candies_eaten", true);
     },
     
     setCandiesPerSecond : function(value){
@@ -70,8 +70,8 @@ var candies = {
             ? `You threw ${this.nbrThrown} candies on the ground ${smiley}`
             : `You threw 1 candy on the ground ${smiley}`
         
-        htmlInteraction.setInnerHtml("candies_thrown", text)
-        htmlInteraction.setElementVisibility("candies_thrown", true)
+        html.setInner("candies_thrown", text)
+        html.setElementVisibility("candies_thrown", true)
     },
     
     throw10Candies : function(){

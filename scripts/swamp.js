@@ -68,7 +68,7 @@ var swamp = {
         
         text += "\n\n<button onClick=\"swamp.leave();\">Leave the Swampy Swamp</button>";
         
-        htmlInteraction.setInnerHtml("map", "\
+        html.setInner("map", "\
            .--._.--.\n\
       The ( O     O ) Frog\n\
           /   . .   \\\n\
@@ -89,7 +89,7 @@ _ _`.    \\  |  |  |  /    .'_ _\n\
             
         switch(this.step){
             case 0:
-                htmlInteraction.setInnerHtml("map", "\
+                html.setInner("map", "\
 While you walk through the swamp,\n\
 following your map...\
 ");
@@ -97,7 +97,7 @@ following your map...\
                 window.setTimeout(this.updateOnPage.bind(this), 3500);
             break;
             case 1:
-                htmlInteraction.setInnerHtml("map", "\
+                html.setInner("map", "\
 On the horizon, you see a\n\
               00        frog\n\
              (--)         coming...\n\
@@ -108,7 +108,7 @@ On the horizon, you see a\n\
                 window.setTimeout(this.updateOnPage.bind(this), 3500);
             break;
             case 2:
-                htmlInteraction.setInnerHtml("map", "\
+                html.setInner("map", "\
 It is coming_    _\n\
   slowly   (o)--(o)\n\
    but    /.______.\\\n\
@@ -122,7 +122,7 @@ It is coming_    _\n\
                 window.setTimeout(this.updateOnPage.bind(this), 3500);
             break;
             case 3:
-                htmlInteraction.setInnerHtml("map", "\
+                html.setInner("map", "\
            .-.   .-.\n\
           ( o )_( o )\n\
       __ / '-'   '-' \\ __ it is\n\
@@ -156,16 +156,16 @@ It is coming_    _\n\
     leave : function(){
         this.shown = false;
         
-        htmlInteraction.setInnerHtml("map", "");
+        html.setInner("map", "");
         //buttons.enableHomeButtons();
     },
     
     resetComment : function(){
-        htmlInteraction.setInnerHtml("swamp_comment", "");
+        html.setInner("swamp_comment", "");
     },
     
     setComment : function(value){
-        htmlInteraction.setInnerHtml("swamp_comment", value);
+        html.setInner("swamp_comment", value);
         window.setTimeout(this.resetComment.bind(this), 1000); // We set the timeout to reset it in one second
     },
     
@@ -179,14 +179,14 @@ It is coming_    _\n\
             this.updateOnPage();
             // We possibly focus
             if(this.step >= 4 && this.step <= 16){
-                htmlInteraction.focusElement("answer");
+                html.focusElement("answer");
             }
         }
     },
     
     answer : function(){
-        var ans = htmlInteraction.getElement("answer").value.toLowerCase().replace(/[^\w]|_/g, "");
-        htmlInteraction.getElement("answer").focus(); // Re focus after answering
+        var ans = html.getElement("answer").value.toLowerCase().replace(/[^\w]|_/g, "");
+        html.getElement("answer").focus(); // Re focus after answering
         
         switch(this.step){
             case 5:

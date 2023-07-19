@@ -29,12 +29,12 @@ var potions = {
     },
     
     updateOnPage : function(){
-        htmlInteraction.setInnerHtml("quest_potions", this.getText());
+        html.setInner("quest_potions", this.getText());
         if(quest.weAreQuestingRightNow) this.updateCountdownOnPage();
     },
     
     updateCountdownOnPage : function(){
-        htmlInteraction.setInnerHtml("quest_potions_countdowns", this.getCountdownText());
+        html.setInner("quest_potions_countdowns", this.getCountdownText());
     },
     
     getCountdownText : function(){

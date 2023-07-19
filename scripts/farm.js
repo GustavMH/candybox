@@ -25,23 +25,11 @@ var farm = {
     setPlantingButtonsStep : function(value){
         // Set the value
         this.plantingButtonsStep = value;
-        
-        // Update on page
-        switch(this.plantingButtonsStep){
-            case 1:
-                htmlInteraction.setInnerHtml("lp_buttons", "<button class=\"home_button\" id=\"plant_1_lp\" onClick=\"farm.plantLollipops(1);\">Plant 1 lollipop</button>");
-            break;
-            case 2:
-                htmlInteraction.setInnerHtml("lp_buttons", "Plant <button class=\"home_button\" id=\"plant_1_lp\" onClick=\"farm.plantLollipops(1);\">1</button><button class=\"home_button\" id=\"plant_10_lp\" onClick=\"farm.plantLollipops(10);\" style=\"visibility:hidden\">10</button> lp");
-            break;
-            case 3:
-                htmlInteraction.setInnerHtml("lp_buttons", "Plant <button class=\"home_button\" id=\"plant_1_lp\" onClick=\"farm.plantLollipops(1);\">1</button><button class=\"home_button\" id=\"plant_10_lp\" onClick=\"farm.plantLollipops(10);\" style=\"visibility:hidden\">10</button><button class=\"home_button\" id=\"plant_100_lp\" onClick=\"farm.plantLollipops(100);\" style=\"visibility:hidden\">100</button> lp");
-            break;
-            case 4:
-                htmlInteraction.setInnerHtml("lp_buttons", "Plant <button class=\"home_button\" id=\"plant_1_lp\" onClick=\"farm.plantLollipops(1);\">1</button><button class=\"home_button\" id=\"plant_10_lp\" onClick=\"farm.plantLollipops(10);\" style=\"visibility:hidden\">10</button><button class=\"home_button\" id=\"plant_100_lp\" onClick=\"farm.plantLollipops(100);\" style=\"visibility:hidden\">100</button><button class=\"home_button\" id=\"plant_1000_lp\" onClick=\"farm.plantLollipops(1000);\" style=\"visibility:hidden\">1000</button> lp");
-            break;
-        }
-        
+
+        button_fn = (n) => `<button class='home_button' id='plant_${n}_lp' onClick='farm.plantLollipops(${n});'>${n}</button>`
+        const text = range(value).map((_, n) => `Plant ${button_fn(10**n)} lp`)
+        html.setInner("lp_buttons", text)
+
         // Check the buttons
         buttons.checkLollipopsPlantingButtons();
     },
@@ -57,12 +45,12 @@ var farm = {
         if(this.currentFlagIndex >= this.flagsList.length || this.currentFlagIndex < 0) this.currentFlagIndex = 0;
         
         // Update on the page
-        htmlInteraction.setInnerHtml("farm_big_lollipop", this.flagsList[this.currentFlagIndex]);
+        html.setInner("farm_big_lollipop", this.flagsList[this.currentFlagIndex]);
     },
     
     checkVisibility : function(){
         if(objects.list.key.have){
-            htmlInteraction.setElementVisibility("farm", true);
+            html.setElementVisibility("farm", true);
         }
     },
     
@@ -78,7 +66,7 @@ var farm = {
         this.lollipopsPlanted = value;
         
         // We update on page
-        htmlInteraction.setInnerHtml("lp_planted", "Lp planted : " + this.lollipopsPlanted);
+        html.setInner("lp_planted", "Lp planted : " + this.lollipopsPlanted);
         
         // We re calculate stuff
         this.calculateLollipopsPerDay();
@@ -110,7 +98,7 @@ var farm = {
     
     setLollipopsProduction : function(value){
         this.lollipopsProduction = value;
-        htmlInteraction.setInnerHtml("lp_production", "Production : " + this.lollipopsProduction + " lp/" + this.productionDelayType);
+        html.setInner("lp_production", "Production : " + this.lollipopsProduction + " lp/" + this.productionDelayType);
     },
     
     setMaxLollipopsPerDay : function(value){

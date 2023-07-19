@@ -9,7 +9,7 @@ var darkMode = {
 
   
   show: function() {
-    htmlInteraction.setElementVisibility("darkModeToggle", true);
+    html.setElementVisibility("darkModeToggle", true);
   },
   
   update: function() {

@@ -16,20 +16,20 @@ var inventory = {
         
         // Sword
         switch(sword.name){
-            case "wooden sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiWoodenSwordWithoutButton); break;
-            case "copper sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiCopperSwordWithoutButton); break;
-            case "iron sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiIronSwordWithoutButton); break;
-            case "silver sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSilverSwordWithoutButton); break;
-            case "diamond sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiDiamondSwordWithoutButton); break;
-            case "candy diamond sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiCandyDiamondSword); break;
-            case "polished candy diamond sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiPolishedCandyDiamondSword); break;
-            case "chocolate sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiChocolateSword); break;
-            case "sharp chocolate sword": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSharpChocolateSword); break;
-            case "Sword of Flames": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSwordOfFlames + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Life": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSwordOfLife + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Summoning": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSwordOfSummoning + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Liflamesummoning": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSwordOfLiflamesummoning + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Randomness": htmlInteraction.setInnerHtml("sword_without_button", sword.asciiSwordOfRandomness + "\n\nLevel : infinite + " + sword.specialPower); break;
+            case "wooden sword": html.setInner("sword_without_button", sword.asciiWoodenSwordWithoutButton); break;
+            case "copper sword": html.setInner("sword_without_button", sword.asciiCopperSwordWithoutButton); break;
+            case "iron sword": html.setInner("sword_without_button", sword.asciiIronSwordWithoutButton); break;
+            case "silver sword": html.setInner("sword_without_button", sword.asciiSilverSwordWithoutButton); break;
+            case "diamond sword": html.setInner("sword_without_button", sword.asciiDiamondSwordWithoutButton); break;
+            case "candy diamond sword": html.setInner("sword_without_button", sword.asciiCandyDiamondSword); break;
+            case "polished candy diamond sword": html.setInner("sword_without_button", sword.asciiPolishedCandyDiamondSword); break;
+            case "chocolate sword": html.setInner("sword_without_button", sword.asciiChocolateSword); break;
+            case "sharp chocolate sword": html.setInner("sword_without_button", sword.asciiSharpChocolateSword); break;
+            case "Sword of Flames": html.setInner("sword_without_button", sword.asciiSwordOfFlames + "\n\nLevel : " + sword.specialPower); break;
+            case "Sword of Life": html.setInner("sword_without_button", sword.asciiSwordOfLife + "\n\nLevel : " + sword.specialPower); break;
+            case "Sword of Summoning": html.setInner("sword_without_button", sword.asciiSwordOfSummoning + "\n\nLevel : " + sword.specialPower); break;
+            case "Sword of Liflamesummoning": html.setInner("sword_without_button", sword.asciiSwordOfLiflamesummoning + "\n\nLevel : " + sword.specialPower); break;
+            case "Sword of Randomness": html.setInner("sword_without_button", sword.asciiSwordOfRandomness + "\n\nLevel : infinite + " + sword.specialPower); break;
         }
         
         // Objects
@@ -45,14 +45,14 @@ var inventory = {
         this.updateObjectOnPage("inventory_old_amulet", objects.list.oldAmulet, this.asciiOldAmulet, this.asciiNoObject);
         
         if(developperComputer.won){
-            htmlInteraction.setInnerHtml("inventory_won1", "<pre>" + this.asciiWon1 + "</pre>");
-            htmlInteraction.setInnerHtml("inventory_won2", "<pre>" + this.asciiWon2 + "</pre>");
-            htmlInteraction.showButton("hardmode");
+            html.setInner("inventory_won1", "<pre>" + this.asciiWon1 + "</pre>");
+            html.setInner("inventory_won2", "<pre>" + this.asciiWon2 + "</pre>");
+            html.showButton("hardmode");
         }
         else{
-            htmlInteraction.setInnerHtml("inventory_won1", "<pre>" + this.asciiNoObject + "</pre>");
-            htmlInteraction.setInnerHtml("inventory_won2", "<pre>" + this.asciiNoObject + "</pre>");
-            htmlInteraction.hideButton("hardmode");
+            html.setInner("inventory_won1", "<pre>" + this.asciiNoObject + "</pre>");
+            html.setInner("inventory_won2", "<pre>" + this.asciiNoObject + "</pre>");
+            html.hideButton("hardmode");
         }
         
         // Maps
@@ -64,10 +64,10 @@ var inventory = {
     
     updateObjectOnPage : function(id, obj, ascii, asciiNoObject){
         if(obj.have){
-            htmlInteraction.setInnerHtml(id, "<pre>" + ascii + "</pre><span><b>" + obj.name + "</b><br/>" + obj.description);
+            html.setInner(id, "<pre>" + ascii + "</pre><span><b>" + obj.name + "</b><br/>" + obj.description);
         }
         else{
-            htmlInteraction.setInnerHtml(id, "<pre>" + asciiNoObject + "</pre>");
+            html.setInner(id, "<pre>" + asciiNoObject + "</pre>");
         }
     },
     

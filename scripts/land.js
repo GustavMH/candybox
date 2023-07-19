@@ -59,7 +59,7 @@ var land = {
             index = this.getLandIndexFromOrder(i); // We get the index of the land with the order i
             // If the land of index "index" isn't already unlocked and is correct (!= -1)
             if(index != -1 && this.list[index].unlocked == false){
-                list = htmlInteraction.getElement("quest_destination"); // We get the list
+                list = html.getElement("quest_destination"); // We get the list
                 option = document.createElement("option"); // We create the new element to add to the list
                 option.text = this.list[index].name; // We set its text
                 // We add it to the list

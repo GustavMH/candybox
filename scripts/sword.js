@@ -153,7 +153,7 @@ if(potions.list.health.nbrOwned > 0){
         if(chocolateBars.nbrOwned >= 1){
             chocolateBars.setNbrOwned(chocolateBars.nbrOwned - 1);
             this.setName("chocolate sword");
-            htmlInteraction.hideButton("coat");
+            html.hideButton("coat");
         }
     },
     
@@ -161,7 +161,7 @@ if(potions.list.health.nbrOwned > 0){
         if(candies.nbrOwned >= 101){
             candies.setNbrOwned(candies.nbrOwned - 101);
             this.setName("candy diamond sword");
-            htmlInteraction.hideButton("encrust");
+            html.hideButton("encrust");
         }
     },
     
@@ -169,7 +169,7 @@ if(potions.list.health.nbrOwned > 0){
         if(lollipops.nbrOwned >= 30){
             lollipops.setNbrOwned(lollipops.nbrOwned - 30);
             this.setName("polished candy diamond sword");
-            htmlInteraction.hideButton("polish");
+            html.hideButton("polish");
         }
     },
     
@@ -187,10 +187,10 @@ if(potions.list.health.nbrOwned > 0){
         }
         
         // Other stuff
-        htmlInteraction.setInnerHtml("sword", "You currently have a " + this.name + ".");
+        html.setInner("sword", "You currently have a " + this.name + ".");
         quest.defineMood();
-        htmlInteraction.setElementVisibility("sword", true);
-        htmlInteraction.setElementVisibility("quest_form", true);
+        html.setElementVisibility("sword", true);
+        html.setElementVisibility("quest_form", true);
         buttons.checkSword();
         inventory.updateOnPage();
     },

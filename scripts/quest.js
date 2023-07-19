@@ -35,7 +35,7 @@ var quest = {
     
     begin : function(getLandFromList, landIndex){
         // Disable button
-        htmlInteraction.disableButton("quest_button");
+        html.disableButton("quest_button");
         
         // First thing to do !
         this.weAreQuestingRightNow = true;
@@ -43,7 +43,7 @@ var quest = {
         // If we have to get the land index from the list on the html page
         if(getLandFromList == true){
             // We get the index in land.list of the current land selected in the html list
-            var landNameInHtmlList = htmlInteraction.getElement("quest_destination").options[htmlInteraction.getElement("quest_destination").selectedIndex].text;
+            var landNameInHtmlList = html.getElement("quest_destination").options[html.getElement("quest_destination").selectedIndex].text;
             this.currentLandIndex = land.getLandIndexFromName(landNameInHtmlList);
         }
         // Else, we use the index given in the parameters
@@ -52,8 +52,8 @@ var quest = {
         }
         
         // We show the quest panel
-        htmlInteraction.setElementVisibility("quest", true);
-        htmlInteraction.setElementVisibility("quest_potions_countdowns", true);
+        html.setElementVisibility("quest", true);
+        html.setElementVisibility("quest_potions_countdowns", true);
         
         // We empty the things array and put none things in it
         this.things = this.fillWithNoneThings();
@@ -121,7 +121,7 @@ var quest = {
         text += drops.getText();
     
         // Draw text
-        htmlInteraction.setInnerHtml("quest", text);
+        html.setInner("quest", text);
     },
     
     getCharacterMaxHp : function(){
@@ -358,7 +358,7 @@ var quest = {
         drops.gainDrops();
         
         // We may enable a new destination, we store the drop-down list
-        var list = htmlInteraction.getElement("quest_destination");
+        var list = html.getElement("quest_destination");
         
         // We change the max land order : it's the order of the just finnished quest + 1
         this.setMaxLandOrder(land.list[this.currentLandIndex].order + 1);
@@ -369,7 +369,7 @@ var quest = {
     
     stop : function(){
         // Enable button
-        htmlInteraction.enableButton("quest_button");
+        html.enableButton("quest_button");
         
         // First thing to do !
         this.weAreQuestingRightNow = false;
@@ -378,8 +378,8 @@ var quest = {
         var index = this.getCharacterIndex();
         
         // No more quest panel or potions shown
-        htmlInteraction.setInnerHtml("quest", "");
-        htmlInteraction.setInnerHtml("quest_potions_countdowns", "");
+        html.setInner("quest", "");
+        html.setInner("quest_potions_countdowns", "");
         
         // We re-enable home buttons
         //buttons.enableHomeButtons();
@@ -398,9 +398,9 @@ var quest = {
     },
     
     defineMood : function(){
-        if(this.tiredTime == 0) htmlInteraction.setInnerHtml("mood", "You're in the pink! Ready for fighting!");
-        else htmlInteraction.setInnerHtml("mood", "You're tired. You have to wait before doing another quest. Waiting time : " + this.tiredTime);
-        htmlInteraction.setElementVisibility("mood", true);
+        if(this.tiredTime == 0) html.setInner("mood", "You're in the pink! Ready for fighting!");
+        else html.setInner("mood", "You're tired. You have to wait before doing another quest. Waiting time : " + this.tiredTime);
+        html.setElementVisibility("mood", true);
     },
     
     setCandiesFound : function(value){

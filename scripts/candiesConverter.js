@@ -9,12 +9,12 @@ var candiesConverter = {
         // If we have the candies conveter
         if(objects.list.candiesConverter.have){
             // We show it on the page
-            htmlInteraction.setElementDisplay("candies_converter", "inline");
+            html.setElementDisplay("candies_converter", "inline");
         }
     },
     
     checkedValueChange : function(){
-        if(htmlInteraction.getElement("candies_converter_checkbox").checked){
+        if(html.getElement("candies_converter_checkbox").checked){
             this.setActivated(true);
         }
         else{
@@ -50,7 +50,7 @@ var candiesConverter = {
     
     setActivated : function(value){
         this.activated = value;
-        htmlInteraction.getElement("candies_converter_checkbox").checked = value;
+        html.getElement("candies_converter_checkbox").checked = value;
     }
     
 };

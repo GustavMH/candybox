@@ -167,13 +167,13 @@ var cauldron = {
                     : timer
                 : "too much mixing, your arms are hurting."
 
-            htmlInteraction.setInnerHtml("cauldron_timer", text)
+            html.setInner("cauldron_timer", text)
         }
 
         if (this.weAreBoiling) {
             const { intervals, texts } = data.text.cauldron_boiling
             text = texts[intervals.indexOf(this.actionTimer)]
-            if (text) htmlInteraction.setInnerHtml("cauldron_timer", text)
+            if (text) html.setInner("cauldron_timer", text)
         }
     },
     
@@ -184,7 +184,7 @@ var cauldron = {
             this.registerAction("mix", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
         } else {
             this.disableActionsButtons();
-            htmlInteraction.setInnerHtml("cauldron_action_text", "Mixing... <span id=\"cauldron_timer\"></span><br/><br/>");
+            html.setInner("cauldron_action_text", "Mixing... <span id=\"cauldron_timer\"></span><br/><br/>");
             this.setActionTimer(0);
 
             this.candiesWhenWeBeganAction = this.candiesInTheCauldron;
@@ -199,7 +199,7 @@ var cauldron = {
             this.registerAction("boil", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
         } else {
             this.disableActionsButtons();
-            htmlInteraction.setInnerHtml("cauldron_action_text", "Boiling... <span id=\"cauldron_timer\"></span><br/><br/>");
+            html.setInner("cauldron_action_text", "Boiling... <span id=\"cauldron_timer\"></span><br/><br/>");
             this.setActionTimer(0);
 
             this.candiesWhenWeBeganAction = this.candiesInTheCauldron;
@@ -373,10 +373,10 @@ var cauldron = {
                     }
                 }
             }
-            htmlInteraction.setInnerHtml("cauldron_results_text", resultsText);
+            html.setInner("cauldron_results_text", resultsText);
         }
         else{
-            htmlInteraction.setInnerHtml("cauldron_results_text", "You don't manage to get anything interesting with that preparation.<br/>Did you follow the manual's instructions ?");
+            html.setInner("cauldron_results_text", "You don't manage to get anything interesting with that preparation.<br/>Did you follow the manual's instructions ?");
         }
         
         // We empty the cauldron
@@ -392,19 +392,19 @@ var cauldron = {
     },
     
     disableActionsButtons : function(){
-        htmlInteraction.disableButton("cauldron_mix");
-        htmlInteraction.disableButton("cauldron_put_into_bottles");
-        htmlInteraction.disableButton("cauldron_boil");
+        html.disableButton("cauldron_mix");
+        html.disableButton("cauldron_put_into_bottles");
+        html.disableButton("cauldron_boil");
 
-        htmlInteraction.enableButton("cauldron_stop");
+        html.enableButton("cauldron_stop");
     },
     
     enableActionsButtons : function(){
-        htmlInteraction.enableButton("cauldron_mix");
-        htmlInteraction.enableButton("cauldron_put_into_bottles");
-        htmlInteraction.enableButton("cauldron_boil");
+        html.enableButton("cauldron_mix");
+        html.enableButton("cauldron_put_into_bottles");
+        html.enableButton("cauldron_boil");
 
-        htmlInteraction.disableButton("cauldron_stop");
+        html.disableButton("cauldron_stop");
     },
     
     stopActions : function(){
@@ -416,13 +416,13 @@ var cauldron = {
         this.enableActionsButtons();
         
         // Empty the action text
-        htmlInteraction.setInnerHtml("cauldron_action_text", "");
+        html.setInner("cauldron_action_text", "");
     },
     
     putInTheCauldron : function(){
         // We get the values of the text inputs
-        const str_candies   = htmlInteraction.getElement("cauldron_candies_quantity").value;
-        const str_lollipops = htmlInteraction.getElement("cauldron_lollipops_quantity").value;
+        const str_candies   = html.getElement("cauldron_candies_quantity").value;
+        const str_lollipops = html.getElement("cauldron_lollipops_quantity").value;
         
         // We get the quantities
         const n_candies   = str_candies   != "" ? parseInt(str_candies)   : 0
@@ -436,10 +436,10 @@ var cauldron = {
             n_candies < 0 || n_lollipops < 0
         ].findIndex((a) => a) || 5]
 
-        if (val_error) htmlInteraction.setInnerHtml("cauldron_comment", val_error)
+        if (val_error) html.setInner("cauldron_comment", val_error)
         else {
-            htmlInteraction.getElement("cauldron_candies_quantity")  .value = "";
-            htmlInteraction.getElement("cauldron_lollipops_quantity").value = "";
+            html.getElement("cauldron_candies_quantity")  .value = "";
+            html.getElement("cauldron_lollipops_quantity").value = "";
 
             candies.  setNbrOwned(candies.nbrOwned   - n_candies);
             lollipops.setNbrOwned(lollipops.nbrOwned - n_lollipops);
@@ -462,32 +462,32 @@ var cauldron = {
     updateCauldronOnPage : function(){
         this.resetCauldronText();
         this.drawCauldron();
-        htmlInteraction.setInnerHtml("cauldron_cauldron", this.textCauldron.join(""));
+        html.setInner("cauldron_cauldron", this.textCauldron.join(""));
     },
     
     updateBookOnPage : function(){
         this.resetBookText();
         this.drawBook();
-        htmlInteraction.setInnerHtml("cauldron_book", this.textBook.join(""));
+        html.setInner("cauldron_book", this.textBook.join(""));
     },
     
     updateActionsInfoOnPage : function(){
-        htmlInteraction.setInnerHtml("cauldron_actions_info", data.text.brewing_actions.info);
-        htmlInteraction.setInnerHtml("candies_n", candies.nbrOwned)
-        htmlInteraction.setInnerHtml("lollipops_n", lollipops.nbrOwned)
+        html.setInner("cauldron_actions_info", data.text.brewing_actions.info);
+        html.setInner("candies_n", candies.nbrOwned)
+        html.setInner("lollipops_n", lollipops.nbrOwned)
     },
     
     updateActionsPutOnPage : function(){
-        htmlInteraction.setInnerHtml("cauldron_actions_put", data.text.brewing_actions.put);
+        html.setInner("cauldron_actions_put", data.text.brewing_actions.put);
     },
     
     updateActionsInCauldronOnPage : function(){
-        htmlInteraction.setInnerHtml("cauldron_actions_in_cauldron", data.text.brewing_actions.in_cauldron)
-        htmlInteraction.setInnerHtml("candies_in_cauldron",  this.candiesInTheCauldron)
-        htmlInteraction.setInnerHtml("lollipops_in_cauldron", this.lollipopsInTheCauldron)
+        html.setInner("cauldron_actions_in_cauldron", data.text.brewing_actions.in_cauldron)
+        html.setInner("candies_in_cauldron",  this.candiesInTheCauldron)
+        html.setInner("lollipops_in_cauldron", this.lollipopsInTheCauldron)
     },
     
     updateActionsOnPage : function(){
-        htmlInteraction.setInnerHtml("cauldron_actions", data.text.brewing_actions.actions);
+        html.setInner("cauldron_actions", data.text.brewing_actions.actions);
     },
 };

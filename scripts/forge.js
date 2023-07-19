@@ -48,7 +48,7 @@ var forge = {
         // The leave button
         text += "\n<button onClick=\"forge.leave();\">Leave the forge</button>";
         
-        htmlInteraction.setInnerHtml("map", text);
+        html.setInner("map", text);
         
         buttons.checkForge();
     },
@@ -93,7 +93,7 @@ var forge = {
     leave : function(){
         this.shown = false;
         
-        htmlInteraction.setInnerHtml("map", "");
+        html.setInner("map", "");
         //buttons.enableHomeButtons();
     }
     

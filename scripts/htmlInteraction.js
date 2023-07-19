@@ -1,4 +1,4 @@
-var htmlInteraction = {
+var html = {
   
     setElementDisplay : function(id, display){
         document.getElementById(id).style.display = display;
@@ -18,7 +18,7 @@ var htmlInteraction = {
         return true;
     },
     
-    setInnerHtml : function(id, value){
+    setInner : function(id, value){
         elem = document.getElementById(id)
         if (elem) elem.innerHTML = value;
         darkMode.update();
@@ -47,7 +47,7 @@ var htmlInteraction = {
     },
     
     showButton : function(id){
-        htmlInteraction.setElementVisibility(id, true);
+        html.setElementVisibility(id, true);
     },
     
     showButtonClass : function(id){
@@ -58,7 +58,7 @@ var htmlInteraction = {
     },
     
     hideButton : function(id){
-        htmlInteraction.setElementVisibility(id, false);
+        html.setElementVisibility(id, false);
     },
     
     hideButtonClass : function(id){

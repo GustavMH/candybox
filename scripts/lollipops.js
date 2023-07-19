@@ -72,8 +72,8 @@ var lollipops = {
             ? `You have ${this.nbrOwned} lollipops!`
             : "You have 1 lollipop!"
 
-        htmlInteraction.setInnerHtml("lollipops", text);
-        htmlInteraction.setElementVisibility("lollipops", true);
+        html.setInner("lollipops", text);
+        html.setElementVisibility("lollipops", true);
         buttons.checkLollipops();
         cauldron.updateActionsInfoOnPage();
         computer.updateLollipops();

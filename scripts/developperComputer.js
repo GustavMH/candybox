@@ -14,7 +14,7 @@ var developperComputer = {
         this.won = value;
         if(this.won == true){
             tabs.enable(4);
-            htmlInteraction.showButton("tab_computer");
+            html.showButton("tab_computer");
         }
         inventory.updateOnPage();
     },

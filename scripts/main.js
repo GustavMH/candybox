@@ -9,7 +9,7 @@ var main = {
     // Functions
     onload : function(){
         // Prevents some stupid refresh bugs of the browser
-        htmlInteraction.enableButtonClass("home_button");
+        html.enableButtonClass("home_button");
         
         // Various loads
         peacefulForest.onload();

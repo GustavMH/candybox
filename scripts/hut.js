@@ -80,7 +80,7 @@ var hut = {
         
         text += "\n\n<button onClick=\"hut.leave();\">Leave the hut</button>";
         
-        htmlInteraction.setInnerHtml("map", text);
+        html.setInner("map", text);
         
         if(this.step == 0) buttons.checkHut();
         if(this.step == 2) buttons.checkHut();
@@ -138,7 +138,7 @@ var hut = {
     leave : function(){
         this.shown = false;
         
-        htmlInteraction.setInnerHtml("map", "");
+        html.setInner("map", "");
         //buttons.enableHomeButtons();
     },
     
