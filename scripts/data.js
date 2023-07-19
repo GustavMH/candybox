@@ -3,6 +3,14 @@ data = {
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
     text: {
+        brewing_val_errors: [
+            "The value you entered for candies is not a number.",
+            "The value you entered for lollipops is not a number.",
+            "The values you entered are not numbers.",
+            "You don't have enough to put all that in the cauldron !",
+            "Don't put negative values !",
+            ""
+        ],
         brewing_actions: {
             info:
             `<br/><b>What you have :</b>

@@ -1,6 +1,4 @@
 var cauldron = {
-    
-    // Variables
     textCauldron : [],
     textBook : [],
     textLeftPage : [],
@@ -29,7 +27,6 @@ var cauldron = {
     actionsList : [{type:"none"}, {type:"none"}, {type:"none"}], // List of actions
     actionTimer : 0, // Count the number of seconds an action lasts
 
-    // Functions
     registerAction : function(type, nbrCandies, nbrLollipops, timer){
         // We add the action to the list
         this.actionsList.push({type:type, nbrCandies:nbrCandies, nbrLollipops:nbrLollipops, timer:timer});
@@ -166,9 +163,9 @@ var cauldron = {
 
             text = timer < 60
                 ? timer > 5 && !somethingInCauldron
-                ? timer + " ... You do realize that you're not mixing anything, right ?"
-                : timer
-            : "too much mixing, your arms are hurting."
+                    ? timer + " ... You do realize that you're not mixing anything, right ?"
+                    : timer
+                : "too much mixing, your arms are hurting."
 
             htmlInteraction.setInnerHtml("cauldron_timer", text)
         }
@@ -412,10 +409,8 @@ var cauldron = {
     
     stopActions : function(){
         // Stop all actions
-        if (this.weAreMxing)
-            this.setWeAreMixing(false)
-        if (this.weAreBoiling)
-            this.setWeAreBoiling(false);
+        if (this.weAreMxing)   this.setWeAreMixing(false)
+        if (this.weAreBoiling) this.setWeAreBoiling(false);
         
         // Re enable buttons
         this.enableActionsButtons();
@@ -426,58 +421,34 @@ var cauldron = {
     
     putInTheCauldron : function(){
         // We get the values of the text inputs
-        var candiesInput = htmlInteraction.getElement("cauldron_candies_quantity").value;
-        var lollipopsInput = htmlInteraction.getElement("cauldron_lollipops_quantity").value;
+        const str_candies   = htmlInteraction.getElement("cauldron_candies_quantity").value;
+        const str_lollipops = htmlInteraction.getElement("cauldron_lollipops_quantity").value;
         
         // We get the quantities
-        if(candiesInput != ""){
-            var candiesQuantity = parseInt(candiesInput);
-        }
-        else candiesQuantity = 0;
-        
-        if(lollipopsInput != ""){
-            var lollipopsQuantity = parseInt(lollipopsInput);
-        }
-        else lollipopsQuantity = 0;
-        
-        // If the quantities are incorrect
-        if(isNaN(candiesQuantity) || isNaN(lollipopsQuantity)){
-            // If both values are incorrect
-            if(isNaN(candiesQuantity) && isNaN(lollipopsQuantity)){
-                htmlInteraction.setInnerHtml("cauldron_comment", "The values you entered are not numbers.");
-            }
-            // If only the candies value is incorrect
-            else if(isNaN(candiesQuantity)){
-                htmlInteraction.setInnerHtml("cauldron_comment", "The value you entered for candies is not a number.");
-            }
-            // Else, only the lollipops value is incorrect
-            else{
-                htmlInteraction.setInnerHtml("cauldron_comment", "The value you entered for lollipops is not a number.");
-            }
-        }
-        // Else, if we don't have enough candies or lollipops to put all that in the cauldron
-        else if(candiesQuantity > candies.nbrOwned || lollipopsQuantity > lollipops.nbrOwned){
-            htmlInteraction.setInnerHtml("cauldron_comment", "You don't have enough to put all that in the cauldron !");
-        }
-        // Else, if one if the value is negative
-        else if(candiesQuantity < 0 || lollipopsQuantity < 0){
-            htmlInteraction.setInnerHtml("cauldron_comment", "Don't put negative values !");
-        }
-        // Else, we put all that in the cauldron !
-        else{
-            htmlInteraction.setInnerHtml("cauldron_comment", ""); // We empty the comment
-            // We clear the text inputs
-            htmlInteraction.getElement("cauldron_candies_quantity").value = "";
+        const n_candies   = str_candies   != "" ? parseInt(str_candies)   : 0
+        const n_lollipops = str_lollipops != "" ? parseInt(str_lollipops) : 0
+
+        let val_error = data.text.brewing_val_errors[[
+            isNaN(n_candies),
+            isNaN(n_lollipops),
+            isNaN(n_candies) && isNaN(n_lollipops),
+            n_candies > candies.nbrOwned || n_lollipops > lollipops.nbrOwned,
+            n_candies < 0 || n_lollipops < 0
+        ].findIndex((a) => a) || 5]
+
+        if (val_error) htmlInteraction.setInnerHtml("cauldron_comment", val_error)
+        else {
+            htmlInteraction.getElement("cauldron_candies_quantity")  .value = "";
             htmlInteraction.getElement("cauldron_lollipops_quantity").value = "";
-            // We substract candies from our stock
-            candies.setNbrOwned(candies.nbrOwned - candiesQuantity);
-            lollipops.setNbrOwned(lollipops.nbrOwned - lollipopsQuantity);
-            // And we add them in the cauldron
-            this.setCandiesInTheCauldron(this.candiesInTheCauldron + candiesQuantity);
-            this.setLollipopsInTheCauldron(this.lollipopsInTheCauldron + lollipopsQuantity);
+
+            candies.  setNbrOwned(candies.nbrOwned   - n_candies);
+            lollipops.setNbrOwned(lollipops.nbrOwned - n_lollipops);
+
+            this.setCandiesInTheCauldron  (this.candiesInTheCauldron   + n_candies);
+            this.setLollipopsInTheCauldron(this.lollipopsInTheCauldron + n_lollipops);
         }
     },
-    
+
     setCandiesInTheCauldron : function(value){
         this.candiesInTheCauldron = value;
         this.updateActionsInCauldronOnPage();
@@ -519,5 +490,4 @@ var cauldron = {
     updateActionsOnPage : function(){
         htmlInteraction.setInnerHtml("cauldron_actions", data.text.brewing_actions.actions);
     },
-    
 };
