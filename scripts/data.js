@@ -3,26 +3,45 @@ data = {
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
     text: {
-        merchant_swords: {
-            "wooden sword": {
-                accept: "Great! This wooden sword isn't the best, for sure, but it really didn't cost so much.",
-                decline: "You don't have enough candies. You should save up candies to buy it : swords are useful nowadays."
+        merchant: {
+            tickle: [
+                "Hey ! You touched my hat !",
+                "Stop that, stop that ! You're tickling me !",
+                "Hahahaha ! I'm so ticklish !",
+                "Listen, listen : I give you 100 candies ! But stop that please !"
+            ],
+            click_lollipop: {
+                texts: [
+                    "Hey ! Don't touch the products !",
+                    "Seriously, don't touch this lollipop.",
+                    "Don't touch it ! Other customers may lick it after that, that's gross !",
+                    "Stop now or I'll be force to do something.",
+                    "Okay, okay, I lower the price, but stop touching it !",
+                    "I can't make a lower price... Please stop."
+                ],
+                intervals: [0, 1, 2, 3, 4, 14]
             },
-            "copper sword": {
-                accept: "This copper sword is quite heavy, but it slays efficiently.",
-                decline: "You need 300 candies to buy that sword! Did you know that copper slowly reacts with atmospheric oxygen forming a layer of brown-black copper oxide?"
-            },
-            "iron sword": {
-                accept: "This iron sword could cut almost anything, if you're strong enough to use it.",
-                decline: "You need more candies for the iron sword. Iron is strong. Iron is reliable. Iron will obey your slaying desire."
-            },
-            "silver sword": {
-                accept: "One thousand candies for meeee! Uh, I mean, this silver sword is even stronger than the iron one! You had to buy it.",
-                decline: "One thousand candies for the silver sword! My marginal profit can't handle less than that."
-            },
-            "diamond sword": {
-                accept: "Diamond! This is the best sword I can sell you. It will cut rocks as if they were made of butter.",
-                decline: "You need more candies. The diamond sword is quite expensive, but it's worth it!"
+            swords: {
+                "wooden sword": {
+                    accept: "Great! This wooden sword isn't the best, for sure, but it really didn't cost so much.",
+                    decline: "You don't have enough candies. You should save up candies to buy it : swords are useful nowadays."
+                },
+                "copper sword": {
+                    accept: "This copper sword is quite heavy, but it slays efficiently.",
+                    decline: "You need 300 candies to buy that sword! Did you know that copper slowly reacts with atmospheric oxygen forming a layer of brown-black copper oxide?"
+                },
+                "iron sword": {
+                    accept: "This iron sword could cut almost anything, if you're strong enough to use it.",
+                    decline: "You need more candies for the iron sword. Iron is strong. Iron is reliable. Iron will obey your slaying desire."
+                },
+                "silver sword": {
+                    accept: "One thousand candies for meeee! Uh, I mean, this silver sword is even stronger than the iron one! You had to buy it.",
+                    decline: "One thousand candies for the silver sword! My marginal profit can't handle less than that."
+                },
+                "diamond sword": {
+                    accept: "Diamond! This is the best sword I can sell you. It will cut rocks as if they were made of butter.",
+                    decline: "You need more candies. The diamond sword is quite expensive, but it's worth it!"
+                }
             }
         },
         brewing_val_errors: [

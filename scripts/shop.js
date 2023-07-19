@@ -33,16 +33,8 @@ var shop = {
     },
     
     clickedOnHat : function() {
-        texts = [
-            "Hey ! You touched my hat !",
-            "Stop that, stop that ! You're tickling me !",
-            "Hahahaha ! I'm so ticklish !",
-            "Listen, listen : I give you 100 candies ! But stop that please !"
-        ]
-        text = texts[this.ticklingStep]
-
+        text = data.text.merchant.tickle[this.ticklingStep]
         if (text) this.setMerchantSpeech(text)
-
         if (this.ticklingStep == 3)
             candies.setNbrOwned(candies.nbrOwned + 100);
 
@@ -68,17 +60,8 @@ var shop = {
     clickedOnLollipop : function() {
         this.setClickingOnLollipopStep(this.clickingOnLollipopStep + 1)
 
-        ts = [
-            "Hey ! Don't touch the products !",
-            "Seriously, don't touch this lollipop.",
-            "Don't touch it ! Other customers may lick it after that, that's gross !",
-            "Stop now or I'll be force to do something.",
-            "I can't make a lower price... Please stop.",
-            "Okay, okay, I lower the price, but stop touching it !"
-        ]
-        texts = [...ts.slice(0,4), ...Array(10).fill(ts[5]), ts[4]]
-        text  = texts[this.clickingOnLollipopStep]
-
+        const { intervals, texts } = data.text.merchant.click_lollipop
+        text = texts[intervals.indexOf(this.clickingOnLollipopStep)]
         if (text) this.setMerchantSpeech(text)
     },
     
@@ -104,7 +87,7 @@ var shop = {
     
     show : function(){
         // We show the shop
-        if(html.isElementVisible("shop") == false){ // If the shop isn't already visible
+        if(html.isElementVisible("shop") == false) { // If the shop isn't already visible
             html.setElementVisibility("shop", true);
             this.setMerchantSpeech("Hello, I'm the candy merchant. I would do anything for candies. My lollipops are delicious!");
         }
@@ -115,11 +98,8 @@ var shop = {
     
     setShown : function(value){
         // If the new value is true but it was false before, we show the shop
-        if(value == true && this.shown == false)
-        {
-			this.show();
-		}
-        
+        if(value == true && this.shown == false) this.show();
+
         // We change the value
         this.shown = value;
     },

@@ -24,7 +24,7 @@ var sword = {
     buyThisSword : function(name){
         if(this.name != name){ // If we're not trying to buy the current sword
 
-            const speech = data.text.merchant_swords[name]
+            const speech = data.text.merchant.swords[name]
 
             if (candies.nbrOwned >= shop.currentSwordPrice) {
                 candies.setNbrOwned(candies.nbrOwned - shop.currentSwordPrice)
