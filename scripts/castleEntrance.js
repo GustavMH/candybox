@@ -27,11 +27,11 @@ var castleEntrance = {
         if(this.timeSpent < 1000){ // We must stop adding ennemies after a while, else the player could be blocked in certain conditions
             if(this.timeSpent % 16 == 5){
                 // If there's nothing here, we add a knight
-                if(quest.things[29].type == "none") quest.things[29] = this.makeKnight();
+                if(quest.things[29].type == "none") quest.things[29] = land.create(data.mobs.knight)
             }
             else if(this.timeSpent % 30 == 29){
                 // If there's nothing here, we add a guard
-                if(quest.things[29].type == "none") quest.things[29] = this.makeGuard();
+                if(quest.things[29].type == "none") quest.things[29] = land.create(data.mobs.guard)
             }
         }
         
@@ -80,23 +80,15 @@ var castleEntrance = {
     
     load : function(){
         // We add some guards on the lawn to slow down the player
-        quest.things[10] = this.makeGuard();
-        quest.things[12] = this.makeGuard();
-        quest.things[15] = this.makeGuard();
-        quest.things[17] = this.makeGuard();
-        
+        quest.things[10] = land.create(data.mobs.guard)
+        quest.things[12] = land.create(data.mobs.guard)
+        quest.things[15] = land.create(data.mobs.guard)
+        quest.things[17] = land.create(data.mobs.guard)
+
         // We reset the time spent
         this.timeSpent = 0;
     },
-    
-    makeGuard : function(){
-        return land.createMob("GUA", 25, 25, "spear", "One of the castle's guards.", [drops.createDrop("candies", random.getRandomIntUpTo(40))]);
-    },
-    
-    makeKnight : function(){
-        return land.createMob("KNI", 70, 70, "sharp sword", "A knight with a huge armor.", [drops.createDrop("candies", 230 + random.getRandomIntUpTo(70)), drops.createDrop("object", "plateArmour", random.oneChanceOutOf(10))]);
-    },
-    
+
     getText : function(){
         var lines = [];
         lines = this.text.slice(0); // It will store the lines of the castle entrance

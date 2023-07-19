@@ -256,14 +256,6 @@ var hell = {
         }
     },
     
-    makeDevil : function(){
-        return land.createMob("DEV", 250, 250, "religion", "It's the devil itself !", [drops.createDrop("candies", 100000)]);
-    },
-    
-    makeTeleportingGate : function(){
-        return land.createMob(" * ", 120, 120, "none", "A teleporting gate, made by the devil itself.", []);
-    },
-    
     makeMiddleCreature : function(){
         switch(this.step){
             case 0:
@@ -340,23 +332,7 @@ var hell = {
         
         return quest.makeNoneThing();
     },
-    
-    makeDemon : function(){
-        return land.createMob("DEM", 90, 90, "demon claws", "A demon.", []);
-    },
-    
-    makeBanshee : function(){
-        return land.createMob("BSH", 160, 160, "?", "A banshee, omen of death.", []);
-    },
-    
-    makeDoor : function(){
-        return land.createMob("|-|", 300, 300, "none", "A strong door. Hard to break.", []);
-    },
-    
-    makeSpikyDoor : function(){
-        return land.createMob("|-|", 300, 300, "spikes", "A strong door. Hard to break. There are spikes on it, it hurts !", []);
-    },
-    
+
     getText : function(){
         // Create the text var
         var text = "";

@@ -73,7 +73,7 @@ var chuckNorris = {
     },
     
     makeChuckNorris : function(){
-        return land.createMob("CHN", 1000, 1000, "Chuck Norris", "Chuck Norris. You just can't beat him.", []);
+        return land.create(data.mobs.chuckNorris)
     },
     
     getText : function(){

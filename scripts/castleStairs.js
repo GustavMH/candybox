@@ -1,12 +1,7 @@
 var castleStairs = {
-
-    // Variables
-    
     size : 19,
     timeSpent : 0,
 
-    // Functions
-    
     onload : function(){
         land.addLand("Castle's stairs", this.size, 4, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
     },
@@ -29,13 +24,10 @@ var castleStairs = {
             // If there's nothing here
             if(i < this.size-1 && quest.things[i].type == "none"){
                 // One chance out of x we make a pile of corpses
-                if(random.oneChanceOutOf(8)){
-                    quest.things[i] = this.makePileOfCorpses();
-                }
-                // Else we make a ghost
-                else{
-                    quest.things[i] = this.makeGhost();
-                }
+                if(random.oneChanceOutOf(8))
+                    quest.things[i] = land.create(data.mobs.pileOfCorpses)
+                else
+                    quest.things[i] = land.create(data.mobs.ghost)
             }
         }
         
@@ -44,27 +36,12 @@ var castleStairs = {
     },
     
     load : function(){
-        quest.things[this.size - 1] = this.makeNecromancer();
+        quest.things[this.size - 1] = land.create(data.mobs.necromancer)
         
         // We reset the time spent
         this.timeSpent = 0;
     },
-    
-    makeNecromancer : function(){
-        return land.createMob("NEC", 150, 150, "magic staff", "A necromancer. She summons ghosts and dead stuff.", [drops.createDrop("object", "candiesConverter", true), drops.createDrop("object", "cauldron", true)]);
-    },
-    
-    makeGhost : function(){
-        return land.createMob("GHO", 5, 5, "spectral magic", "A Ghost. It halves the life of human beings.", []);
-    },
-    
-    makePileOfCorpses : function(){
-        var life = 140;
-        life += random.getRandomIntUpTo(4) * 20;
-        
-        return land.createMob("POC", life, life, "none", "A pile of corpses. It doesn't hurt you, but damn, it's hard to remove !", []);
-    },
-    
+
     getText : function(){
         var lines = [];
         lines = this.text.slice(0); // It will store the lines

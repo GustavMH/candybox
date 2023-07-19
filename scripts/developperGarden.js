@@ -34,24 +34,20 @@ var developperGarden = {
     
     load : function(){
         // Add garden gnomes
-        quest.things[27] = this.makeCheatedGardenGnome();
-        quest.things[28] = this.makeCheatedGardenGnome();
-        if(random.flipACoin()) quest.things[29] = this.makeCheatedGardenGnome();
-        quest.things[30] = this.makeCheatedGardenGnome();
-        quest.things[31] = this.makeCheatedGardenGnome();
-        if(random.flipACoin()) quest.things[32] = this.makeCheatedGardenGnome();
-        quest.things[34] = this.makeCheatedGardenGnome();
-        quest.things[35] = this.makeCheatedGardenGnome();
-        quest.things[36] = this.makeCheatedGardenGnome();
-        quest.things[37] = this.makeCheatedGardenGnome();
-        quest.things[38] = this.makeCheatedGardenGnome();
-        if(random.flipACoin()) quest.things[39] = this.makeCheatedGardenGnome();
+        quest.things[27] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[28] = land.create(data.mobs.cheatedGardenGnome)
+        if(random.flipACoin()) quest.things[29] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[30] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[31] = land.create(data.mobs.cheatedGardenGnome)
+        if(random.flipACoin()) quest.things[32] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[34] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[35] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[36] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[37] = land.create(data.mobs.cheatedGardenGnome)
+        quest.things[38] = land.create(data.mobs.cheatedGardenGnome)
+        if(random.flipACoin()) quest.things[39] = land.create(data.mobs.cheatedGardenGnome)
     },
-    
-    makeCheatedGardenGnome : function(){
-        return land.createMob("CGG", 70, 70, "ultra plasma gun", "A cheated garden gnome. Since when garden gnomes have guns like that ?", []);
-    },
-    
+
     getText : function(){
         // Create the text
         var lines = this.asciiGarden.slice(0);

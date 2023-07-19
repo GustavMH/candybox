@@ -3,6 +3,13 @@ var land = {
     // Variables
     list : [],
     ponyTime : false,
+
+    create : function(opts) {
+        const pony_opts = this.ponyTime ? {text: "PON", description: "A pony"} : {}
+        const fake_opts = opts.type == "fake" ? {text: `\o/`, description: "", max_hp:0, hp:0,} : {}
+
+        return {...opts, fake_opts, ...pony_opts}
+    }
     
     // Functions
     createMob : function(text, max_hp, hp, weapon, description, drops){
@@ -33,22 +40,12 @@ var land = {
         this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
     },
     
-    getLandIndexFromOrder : function(order){
-        for(var i = 0; i < this.list.length; i++){
-            if(this.list[i].order == order){
-                return i;
-            }
-        }
-        return -1;
+    getLandIndexFromOrder : function(order) {
+        return this.list.findIndex(({order}) => order == i)
     },
     
     getLandIndexFromName : function(name){
-        for(var i = 0; i < this.list.length; i++){
-            if(this.list[i].name == name){
-                return i;
-            }
-        }
-        return -1;
+        return this.list.findIndex(({name}) => name == i)
     },
     
     updateListOnPage : function(maxOrder){
@@ -56,17 +53,20 @@ var land = {
         
         // We iterate over all order from 0 to maxOrder
         for(var i = 0; i <= maxOrder; i++){
-            index = this.getLandIndexFromOrder(i); // We get the index of the land with the order i
+            land = this.list.find(({order}) => order == i)
             // If the land of index "index" isn't already unlocked and is correct (!= -1)
-            if(index != -1 && this.list[index].unlocked == false){
+            if(land && !land.unlocked) {
                 list = html.getElement("quest_destination"); // We get the list
                 option = document.createElement("option"); // We create the new element to add to the list
-                option.text = this.list[index].name; // We set its text
+                option.text = land.name; // We set its text
                 // We add it to the list
-                try{ list.add(option, list.options[null]); }
-                catch(e){ list.add(option, null); }
+                try{
+                    list.add(option, list.options[null])
+                } catch(e) {
+                    list.add(option, null)
+                }
                 // We set that it is unlocked now
-                this.list[index].unlocked = true;
+                land.unlocked = true;
             }
         }
     },

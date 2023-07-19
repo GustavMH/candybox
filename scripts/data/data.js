@@ -2,6 +2,21 @@ data = {
     recipes: [
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
+    mobs: {
+        chuckNorris: ("mob", "CHN", 1000, 1000, "Chuck Norris", "Chuck Norris. You just can't beat him.", [])
+        necromancer: ("mob", "NEC", 150, 150, "magic staff", "A necromancer. She summons ghosts and dead stuff.", [drops.createDrop("object", "candiesConverter", true), drops.createDrop("object", "cauldron", true)])
+        ghost: ("GHO", 5, 5, "spectral magic", "A Ghost. It halves the life of human beings.", [])
+        pileOfCorpses: ("POC", [140, 220, 20], [140, 220, 20], "none", "A pile of corpses. It doesn't hurt you, but damn, it's hard to remove !", [])
+        guard: ("GUA", 25, 25, "spear", "One of the castle's guards.", [drops.createDrop("candies", random.getRandomIntUpTo(40))])
+        knight: ("KNI", 70, 70, "sharp sword", "A knight with a huge armor.", [drops.createDrop("candies", 230 + random.getRandomIntUpTo(70)), drops.createDrop("object", "plateArmour", random.oneChanceOutOf(10))])
+        cheatedGardenGnome: ("CGG", 70, 70, "ultra plasma gun", "A cheated garden gnome. Since when garden gnomes have guns like that ?", [])
+        spikyDoor: ("|-|", 300, 300, "spikes", "A strong door. Hard to break. There are spikes on it, it hurts !", []);
+        door: ("|-|", 300, 300, "none", "A strong door. Hard to break.", [])
+        banshee: ("BSH", 160, 160, "?", "A banshee, omen of death.", [])
+        demon: ("DEM", 90, 90, "demon claws", "A demon.", [])
+        devil: ("DEV", 250, 250, "religion", "It's the devil itself !", [drops.createDrop("candies", 100000)])
+        teleportingGate: (" * ", 120, 120, "none", "A teleporting gate, made by the devil itself.", [])
+    }
     text: {
         merchant: {
             tickle: [
