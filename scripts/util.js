@@ -60,3 +60,5 @@ const r_interval_or_number = (input) =>
       Array.isArray(input)
         ? r_interval(...input)
         : input
+
+const r_choice = (arr) => arr[r_int(arr.length)]

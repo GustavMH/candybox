@@ -7,7 +7,10 @@ const land = {
 
         const hp_opts = {
             hp: r_interval_or_number(opts.hp),
-            max_hp: r_interval_or_number(opts.max_hp)
+            max_hp: r_interval_or_number(opts.max_hp),
+            weapon: Array.isArray(opts.weapon)
+                ? r_choice(opts.weapon)
+                : opts.weapon
         }
 
         const fake_opts = opts.type == "fake"
