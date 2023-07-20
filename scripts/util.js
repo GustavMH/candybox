@@ -7,11 +7,8 @@ layer_text = (lower_text, upper_text, x, y) =>
             (c, j) => upper_text[i-y]?.[j-x] || c
         ).join(""))
 
-layer_texts = (lower_text, upper_texts) =>
-    upper_texts.reduce(
-        (acc, [text, x, y]) => layer_text(acc, text, x, y),
-        lower_text
-    )
+layer_texts = (texts) => upper_texts
+    .reduce((acc, [text, x, y]) => layer_text(acc, text, x, y))
 
 /* EXAMPLE USE
 print_block = (block) => console.log(block.join("\n"))
