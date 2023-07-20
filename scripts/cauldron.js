@@ -92,8 +92,9 @@ var cauldron = {
 
     drawBook : function(){
         const { x, y, page_no_1, page_no_2, page_L, page_R } = this.book
-        this.textBook = layer_texts([
-                this.textBook,
+        this.textBook = layer_texts(
+            this.textBook,
+            [
                 // Draw the book itself
                 [data.ascii.book, x, y],
                 // Draw the page numbers
