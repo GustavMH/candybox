@@ -1,4 +1,5 @@
 var peacefulForest = {
+    /* TODO peaceful forest bliver to land objektet???? */
     
     // Variables
     basicChestProbability : 100,

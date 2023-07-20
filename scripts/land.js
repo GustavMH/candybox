@@ -21,7 +21,7 @@ var land = {
             weapon = sword.name
         }
         if (name = "CND") {
-            hp = 80 + 5*sword.specialPower
+            hp = 80 + 5 * sword.specialPower
         }
 
 
@@ -29,6 +29,7 @@ var land = {
     },
     
     addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction) {
+        console.log(name)
         this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
     },
     
@@ -36,7 +37,7 @@ var land = {
         return this.list.findIndex(({order}) => order == i)
     },
     
-    getLandIndexFromName : function(name){
+    getLandIndexFromName : function(name) {
         return this.list.findIndex(({name}) => name == i)
     },
     

@@ -47,22 +47,26 @@ var sword = {
             quest.things[id] = land.create(data.mobs[summon_key])
         }
     },
+
+    /* TODO sword enchantment -> data ?? */
     
     enchantFire : function() {
-        if(potions.list.fireScroll.nbrOwned > 0){
-            this.setSpecialSword(true);
+        if(potions.list.fireScroll.nbrOwned >= 1){
             this.setName("Sword of Flames");
             potions.list.fireScroll.nbrOwned -= 1;
+
+            this.setSpecialSword(true);
             potions.updateOnPage();
             forge.setStep(2);
         }
     },
     
     enchantHealth : function() {
-        if(potions.list.health.nbrOwned > 0){
-            this.setSpecialSword(true);
+        if(potions.list.health.nbrOwned >= 1){
             this.setName("Sword of Life");
             potions.list.health.nbrOwned -= 1;
+
+            this.setSpecialSword(true);
             potions.updateOnPage();
             forge.setStep(2);
         }
@@ -77,6 +81,7 @@ var sword = {
         if(chocolateBars.nbrOwned >= 1){
             chocolateBars.setNbrOwned(chocolateBars.nbrOwned - 1);
             this.setName("chocolate sword");
+
             html.hideButton("coat");
         }
     },
@@ -85,6 +90,7 @@ var sword = {
         if(candies.nbrOwned >= 101){
             candies.setNbrOwned(candies.nbrOwned - 101);
             this.setName("candy diamond sword");
+
             html.hideButton("encrust");
         }
     },
@@ -93,6 +99,7 @@ var sword = {
         if(lollipops.nbrOwned >= 30){
             lollipops.setNbrOwned(lollipops.nbrOwned - 30);
             this.setName("polished candy diamond sword");
+
             html.hideButton("polish");
         }
     },

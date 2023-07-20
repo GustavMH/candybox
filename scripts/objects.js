@@ -28,7 +28,7 @@ var objects = {
     // Functions
     setHaveObject : function(name, value){
         // We set the new "have" value
-        this.list[name].have = value;
+        this.all[name].have = value;
         
         // We check the buttons related to objects, since they may have changed
         buttons.checkObjects();
