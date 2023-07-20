@@ -26,9 +26,9 @@ var land = {
 
 
         return {...opts, ...fake_opts, ...pony_opts}
-    }
+    },
     
-    addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction){
+    addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction) {
         this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
     },
     

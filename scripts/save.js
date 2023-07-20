@@ -58,20 +58,20 @@ function save() {
 					"mountGoblinBasicChestProbability: " + mountGoblin.basicChestProbability + "\n" + 
 					"peacefulForestBasicChestProbability: " + peacefulForest.basicChestProbability + "\n" + 
 					"peacefulForestPoniesEncountered: " + peacefulForest.poniesEncountered + "\n" + 
-					"objectsHaveObjectKey: " + getPhpStuff(objects.list.key.have) + "\n" + 
-					"objectsHaveObjectHutMap: " + getPhpStuff(objects.list.hutMap.have) + "\n" + 
-					"objectsHaveObjectWellMap: " + getPhpStuff(objects.list.wellMap.have) + "\n" + 
-					"objectsHaveObjectSwampMap: " + getPhpStuff(objects.list.swampMap.have) + "\n" + 
-					"objectsHaveObjectBoots: " + getPhpStuff(objects.list.boots.have) + "\n" + 
-					"objectsHaveObjectMagicianHat: " + getPhpStuff(objects.list.magicianHat.have) + "\n" + 
-					"objectsHaveObjectPinkRing: " + getPhpStuff(objects.list.pinkRing.have) + "\n" + 
-					"objectsHaveObjectForgeMap: " + getPhpStuff(objects.list.forgeMap.have) + "\n" + 
-					"objectsHaveObjectCandiesConverter: " + getPhpStuff(objects.list.candiesConverter.have) + "\n" + 
-					"objectsHaveObjectPlateArmour: " + getPhpStuff(objects.list.plateArmour.have) + "\n" + 
-					"objectsHaveObjectCauldron: " + getPhpStuff(objects.list.cauldron.have) + "\n" + 
-					"objectsHaveObjectMagicalHorn: " + getPhpStuff(objects.list.magicalHorn.have) + "\n" + 
-					"objectsHaveObjectHornOfPlenty: " + getPhpStuff(objects.list.hornOfPlenty.have) + "\n" + 
-					"objectsHaveObjectOldAmulet: " + getPhpStuff(objects.list.oldAmulet.have) + "\n" + 
+					"objectsHaveObjectKey: " + getPhpStuff(objects.all.key.have) + "\n" + 
+					"objectsHaveObjectHutMap: " + getPhpStuff(objects.all.hutMap.have) + "\n" + 
+					"objectsHaveObjectWellMap: " + getPhpStuff(objects.all.wellMap.have) + "\n" + 
+					"objectsHaveObjectSwampMap: " + getPhpStuff(objects.all.swampMap.have) + "\n" + 
+					"objectsHaveObjectBoots: " + getPhpStuff(objects.all.boots.have) + "\n" + 
+					"objectsHaveObjectMagicianHat: " + getPhpStuff(objects.all.magicianHat.have) + "\n" + 
+					"objectsHaveObjectPinkRing: " + getPhpStuff(objects.all.pinkRing.have) + "\n" + 
+					"objectsHaveObjectForgeMap: " + getPhpStuff(objects.all.forgeMap.have) + "\n" + 
+					"objectsHaveObjectCandiesConverter: " + getPhpStuff(objects.all.candiesConverter.have) + "\n" + 
+					"objectsHaveObjectPlateArmour: " + getPhpStuff(objects.all.plateArmour.have) + "\n" + 
+					"objectsHaveObjectCauldron: " + getPhpStuff(objects.all.cauldron.have) + "\n" + 
+					"objectsHaveObjectMagicalHorn: " + getPhpStuff(objects.all.magicalHorn.have) + "\n" + 
+					"objectsHaveObjectHornOfPlenty: " + getPhpStuff(objects.all.hornOfPlenty.have) + "\n" + 
+					"objectsHaveObjectOldAmulet: " + getPhpStuff(objects.all.oldAmulet.have) + "\n" + 
 					"potionsShownHealth: " + getPhpStuff(potions.list.health.shown) + "\n" + 
 					"potionsShownEscape: " + getPhpStuff(potions.list.escape.shown) + "\n" + 
 					"potionsShownBerserk: " + getPhpStuff(potions.list.berserk.shown) + "\n" + 

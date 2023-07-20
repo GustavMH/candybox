@@ -59,21 +59,21 @@ var main = {
 
     secInterval : function(){
         // Candies
-        let candy_rate = objects.list.oldAmulet.have ? 3 : 1
+        let candy_rate = objects.all.oldAmulet.have ? 3 : 1
         candies.setNbrOwned(candies.nbrOwned + candies.candiesPerSecond * candy_rate);
         
         // Quest tired time
-        let recover_rate = objects.list.pinkRing.have ? 2 : 1
+        let recover_rate = objects.all.pinkRing.have ? 2 : 1
         quest.setTiredTime(quest.tiredTime - recover_rate);
         
         // Lollipop farm
         if(farm.productionDelayType == "sec"){
-            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            let lollipop_mult = objects.all.hornOfPlenty.have ? 3 : 1
             lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
         
         // Cauldron
-        if(objects.list.cauldron.have) cauldron.moveSmoke();
+        if(objects.all.cauldron.have) cauldron.moveSmoke();
         cauldron.increaseActionTimer();
         
         // We increase nbrOfSeconds variables
@@ -103,7 +103,7 @@ var main = {
     minInterval : function(){
         // Lollipop farm
         if(farm.productionDelayType == "min"){
-            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            let lollipop_mult = objects.all.hornOfPlenty.have ? 3 : 1
             lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
     },
@@ -111,7 +111,7 @@ var main = {
     hourInterval : function(){
         // Lollipop farm
         if(farm.productionDelayType == "hour"){
-            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            let lollipop_mult = objects.all.hornOfPlenty.have ? 3 : 1
             lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
     },
@@ -119,7 +119,7 @@ var main = {
     dayInterval : function(){
         // Lollipop farm
         if(farm.productionDelayType == "day"){
-            let lollipop_mult = objects.list.hornOfPlenty.have ? 3 : 1
+            let lollipop_mult = objects.all.hornOfPlenty.have ? 3 : 1
             lollipops.setNbrOwned(lollipops.nbrOwned + farm.lollipopsProduction * lollipop_mult);
         }
     },

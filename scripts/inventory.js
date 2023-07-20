@@ -10,7 +10,7 @@ var inventory = {
     
     updateOnPage : function(){
         // Check for the magician hat letter : if we have the magician hat but no letter is set yet
-        if(objects.list.magicianHat.have && this.magicianHatLetter == ""){
+        if(objects.all.magicianHat.have && this.magicianHatLetter == ""){
             this.setMagicianHatLetter("     " + random.getRandomLetter());
         }
         
@@ -33,16 +33,16 @@ var inventory = {
         }
         
         // Objects
-        this.updateObjectOnPage("inventory_key", objects.list.key, this.asciiKey, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_boots", objects.list.boots, this.asciiBoots, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_magician_hat", objects.list.magicianHat, this.magicianHatLetter + "\n" + this.asciiMagicianHat, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_pink_ring", objects.list.pinkRing, this.asciiPinkRing, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_candies_converter", objects.list.candiesConverter, this.asciiCandiesConverter, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_plate_armour", objects.list.plateArmour, this.asciiPlateArmour, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_cauldron", objects.list.cauldron, this.asciiCauldron, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_magical_horn", objects.list.magicalHorn, this.asciiMagicalHorn, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_horn_of_plenty", objects.list.hornOfPlenty, this.asciiHornOfPlenty, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_old_amulet", objects.list.oldAmulet, this.asciiOldAmulet, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_key", objects.all.key, this.asciiKey, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_boots", objects.all.boots, this.asciiBoots, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_magician_hat", objects.all.magicianHat, this.magicianHatLetter + "\n" + this.asciiMagicianHat, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_pink_ring", objects.all.pinkRing, this.asciiPinkRing, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_candies_converter", objects.all.candiesConverter, this.asciiCandiesConverter, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_plate_armour", objects.all.plateArmour, this.asciiPlateArmour, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_cauldron", objects.all.cauldron, this.asciiCauldron, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_magical_horn", objects.all.magicalHorn, this.asciiMagicalHorn, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_horn_of_plenty", objects.all.hornOfPlenty, this.asciiHornOfPlenty, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_old_amulet", objects.all.oldAmulet, this.asciiOldAmulet, this.asciiNoObject);
         
         if(developperComputer.won){
             html.setInner("inventory_won1", "<pre>" + this.asciiWon1 + "</pre>");
@@ -56,10 +56,10 @@ var inventory = {
         }
         
         // Maps
-        this.updateObjectOnPage("inventory_swamp_map", objects.list.swampMap, this.asciiSwampMap, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_hut_map", objects.list.hutMap, this.asciiHutMap, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_forge_map", objects.list.forgeMap, this.asciiForgeMap, this.asciiNoObject);
-        this.updateObjectOnPage("inventory_well_map", objects.list.wellMap, this.asciiWellMap, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_swamp_map", objects.all.swampMap, this.asciiSwampMap, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_hut_map", objects.all.hutMap, this.asciiHutMap, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_forge_map", objects.all.forgeMap, this.asciiForgeMap, this.asciiNoObject);
+        this.updateObjectOnPage("inventory_well_map", objects.all.wellMap, this.asciiWellMap, this.asciiNoObject);
     },
     
     updateObjectOnPage : function(id, obj, ascii, asciiNoObject){

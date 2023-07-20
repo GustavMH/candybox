@@ -132,7 +132,7 @@ var damage = {
         else{
             howManyDamage = this.getWeaponDamage(quest.things[j].weapon); // We store the damage the mob should do to us
             // If we have a plate armour
-            if(objects.list.plateArmour.have){
+            if(objects.all.plateArmour.have){
                 howManyDamage -= 3; // We reduce the damage
             }
             // If we are a turtle

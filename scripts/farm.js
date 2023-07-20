@@ -48,7 +48,7 @@ var farm = {
     },
     
     checkVisibility : function(){
-        if(objects.list.key.have) html.setElementVisibility("farm", true);
+        if(objects.all.key.have) html.setElementVisibility("farm", true);
     },
     
     plantLollipops : function(number){

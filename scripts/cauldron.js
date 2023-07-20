@@ -42,7 +42,7 @@ var cauldron = {
     },
 
     checkVisibility : function(){
-        if(objects.list.cauldron.have){
+        if(objects.all.cauldron.have){
             // Show the cauldron tab, which have to be hidden before this point
             tabs.enable(3);
 

@@ -7,7 +7,7 @@ var candiesConverter = {
     // Functions
     checkVisibility : function(){
         // If we have the candies conveter
-        if(objects.list.candiesConverter.have){
+        if(objects.all.candiesConverter.have){
             // We show it on the page
             html.setElementDisplay("candies_converter", "inline");
         }

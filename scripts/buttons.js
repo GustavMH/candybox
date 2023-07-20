@@ -233,25 +233,25 @@ var buttons = {
     
     checkObjects : function(){
         // Show the button to go to the swamp map
-        if(objects.list.swampMap.have){
+        if(objects.all.swampMap.have){
             html.setElementDisplay("go_to_swamp", "block");
             html.showButton("go_to_swamp");
             this.enableButton("go_to_swamp");
         }
         // Show the button to go to the hut
-        if(objects.list.hutMap.have){
+        if(objects.all.hutMap.have){
             html.setElementDisplay("go_to_hut", "block");
             html.showButton("go_to_hut");
             this.enableButton("go_to_hut");
         }
         // Show the button to go to the wishing well
-        if(objects.list.wellMap.have){
+        if(objects.all.wellMap.have){
             html.setElementDisplay("go_to_well", "block");
             html.showButton("go_to_well");
             this.enableButton("go_to_well");
         }
         // Show the button to go to the forge
-        if(objects.list.forgeMap.have){
+        if(objects.all.forgeMap.have){
             html.setElementDisplay("go_to_forge", "block");
             html.showButton("go_to_forge");
             this.enableButton("go_to_forge");
@@ -272,7 +272,7 @@ var buttons = {
     
     checkLollipopsPlantingButtons : function(){
         // If we have the key of the lollipop farm
-        if(objects.list.key.have){
+        if(objects.all.key.have){
             // innerHtml of the lp_buttons span
             
             // Plant 1000 button

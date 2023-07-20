@@ -1,7 +1,7 @@
 var objects = {
 
     // Variables
-    list : {
+    all : {
         key : {have:false, found:false, text:"a key", name:"The lollipop farm's key.", description:"This key brings a lollipop farm to your candy box."},
         boots : {have:false, found:false, text:"a pair of boots", name:"The seven-league boots.", description:"These boots increase your speed during quests."},
         swampMap : {have:false, found:false, text:"a map", name:"The map to the Swampy Swamp.", description:"The Swampy Swamp is the swampiest swamp you've ever seen."},

@@ -49,3 +49,9 @@ format_speech = (text, size) => {
 /* EXAMPLE USE
 format_speech("Hello, I'm the candy merchant.", 20)
  */
+
+const r_int = (n) => Math.floor(Math.random() * n)
+const r_oneOutOf = (n) => rint(n) == 0
+const r_coin = () => r_oneOutOf(2)
+const r_interval = (from, to, step=1) =>
+    from + r_int((to - from) / step) * step

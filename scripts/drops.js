@@ -1,58 +1,49 @@
 var drops = {
-    
-    createDrop : function(type, param1, param2){
-        return {type:type, param1:param1, param2:param2};
-    },
-    
-    getText : function(){
-        var text = "";
-        
-        // Candies found
-        if(quest.candiesFound != 1) text += "You found " + quest.candiesFound + " candies.";
-        else text += "You found 1 candy.";
-    
-        // Objects found
-        for(obj in objects.list){
-            if(objects.list[obj].found){
-                text += "\n<b>You found " + objects.list[obj].text + ".</b>";
-            }
-        }
-        
-        // Notice
-        text += "\n\nThings found will be yours only if you finish the quest without dying.";
-        
-        return text;
+    getText : function() {
+        return [
+            quest.candiesFound > 1
+                ? "You found ${quest.candiesFound} candies."
+                : "You found 1 candy.",
+            ...objects.all
+                .filter(({ found }) => found)
+                .map(({ text }) => `<b>You found ${text}.</b>`),
+            "",
+            "Things found will be yours only if you finish the quest without dying."
+        ].join("\n")
     },
     
     gainDrops : function(){
         // Gain the candies
-        candies.setNbrOwned(candies.nbrOwned + quest.candiesFound);
+        candies.setNbrOwned(candies.nbrOwned + quest.candiesFound)
         
-        // Gain the objects
-        for(obj in objects.list){
-            if(objects.list[obj].found){ // If we found this object but didn't have it already
-                objects.setHaveObject(obj, true);
+        // Set .have if .found
+        for(obj in objects.all) {
+            if(objects.all[obj].found) {
+                objects.setHaveObject(obj, true)
             }
         }
     },
     
-    getAllDropsFromList : function(list){
-        for(var i = 0; i < list.length; i++){
-            switch(list[i].type){
-                case "candies":
-                    quest.setCandiesFound(quest.candiesFound + list[i].param1);
-                break;
-                case "object":
-                    if(list[i].param2 == true) this.foundObject(list[i].param1);
-                break;
+    getAllDropsFromList : function(drops) {
+        for (const type in drops) {
+            const drop = drops[type]
+
+            if (drop == "candies") {
+                n_candies = Array.isArray(drop)
+                    ? r_interval(...drop)
+                    : drop
+
+                quest.setCandiesFound(quest.candiesFound + n_candies)
+            } else {
+                if(r_oneOutOf(drop))
+                    this.foundObject(type)
             }
         }
     },
     
     foundObject : function(name){
-        // If we don't already have this object, then we just found it !
-        if(objects.list[name].have == false) objects.list[name].found = true;
+        // saves objects found in the objects.all dict
+        if(objects.all[name].have == false)
+            objects.all[name].found = true
     }
-    
-};
-    
+}

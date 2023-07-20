@@ -5,7 +5,7 @@ var potions = {
   
     // Functions
     getCountdown : function(){
-        if(objects.list.magicianHat.have) return 12;
+        if(objects.all.magicianHat.have) return 12;
         return 20;
     },
     
@@ -111,7 +111,7 @@ var potions = {
     buyScroll : function(price){
         var maxPower = 2;
         
-        if(objects.list.magicianHat.have) maxPower = 4;
+        if(objects.all.magicianHat.have) maxPower = 4;
         
         switch(random.getRandomIntUpTo(maxPower)){
             case 0:

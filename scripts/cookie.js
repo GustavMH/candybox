@@ -69,20 +69,20 @@ var cookie = {
 					":" + mountGoblin.basicChestProbability +
 					":" + peacefulForest.basicChestProbability +
 					":" + peacefulForest.poniesEncountered +
-					":" + getPhpStuff(objects.list.key.have) +
-					":" + getPhpStuff(objects.list.hutMap.have) +
-					":" + getPhpStuff(objects.list.wellMap.have) +
-					":" + getPhpStuff(objects.list.swampMap.have) +
-					":" + getPhpStuff(objects.list.boots.have) +
-					":" + getPhpStuff(objects.list.magicianHat.have) +
-					":" + getPhpStuff(objects.list.pinkRing.have) +
-					":" + getPhpStuff(objects.list.forgeMap.have) +
-					":" + getPhpStuff(objects.list.candiesConverter.have) +
-					":" + getPhpStuff(objects.list.plateArmour.have) +
-					":" + getPhpStuff(objects.list.cauldron.have) +
-					":" + getPhpStuff(objects.list.magicalHorn.have) +
-					":" + getPhpStuff(objects.list.hornOfPlenty.have) +
-					":" + getPhpStuff(objects.list.oldAmulet.have) +
+					":" + getPhpStuff(objects.all.key.have) +
+					":" + getPhpStuff(objects.all.hutMap.have) +
+					":" + getPhpStuff(objects.all.wellMap.have) +
+					":" + getPhpStuff(objects.all.swampMap.have) +
+					":" + getPhpStuff(objects.all.boots.have) +
+					":" + getPhpStuff(objects.all.magicianHat.have) +
+					":" + getPhpStuff(objects.all.pinkRing.have) +
+					":" + getPhpStuff(objects.all.forgeMap.have) +
+					":" + getPhpStuff(objects.all.candiesConverter.have) +
+					":" + getPhpStuff(objects.all.plateArmour.have) +
+					":" + getPhpStuff(objects.all.cauldron.have) +
+					":" + getPhpStuff(objects.all.magicalHorn.have) +
+					":" + getPhpStuff(objects.all.hornOfPlenty.have) +
+					":" + getPhpStuff(objects.all.oldAmulet.have) +
 					":" + getPhpStuff(potions.list.health.shown) +
 					":" + getPhpStuff(potions.list.escape.shown) +
 					":" + getPhpStuff(potions.list.berserk.shown) +

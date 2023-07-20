@@ -129,8 +129,8 @@ var quest = {
     },
     
     getSpeed : function(){
-        if(objects.list.boots.have && this.berserk) return 125;
-        if(objects.list.boots.have || this.berserk) return 250;
+        if(objects.all.boots.have && this.berserk) return 125;
+        if(objects.all.boots.have || this.berserk) return 250;
         
         return 500;
     },
@@ -233,7 +233,7 @@ var quest = {
             }
             
             // Horn bonus
-            if(objects.list.magicalHorn.have){
+            if(objects.all.magicalHorn.have){
                 this.applyMagicalHornBonus();
             }
             
@@ -394,7 +394,7 @@ var quest = {
         // Nothing found anymore
         this.setCandiesFound(0);
         this.setTiredFound(0);
-        for(obj in objects.list) objects.list[obj].found = false;
+        for(obj in objects.all) objects.all[obj].found = false;
     },
     
     defineMood : function(){

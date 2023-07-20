@@ -4,22 +4,8 @@ var sword = {
     name : "none",
     specialSword : false,
     specialPower : 1, // How many the Sword of Life can steal hp, additional damage of the Sword of Flames...
-    // List of summoned things with the level we need to summon them
-    summonList : [],
-    
-    // Functions
-    
-    onload : function(){
-        this.summonList = [
-            {name:"imps",            summonFunction:quest.makeImp.bind(quest),          powerNeeded: 1},
-            {name:"orcs",            summonFunction:quest.makeOrc.bind(quest),          powerNeeded: 2},
-            {name:"draugrs",         summonFunction:quest.makeDraugr.bind(quest),       powerNeeded: 3},
-            {name:"a chupacabra",    summonFunction:quest.makeChupacabra.bind(quest),   powerNeeded: 4},
-            {name:"a golem",         summonFunction:quest.makeGolem.bind(quest),        powerNeeded: 5},
-            {name:"a chimera",       summonFunction:quest.makeChimera.bind(quest),      powerNeeded: 6},
-            {name:"a candy monster", summonFunction:quest.makeCandyMonster.bind(quest), powerNeeded: 7}
-        ]
-    },
+
+    onload : function() {},
     
     buyThisSword : function(name){
         if(this.name != name){ // If we're not trying to buy the current sword
@@ -52,51 +38,34 @@ var sword = {
     },
     
     setSpecialPower : function(value){
-        if(value > 0){
-            this.specialPower = value;
-        }
-        else this.specialPower = 0;
+        this.specialPower = value > 0 ? value : 0
     },
-    
-    getIndexOfBetterToSummon : function(){
-        var indexOfBetterToSummon = 0;
-        // We iterate over the list
-        for(var i = 0; i < this.summonList.length; i++){
-            // If we can summon this one and it is better than the current betterToSummon
-            if(this.summonList[i].powerNeeded <= this.specialPower && this.summonList[i].powerNeeded > this.summonList[indexOfBetterToSummon].powerNeeded){
-                // This is now the better to summon
-                indexOfBetterToSummon = i;
-            }
-        }
-        return indexOfBetterToSummon;
-    },
-    
+
     summonHere : function(id){
-        // One chance out of two we summon something
-        if(random.flipACoin()){
-            // We summon the better to summon
-            quest.things[id] = this.summonList[this.getIndexOfBetterToSummon()].summonFunction();
+        if (r_coin()) {
+            summon_key = data.sword_summons[this.specialPower] || data.sword_summons[6]
+            quest.things[id] = land.create(data.mobs[summon_key])
         }
     },
     
-    enchantFire : function(){
-if(potions.list.fireScroll.nbrOwned > 0){
-        this.setSpecialSword(true);
-        this.setName("Sword of Flames");
-        potions.list.fireScroll.nbrOwned -= 1;
-        potions.updateOnPage();
-        forge.setStep(2);
-}
+    enchantFire : function() {
+        if(potions.list.fireScroll.nbrOwned > 0){
+            this.setSpecialSword(true);
+            this.setName("Sword of Flames");
+            potions.list.fireScroll.nbrOwned -= 1;
+            potions.updateOnPage();
+            forge.setStep(2);
+        }
     },
     
-    enchantHealth : function(){
-if(potions.list.health.nbrOwned > 0){
-        this.setSpecialSword(true);
-        this.setName("Sword of Life");
-        potions.list.health.nbrOwned -= 1;
-        potions.updateOnPage();
-        forge.setStep(2);
-}
+    enchantHealth : function() {
+        if(potions.list.health.nbrOwned > 0){
+            this.setSpecialSword(true);
+            this.setName("Sword of Life");
+            potions.list.health.nbrOwned -= 1;
+            potions.updateOnPage();
+            forge.setStep(2);
+        }
     },
     
     sharpen : function(){
