@@ -53,7 +53,7 @@ var peacefulForest = {
                 // 1 chance out of x we spawn a CHS (chest !!)
                 else if(random.oneChanceOutOf(this.basicChestProbability)){
                     this.setBasicChestProbability(this.basicChestProbability + 50);
-                    quest.things[i] = quest.makeBasicChest();
+                    quest.things[i] = land.create(data.mobs.basicChest)
                 }
                 // Else we spawn a tree
                 else quest.things[i] = land.create(data.mobs.tree);

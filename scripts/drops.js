@@ -1,10 +1,8 @@
 var drops = {
     getText : function() {
         return [
-            quest.candiesFound > 1
-                ? "You found ${quest.candiesFound} candies."
-                : "You found 1 candy.",
-            ...objects.all
+            `You found ${quest.candiesFound} cand${quest.candiesFound == 1 ? "y" : "ies"}.`,
+            ...Object.values(objects.all)
                 .filter(({ found }) => found)
                 .map(({ text }) => `<b>You found ${text}.</b>`),
             "",
@@ -25,14 +23,12 @@ var drops = {
     },
     
     getAllDropsFromList : function(drops) {
+        console.log("getAll", drops)
         for (const type in drops) {
             const drop = drops[type]
 
-            if (drop == "candies") {
-                n_candies = Array.isArray(drop)
-                    ? r_interval(...drop)
-                    : drop
-
+            if (type == "candies") {
+                n_candies = r_interval_or_number(drop)
                 quest.setCandiesFound(quest.candiesFound + n_candies)
             } else {
                 if(r_oneOutOf(drop))
