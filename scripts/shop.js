@@ -64,6 +64,7 @@ var shop = {
     },
     
     showProduct : function(id){
+        /* TODO this is a map, since selling_order is a map, since sword.setName uses .name*/
         const special_product = ({
             "wooden_sword":  [data.ascii.swords.woodenWithButton,  "buy_wooden_sword",  150],
             "copper_sword":  [data.ascii.swords.copperWithButton,  "buy_copper_sword",  300],

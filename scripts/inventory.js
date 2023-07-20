@@ -16,21 +16,32 @@ var inventory = {
         
         // Sword
         switch(sword.name){
-            case "wooden sword": html.setInner("sword_without_button", sword.asciiWoodenSwordWithoutButton); break;
-            case "copper sword": html.setInner("sword_without_button", sword.asciiCopperSwordWithoutButton); break;
-            case "iron sword": html.setInner("sword_without_button", sword.asciiIronSwordWithoutButton); break;
-            case "silver sword": html.setInner("sword_without_button", sword.asciiSilverSwordWithoutButton); break;
-            case "diamond sword": html.setInner("sword_without_button", sword.asciiDiamondSwordWithoutButton); break;
-            case "candy diamond sword": html.setInner("sword_without_button", sword.asciiCandyDiamondSword); break;
-            case "polished candy diamond sword": html.setInner("sword_without_button", sword.asciiPolishedCandyDiamondSword); break;
-            case "chocolate sword": html.setInner("sword_without_button", sword.asciiChocolateSword); break;
-            case "sharp chocolate sword": html.setInner("sword_without_button", sword.asciiSharpChocolateSword); break;
-            case "Sword of Flames": html.setInner("sword_without_button", sword.asciiSwordOfFlames + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Life": html.setInner("sword_without_button", sword.asciiSwordOfLife + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Summoning": html.setInner("sword_without_button", sword.asciiSwordOfSummoning + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Liflamesummoning": html.setInner("sword_without_button", sword.asciiSwordOfLiflamesummoning + "\n\nLevel : " + sword.specialPower); break;
-            case "Sword of Randomness": html.setInner("sword_without_button", sword.asciiSwordOfRandomness + "\n\nLevel : infinite + " + sword.specialPower); break;
+            "wooden sword": sword.asciiWoodenSwordWithoutButton
+            "copper sword": sword.asciiCopperSwordWithoutButton
+            "iron sword": sword.asciiIronSwordWithoutButton
+            "silver sword": sword.asciiSilverSwordWithoutButton
+            "diamond sword": sword.asciiDiamondSwordWithoutButton
+            "candy diamond sword": sword.asciiCandyDiamondSword
+            "polished candy diamond sword": sword.asciiPolishedCandyDiamondSword
+            "chocolate sword": sword.asciiChocolateSword
+            "sharp chocolate sword": sword.asciiSharpChocolateSword
+            "Sword of Flames": sword.asciiSwordOfFlames +
+            "Sword of Life": sword.asciiSwordOfLife + "\n\nLevel : " + sword.specialPower
+            "Sword of Summoning": sword.asciiSwordOfSummoning + "\n\nLevel : " + sword.specialPower
+            "Sword of Liflamesummoning": sword.asciiSwordOfLiflamesummoning + "\n\nLevel : " + sword.specialPower
+            "Sword of Randomness": sword.asciiSwordOfRandomness + "\n\nLevel : infinite + " + sword.specialPower
         }
+
+        const randomness_text = (sword.name == "Sword of Randomness")
+              ? "infinite + "
+              : ""
+
+        const special_text = (sword.specialSword)
+              ? `\n\nLevel : ${randomness_text}${sword.specialPower}`
+              : ""
+
+
+        html.setInner("sword_without_button", )
         
         // Objects
         this.updateObjectOnPage("inventory_key", objects.all.key, this.asciiKey, this.asciiNoObject);
@@ -65,97 +76,8 @@ var inventory = {
     updateObjectOnPage : function(id, obj, ascii, asciiNoObject){
         if(obj.have){
             html.setInner(id, "<pre>" + ascii + "</pre><span><b>" + obj.name + "</b><br/>" + obj.description);
-        }
-        else{
+        } else{
             html.setInner(id, "<pre>" + asciiNoObject + "</pre>");
         }
-    },
-    
-    // Ascii art
-    
-    asciiKey : " __\n\
-/o \\_____\n\
-\\__/-=\"=\"`",
-
-    asciiBoots : "  ____\n\
-  \\  _|__\n\
- __)|   /\n\
-(___|  (__\n\
-    (_-___)",
-    
-    asciiMagicianHat : "    / \\\n\
-   /   \\\n\
-  /     \\\n\
- /_______\\",
-    
-    asciiPinkRing : "   .--.\n\
-  //  \\\\\n\
-  \\\\__//\n\
-   \'--\'",
-   
-    asciiSwampMap : " _________\n\
-|         |\n\
-| SWAMP   |\n\
-|    ---> |\n\
-|.-._.-._.|",
-
-    asciiHutMap : " _________\n\
-|  __     |\n\
-| /lp\\ -> |\n\
-| |__|    |\n\
-|._.-._.__|",
-
-    asciiForgeMap : " _________\n\
-/  anvil  \\\n\
-|   this  |\n\
-| <-- way |\n\
-\\_________/",
-
-    asciiWellMap : " .-~-~-~-.\n\
-!  ~    ~ !\n\
-!~    ~   !\n\
-! ~  ~  ~ !\n\
- \'-~-~-~-\'",
- 
-    asciiCandiesConverter : "   ______\n\
-  /+|  |+\\\n\
- |=={==}==|\n\
-  \\_|__|_/",
- 
-    asciiPlateArmour : "-;`\\..../`;-\n\
- |...::...|\n\
- /\'\'\'::\'\'\'\\\n\
-/\\   ::   /\\\n\
-  >._::_.<",
-  
-    asciiCauldron : "  ________\n\
- (________)\n\
-  )      (\n\
- /        \\\n\
-|          |\n\
-\\__________/",
-
-    asciiMagicalHorn : "  \\.\n\
-   \\\'.\n\
-    \\ \'.\n\
-     \\,-\'",
-
-    asciiHornOfPlenty : "  .\\\n\
-   \\\'.\n\
-    \\ \'.\n\
-     \\__)",
-     
-    asciiOldAmulet : "   /   \\\n\
-   o   o\n\
-    \\_/\n\
-    .^.\n\
-   \'cnd\'\n\
-   \'. .\'",
-   
-    asciiWon1 : "Bravo !\nYou won\nthe game :)\nYou now have\nall the\ncandies in\nthe world.",
-   
-    asciiWon2 : "(you can now\nask the dev\nfor a real\ncandy, if you\nfind him !)",
-   
-    asciiNoObject : "            \n            \n            "
-
+    }
 };

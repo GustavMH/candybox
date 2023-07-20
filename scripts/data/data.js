@@ -2,6 +2,14 @@ data = {
     recipes: [
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
+    shop_selling_order: [
+        "wooden sword",
+        "copper sword",
+        "iron sword",
+        "silver sword",
+        "diamond_sword",
+        "products_after_swords"
+    ],
     sword_summons: [
         "imp",
         "orc",
@@ -76,6 +84,20 @@ data = {
         fake: {type:"fake", text: "\\o/", max_hp: 0, hp: 0, weapon: "none", description: "", drops: {}}
     },
     text: {
+        forge: {
+            buttons: {
+                "sharpen": {text: "Sharpen your sword using the anvil"},
+                "enchantHealth": {text: "Enchant using a health potion", id: "enchant_health"},,
+                "enchantFire": {text: "Enchant using a fire scroll", id: "enchant_fire"},
+                "enchantImpInvocation": {text: "Enchant using an imp invocation scroll", id: "enchant_imp_invocation"}
+            }
+            enchant: {
+                "init": "You could enchant your sword using this anvil, but be careful : you can only enchant a sword once !",
+                "Sword of Flames": "You now have the Sword of Flames ! Your sword is covered by a permanent blaze, damaging your enemies more than ever.",
+                "Sword of Life": "You now have the Sword of Life ! This powerful charm will drain the life of your enemies to regain yours.",
+                "Sword of Summoning": "You now have the Sword of Summoning ! Your sword will sometimes spawn ally creatures in place of your dead enemies."
+            }
+        }
         merchant: {
             tickle: [
                 "Hey ! You touched my hat !",
@@ -163,6 +185,102 @@ data = {
         }
     },
     ascii: {
+        anvil: "\
+    .-------..___\n\
+    \'-._     :_.-\'\n\
+     .- ) _ ( --.\n\
+    :  \'-\' \'-\'  ;.\n\
+   /\'-.._____.-\' |\n\
+   |   |     \\   |\n\
+   \\   |     /   \\\n\
+   |   \\     )_.-\'\n\
+   \'-._/__..-\'\n\n",
+        inventory: {
+            key : " __\n\
+/o \\_____\n\
+\\__/-=\"=\"`",
+
+            boots : "  ____\n\
+  \\  _|__\n\
+ __)|   /\n\
+(___|  (__\n\
+    (_-___)",
+
+            magicianHat : "    / \\\n\
+   /   \\\n\
+  /     \\\n\
+ /_______\\",
+
+            pinkRing : "   .--.\n\
+  //  \\\\\n\
+  \\\\__//\n\
+   \'--\'",
+
+            swampMap : " _________\n\
+|         |\n\
+| SWAMP   |\n\
+|    ---> |\n\
+|.-._.-._.|",
+
+            hutMap : " _________\n\
+|  __     |\n\
+| /lp\\ -> |\n\
+| |__|    |\n\
+|._.-._.__|",
+
+            forgeMap : " _________\n\
+/  anvil  \\\n\
+|   this  |\n\
+| <-- way |\n\
+\\_________/",
+
+            wellMap : " .-~-~-~-.\n\
+!  ~    ~ !\n\
+!~    ~   !\n\
+! ~  ~  ~ !\n\
+ \'-~-~-~-\'",
+
+            candiesConverter : "   ______\n\
+  /+|  |+\\\n\
+ |=={==}==|\n\
+  \\_|__|_/",
+
+            plateArmour : "-;`\\..../`;-\n\
+ |...::...|\n\
+ /\'\'\'::\'\'\'\\\n\
+/\\   ::   /\\\n\
+  >._::_.<",
+
+            cauldron : "  ________\n\
+ (________)\n\
+  )      (\n\
+ /        \\\n\
+|          |\n\
+\\__________/",
+
+            magicalHorn : "  \\.\n\
+   \\\'.\n\
+    \\ \'.\n\
+     \\,-\'",
+
+            hornOfPlenty : "  .\\\n\
+   \\\'.\n\
+    \\ \'.\n\
+     \\__)",
+
+            oldAmulet : "   /   \\\n\
+   o   o\n\
+    \\_/\n\
+    .^.\n\
+   \'cnd\'\n\
+   \'. .\'",
+
+            won1 : "Bravo !\nYou won\nthe game :)\nYou now have\nall the\ncandies in\nthe world.",
+
+            won2 : "(you can now\nask the dev\nfor a real\ncandy, if you\nfind him !)",
+
+            noObject : "            \n            \n            "
+        }
         dragon: [
             "    _///_,",
             "   / ` \' \'>",

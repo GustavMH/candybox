@@ -1,7 +1,6 @@
-var sword = {
-  
-    // Variables
+const sword = {
     name : "none",
+    asciiKey: null,
     specialSword : false,
     specialPower : 1, // How many the Sword of Life can steal hp, additional damage of the Sword of Flames...
 
@@ -23,16 +22,6 @@ var sword = {
         }
     },
     
-    enchantImpInvocation : function(){
-        if(potions.list.impInvocationScroll.nbrOwned > 0){
-        this.setSpecialSword(true);
-        this.setName("Sword of Summoning");
-        potions.list.impInvocationScroll.nbrOwned -= 1;
-        potions.updateOnPage();
-        forge.setStep(2);
-}
-    },
-    
     setSpecialSword : function(value){
         this.specialSword = value;
     },
@@ -49,6 +38,17 @@ var sword = {
     },
 
     /* TODO sword enchantment -> data ?? */
+
+    enchantImpInvocation : function(){
+        if(potions.list.impInvocationScroll.nbrOwned > 0){
+            this.specialWord = true
+            this.setName("Sword of Summoning");
+            potions.list.impInvocationScroll.nbrOwned -= 1;
+            potions.updateOnPage();
+            forge.setStep(2);
+        }
+    },
+
     
     enchantFire : function() {
         if(potions.list.fireScroll.nbrOwned >= 1){
@@ -105,18 +105,9 @@ var sword = {
     },
     
     setName : function(value){
-        // We change the value
         this.name = value;
-        
-        // We possibly show a new product in the shop depending on the new sword name
-        switch(this.name){
-            case "wooden sword": shop.showProduct("copper_sword"); break;
-            case "copper sword": shop.showProduct("iron_sword"); break;
-            case "iron sword": shop.showProduct("silver_sword"); break;
-            case "silver sword": shop.showProduct("diamond_sword"); break;
-            default: shop.showProduct("products_after_swords"); break;
-        }
-        
+        shop.showProduct(order[1+order.findIndex(this.name)])
+
         // Other stuff
         html.setInner("sword", "You currently have a " + this.name + ".");
         quest.defineMood();

@@ -23,7 +23,6 @@ var drops = {
     },
     
     getAllDropsFromList : function(drops) {
-        console.log("getAll", drops)
         for (const type in drops) {
             const drop = drops[type]
 
