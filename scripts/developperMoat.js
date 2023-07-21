@@ -1,11 +1,8 @@
 var developperMoat = {
-    
-    // Variables
     size : 22,
     platformPosition : 0,
     timeSpent : 0,
 
-    // Functions
     onload : function(){
         land.addLand("Developper's moat", this.size, 10, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
     },
@@ -37,38 +34,10 @@ var developperMoat = {
     },
     
     getText : function(){
-        var lines = this.asciiMoat.slice(0);
-        
-        // Add the platform
-        lines[3] = lines[3].replaceAt(18 + this.platformPosition*3, "______");
-        lines[4] = lines[4].replaceAt(18 + this.platformPosition*3, "\\|__|/");
-        
-        // Add things
-        for(var i = 0; i < this.size; i++){
-            if(quest.things[i].type == "character"){
-                lines[3] = lines[3].replaceAt(i*3, quest.things[i].text);
-            }
-        }
-        
-        return lines.join("");
-    },
-    
-    // Ascii
-    
-    asciiMoat :
-[
-"                                                                  \n",
-"                                                                  \n",
-"                                                                  \n",
-"__________________                                    ____________\n",
-"                  \\,                               ._/ /\n",
-"                    \\,                            /  \\ \\\n",
-"                     )_,                         (__   _\\\n",
-"                    /  _\\                        /   ./ /\n",
-"                    \\,   |                      |   /  /\n",
-"                    /  _/ \\                     /  (\n",
-"                         _,|                   /_\n",
-"                           \\                  |"
-]
-    
-};
+        return layer_texts(
+            data.ascii.moat,
+            [data.ascii.platform, 18 + this.platformPosition*3, 3],
+            ["\\o/", quest.getCharacterIndex()*3, 3]
+        ).join("")
+    }
+}

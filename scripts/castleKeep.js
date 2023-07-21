@@ -1,7 +1,4 @@
 var castleKeep = {
-
-    // Variables
-    
     size : 30, // The size here must be higher than the size of the biggest room
     realSize : 0, // This is the real size of the current room, in term of things
     roomSize : 0, // Real size of the room in term of ascii
@@ -13,8 +10,6 @@ var castleKeep = {
     mobsAreMoving : false, // If true, in the current room, mobs should move toward the player
     maxRoom : 6,
 
-    // Functions
-    
     onload : function(){
         land.addLand("Castle's keep", this.size, 5, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
     },
@@ -64,19 +59,15 @@ var castleKeep = {
         this.createNewRoom();
     },
     
-    getText : function(){
-        var lines = [];
-        lines = this.text.slice(0); // It will store the lines of the castle keep
-        
-        // We add things
-        for(var i = 0; i < this.realSize; i++){
-            if(quest.things[i].type != "none"){
-                lines[this.floorPosition] = lines[this.floorPosition].replaceAt(1 + this.firstCharacterPosition*3 + i*3, quest.things[i].text);
-            }
-        }
-
-        // We return the lines around the player
-        return lines.join("");
+    getText : function() {
+        return layer_texts(
+            this.text,
+            quest.things.map(({text, type}) => [
+                type != "none" ? text : false,
+                1 + this.firstCharacterPosition*3 + i*3,
+                this.floorPosition
+            ]).filter(([text]) => text)
+        ).join("")
     },
     
     createRoomStructure : function(){
@@ -108,17 +99,10 @@ var castleKeep = {
     },
     
     addDragonInRoom : function(){
-        var line = "";
-        
-        // Add a line (to store the tail of the dragon)
-        for(var i = 0; i < this.roomSize; i++){
-            line += "   ";
-        }
-        this.text.push(line);
-        
-        for(var i = 0; i < data.ascii.dragon.length; i++){
-            this.text[i + 1] = this.text[i + 1].replaceAt(54, data.ascii.dragon[i]);
-        }
+        this.text = layer_texts(
+            this.text,
+            [data.ascii.dragon, 54, 1]
+        )
     },
     
     createNewRoom : function(){
@@ -261,8 +245,9 @@ var castleKeep = {
     },
     
     createDoorHere : function(position){
-        this.text[this.floorPosition-2] = this.text[this.floorPosition-2].replaceAt(1 + position*3, " _ ");
-        this.text[this.floorPosition-1] = this.text[this.floorPosition-1].replaceAt(1 + position*3, "|.|");
-        this.text[this.floorPosition] = this.text[this.floorPosition].replaceAt(1 + position*3, "| |");
+        this.text = layer_texts(
+            this.text,
+            [data.ascii.door, 1+position*3, this.floorPosition-2]
+        )
     }
 };

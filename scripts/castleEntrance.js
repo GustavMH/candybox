@@ -1,20 +1,15 @@
 var castleEntrance = {
-
-    // Variables
-    
     size : 30,
     timeSpent : 0, // Time spent since the beginning of the quest
     thereIsAMagicBall : false, // True if there's a magic ball right now
     magicBallX : 0, // X position of the magic ball
     magicBallY : 0, // Y position of the magic ball
 
-    // Functions
-    
     onload : function(){
         land.addLand("Castle's entrance", this.size, 3, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
     },
     
-    move : function(){
+    move : function() {
         // Make enemies go toward the left
         for(var i = 0; i < quest.things.length; i++){
             if(quest.things[i].type == "mob" && quest.things[i-1].type == "none"){
@@ -49,9 +44,7 @@ var castleEntrance = {
                     // We teleport the player
                     quest.things[0] = quest.things[index];
                     quest.things[index] = quest.makeNoneThing();
-                }
-                // Else
-                else{
+                } else {
                     // If the magic ball is at the right of the player or is above the steps (it mustn't be above the steps)
                     if(this.magicBallX > index*3 + 1 || this.magicBallX > 77){
                         this.magicBallX -= 1;
@@ -65,9 +58,7 @@ var castleEntrance = {
                         this.magicBallY += 1;
                     }
                 }
-            }
-            // If there is not already a magic ball
-            else{
+            } else {
                 this.thereIsAMagicBall = true;
                 this.magicBallX = 83;
                 this.magicBallY = 1;
@@ -79,20 +70,20 @@ var castleEntrance = {
     },
     
     load : function(){
-        // We add some guards on the lawn to slow down the player
-        quest.things[10] = land.create(data.mobs.guard)
-        quest.things[12] = land.create(data.mobs.guard)
-        quest.things[15] = land.create(data.mobs.guard)
-        quest.things[17] = land.create(data.mobs.guard)
+        [10,12,15,16].forEach(i => quest.things[i] = land.create(data.mobs.guard))
 
-        // We reset the time spent
         this.timeSpent = 0;
     },
 
     getText : function(){
-        var lines = [];
-        lines = this.text.slice(0); // It will store the lines of the castle entrance
-        
+        return layer_texts(
+            data.ascii.castleEntrance,
+            quest.things
+                .map(({text, type}, i) => [text, i, /*TODO*/])
+                .filter(({type}) => type != "none")
+        )
+        var lines = data.ascii.castleEntrance
+
         // We add things to the lines (we use size - 1 to avoid drawing the last position, which is inside the castle)
         for(var i = 0; i < this.size - 1; i++){
             // If there's a thing
@@ -100,13 +91,9 @@ var castleEntrance = {
                 // Before the first step
                 if(i < 26){
                     lines[20] = lines[20].replaceAt(i*3, quest.things[i].text);
-                }
-                // On the first step
-                else if(i == 26){
+                } else if(i == 26){
                     lines[19] = lines[19].replaceAt(i*3, quest.things[i].text);
-                }
-                // On the second step
-                else if(i <= 28){
+                } else if(i <= 28){
                     lines[18] = lines[18].replaceAt(i*3, quest.things[i].text);
                 }
             }
@@ -119,36 +106,5 @@ var castleEntrance = {
 
         // We return the lines
         return lines.join("");
-    },
-    
-    // Variables
-    
-    text : [
-"                                                                                     __\n",
-"                                                                                    <*/\n",
-"                                                                                     (}\n",
-"                                                                                     |\\\n",
-"                                                                                     ||| || || || |\n",
-"                                                                                     |`\' `\' `\' `\'.|\n",
-"                                                                                     :          .:;\n",
-"                                                                                      \\-..____..:/  _  _\n",
-"                                                                                       :--------:_,\' || |\n",
-"                                                                                       |]     .:|    `\' `\n",
-"                                                                                       |  ,-. .[| _\n",
-"                                                                                       |  | | .:|\'--\' _\n",
-"                                                                                       |  |_| .:|   \'--\'\n",
-"                                                                                       |  \'=\' .:|\n",
-"                                                                                       | __   .:|\n",
-"                                                                                       |\'--\'  .:|   _\n",
-"                                                                                       |      .:|  \'-\'\n",
-"                                                                                       |      \'-|       _\n",
-"                                                                                 ______|  _   .:|   _ \'--\'\n",
-"                                                                              ___||||||| \'-\'  .:|  \'-\'\n",
-"                                                                           ___|||||||||;._____.::-------\n",
-"\' \"  \'\' \" \"\' \"\'  \'  \" \' \"\' \'\" \' \'\" \"\' \' \'\" \" \' \' \'\"  \' \' \'\" \'  \'\" \'\" \'\' \' \'\" \" \' \'\" \' \' \" \'\" \" \" \' \'\" \"\' \n",
-"     \"\'  \'      \" \' \"  \' \"       \'     \"   \'  \'  \"    \'  \'  \"    \'  \"    \' \' \"   \" \"    \' \'  \"  \"\'  \'\n",
-"        \'\"     \'    \"   \' \"      \'    \"     \'      \"   \'       \"     \"        \'   \"     \'    \"   \'  \n",
-"             \'         \"        \'         \'        \"      \"        \'     \'       \'    \"   \"\n"
-]
-
-};
+    }
+}
