@@ -66,12 +66,14 @@ var shop = {
     showProduct : function(id){
         /* TODO this is a map, since selling_order is a map, since sword.setName uses .name*/
         const special_product = ({
-            "wooden_sword":  [data.ascii.swords.woodenWithButton,  "buy_wooden_sword",  150],
-            "copper_sword":  [data.ascii.swords.copperWithButton,  "buy_copper_sword",  300],
-            "iron_sword":    [data.ascii.swords.ironWithButton,    "buy_iron_sword",    500],
-            "silver_sword":  [data.ascii.swords.silverWithButton,  "buy_silver_sword",  1000],
-            "diamond_sword": [data.ascii.swords.diamondWithButton, "buy_diamond_sword", 2000],
+            "wooden sword":  [data.ascii.swords.woodenWithButton,  "buy_wooden_sword",  150],
+            "copper sword":  [data.ascii.swords.copperWithButton,  "buy_copper_sword",  300],
+            "iron sword":    [data.ascii.swords.ironWithButton,    "buy_iron_sword",    500],
+            "silver sword":  [data.ascii.swords.silverWithButton,  "buy_silver_sword",  1000],
+            "diamond sword": [data.ascii.swords.diamondWithButton, "buy_diamond_sword", 2000],
         })[id]
+
+        console.log("showProduct", id, special_product)
 
         if (special_product) {
             const [ascii, button_id, price] = special_product

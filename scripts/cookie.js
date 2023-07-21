@@ -223,7 +223,7 @@ var cookie = {
 		
 		hut.setStep(Number(var_list[22]));
 		hut.setSpeech(var_list[23]); //vermutlich string
-		inventory.setMagicianHatLetter(var_list[24]); //char
+		inventory.magicianHatLetter = var_list[24]; //char
 		
 		if(Number(var_list[25]) != 0)
 		{

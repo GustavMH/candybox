@@ -106,7 +106,8 @@ const sword = {
     
     setName : function(value){
         this.name = value;
-        shop.showProduct(order[1+order.findIndex(this.name)])
+        const order = data.shop_selling_order
+        shop.showProduct(order[1+order.findIndex((a) => a == this.name)])
 
         // Other stuff
         html.setInner("sword", "You currently have a " + this.name + ".");

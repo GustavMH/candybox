@@ -1,4 +1,4 @@
-var html = {
+const html = {
   
     setElementDisplay : function(id, display){
         document.getElementById(id).style.display = display;

@@ -26,7 +26,7 @@ const forge = {
         this.step = value;
         this.speech = [
             data.text.forge.enchant.init,
-            data.text.forge.enchant[sword_name]
+            data.text.forge.enchant[sword.name]
         ][this.step]
 
         if(this.shown) this.updateOnPage();
