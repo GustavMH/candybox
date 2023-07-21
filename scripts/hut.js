@@ -1,11 +1,8 @@
-var hut = {
-    
-    // Variables
+const hut = {
     shown : false,
     speech : "",
     step : 0,
     
-    // Functions
     throwLollipops : function(){
         if(lollipops.nbrOwned >= 10){
             lollipops.setNbrOwned(lollipops.nbrOwned - 10);
@@ -35,34 +32,11 @@ var hut = {
         // Hut drawing
         switch(this.step){
             case 0:
-                text += "\
-/\\)\\))/\\(/|)\\))/((||\\/)\\)\\\n\
-(/((\\///)))/(\\\\(/)\\\\\\\\\\)\\)\n\
-.__/(|_/|        |\\_|)/__.\n\
-   | |_/|        |\\_| |\n\
-   | |_/|        |\\_| |\n\
-.__| |_/|        |\\_| |__.\n\
-     |_/|        |\\_|\n\
-     |_/|        |\\_|\n\
-._   |_/|________|\\_|   _.\n\
-  '-.|_/          \\_|.-'\
-"
-    
+                text += data.ascii.hut
                 text += "\n\n<button id=\"hut_throw_lollipops\" onClick=\"hut.throwLollipops();\">Throw 10 lollipops inside the hut</button>";
             break;
             default:
-                text += "\
-/\\)\\))/\\(/|)\\))/((||\\/)\\)\\\n\
-(/((\\///)))/(\\\\(/)\\\\\\\\\\)\\)\n\
-.__/(|_/|  _|\\_  |\\_|)/__.\n\
-   | |_/|   (\"}  |\\_| |\n\
-   | |_/|i_.-@-._|\\_| |\n\
-.__| |_/|8--,  .-|\\_| |__.\n\
-     |_/|I  /==\\ |\\_|\n\
-     |_/|I  |   \\|\\_|\n\
-._   |_/|I__/___\\|\\_|   _.\n\
-  '-.|_/          \\_|.-'\n\n\
-"
+                text += data.ascii.hutWithSocerer
             break;
         }
         
@@ -129,17 +103,13 @@ var hut = {
     
     enter : function(){
         objects.leave();
-        
         this.shown = true;
-        
         this.updateOnPage();
     },
     
     leave : function(){
         this.shown = false;
-        
         html.setInner("map", "");
-        //buttons.enableHomeButtons();
     },
     
     useSpell : function(id){
