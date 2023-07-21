@@ -59,17 +59,8 @@ var castleKeep = {
         this.createNewRoom();
     },
     
-    getText : function() {
-        return layer_texts(
-            this.text,
-            quest.things.map(({text, type}) => [
-                type != "none" ? text : false,
-                1 + this.firstCharacterPosition*3 + i*3,
-                this.floorPosition
-            ]).filter(([text]) => text)
-        ).join("")
-    },
-    
+    getText : getText.castleKeep,
+
     createRoomStructure : function(){
         var line;
 

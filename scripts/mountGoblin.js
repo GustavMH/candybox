@@ -31,12 +31,6 @@ const mountGoblin = {
         }
     },
     
-    getText : function() {
-        /* TODO */
-        return layer_texts(
-            data.ascii.mountGoblin,
-            []
-        )
-    }
+    getText : getText.mountGoblin
 
 }

@@ -1,11 +1,8 @@
 var yourself = {
-    
-    // Variables
     size : 2,
     canSurpass : false,
     end : false,
 
-    // Functions
     onload : function(){
         land.addLand("Yourself", this.size, 7, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
     },
@@ -31,24 +28,7 @@ var yourself = {
         this.end = false;
     },
     
-    getText : function(){
-        // Create the text
-        var text = "<span style=\"font-size:50px;\">";
-        
-        if(quest.things[0].type == "character" && quest.things[1].type == "mob"){
-            text += quest.things[0].text;
-            text += quest.things[0].text;
-        }
-        else{
-            for(var i = 0; i < this.size; i++){
-                text += quest.things[i].text;
-            }
-        }
-        
-        text +="</span>";
-        
-        return text;
-    },
+    getText : getText.yourself,
     
     makeYourself : function(){
         var index = quest.getCharacterIndex();

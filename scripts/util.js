@@ -24,6 +24,13 @@ print_block(block_b)
 print_block(layer_text(block_a, block_b, 4, 2))
 */
 
+center_line = (line, size) => {
+    pad = (size - line.length) / 2
+    pad_l = " ".repeat(Math.floor(pad))
+    pad_r = " ".repeat(Math.ceil(pad))
+    return pad_l + line + pad_r
+}
+
 format_speech = (text, size) => {
     // split chunk center join
     center = text
@@ -35,12 +42,7 @@ format_speech = (text, size) => {
             return [candidate, ...rst]
         }, [""])
         .reverse()
-        .map(line => {
-            pad = (size - line.length) / 2
-            pad_l = " ".repeat(Math.floor(pad))
-            pad_r = " ".repeat(Math.ceil(pad))
-            return pad_l + line + pad_r
-        })
+        .map(line => center_line(line, size))
         .join("\n  ")
 
     return `"${center}"`

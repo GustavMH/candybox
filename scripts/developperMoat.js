@@ -33,11 +33,5 @@ var developperMoat = {
         this.timeSpent = 0;
     },
     
-    getText : function(){
-        return layer_texts(
-            data.ascii.moat,
-            [data.ascii.platform, 18 + this.platformPosition*3, 3],
-            ["\\o/", quest.getCharacterIndex()*3, 3]
-        ).join("")
-    }
+    getText : getText.developperMoat
 }

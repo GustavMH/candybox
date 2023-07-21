@@ -52,9 +52,11 @@ var potions = {
         return text;
     },
     
-    getText : function(){
+    getText : function() {
+        return data.potion_buttons.map()
+
         var text = "";
-        
+
         // Special stuff
         text += this.getPotionButtonText(this.list.seed);
         text += this.getPotionButtonText(this.list.jelly);
@@ -84,8 +86,6 @@ var potions = {
         text += this.getPotionButtonText(this.list.teleportScroll);
         text += this.getPotionButtonText(this.list.impInvocationScroll);
         text += this.getPotionButtonText(this.list.earthquakeScroll);
-        
-        return text;
     },
     
     getPotions : function(potion, nbr){
@@ -108,31 +108,20 @@ var potions = {
         shop.setMerchantSpeech(potion.merchantSpeech);
     },
     
-    buyScroll : function(price){
-        var maxPower = 2;
-        
-        if(objects.all.magicianHat.have) maxPower = 4;
-        
-        switch(random.getRandomIntUpTo(maxPower)){
-            case 0:
-                this.buyPotion(this.list.fireScroll, price);
-            break;
-            case 1:
-                this.buyPotion(this.list.acidRainScroll, price);
-            break;
-            case 2:
-                this.buyPotion(this.list.teleportScroll, price);
-            break;
-            case 3:
-                this.buyPotion(this.list.impInvocationScroll, price);
-            break;
-            case 4:
-                this.buyPotion(this.list.earthquakeScroll, price);
-            break;
-        }
+    buyScroll : function(price) {
+        const scroll = [
+            "fireScroll",
+            "acidRainScroll",
+            "teleportScroll",
+            "impInvocationScroll",
+            "earthquakeScroll"
+        ][r_int((objects.all.magicianHat.have) ? 5 : 3)]
+
+        this.buyPotion(this.list[scroll], price);
     },
     
     getPotionButtonText : function(potion){
+        /* TODO */
         if(potion.shown){
             var disabled = "";
             var tooltip = "";

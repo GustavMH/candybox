@@ -39,27 +39,5 @@ const developperComputer = {
 
         this.letter = 65 + random.getRandomIntUpTo(25)
     },
-    
-    getText : function(){
-        const textBefore = (index == this.size-2)
-              ? "<b>You must press a certain key to kill the developper.</b>\n\n" : ""
-        var lines = data.ascii.computer
-        var index = quest.getCharacterIndex()
-
-        for(var i = 0 i < 100; i++){
-            const x = random.getRandomIntUpTo(65)
-            const y = random.getRandomIntUpTo(9)
-            lines[y] = lines[y].replaceAt(x, random.pickRandomly(["$", "%", "*", ":", ";", ",", ".", "-", "+", "_", "-", "d", "n", "c"]));
-        }
-        
-        // Add things
-        for(var i = 0 i < this.size; i++){
-            if(quest.things[i].type != "none"){
-                const pos = random.getRandomIntUpTo(9)
-                lines[pos] = lines[pos].replaceAt(i*3, quest.things[i].text)
-            }
-        }
-        
-        return textBefore + lines.join("")
-    }
+    getText: getText.developperComputer
 }

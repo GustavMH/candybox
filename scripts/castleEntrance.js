@@ -75,36 +75,5 @@ var castleEntrance = {
         this.timeSpent = 0;
     },
 
-    getText : function(){
-        return layer_texts(
-            data.ascii.castleEntrance,
-            quest.things
-                .map(({text, type}, i) => [text, i, /*TODO*/])
-                .filter(({type}) => type != "none")
-        )
-        var lines = data.ascii.castleEntrance
-
-        // We add things to the lines (we use size - 1 to avoid drawing the last position, which is inside the castle)
-        for(var i = 0; i < this.size - 1; i++){
-            // If there's a thing
-            if(quest.things[i].type != "none"){
-                // Before the first step
-                if(i < 26){
-                    lines[20] = lines[20].replaceAt(i*3, quest.things[i].text);
-                } else if(i == 26){
-                    lines[19] = lines[19].replaceAt(i*3, quest.things[i].text);
-                } else if(i <= 28){
-                    lines[18] = lines[18].replaceAt(i*3, quest.things[i].text);
-                }
-            }
-        }
-        
-        // We add the magic ball
-        if(this.thereIsAMagicBall){
-            lines[this.magicBallY] = lines[this.magicBallY].replaceAt(this.magicBallX, "*");
-        }
-
-        // We return the lines
-        return lines.join("");
-    }
+    getText : getText.castleEntrance
 }

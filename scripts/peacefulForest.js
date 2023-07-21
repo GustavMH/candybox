@@ -69,14 +69,5 @@ var peacefulForest = {
         this.poniesEncountered = value;
     },
     
-    getText : function(){
-        /* TODO .join ? */
-        var text = "";
-        
-        for(var i = 0; i < quest.things.length; i++){
-            text += quest.things[i].text;
-        }
-        
-        return text;
-    }
+    getText : getText.peacefulForest
 };

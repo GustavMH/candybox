@@ -53,24 +53,5 @@ var cowLevel = {
         }
     },
     
-    getText : function(){
-        var text = "                                   \"The cow level\"\n\n\n";
-        
-        text += "                  ";
-        for(var i = 0; i < 18; i++){
-            text += quest.things[i].text;
-        }
-        
-        text += "\n\n         ";
-        for(var i = 18; i < 42; i++){
-            text += quest.things[i].text;
-        }
-        
-        text += "\n\n";
-        for(var i = 42; i < this.size; i++){
-            text += quest.things[i].text;
-        }
-        
-        return text;
-    }
+    getText : getText.cow
 };

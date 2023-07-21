@@ -54,30 +54,5 @@ var underwaterCave = {
             }
         }
     },
-    
-    getText : function(){
-        var defeated = false;
-        if(quest.things[51].type != "mob") defeated = true; // The Whale has been defeated
-        
-        var lines = (defeated == false)
-            ? data.ascii.underwaterCave
-            : data.ascii.underwaterCaveWithoutWhale
-
-        // We modify this variable by adding things to it
-        for(var i = 0; i < this.size; i++){
-            if(defeated == true || (defeated == false && i <= 50)){ // If we defeated the Whale or we're not drawing the things located after the Whale
-                if(quest.things[i].type != "none"){
-                    lines[this.positions[i].y] = lines[this.positions[i].y].replaceAt(this.positions[i].x, quest.things[i].text);
-                }
-            }
-        }
-
-        // We modify this land var by drawing bubbles
-        for(var i = this.bubbles.length - 1; i >= 0; i--){
-            if(lines[this.bubbles[i].y].charAt(this.bubbles[i].x) == " ") lines[this.bubbles[i].y] = lines[this.bubbles[i].y].replaceAt_with_size(this.bubbles[i].x, "&deg", 1);
-            else this.bubbles.splice(i, 1);
-        }
-
-        return lines.join("");
-    }
+    getText : getText.underwaterCave
 };

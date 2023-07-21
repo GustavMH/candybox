@@ -4,13 +4,6 @@ var sea = {
     onload : function(){
         land.addLand("sea", this.size, -1, this.load.bind(this), this.getText.bind(this));
     },
-    
     load : function(){},
-    
-    getText : function() {
-        return layer_texts(
-            data.ascii.sea,
-            [data.ascii.boat, quest.getCharacterIndex(), 3]
-        )
-    }
+    getText : getText.sea
 }

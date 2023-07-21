@@ -1,12 +1,57 @@
 data = {
+    potion_buttons: [
+        "seed",
+        "jelly",
+        "\n",
+        "health",
+        "escape",
+        "berserk",
+        "\n",
+        "majorHealth",
+        "turtle",
+        "invulnerability",
+        "superman",
+        "cloning",
+        "gmooh",
+        "\n",
+        "fireScroll",
+        "acidRainScroll",
+        "teleportScroll",
+        "impInvocationScroll",
+        "earthquakeScroll"
+    ],
+    chuckNorrisFacts: [
+        "Chuck Norris counted to infinity. Twice.",
+        "Chuck Norris' tears cure cancer. Too bad he has never cried.",
+        "Chuck Norris does not sleep. He waits.",
+        "Chuck Norris can squeeze orange juice out of a lemon.",
+        "Superman owns a pair of Chuck Norris pajamas.",
+        "Chuck Norris can kill two stones with one bird.",
+        "Chuck Norris doesn't read books. He stares them down until he gets the information he wants.",
+        "Chuck Norris doesn't have hair on his testicles, because hair does not grow on steel.",
+        "Chuck Norris can build a snowman out of rain.",
+        "Chuck Norris once punched a man in the soul.",
+        "Chuck Norris can drown a fish.",
+        "Leaving a criminal in the same room as Chuck Norris is cruel and unusual punishment.",
+        "Chuck Norris can pick oranges from an apple tree and make the best lemonade youve ever tasted.",
+        "Once a cobra bit Chuck Norris' leg. After five days of excruciating pain, the cobra died.",
+        "Chuck Norris doesn't play \"hide-and-seek.\" He plays \"hide-and-pray-I-don't-find-you.\"",
+        "Chuck Norris beat the sun in a staring contest.",
+        "Chuck Norris makes onions cry.",
+        "Chuck Norris can divide by zero.",
+        "Chuck Norris hears every tree that falls in the woods."
+    ],
     lands: {
         castleEntrance: {
             height: [[0,20], [26,19], [27, 18]],
-            masks: [28, 29, 30]
+            mask: [28, 29, 30]
         },
         mountGoblin: {
             height: [[0, 3], [1, 6], [2, 9], [3, 12], [4, 16], [3, 19], [2, 22], [1, 25], [0, 28]]
-        }
+        },
+        castleStairs: {
+            height: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18],[18,19]]
+        },
         underwaterCave: {
             positions: [
                 {x:0, y:1},
@@ -315,6 +360,27 @@ data = {
         }
     },
     ascii: {
+        castleStairs: [
+            "                                                      ___\n",
+            "                                                   ___|  \n",
+            "                                                ___|     \n",
+            "                                             ___|        \n",
+            "                                          ___|           \n",
+            "                                       ___|              \n",
+            "                                    ___|                 \n",
+            "                                 ___|                    \n",
+            "                              ___|                       \n",
+            "                           ___|                          \n",
+            "                        ___|                             \n",
+            "                     ___|                                \n",
+            "                  ___|                                   \n",
+            "               ___|                                      \n",
+            "            ___|                                         \n",
+            "         ___|                                            \n",
+            "      ___|                                               \n",
+            "   ___|                                                  \n",
+            "___|                                                     \n"
+        ],
         mountGoblin: [
             "                                    ____________                                    ",
             "                           _________/ \\/ \\/ \\/ \\_________                           ",

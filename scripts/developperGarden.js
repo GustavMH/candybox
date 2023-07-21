@@ -38,10 +38,5 @@ var developperGarden = {
             })
     },
 
-    getText : function(){
-        const lines = data.ascii.garden
-        const line = quest.things
-              .map(({type, text}, i) => type != "none" ? text : lines[13].slice(i*3, i*3+2))
-        return [...lines.slice(0,12), ...line, ...lines.slice(14)].join("");
-    }
+    getText : getText.developperGarden
 }
