@@ -1,4 +1,5 @@
-var status2 = {
+/* TODO why 2? */
+const status2 = {
     
     getText : function(){
         var statusLines = [];
@@ -63,4 +64,4 @@ var status2 = {
         return lines;
     }
 
-};
+}
