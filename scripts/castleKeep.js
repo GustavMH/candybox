@@ -182,9 +182,13 @@ var castleKeep = {
                     // Walled off zombie warrior room
                     case 3:
                         // We add the walls
+                        replaceAt = function(str, index, text){
+                            return str.substr(0, index) + text + str.substr(index + text.length);
+                        }
+
                         for(var i = 1; i < this.floorPosition; i++){
-                            this.text[i] = this.text[i].replaceAt(1 + this.firstCharacterPosition*3 + 7*3, "WAL");
-                            this.text[i] = this.text[i].replaceAt(1 + this.firstCharacterPosition*3 + 9*3, "WAL");
+                            this.text[i] = replaceAt(this.text[i], 1 + this.firstCharacterPosition*3 + 7*3, "WAL");
+                            this.text[i] = replaceAt(this.text[i], 1 + this.firstCharacterPosition*3 + 9*3, "WAL");
                         }
                         // We add the mobs (walls and walled off zombie warrior)
                         quest.things[7] = land.create(data.mobs.stoneWall)
