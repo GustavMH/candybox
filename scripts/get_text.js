@@ -196,31 +196,24 @@ const getText = {
         return layer_texts(
             data.ascii.peacefulForest,
             characters
-        )
+        ).join("")
     },
     underwaterCave: function(){
-        var defeated = false;
-        if(quest.things[51].type != "mob") defeated = true; // The Whale has been defeated
+        const bubbles = underwaterCave.bubbles
+              .map(({ x, y }) => [["&deg"], x, y]);
 
-        var lines = (defeated == false)
-            ? data.ascii.underwaterCave
-            : data.ascii.underwaterCaveWithoutWhale
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false /* TODO path translation */])
+              .filter(([a]) => a)
 
-        // We modify this variable by adding things to it
-        for(var i = 0; i < this.size; i++){
-            if(defeated == true || (defeated == false && i <= 50)){ // If we defeated the Whale or we're not drawing the things located after the Whale
-                if(quest.things[i].type != "none"){
-                    lines[this.positions[i].y] = lines[this.positions[i].y].replaceAt(this.positions[i].x, quest.things[i].text);
-                }
-            }
-        }
-
-        // We modify this land var by drawing bubbles
-        for(var i = this.bubbles.length - 1; i >= 0; i--){
-            if(lines[this.bubbles[i].y].charAt(this.bubbles[i].x) == " ") lines[this.bubbles[i].y] = lines[this.bubbles[i].y].replaceAt_with_size(this.bubbles[i].x, "&deg", 1);
-            else this.bubbles.splice(i, 1);
-        }
-
-        return lines.join("");
+        return layer_texts(
+            data.ascii.underwaterCave,
+            [
+                ...bubbles,
+                ...characters,
+                ...(quest.things[51].type != "mob")
+                    ? [[data.ascii.whale, 4, 15]] : []
+            ]
+        )
     }
 }

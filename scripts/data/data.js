@@ -357,12 +357,126 @@ data = {
                 "the water is burnt ! How is that even possible ?"
             ],
             intervals: [0,3,6,9,11,13,14,15,32]
+        },
+        swamp: {
+            default_button: '\n\n<input id="answer" type="text" onchange="swamp.answer()" /> <span id="swamp_comment"></span>',
+            leave_button: '\n\n<button onClick="swamp.leave();">Leave the Swampy Swamp</button>',
+            questions: [
+                {
+                    text: "Hello. I\'m The Frog. I can provide you candies, and lots of things. I know how much you love candies. But I feel alone in this swamp. I\'d like to play with you before. If you answer my questions correctly, the sweetest sweets will be yours.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(5);">Let\'s go, then</button>',
+                },
+                {
+                    text: "First question : do you _really_ love candies?",
+                    answers: ["yes"],
+                    reward: ["candies", 10]
+                },
+                {
+                    text: "Perfect. Here\'s 10 candies. Many more candies are waiting for you.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(7);">Second question!</button>'
+                },
+                {
+                    text: "Second question : if A implies B and B implies C, and D implies A, and E implies D, what does A imply?",
+                    answers: ["c", "b", "candb", "bandc"],
+                    reward: ["candies", 100]
+                },
+                {
+                    text: "Great. You seem to understand basic logic. Here\'s 100 candies.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(9);">Next question!</button>'
+                },
+                {
+                    text: "Third question. Consider 10 days. If I give you 1 candy on the first day, and each day I give you twice more candies than the previous day, how much candies will I give you on day number 10?",
+                    answers: ["512"],
+                    reward: ["candies", 512]
+                },
+                {
+                    text: "Exactly. Let\'s speed up the process : here\'s your 512 candies right now! Playing with you is so exciting! Next question is for 1000 candies.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(11);">Candiiiiies!</button>'
+                },
+                {
+                    text: "Fourth question : if you could be whatever you want, what would you be?",
+                    answers: ["frog", "afrog", "thefrog"],
+                    reward: ["candies", 1000]
+                },
+                {
+                    text: "Correct! Everyone wants to be a frog. Here\'s your 1000 candies.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(13);">Any more enigma?</button>'
+                },
+                {
+                    text: "Here\'s a story : there\'s a fox, a lion and a wolf inside a lunar crater. The fox is about to bite the lion, which is about to bite the wolf, which is about to bite the fox. It\'s snowing and a shrub is watching the scene. Who\'s enjoying the story?",
+                    answers: ["me"],
+                    reward: ["chocolateBars", 1]
+                },
+                {
+                    text: "Right, you were enjoying it! At least, I hope so. Here\'s a chocolate bar for you. It\'s very precious.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(15);">Thanks, Frog!</button>'
+                },
+                {
+                    text: "Now, just type the answer to that question and I\'ll give you a very special present : what is the only thing to go beyond the limits of our universe ?",
+                    answers: ["theanswertothatquestion", "theanswer", "answer", "answertothatquestion"],
+                    reward: ["beserk", 5]
+                },
+                {
+                    text: "Yes it is ! Now, here\'s 5 very special potions. They\'ll be very useful during quests.",
+                    button: '\n\n<button id="answer" onClick="swamp.setStep(17);">Yay !!</button>'
+                }
+            ],
+            no_more_questions: "I have no more sweets to give you. It was a real pleasure to play with you. Thanks a lot.",
         }
     },
     ascii: {
+        frog: "\
+           .--._.--.\n\
+      The ( O     O ) Frog\n\
+          /   . .   \\\n\
+         .`._______.'.\n\
+        /(           )\\\n\
+      _/  \\  \\   /  /  \\_\n\
+   .~   `  \\  \\ /  /  '   ~.\n\
+  {    -.   \\  V  /   .-    }\n\
+_ _`.    \\  |  |  |  /    .'_ _\n\
+>_       _} |  |  | {_       _<\n\
+ /. - ~ ,_-'  .^.  `-_, ~ - .\\\n\
+          '-'|/   \\|`-`\n\n\
+",
+        swamp_steps : [
+            "\
+While you walk through the swamp,\n\
+following your map...\
+",
+            "\
+On the horizon, you see a\n\
+              00        frog\n\
+             (--)         coming...\n\
+            ( || )\n\
+            ^^~~^^\
+",
+            "\
+It is coming_    _\n\
+  slowly   (o)--(o)\n\
+   but    /.______.\\\n\
+  surely, \\________/\n\
+         ./        \\.\n\
+        ( .        , )\n\
+         \\ \\_\\\\//_/ /\n\
+          ~~  ~~  ~~\
+",
+            "\
+           .-.   .-.\n\
+          ( o )_( o )\n\
+      __ / '-'   '-' \\ __ it is\n\
+     /  /      \"      \\  \\    green.\n\
+    |   \\    _____,   /   |\n\
+     \\  \\`-._______.-'/  /\n\
+ _.-`   /\\)         (/\\   `-._\n\
+(_     / /  /.___.\\  \\ \\     _)\n\
+ (_.(_/ /  (_     _)  \\ \\_)._)\n\
+       (_(_)_)   (_(_)_)\
+"
+        ],
         peacefulForest: [
             "__________________________________________________________________________________________"
-        ]
+        ],
         cowLevel: [
             '                                   "The cow level"                                        ',
             "                                                                                          ",
@@ -425,32 +539,13 @@ data = {
 ._   |_/|I__/___\\|\\_|   _.\n\
   '-.|_/          \\_|.-'\n\n\
 ",
-        underwaterCave : [
-            "            / . . . . . . . . . . . . . . . . . . . . . . . . . . . . .\n",
-            "___________| . . . . . . . . . . . . . . . . . . . . . . _______ . . .\n",
-            ". . .|     |. . . . . . . . . . . . . . . . . . . ._____/       \\ . . .\n",
-            " . . |     | . . . ________. . . . . . . . . . . ./              \\ . .\n",
-            ". . .|      \\_____/        \\_______ . . . . . . ./                \\ . .\n",
-            " . . \\                             \\____________/                  \\ .\n",
-            ". . . \\                                                  __         | .\n",
-            " . . . \\                                              __/. |        |.\n",
-            ". . . . \\                                    ________/. . .|        | .\n",
-            " . . . . \\                              ____/. . . . . . ./        / .\n",
-            ". . . . . \\___                       __/. . . . . . . . ./        / . .\n",
-            " . . . . . . .\\               ______/. . . . . . . . . ./        / . .\n",
-            ". . . . . . . .\\_____________/. . . . . ____. . . . . ./        / . . .\n",
-            " . .__________ . . . . . . . . . . . __/    \\_________/         \\. . .\n",
-            ". ./          \\ . . . . . . . ______/                            \\. . .\n",
-            " ./     ::.    \\_____________/                                    |. .\n",
-            ".|(\\./)  .-\"\"-.                                                   | . .\n",
-            " | `\\'-'`      \\                                                 / . .\n",
-            ".|   '.___,_`__/                                                / . . .\n",
-            " |                           __________           _____________/ . . .\n",
-            ". \\_____            ________/ . . . . .\\_________/. . . . . . . . . . .\n",
-            " . . . .\\__________/ . . . . . . . . . . . . . . . . . . . . . . . . .\n",
-            ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        whale: [
+            "/     ::.    \\",
+            "(\\./)  .-""-. ",
+            " `\\'-'`      \\",
+            "   '.___,_`__/"
         ],
-        underwaterCaveWithoutWhale : [
+        underwaterCave: [
             "            / . . . . . . . . . . . . . . . . . . . . . . . . . . . . .\n",
             "___________| . . . . . . . . . . . . . . . . . . . . . . _______ . . .\n",
             ". . .|     |. . . . . . . . . . . . . . . . . . . ._____/       \\ . . .\n",
