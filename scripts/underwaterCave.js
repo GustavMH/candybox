@@ -25,7 +25,7 @@ var underwaterCave = {
 
         // We add bubbles if there isn't enough
         if(this.bubbles.length < 4){
-            var b = this.bubblesStartingPositions[random.getRandomIntUpTo(this.bubblesStartingPositions.length-1)];
+            var b = this.bubblesStartingPositions[r_int(1+this.bubblesStartingPositions.length-1)];
             if(lines[b.y].charAt(b.x) == " " && lines[b.y-1].charAt(b.x) == " "){
                 this.bubbles.push({x:0, y:0});
                 this.bubbles[this.bubbles.length-1].x = b.x;
@@ -47,7 +47,7 @@ var underwaterCave = {
                     }
                 }
             } else if(i <= 50){ // If we're before the whale
-                if(random.getRandomIntUpTo(10) <= 9) // 9/10 chances
+                if(r_int(1+10) <= 9) // 9/10 chances
                     quest.things[i] = land.create(data.mobs.octopus);
             } else if(i == 51){ // It's the whale (52 and 53 must be void)
                 quest.things[i] = land.create(data.mobs.theWhale);

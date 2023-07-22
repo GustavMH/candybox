@@ -1,6 +1,6 @@
 const inventory = {
     /* TODO check that this doesn't change */
-    magicianHatLetter : "     " + random.getRandomLetter(),
+    magicianHatLetter : "     " + r_letter(),
 
     updateOnPage : function(){
         const noObject = data.ascii.noObject

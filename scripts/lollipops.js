@@ -61,7 +61,7 @@ var lollipops = {
     },
     
     delivery : function(){
-        this.setNbrInStock(this.nbrInStock + 15 + random.getRandomIntUpTo(10));
+        this.setNbrInStock(this.nbrInStock + 15 + r_int(1+10));
         window.setTimeout(this.delivery.bind(this), 900000); // One delivery every 15 minutes
     },
     

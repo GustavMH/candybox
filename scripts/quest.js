@@ -294,7 +294,7 @@ var quest = {
     
     beginBerserk : function(){
         this.berserk = true;
-        this.berserkCountdown = 25 + random.getRandomIntUpTo(10);
+        this.berserkCountdown = 25 + r_int(1+10);
         this.speed = this.getSpeed();
         this.things[this.getCharacterIndex()].text = "O_O";
     },

@@ -20,7 +20,7 @@ var castleStairs = {
         // Add ennemies, summoned by the necromancer !
        if(this.timeSpent > 1){
             // We get a random index where we'll try to add something
-            var i = index + 2 + random.getRandomIntUpTo(this.size - 1 - (index+2))
+            var i = index + 2 + r_int(1+this.size - 1 - (index+2))
             // If there's nothing here
             if(i < this.size-1 && quest.things[i].type == "none"){
                 // One chance out of x we make a pile of corpses

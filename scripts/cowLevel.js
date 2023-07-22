@@ -41,7 +41,7 @@ var cowLevel = {
     
     load : function(){
         // Add the cow king
-        quest.things[5 + random.getRandomIntUpTo(this.size - 6)] = land.create(data.mobs.cowKing)
+        quest.things[5 + r_int(1+this.size - 6)] = land.create(data.mobs.cowKing)
         
         // Add cows
         for(var i = 1; i < this.size - 1; i++){

@@ -60,9 +60,17 @@ const r_coin = () => r_oneOutOf(2)
 const r_interval = (from, to, step=1) =>
     from + r_int((to - from) / step) * step
 
+
 const r_interval_or_number = (input) =>
       Array.isArray(input)
         ? r_interval(...input)
         : input
 
 const r_choice = (arr) => arr[r_int(arr.length)]
+const r_letter = () => r_choice([..."abcdefghijklmnopqrstuvwxyz"])
+
+/* TODO LEGACY */
+const random = {
+    pure : () => Math.floor(Math.pow(10, r_int(1+100)) * Math.random()),
+    pure2 : () => [random.pure(),-random.pure(), "bug"]
+}

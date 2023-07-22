@@ -131,7 +131,7 @@ var cauldron = {
         if(!this.smoke.on) {
             this.smoke = {
                 on: true,
-                x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
+                x: this.cauldron.x + 7 + r_int(1+10),
                 y: this.cauldron.y,
                 orientation: r_coin()
             }

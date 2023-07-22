@@ -26,14 +26,14 @@ var damage = {
             case "Sword of Liflamesummoning": return 16 + sword.specialPower*5; break;
             case "Sword of Randomness":
                 var index = quest.getCharacterIndex();
-                switch(random.getRandomIntUpTo(4)){
+                switch(r_int(1+4)){
                     case 0: quest.things[index].text = "   "; break;
                     case 1: quest.things[index].text = "___"; break;
                     case 2: quest.things[index].text = "r" + r_choice(["a", "p", "^", "'", "-", "+", "n", "m", "s", "o", ","]) + "r"; break;
                     case 3: quest.things[index].hp = Math.floor(quest.things[index].hp * Math.random() * 2); break;
                     case 4: quest.things[index].hp = Math.floor(quest.things[index].max_hp * Math.random() * 2); break;
                 }
-                return random.getRandomIntUpTo(sword.specialPower*114);
+                return r_int(1+sword.specialPower*114);
             break;
             // Traps
             case "powerful explosion": return 100; break;
@@ -56,9 +56,9 @@ var damage = {
             case "dagger": return 2; break;
             // Underwater cave
             case "fins": return 2; break;
-            case "tentacles": return 1 + random.getRandomIntUpTo(5); break;
+            case "tentacles": return 1 + r_int(1+5); break;
             case "giant tail": return 8; break;
-            case "electric tail": return 9 + random.getRandomIntUpTo(2); break;
+            case "electric tail": return 9 + r_int(1+2); break;
             // Castle's entrance
             case "spear": return 7; break;
             case "sharp sword": return 10; break;
@@ -73,7 +73,7 @@ var damage = {
             case "its fists": return 6; break;
             case "its teeth": return 4; break;
             case "spiky tail": return 10; break;
-            case "cursed sword": return 3 + random.getRandomIntUpTo(20); break;
+            case "cursed sword": return 3 + r_int(1+20); break;
             case "itself": return 45; break;
             case "sharp teeth": return 16; break;
             case "magical horn": return 12; break;
@@ -94,7 +94,7 @@ var damage = {
             case "spikes": return 15; break;
             case "?": return 50; break;
             // Chuck norris
-            case "Chuck Norris": return random.getRandomIntUpTo(chuckNorris.timeSpent*8); break;
+            case "Chuck Norris": return r_int(1+chuckNorris.timeSpent*8); break;
             // Developper's garden
             case "ultra plasma gun": return 8; break;
             // Developper's computer

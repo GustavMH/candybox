@@ -13,7 +13,7 @@ var chuckNorris = {
     },
     
     setNextPunch : function(){
-        this.nextPunch = 3 + random.getRandomIntUpTo(7);
+        this.nextPunch = 3 + r_int(1+7);
     },
     
     move : function(){

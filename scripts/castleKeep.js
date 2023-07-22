@@ -102,11 +102,11 @@ var castleKeep = {
         // If we're not yet at the boss room, we make a random-sized room
         if(this.roomNumber < this.maxRoom){
             // Set the size and stuff
-            this.realSize = 16 + random.getRandomIntUpTo(10);
-            this.firstCharacterPosition = random.getRandomIntUpTo(2);
+            this.realSize = 16 + r_int(1+10);
+            this.firstCharacterPosition = r_int(1+2);
             this.lastCharacterPosition = this.firstCharacterPosition + this.realSize - 1;
-            this.floorPosition = 5 + random.getRandomIntUpTo(6);
-            this.roomSize = this.realSize + this.firstCharacterPosition + random.getRandomIntUpTo(2);
+            this.floorPosition = 5 + r_int(1+6);
+            this.roomSize = this.realSize + this.firstCharacterPosition + r_int(1+2);
             
             this.createRoomStructure();
                 
@@ -144,7 +144,7 @@ var castleKeep = {
             break;
             // Rooms 1 to 4 : we put some random ennemies
             case 1: case 2: case 3: case 4:
-                switch(random.getRandomIntUpTo(7)){
+                switch(r_int(1+7)){
                     // Knights room
                     case 0:
                         for(var i = 2; i < this.realSize - 1; i++){
@@ -158,7 +158,7 @@ var castleKeep = {
                     case 1:
                         for(var i = 2; i < this.realSize - 1; i++){
                             if(r_oneOutOf(4)){
-                                switch(random.getRandomIntUpTo(6)){
+                                switch(r_int(1+6)){
                                     case 0: quest.things[i] = castleKeep.makeKomodoDragon(); break;
                                     case 1: quest.things[i] = castleKeep.makeRhinoceros(); break;
                                     case 2: quest.things[i] = castleKeep.makeGaur(); break;
@@ -207,14 +207,14 @@ var castleKeep = {
                     break;
                     // Unicorn room
                     case 6:
-                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = land.create(data.mobs.charlieTheUnicorn)
-                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = land.create(data.mobs.unicorn)
-                        quest.things[2 + random.getRandomIntUpTo(this.realSize - 4)] = land.create(data.mobs.unicorn)
+                        quest.things[2 + r_int(1+this.realSize - 4)] = land.create(data.mobs.charlieTheUnicorn)
+                        quest.things[2 + r_int(1+this.realSize - 4)] = land.create(data.mobs.unicorn)
+                        quest.things[2 + r_int(1+this.realSize - 4)] = land.create(data.mobs.unicorn)
                         this.mobsAreMoving = true;
                     break;
                     // Troll room
                     case 7:
-                        quest.things[6 + random.getRandomIntUpTo(this.realSize - 8)] = land.create(data.mobs.troll)
+                        quest.things[6 + r_int(1+this.realSize - 8)] = land.create(data.mobs.troll)
                         this.mobsAreMoving = true;
                     break;
                 }

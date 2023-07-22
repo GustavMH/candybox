@@ -60,19 +60,19 @@ var wishingWell = {
         var rand, total = 0;
         
         // Potions
-        rand = 5 + random.getRandomIntUpTo(10);
+        rand = 5 + r_int(1+10);
         potions.getPotions(potions.list.health, rand);
         total += rand;
         
-        rand = 5 + random.getRandomIntUpTo(10);
+        rand = 5 + r_int(1+10);
         potions.getPotions(potions.list.escape, rand);
         total += rand;
         
-        rand = 3 + random.getRandomIntUpTo(3);
+        rand = 3 + r_int(1+3);
         potions.getPotions(potions.list.berserk, rand);
         total += rand;
         
-        rand = 5 + random.getRandomIntUpTo(5);
+        rand = 5 + r_int(1+5);
         potions.getPotions(potions.list.superman, rand);
         total += rand;
         
@@ -80,23 +80,23 @@ var wishingWell = {
         total += 1;
         
         // Scrolls
-        rand = 5 + random.getRandomIntUpTo(10);
+        rand = 5 + r_int(1+10);
         potions.getPotions(potions.list.fireScroll, rand);
         total += rand;
         
-        rand = 5 + random.getRandomIntUpTo(10);
+        rand = 5 + r_int(1+10);
         potions.getPotions(potions.list.acidRainScroll, rand);
         total += rand;
         
-        rand = 5 + random.getRandomIntUpTo(10);
+        rand = 5 + r_int(1+10);
         potions.getPotions(potions.list.teleportScroll, rand);
         total += rand;
         
-        rand = 3 + random.getRandomIntUpTo(3);
+        rand = 3 + r_int(1+3);
         potions.getPotions(potions.list.earthquakeScroll, rand);
         total += rand;
         
-        rand = 3 + random.getRandomIntUpTo(3);
+        rand = 3 + r_int(1+3);
         potions.getPotions(potions.list.impInvocationScroll, rand);
         total += rand;
         

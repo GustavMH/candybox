@@ -37,7 +37,7 @@ const developperComputer = {
             }
         }
 
-        this.letter = 65 + random.getRandomIntUpTo(25)
+        this.letter = 65 + r_int(1+25)
     },
     getText: getText.developperComputer
 }

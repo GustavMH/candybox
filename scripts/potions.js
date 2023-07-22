@@ -228,7 +228,7 @@ var potions = {
         var index = quest.getCharacterIndex();
         index += 1; // We set the index to look just in front of the player
         if(quest.things[index].type == "mob"){ // If it's a mob
-            quest.things[index].hp -= 25 + random.getRandomIntUpTo(10);
+            quest.things[index].hp -= 25 + r_int(1+10);
             if(quest.things[index].hp < 0) quest.things[index] = quest.makeNoneThing();
         }
         
@@ -459,7 +459,7 @@ var potions = {
             "cowLevel",
             "sea",
             "desert"
-        ][random.getRandomIntUpTo(3)]
+        ][r_int(1+3)]
         quest.begin(false, land.getLandIndexFromName(land_name));
     }
     
