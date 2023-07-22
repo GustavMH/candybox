@@ -1,10 +1,5 @@
-var buttons = {
-  
-    // Variables
-    
+const buttons = {
     homeButtonsDisabled : false, // Block any enabling home button process when true
-    
-    // Functions
     
     enableHomeButtons : function(){
         if(this.homeButtonsDisabled == true){
@@ -26,15 +21,15 @@ var buttons = {
         if(candies.nbrOwned >= 1){
             html.showButton("eat");
             this.enableButton("eat");
-        }
-        else html.disableButton("eat");
+        } else
+            html.disableButton("eat");
         
         // Show the throw button
         if(candies.nbrOwned >= 10){
             html.showButton("throw_10");
             this.enableButton("throw_10");
-        }
-        else html.disableButton("throw_10");
+        } else
+            html.disableButton("throw_10");
     },
     
     checkHomeEnabled : function(){

@@ -71,55 +71,48 @@ const getText = {
               .map(({type, text}, i) => [type != "none" ? text : false, i*3, height(land.height, i)])
               .filter(([a]) => a)
 
+        /* TODO should be a character */
+        const { x, y, exists } = castleEntrance.magicBall
+        const magic_ball = [exists ? ["*"] : false, x, y]
+
         return layer_texts(
             data.ascii.castleEntrance,
             [...characters,
+             magic_ball,
              make_mask(data.ascii.castleEntrance, land.mask, 18)]
-        ),join("")
-
-        // We add the magic ball
-        if(this.thereIsAMagicBall){
-            lines[this.magicBallY] = lines[this.magicBallY].replaceAt(this.magicBallX, "*");
-        }
-
-        // We return the lines
-        return lines.join("");
+        ).join("")
     },
     cow: function(){
-        var text = "                                   \"The cow level\"\n\n\n";
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, /* TODO */ height(land.height, i)])
+              .filter(([a]) => a)
 
-        text += "                  ";
-        for(var i = 0; i < 18; i++){
-            text += quest.things[i].text;
-        }
-
-        text += "\n\n         ";
-        for(var i = 18; i < 42; i++){
-            text += quest.things[i].text;
-        }
-
-        text += "\n\n";
-        for(var i = 42; i < this.size; i++){
-            text += quest.things[i].text;
-        }
-
-        return text;
+        return layer_texts(
+            data.ascii.cowLevel,
+            characters
+        ).join("")
     },
     castleKeep: function() {
+        const characters = quest.things
+              .map(({text, type}) => [
+                  type != "none" ? text : false,
+                  1 + this.firstCharacterPosition*3 + i*3,
+                  this.floorPosition
+              ]).filter(([text]) => text)
+
         return layer_texts(
             this.text,
-            quest.things.map(({text, type}) => [
-                type != "none" ? text : false,
-                1 + this.firstCharacterPosition*3 + i*3,
-                this.floorPosition
-            ]).filter(([text]) => text)
+            characters
         ).join("")
     },
     mountGoblin: function() {
-        /* TODO */
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, /* TODO */ height(land.height, i)])
+              .filter(([a]) => a)
+
         return layer_texts(
             data.ascii.mountGoblin,
-            []
+            characters
         )
     },
     developperMoat: function(){
@@ -136,19 +129,14 @@ const getText = {
         )
     },
     castleStairs: function(){
-        var lines = []
-        lines = this.text.slice(0); // It will store the lines
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, /* TODO */ height(land.height, i)])
+              .filter(([a]) => a)
 
-        // We add things to the lines
-        for(var i = 0; i < this.size; i++){
-            // If there's a thing
-            if(quest.things[i].type != "none"){
-                lines[this.size-1-i] = lines[this.size-1-i].replaceAt(i*3, quest.things[i].text)
-            }
-        }
-
-        // We return the lines around the player
-        return lines.join("")
+        return layer_texts(
+            data.ascii.castleStairs,
+            characters
+        )
     },
     hell: function() {
         // Create the text var
@@ -201,14 +189,14 @@ const getText = {
         return text;
     },
     peacefulForest: function(){
-        /* TODO .join ? */
-        var text = "";
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, 0])
+              .filter(([a]) => a)
 
-        for(var i = 0; i < quest.things.length; i++){
-            text += quest.things[i].text;
-        }
-
-        return text;
+        return layer_texts(
+            data.ascii.peacefulForest,
+            characters
+        )
     },
     underwaterCave: function(){
         var defeated = false;

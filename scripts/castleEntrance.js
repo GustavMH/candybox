@@ -1,9 +1,14 @@
 var castleEntrance = {
     size : 30,
     timeSpent : 0, // Time spent since the beginning of the quest
-    thereIsAMagicBall : false, // True if there's a magic ball right now
+    magicBall.exists : false, // True if there's a magic ball right now
     magicBallX : 0, // X position of the magic ball
     magicBallY : 0, // Y position of the magic ball
+    magicBall : {
+        exists: false,
+        x: 0,
+        y: 0
+    }
 
     onload : function(){
         land.addLand("Castle's entrance", this.size, 3, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
@@ -32,36 +37,35 @@ var castleEntrance = {
         
         // We handle the magic ball if we spent at least four movements
         if(this.timeSpent > 4){
-            // If there is already a magic ball
-            if(this.thereIsAMagicBall){
-                var index = quest.getCharacterIndex();
-                
+            /* ball moves 1 character toward the player
+             * and shouldn't be above the steps */
+
+            const { x, y, exists } = this.magicBall
+            const index = quest.getCharacterIndex()
+
+            if(exists) {
                 // If the magic ball just hit the player !
-                if(Math.abs(this.magicBallX - (index*3 + 1)) <= 1 && this.magicBallY == 19){
+                if(x - (index*3 + 1) == 0 && y == 19){
                     // No more magic ball
-                    this.thereIsAMagicBall = false;
+                    this.magicBall.exists = false;
                     
                     // We teleport the player
                     quest.things[0] = quest.things[index];
                     quest.things[index] = quest.makeNoneThing();
                 } else {
                     // If the magic ball is at the right of the player or is above the steps (it mustn't be above the steps)
-                    if(this.magicBallX > index*3 + 1 || this.magicBallX > 77){
-                        this.magicBallX -= 1;
-                    }
+                    if(x > index*3 + 1 || x > 77) x -= 1;
                     // Else, if it's at the left
-                    else if(this.magicBallX < index*3 + 1){
-                        this.magicBallX += 1;
-                    }
+                    if(x < index*3 + 1) x += 1;
                     // If the magic ball isn't already just above the lawn and we're not too far from the play horizontally
-                    if(this.magicBallY < 19 && Math.abs(this.magicBallX - index*3) < (19 - this.magicBallY)*3){
-                        this.magicBallY += 1;
+                    if(y < 19 && Math.abs(x - index*3) < (19 - y)*3){
+                        y += 1;
                     }
                 }
-            } else {
-                this.thereIsAMagicBall = true;
-                this.magicBallX = 83;
-                this.magicBallY = 1;
+            } else this.magicBall = {
+                exists = true,
+                x: 83,
+                y: 1
             }
         }
         
