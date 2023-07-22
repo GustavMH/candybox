@@ -11,14 +11,16 @@ var peacefulForest = {
     setBasicChestProbability : function(value){
         this.basicChestProbability = value;
     },
-    
+    wpy: function() {
+
+    },
     move : function(){
         // Iterate over all things
         for(var i = 0; i < quest.things.length; i++){
             // If it's a wood poney (wood poneeeey \o/)
             if(quest.things[i].text == "WPY"){
                 // We make it move if possible
-                if(random.flipACoin()){
+                if(r_coin()){
                     // If we can move it to the right
                     if(quest.things[i+1].type == "none"){
                         // We move it to the right
@@ -42,14 +44,14 @@ var peacefulForest = {
         var addedAPoney = false; // Will be true if we added a pony. Useful to avoid adding two ponies in the same quest
         
         for(var i = 1; i < quest.things.length; i++){
-            if(random.flipACoin()){
+            if(r_coin()){
                 // 1 chance out of x we spawn a wood poney !!!! (if we didn't already add one)
-                if(random.oneChanceOutOf(300) && addedAPoney == false){
+                if(r_oneOutOf(300) && addedAPoney == false){
                     addedAPoney = true;
                     quest.things[i] = land.create(data.mobs.woodPony)
                 }
                 // 1 chance out of x we spawn a CHS (chest !!)
-                else if(random.oneChanceOutOf(this.basicChestProbability)){
+                else if(r_oneOutOf(this.basicChestProbability)){
                     this.setBasicChestProbability(this.basicChestProbability + 50);
                     quest.things[i] = land.create(data.mobs.basicChest)
                 }

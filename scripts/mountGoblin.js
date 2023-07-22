@@ -11,7 +11,7 @@ const mountGoblin = {
     
     load : function(){
         for(var i = 1; i < quest.things.length; i++){
-            if(random.flipACoin()) {
+            if(r_coin()) {
                 if(i < 12 || i > 15){
                     if(r_oneOutOf(this.basicChestProbability)) {
                         this.basicChestProbability += 50

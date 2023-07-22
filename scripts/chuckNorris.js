@@ -24,7 +24,7 @@ var chuckNorris = {
         // Increase the fact step
         this.timeSpent += 1;
         if(this.timeSpent % 15)
-            this.currentFact = random.pickRandomly(data.chuckNorrisFacts);
+            this.currentFact = r_choice(data.chuckNorrisFacts);
 
         // Possibly make some special action
         if(norrisIndex != -1){

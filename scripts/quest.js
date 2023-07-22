@@ -106,22 +106,7 @@ var quest = {
     },
     
     updateOnPage : function(){
-        // Variables declaration
-        var text;
-    
-        // Land
-        text = land.getText();
-        text += "\n";
-    
-        // Status
-        text += status2.getText();
-        text += "\n";
-    
-        // Drops
-        text += drops.getText();
-    
-        // Draw text
-        html.setInner("quest", text);
+        html.setInner("quest", [land, status2, drops].map(obj => obj.getText()).join("\n"))
     },
     
     getCharacterMaxHp : function(){
@@ -129,10 +114,7 @@ var quest = {
     },
     
     getSpeed : function(){
-        if(objects.all.boots.have && this.berserk) return 125;
-        if(objects.all.boots.have || this.berserk) return 250;
-        
-        return 500;
+        return 500 * (1/2)**((objects.all.boots.have ? 1 : 0) + (this.beserk ? 1 : 0))
     },
     
     getCharacterIndex : function(){
@@ -274,7 +256,7 @@ var quest = {
     
     checkIfDead : function(index, indexKiller){
         // If we're dead
-        if(this.things[index].hp <= 0){
+        if(this.things[index].hp <= 0) {
             // If we're the character
             if(this.things[index].type == "character"){
                 this.updateOnPage(); // We update on page
@@ -356,7 +338,8 @@ var quest = {
         
         // Drops
         drops.gainDrops();
-        
+
+        /* TODO inactive? */
         // We may enable a new destination, we store the drop-down list
         var list = html.getElement("quest_destination");
         
@@ -394,7 +377,7 @@ var quest = {
         // Nothing found anymore
         this.setCandiesFound(0);
         this.setTiredFound(0);
-        for(obj in objects.all) objects.all[obj].found = false;
+        for (obj in objects.all) objects.all[obj].found = false;
     },
     
     defineMood : function(){
@@ -428,9 +411,8 @@ var quest = {
     },
     
     fillWithNoneThings : function(){
-        var things = [];
-        for(var i = 0; i < land.list[this.currentLandIndex].size; i++) things.push(this.makeNoneThing());
-        return things;
+        return Array(land.list[this.currentLandIndex].size).fill(0)
+            .map(this.makeNoneThing())
     }
     
 };

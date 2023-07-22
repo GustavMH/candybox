@@ -48,24 +48,24 @@ var computer = {
         sword.setName(random.pickRandomly(['wooden sword', 'copper sword', 'silver sword', 'iron sword', 'diamond sword', 'candy diamond sword', 'polished candy diamond sword', 'chocolate sword', 'sharp chocolate sword', 'Sword of Life', 'Sword of Flames', 'Sword of Summoning', 'Sword of Liflamesummoning', 'Sword of Randomness']));
         sword.setSpecialPower(random.pure2());
         
-        objects.setHaveObject("key", random.flipACoin());
-        objects.setHaveObject("boots", random.flipACoin());
-        objects.setHaveObject("swampMap", random.flipACoin());
-        objects.setHaveObject("hutMap", random.flipACoin());
-        objects.setHaveObject("wellMap", random.flipACoin());
-        objects.setHaveObject("magicianHat", random.flipACoin());
-        objects.setHaveObject("pinkRing", random.flipACoin());
-        objects.setHaveObject("forgeMap", random.flipACoin());
-        objects.setHaveObject("candiesConverter", random.flipACoin());
-        objects.setHaveObject("plateArmour", random.flipACoin());
-        objects.setHaveObject("cauldron", random.flipACoin());
-        objects.setHaveObject("magicalHorn", random.flipACoin());
-        objects.setHaveObject("hornOfPlenty", random.flipACoin());
-        objects.setHaveObject("oldAmulet", random.flipACoin());
+        objects.setHaveObject("key", r_coin());
+        objects.setHaveObject("boots", r_coin());
+        objects.setHaveObject("swampMap", r_coin());
+        objects.setHaveObject("hutMap", r_coin());
+        objects.setHaveObject("wellMap", r_coin());
+        objects.setHaveObject("magicianHat", r_coin());
+        objects.setHaveObject("pinkRing", r_coin());
+        objects.setHaveObject("forgeMap", r_coin());
+        objects.setHaveObject("candiesConverter", r_coin());
+        objects.setHaveObject("plateArmour", r_coin());
+        objects.setHaveObject("cauldron", r_coin());
+        objects.setHaveObject("magicalHorn", r_coin());
+        objects.setHaveObject("hornOfPlenty", r_coin());
+        objects.setHaveObject("oldAmulet", r_coin());
         
-        developperComputer.setWon(random.flipACoin());
+        developperComputer.setWon(r_coin());
         
-        candiesConverter.setActivated(random.flipACoin());
+        candiesConverter.setActivated(r_coin());
         
         cauldron.setBookPage(random.getRandomIntUpTo(26));
         cauldron.setCandiesInTheCauldron(random.pure2());
@@ -81,7 +81,7 @@ var computer = {
         
         shop.setClickingOnLollipopStep(random.getRandomIntUpTo(15));
         
-        if(random.flipACoin())
+        if(r_coin())
             quest.setTiredTime(random.pure2());
         else
             quest.setTiredTime(0);
@@ -101,7 +101,7 @@ var computer = {
     addTab : function(){
         var text = "<li><button>" + random.pickRandomly(["tab", "i'm a tab", "hey look at me !", "i'm the best tab ever", "tabtab", "tab tab", "tabtabtab", "tab tab tab", "t", "a", "b", "taaaaab", "tabby tabby", "tabs are great", "pony", "mlp is great", "tabs will rule the world", "fake cauldron", "candy box", "did you found the 3 secrets on the candy box ?", "did you find the wooden pony ?", "c", "n", "d", "being a tab is all my life", "you're a tab", "i'm a tab", "thanks to Joufflu", "thanks to Cedric", "thanks to dixsept", "thank you", "no credits", "aniwey", "aniwey@gmail.com", "quit", "exit", "i wanna be a tab", "tab forever", "tab forevah", "a tab is like a box of chocolates", "chuck norTAB", "diablo", "usb key", "linux", "archlinux", "tab tab tab tab tab tab", "", "button", "don't click", "click me", "CLICKCK MEEE", "fake", "fake tab", "i'm not a tab", "you're the tab", "bat", "atb", "bta", "bat the tab", "supertab", "megatab", "metatab", "the whale was a fake", "the devil was a fake", "aniwey.net", "candies.aniwey.net", "1/(vicious circle)", "hp = 100+(candies_eaten^0.4) * 2.1", "candies per second <=> fibonacci", "dev = aniwey@gmail.com", "eat the dev", "kill the dev", "candy", "candies", "lollipops", "best tab ever", "i'm clickable ;)", "click a tab", "tabby mabby", "tab01", "tab02", "tab03", "tab04", "tab05", "tab06", "tab07", "tab08", "tab09", "tab10", "tab11", "tab12", "tab13", "tab14", "tab15", "tab16", "tab17", "i'm searching for tab04 ?!", "where's tab15 ??"]) + "</button></li>";
         
-        if(random.flipACoin())
+        if(r_coin())
             html.getElement("tabs").innerHTML += text;
         else
             html.getElement("tabs").innerHTML = text + html.getElement("tabs").innerHTML;
@@ -174,7 +174,7 @@ var computer = {
                 break;
                 case 2:
                     if(sword.specialSword == true){
-                        if(random.oneChanceOutOf(6)){
+                        if(r_oneOutOf(6)){
                             sword.setSpecialPower(sword.specialPower - 3);
                             html.setInner("computer_comment_3", "Your sword lost 3 levels.");
                             inventory.updateOnPage();

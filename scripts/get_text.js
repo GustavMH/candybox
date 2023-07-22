@@ -1,7 +1,3 @@
-replace_line = (text, linetext, i) = [...text.slice(0,i-1), linetext, ...text.slice(i+1)]
-make_mask = (upper, masks, y) = [[upper[y].map((c, i) => i in masks ? c : false)], 0, y]
-height = (map, i) => map.find(([x]) => x < i)[1]
-
 const getText = {
     developperComputer : function(){
         const textBefore = (index == this.size-2)
@@ -116,10 +112,14 @@ const getText = {
         )
     },
     developperMoat: function(){
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, /* TODO */ height(land.height, i)])
+              .filter(([a]) => a)
+
         return layer_texts(
             data.ascii.moat,
-            [data.ascii.platform, 18 + this.platformPosition*3, 3],
-            ["\\o/", quest.getCharacterIndex()*3, 3]
+            [[data.ascii.platform, 18 + this.platformPosition*3, 3],
+             ...characters]
         ).join("")
     },
     sea: function() {
@@ -139,54 +139,22 @@ const getText = {
         )
     },
     hell: function() {
-        // Create the text var
-        var text = "";
+        const before = [
+            "<span style=\"color:red;\"><b>Press i to go up and k to go down.</b></span> (if it doesn't work, click on the page to gain focus)",
+            "<span style=\"font-size:10px;\">"
+        ].join("\n")
 
-        // Add the i & k instructions
-        text += "<span style=\"color:red;\"><b>Press i to go up and k to go down.</b></span> (if it doesn't work, click on the page to gain focus)";
-        text += "\n";
+        /* TODO hell has multiple layers of enemies */
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, /* TODO */ height(land.height, i)])
+              .filter(([a]) => a)
 
-        // Open the span
-        text += "<span style=\"font-size:10px;\">";
-        text += "\n";
+        const after = [
+            Array(this.size).fill(data.ascii.lava[~~(this.laveLakeStep/2)]).join(""),
+            "</span>"
+        ].join("")
 
-        // We add buffers
-        for(var i = 0; i < 7; i++){
-            if(i != this.bufferPosition){
-                for(var j = 0; j < this.size; j++){
-                    if(this.buffers[i][j].type != "none"){
-                        text += this.buffers[i][j].text;
-                    } else
-                        text += "   ";
-                }
-            } else {
-                for(var j = 0; j < this.size; j++){
-                    if(quest.things[j].type != "none"){
-                        text += quest.things[j].text;
-                    } else
-                        text += "   ";
-                }
-            }
-
-            text += "\n";
-        }
-
-        // We make the lava lake
-        for(var i = 0; i < Math.floor(this.size/2); i++){
-            switch(this.lavaLakeStep){
-                case 0: case 1: text += "_.-'-."; break;
-                case 2: case 3: text += "._.-'-"; break;
-                case 4: case 5: text += "-._.-'"; break;
-                case 6: case 7: text += "'-._.-"; break;
-                case 8: case 9: text += "-'-._."; break;
-                case 10: case 11: text += ".-'-._"; break;
-            }
-        }
-
-        // Close the span
-        text += "</span>"
-
-        return text;
+        return before + text + after;
     },
     peacefulForest: function(){
         const characters = quest.things

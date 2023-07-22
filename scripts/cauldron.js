@@ -133,7 +133,7 @@ var cauldron = {
                 on: true,
                 x: this.cauldron.x + 7 + random.getRandomIntUpTo(10),
                 y: this.cauldron.y,
-                orientation: random.flipACoin()
+                orientation: r_coin()
             }
         } else {
             // We make it go up

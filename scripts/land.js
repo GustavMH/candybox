@@ -17,7 +17,7 @@ const land = {
               ? { text: `\o/`, description: "", max_hp: 0, hp: 0 }
               : {}
 
-        a = () => random.pickRandomly(["B", "U", "G"])
+        a = () => r_choice(["B", "U", "G"])
         const spec_opts = ({
             "BUG": {
                 name: a() + a() + a()

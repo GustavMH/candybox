@@ -17,7 +17,7 @@ var cowLevel = {
             // If it's a cow
             if(quest.things[i].text == "COW"){
                 // We make it move if possible (if it is too close from the player we force it moving to the left)
-                if(random.flipACoin() && Math.abs(index - i) > 5 && i < this.size - 1){
+                if(r_coin() && Math.abs(index - i) > 5 && i < this.size - 1){
                     // If we can move it to the right
                     if(quest.things[i+1].type == "none"){
                         // We move it to the right
@@ -46,7 +46,7 @@ var cowLevel = {
         // Add cows
         for(var i = 1; i < this.size - 1; i++){
             if(quest.things[i].type == "none"){
-                if(random.flipACoin()){
+                if(r_coin()){
                     quest.things[i] = land.create(data.mobs.cow)
                 }
             }

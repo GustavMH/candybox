@@ -254,17 +254,17 @@ var hell = {
     makeMiddleCreature : function(){
         switch(this.step){
             case 0:
-                if(random.oneChanceOutOf(3)){
+                if(r_oneOutOf(3)){
                     return this.makeDemon();
                 }
             break;
             case 2:
-                if(random.oneChanceOutOf(4)){
+                if(r_oneOutOf(4)){
                     return this.makeBanshee();
                 }
             break;
             case 3:
-                if(random.oneChanceOutOf(3)){
+                if(r_oneOutOf(3)){
                     return castleKeep.makeFireball();
                 }
             break;
@@ -276,22 +276,22 @@ var hell = {
                     // nothing
                 }
                 else if(this.timeSpent < 90){
-                    if(random.oneChanceOutOf(5)){
+                    if(r_oneOutOf(5)){
                         return castleKeep.makeFireball();
                     }
                 }
                 else if(this.timeSpent < 110){
-                    if(random.oneChanceOutOf(4)){
+                    if(r_oneOutOf(4)){
                         return castleKeep.makeFireball();
                     }
                 }
                 else if(this.timeSpent < 130){
-                    if(random.oneChanceOutOf(3)){
+                    if(r_oneOutOf(3)){
                         return castleKeep.makeFireball();
                     }
                 }
                 else if(this.timeSpent < 170){
-                    if(random.oneChanceOutOf(2)){
+                    if(r_oneOutOf(2)){
                         return castleKeep.makeFireball();
                     }
                 }
@@ -310,12 +310,12 @@ var hell = {
                 return this.makeMiddleCreature();
             break;
             case 2:
-                if(random.oneChanceOutOf(5)){
+                if(r_oneOutOf(5)){
                     return castleStairs.makeGhost();
                 }
             break;
             case 3:
-                if(random.oneChanceOutOf(4)){} // nothing
+                if(r_oneOutOf(4)){} // nothing
                 else{
                     return castleStairs.makeGhost();
                 }

@@ -24,7 +24,7 @@ var castleStairs = {
             // If there's nothing here
             if(i < this.size-1 && quest.things[i].type == "none"){
                 // One chance out of x we make a pile of corpses
-                if(random.oneChanceOutOf(8))
+                if(r_oneOutOf(8))
                     quest.things[i] = land.create(data.mobs.pileOfCorpses)
                 else
                     quest.things[i] = land.create(data.mobs.ghost)

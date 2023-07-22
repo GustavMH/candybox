@@ -39,10 +39,10 @@ var underwaterCave = {
             if(i < 47){ // If we're before the place of octopus guardians
                 if(i > 2){ // If we're underwater
                     if(i >= 26 && i <= 35){ // Eel zone
-                        if(random.oneChanceOutOf(3))
+                        if(r_oneOutOf(3))
                             quest.things[i] = land.create(data.mobs.eel);
                     } else {
-                        if(random.flipACoin())
+                        if(r_coin())
                             quest.things[i] = land.create(data.mobs.fish);
                     }
                 }

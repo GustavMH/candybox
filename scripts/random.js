@@ -1,16 +1,5 @@
 var random = {
     /* TODO remove this file */
-
-    flipACoin : function(){
-        if(Math.random() < 0.5) return true;
-        return false;
-    },
-
-    oneChanceOutOf : function(n){
-        if(this.getRandomIntUpTo(n - 1) == 0) return true;
-        else return false;
-    },
-    
     getRandomFloat : function(){
         return Math.random();
     },

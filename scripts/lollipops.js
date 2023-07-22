@@ -47,17 +47,17 @@ var lollipops = {
             [0.1, 0.2, 0.7], [0.1, 0.2, 0.6], [0.1, 0.2, 0.5], [0.1, 0.2, 0.4], [0.1, 0.2, 0.3],
         ]
 
-        if (this.nbrBought == 42 && random.flipACoin())   return "space"
-        if (this.nbrBought == 1337 && random.flipACoin()) return "leet"
+        if (this.nbrBought == 42 && r_coin())   return "space"
+        if (this.nbrBought == 1337 && r_coin()) return "leet"
 
-        const r = random.getRandomFloat()
+        const r = Math.random()
         const chances = all_chances[Math.floor(this.nbrBought / 50)] || all_chances[17]
 
-        if (r < chances[0]) return random.pickRandomly(flavours.fruits);
-        if (r < chances[1]) return random.pickRandomly(flavours.uncommon);
-        if (r < chances[2]) return random.pickRandomly(flavours.unrealistic);
+        if (r < chances[0]) return r_choice(flavours.fruits);
+        if (r < chances[1]) return r_choice(flavours.uncommon);
+        if (r < chances[2]) return r_choice(flavours.unrealistic);
 
-        return random.pickRandomly(flavours.abstract);
+        return r_choice(flavours.abstract);
     },
     
     delivery : function(){

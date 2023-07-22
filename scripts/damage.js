@@ -15,7 +15,7 @@ var damage = {
             case "sharp chocolate sword": return 14; break;
             case "Sword of Life": return 14; break;
             case "Sword of Flames":
-                if(random.oneChanceOutOf(3)){
+                if(r_oneOutOf(3)){
                     return 16 + Math.floor(sword.specialPower/2) + sword.specialPower*2;
                 }
                 else{
@@ -29,9 +29,9 @@ var damage = {
                 switch(random.getRandomIntUpTo(4)){
                     case 0: quest.things[index].text = "   "; break;
                     case 1: quest.things[index].text = "___"; break;
-                    case 2: quest.things[index].text = "r" + random.pickRandomly(["a", "p", "^", "'", "-", "+", "n", "m", "s", "o", ","]) + "r"; break;
-                    case 3: quest.things[index].hp = Math.floor(quest.things[index].hp * random.getRandomFloat() * 2); break;
-                    case 4: quest.things[index].hp = Math.floor(quest.things[index].max_hp * random.getRandomFloat() * 2); break;
+                    case 2: quest.things[index].text = "r" + r_choice(["a", "p", "^", "'", "-", "+", "n", "m", "s", "o", ","]) + "r"; break;
+                    case 3: quest.things[index].hp = Math.floor(quest.things[index].hp * Math.random() * 2); break;
+                    case 4: quest.things[index].hp = Math.floor(quest.things[index].max_hp * Math.random() * 2); break;
                 }
                 return random.getRandomIntUpTo(sword.specialPower*114);
             break;
@@ -78,7 +78,7 @@ var damage = {
             case "sharp teeth": return 16; break;
             case "magical horn": return 12; break;
             case "enormous fist":
-                if(random.oneChanceOutOf(3)){
+                if(r_oneOutOf(3)){
                     return 20;
                 }
                 return 0;

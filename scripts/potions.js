@@ -146,7 +146,7 @@ var potions = {
         var hp = 0;
         
         // One chance out of 100 to spawn the Yggdrasil \o/
-        if(random.oneChanceOutOf(100)){
+        if(r_oneOutOf(100)){
             return land.create(data.mobs.yggdrasil);
         } else {
             return land.create(data.mobs.tree);

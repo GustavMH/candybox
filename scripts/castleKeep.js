@@ -148,7 +148,7 @@ var castleKeep = {
                     // Knights room
                     case 0:
                         for(var i = 2; i < this.realSize - 1; i++){
-                            if(random.oneChanceOutOf(4)){
+                            if(r_oneOutOf(4)){
                                 quest.things[i] = castleEntrance.makeKnight();
                             }
                         }
@@ -157,7 +157,7 @@ var castleKeep = {
                     // Animals room
                     case 1:
                         for(var i = 2; i < this.realSize - 1; i++){
-                            if(random.oneChanceOutOf(4)){
+                            if(r_oneOutOf(4)){
                                 switch(random.getRandomIntUpTo(6)){
                                     case 0: quest.things[i] = castleKeep.makeKomodoDragon(); break;
                                     case 1: quest.things[i] = castleKeep.makeRhinoceros(); break;
@@ -173,7 +173,7 @@ var castleKeep = {
                     // Ghosts room
                     case 2:
                         for(var i = 4; i < this.realSize - 1; i++){
-                            if(random.oneChanceOutOf(5)){
+                            if(r_oneOutOf(5)){
                                 quest.things[i] = castleStairs.makeGhost();
                             }
                         }
@@ -194,7 +194,7 @@ var castleKeep = {
                     // Fireball room
                     case 4:
                         for(var i = this.realSize - 8; i < this.realSize - 1; i++){
-                            if(random.flipACoin()){
+                            if(r_coin()){
                                 quest.things[i] = land.create(data.mobs.fireball)
                             }
                         }
@@ -222,7 +222,7 @@ var castleKeep = {
             // The chests room
             case 5:
                 for(var i = 1; i < this.realSize - 1; i++){
-                    if(random.oneChanceOutOf(3)){
+                    if(r_oneOutOf(3)){
                         quest.things[i] = quest.makeOpenChest();
                     }
                 }

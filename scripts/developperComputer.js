@@ -32,7 +32,7 @@ const developperComputer = {
         quest.things[21] = land.create(data.mobs.dev)
         
         for(var i = 1 i <= 20; i++){
-            if(random.flipACoin()){
+            if(r_coin()){
                 quest.things[i] = land.create(data.mobs.bug)
             }
         }
