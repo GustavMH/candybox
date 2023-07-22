@@ -266,61 +266,21 @@ const buttons = {
     },
     
     checkLollipopsPlantingButtons : function(){
-        // If we have the key of the lollipop farm
         if(objects.all.key.have){
-            // innerHtml of the lp_buttons span
-            
-            // Plant 1000 button
-            if(lollipops.nbrOwned >= 1000 && farm.plantingButtonsStep < 4){
-                farm.setPlantingButtonsStep(4);
-            }
-            // Plant 100 button
-            else if(lollipops.nbrOwned >= 100 && farm.plantingButtonsStep < 3){
-                farm.setPlantingButtonsStep(3);
-            }
-            // Plant 10 button
-            else if(lollipops.nbrOwned >= 10 && farm.plantingButtonsStep < 2){
-                farm.setPlantingButtonsStep(2);
-            }
-            // Plant 1 button
-            else if(farm.plantingButtonsStep < 1){
-                farm.setPlantingButtonsStep(1);
-            }
-            
-            // Buttons activation
-            
-            // Plant 1000 button
-            if(farm.plantingButtonsStep >= 4){
-                html.showButton("plant_1000_lp");
-                if(lollipops.nbrOwned >= 1000){
-                    this.enableButton("plant_1000_lp");
+            [1,2,3,4].forEach(step => {
+                const no = 10**(step-1)
+                if(lollipops.nbrOwned >= no && farm.plantingButtonsStep < step){
+                    farm.setPlantingButtonsStep(step);
                 }
-                else html.disableButton("plant_1000_lp");
-            }
-            // Plant 100 button
-            if(farm.plantingButtonsStep >= 3){
-                html.showButton("plant_100_lp");
-                if(lollipops.nbrOwned >= 100){
-                    this.enableButton("plant_100_lp");
+
+                if(farm.plantingButtonsStep >= step){
+                    html.showButton("plant_${no}_lp");
+                    if(lollipops.nbrOwned >= no){
+                        this.enableButton("plant_${no}_lp");
+                    } else
+                        html.disableButton("plant_${no}_lp");
                 }
-                else html.disableButton("plant_100_lp");
-            }
-            // Plant 10 button
-            if(farm.plantingButtonsStep >= 2){
-                html.showButton("plant_10_lp");
-                if(lollipops.nbrOwned >= 10){
-                    this.enableButton("plant_10_lp");
-                }
-                else html.disableButton("plant_10_lp");
-            }
-            // Plant 1 button
-            if(farm.plantingButtonsStep >= 1){
-                html.showButton("plant_1_lp");
-                if(lollipops.nbrOwned >= 1){
-                    this.enableButton("plant_1_lp");
-                }
-                else html.disableButton("plant_1_lp");
-            }
+            })
         }
     },
     
@@ -358,37 +318,23 @@ const buttons = {
     },
     
     checkWishingWell : function(){
-        if(wishingWell.shown){
-            switch(wishingWell.step){
-                case 0:
-                    if(candies.nbrOwned >= 1){
-                        this.enableButton("wishingWell_throw_candy");
-                    }
-                    else html.disableButton("wishingWell_throw_candy");
-                break;
-            }
+        if(wishingWell.shown && wishingWell.step) {
+            if(candies.nbrOwned >= 1){
+                this.enableButton("wishingWell_throw_candy")
+            } else
+                html.disableButton("wishingWell_throw_candy")
         }
     },
     
     checkForge : function(){
         if(forge.shown && forge.step == 1){
-            // Health
-            if(potions.list.health.shown && potions.list.health.nbrOwned >= 1){
-                this.enableButton("enchant_health");
-            }
-            else html.disableButton("enchant_health");
-            
-            // Fire
-            if(potions.list.fireScroll.shown && potions.list.fireScroll.nbrOwned >= 1){
-                this.enableButton("enchant_fire");
-            }
-            else html.disableButton("enchant_fire");
-            
-            // Imp invocation
-            if(potions.list.impInvocationScroll.shown && potions.list.impInvocationScroll.nbrOwned >= 1){
-                this.enableButton("enchant_imp_invocation");
-            }
-            else html.disableButton("enchant_imp_invocation");
+            ["health", "fireScroll", "impInvocationScroll"]
+                .forEach(type => {
+                    if(potions.list[type].shown && potions.list[type].nbrOwned >= 1){
+                        this.enableButton("enchant_" + type);
+                    } else
+                        html.disableButton("enchant_" + type);
+                })
         }
     }
   
