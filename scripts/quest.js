@@ -1,4 +1,4 @@
-var quest = {
+const quest = {
     
     // Variables
     currentLandIndex : 0, // Index of the current land in land.list
@@ -402,17 +402,14 @@ var quest = {
         this.tiredFound = value;
     },
     
-    makeNoneThing : function(){
-        return {type:"none", text:"___"};
-    },
+    makeNoneThing : () => ({type: "none", text: "___"}),
 
     makeFakeCharacter : function(){
         return land.createFakeCharacter();
     },
     
     fillWithNoneThings : function(){
-        return Array(land.list[this.currentLandIndex].size).fill(0)
-            .map(this.makeNoneThing())
+        return Array(land.list[this.currentLandIndex].size).fill({ type: "none", text: "___" })
     }
     
 };
