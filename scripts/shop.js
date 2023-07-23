@@ -1,6 +1,4 @@
-var shop = {
-
-    // Variables
+const shop = {
     buy10LollipopsButtonShown : false, // True if the buy 10 lollipops button should be shown
     shown : false, // True if the shop is currently shown
     ticklingStep : 0, // Tickling step (increase when we click on the merchant's hat
@@ -21,7 +19,7 @@ var shop = {
         if(candies.nbrOwned >= 150){
             // If we don't have any sword and there's no sword to sell yet, we show the wooden sword
             if(sword.name == "none" && this.currentSwordButtonId == "none") {
-                this.showProduct("wooden_sword");
+                this.showProduct("wooden sword");
             }
         }
     },
@@ -84,9 +82,9 @@ var shop = {
         }
     },
     
-    show : function(){
+    show : function() {
         // We show the shop
-        if(html.isElementVisible("shop") == false) { // If the shop isn't already visible
+        if(!html.isElementVisible("shop")) { // If the shop isn't already visible
             html.setElementVisibility("shop", true);
             this.setMerchantSpeech("Hello, I'm the candy merchant. I would do anything for candies. My lollipops are delicious!");
         }
@@ -108,9 +106,7 @@ var shop = {
         if(id == "sword"){
             this.currentSwordButtonId = "none";
             html.setInner("sword_with_button", "");
-        }
-        // Else
-        else{
+        } else {
             html.setElementVisibility(id, false);
             html.setElementDisplay(id, "none");
         }

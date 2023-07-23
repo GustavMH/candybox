@@ -6,7 +6,7 @@ const sword = {
 
     onload : function() {},
     
-    buyThisSword : function(name){
+    buyThisSword : function(name) {
         if(this.name != name){ // If we're not trying to buy the current sword
 
             const speech = data.text.merchant.swords[name]
@@ -15,10 +15,9 @@ const sword = {
                 candies.setNbrOwned(candies.nbrOwned - shop.currentSwordPrice)
                 shop.setMerchantSpeech(speech.accept)
                 shop.hideProduct("sword")
+                this.setName(name)
             } else
                 shop.setMerchantSpeech(speech.decline)
-
-            this.setName(name); // We bought it, since we didn't return : we change the name
         }
     },
     
@@ -104,13 +103,13 @@ const sword = {
         }
     },
     
-    setName : function(value){
+    setName : function(value) {
         this.name = value;
         const order = data.shop_selling_order
         shop.showProduct(order[1+order.findIndex((a) => a == this.name)])
 
         // Other stuff
-        html.setInner("sword", "You currently have a " + this.name + ".");
+        html.setInner("sword", `You currently have a ${this.name}.`);
         quest.defineMood();
         html.setElementVisibility("sword", true);
         html.setElementVisibility("quest_form", true);

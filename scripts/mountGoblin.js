@@ -16,17 +16,11 @@ const mountGoblin = {
                     if(r_oneOutOf(this.basicChestProbability)) {
                         this.basicChestProbability += 50
                         quest.things[i] = quest.makeBasicChest()
-
-                    } else if(r_oneOutOf(7)) {
-                        quest.things[i] = land.create(data.mobs.nastyGoblin)
-
                     } else
-                        quest.things[i] = land.create(data.mobs.sickGoblin)
-
-                } else {
-                    quest.things[i] = land.create(data.mobs.teneciousGoblin)
-
-                }
+                        if(r_oneOutOf(7)) {
+                            quest.things[i] = land.create(data.mobs.nastyGoblin)
+                    } else quest.things[i] = land.create(data.mobs.sickGoblin)
+                } else quest.things[i] = land.create(data.mobs.tenaciousGoblin)
             }
         }
     },

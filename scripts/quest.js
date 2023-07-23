@@ -1,6 +1,4 @@
 const quest = {
-    
-    // Variables
     currentLandIndex : 0, // Index of the current land in land.list
     maxLandOrder : -1, // Max land order we achieved for the moment
     candiesFound : 0, // Number of candies found during a quest
@@ -22,11 +20,11 @@ const quest = {
     characterSpeed : 1, // Speed of the character : if = 2 for example, the character will take two cycles to move. This variable can be reduce by being a turtle
     characterSpeedStep : 1, // Used to apply the characterSpeed var
     
-    onloadAfter : function(){
+    onloadAfter : function() {
         this.setMaxLandOrder(0);
     },
     
-    setMaxLandOrder : function(value){
+    setMaxLandOrder : function(value) {
         if(value > this.maxLandOrder){
             this.maxLandOrder = value; // We change the value
             land.updateListOnPage(quest.maxLandOrder); // And we try to update the quest list on the html page, in case a new quest was unlocked
@@ -381,8 +379,10 @@ const quest = {
     },
     
     defineMood : function(){
-        if(this.tiredTime == 0) html.setInner("mood", "You're in the pink! Ready for fighting!");
-        else html.setInner("mood", "You're tired. You have to wait before doing another quest. Waiting time : " + this.tiredTime);
+        const text = this.tiredTime == 0
+              ? "You're in the pink! Ready for fighting!"
+              : `You're tired. You have to wait before doing another quest. Waiting time : ${this.tiredTime}`
+        html.setInner("mood", text)
         html.setElementVisibility("mood", true);
     },
     
@@ -404,12 +404,9 @@ const quest = {
     
     makeNoneThing : () => ({type: "none", text: "___"}),
 
-    makeFakeCharacter : function(){
-        return land.createFakeCharacter();
-    },
-    
-    fillWithNoneThings : function(){
-        return Array(land.list[this.currentLandIndex].size).fill({ type: "none", text: "___" })
+    makeFakeCharacter : () => land.createFakeCharacter(),
+
+    fillWithNoneThings : function() {
+      return Array(land.list[this.currentLandIndex].size).fill({ type: "none", text: "___" })
     }
-    
-};
+}
