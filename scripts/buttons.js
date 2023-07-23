@@ -1,3 +1,4 @@
+/* TODO re-roll button checks + data backed checking */
 const buttons = {
     homeButtonsDisabled : false, // Block any enabling home button process when true
     
@@ -269,16 +270,17 @@ const buttons = {
         if(objects.all.key.have){
             [1,2,3,4].forEach(step => {
                 const no = 10**(step-1)
-                if(lollipops.nbrOwned >= no && farm.plantingButtonsStep < step){
+                const id = `plant_${no}_lp`
+
+                if(lollipops.nbrOwned >= no && farm.plantingButtonsStep < step)
                     farm.setPlantingButtonsStep(step);
-                }
 
                 if(farm.plantingButtonsStep >= step){
-                    html.showButton("plant_${no}_lp");
+                    html.showButton(id);
                     if(lollipops.nbrOwned >= no){
-                        this.enableButton("plant_${no}_lp");
+                        this.enableButton(id)
                     } else
-                        html.disableButton("plant_${no}_lp");
+                        html.disableButton(id)
                 }
             })
         }

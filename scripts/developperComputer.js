@@ -31,7 +31,7 @@ const developperComputer = {
     load : function(){
         quest.things[21] = land.create(data.mobs.dev)
         
-        for(var i = 1 i <= 20; i++){
+        for(var i = 1; i <= 20; i++){
             if(r_coin()){
                 quest.things[i] = land.create(data.mobs.bug)
             }

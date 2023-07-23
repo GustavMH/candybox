@@ -53,7 +53,7 @@ var swamp = {
         const ans = html.getElement("answer").value.toLowerCase().replace(/[^\w]|_/g, "")
         html.getElement("answer").focus() // Re focus after answering
 
-        const { answers, [type, amount] } = data.swamp.questions[index]
+        const { answers, reward: [type, amount] } = data.swamp.questions[index]
 
         if (ans in answers) {
             if (type == "candies")       candies.setNbrOwned(candies.nbrOwned + amount)

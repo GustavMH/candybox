@@ -36,7 +36,6 @@ const land = {
     },
     
     addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction) {
-        console.log(name)
         this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
     },
     

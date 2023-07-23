@@ -73,8 +73,6 @@ var shop = {
             "diamond sword": [data.ascii.swords.diamondWithButton, "buy_diamond_sword", 2000],
         })[id]
 
-        console.log("showProduct", id, special_product)
-
         if (special_product) {
             const [ascii, button_id, price] = special_product
             html.setInner("sword_with_button", ascii)

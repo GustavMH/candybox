@@ -13,7 +13,7 @@ layer_texts = (lower_text, upper_texts) =>
         lower_text
     )
 
-make_mask = (upper, masks, y) = [[upper[y].map((c, i) => i in masks ? c : false)], 0, y]
+make_mask = (upper, masks, y) => [[upper[y].map((c, i) => i in masks ? c : false)], 0, y]
 
 /* EXAMPLE USE
 print_block = (block) => console.log(block.join("\n"))

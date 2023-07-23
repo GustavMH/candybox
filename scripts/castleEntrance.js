@@ -1,14 +1,13 @@
 var castleEntrance = {
     size : 30,
     timeSpent : 0, // Time spent since the beginning of the quest
-    magicBall.exists : false, // True if there's a magic ball right now
     magicBallX : 0, // X position of the magic ball
     magicBallY : 0, // Y position of the magic ball
     magicBall : {
         exists: false,
         x: 0,
         y: 0
-    }
+    },
 
     onload : function(){
         land.addLand("Castle's entrance", this.size, 3, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
@@ -63,7 +62,7 @@ var castleEntrance = {
                     }
                 }
             } else this.magicBall = {
-                exists = true,
+                exists: true,
                 x: 83,
                 y: 1
             }

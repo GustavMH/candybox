@@ -53,39 +53,11 @@ var potions = {
     },
     
     getText : function() {
-        return data.potion_buttons.map()
-
-        var text = "";
-
-        // Special stuff
-        text += this.getPotionButtonText(this.list.seed);
-        text += this.getPotionButtonText(this.list.jelly);
-        
-        text += "\n";
-        
-        // Potions
-        text += this.getPotionButtonText(this.list.health);
-        text += this.getPotionButtonText(this.list.escape);
-        text += this.getPotionButtonText(this.list.berserk);
-        
-        text += "\n";
-        
-        // Potions bis !
-        text += this.getPotionButtonText(this.list.majorHealth);
-        text += this.getPotionButtonText(this.list.turtle);
-        text += this.getPotionButtonText(this.list.invulnerability);
-        text += this.getPotionButtonText(this.list.superman);
-        text += this.getPotionButtonText(this.list.cloning);
-        text += this.getPotionButtonText(this.list.gmooh);
-        
-        text += "\n";
-        
-        // Scrolls
-        text += this.getPotionButtonText(this.list.fireScroll);
-        text += this.getPotionButtonText(this.list.acidRainScroll);
-        text += this.getPotionButtonText(this.list.teleportScroll);
-        text += this.getPotionButtonText(this.list.impInvocationScroll);
-        text += this.getPotionButtonText(this.list.earthquakeScroll);
+        return data.potion_buttons.map(button => {
+            return (button != "\n")
+                ? this.getPotionButtonText(this.list[button])
+                : "\n"
+        }).join("")
     },
     
     getPotions : function(potion, nbr){
@@ -122,7 +94,7 @@ var potions = {
     
     getPotionButtonText : function(potion){
         /* TODO */
-        if(potion.shown){
+        if(potion.shown) {
             var disabled = "";
             var tooltip = "";
         
