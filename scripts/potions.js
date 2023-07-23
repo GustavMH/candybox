@@ -1,42 +1,15 @@
-var potions = {
-    
-    // Variables
-    list : {},
+const potions = {
+    list : data.potion_list,
   
-    // Functions
-    getCountdown : function(){
-        if(objects.all.magicianHat.have) return 12;
-        return 20;
-    },
-    
-    onload : function(){
-        this.addPotion("health", "Health potion", "#ff0000", "potions.heal(50);", "Use this minor health potion during combats to regain some of your health points !", "potion");
-        this.addPotion("escape", "Escape potion", "#51c90f", "potions.escape();", "The escape potion allow escaping from a quest while avoiding any time penalty. It makes you flee really really fast !", "potion");
-        this.addPotion("berserk", "Berserk potion", "#000000", "potions.berserk();", "The berserk potions transforms you into a.. BERSERKEEEER !", "potion");
-        this.addPotion("fireScroll", "Fire scroll", "#dc3e00", "potions.fireScroll();", "This powerful fire scroll will burn your enemy if you use it during a fight.", "scroll");
-        this.addPotion("acidRainScroll", "Acid rain scroll", "#68980b", "potions.acidRainScroll();", "This acid rain scroll will instantly damage everyone in the whole land (including yourself).", "scroll");
-        this.addPotion("teleportScroll", "Teleport scroll", "#7ca0b5", "potions.teleportScroll();", "This teleport scroll will make you go back to the beginning of a quest. Useful to rest a little bit !", "scroll");
-        this.addPotion("earthquakeScroll", "Earthquake scroll", "#470b0b", "potions.earthquakeScroll();", "This earthquake scroll will inflict a lot of damage to everyone in the whole land.", "scroll");
-        this.addPotion("impInvocationScroll", "Imp invocation scroll", "#ff6600", "potions.impInvocationScroll();", "This imp invocation scroll will, if there's enough place, invoke in front of you an imp which will fight for you.", "scroll");
-        this.addPotion("majorHealth", "Major health potion", "#ff0000", "potions.heal(100);", "This major health potion is twice more efficient than the minor one.", "potion");
-        this.addPotion("invulnerability", "Invulnerability potion", "#ef893b", "potions.invulnerability();", "This invulnerability potion will make you invincible for some time, but it fills your stomach : you won't be able to drink another potion for a long time after using it.", "potion");
-        this.addPotion("turtle", "Turtle potion", "#008a13", "potions.turtle();", "When you drink a turtle potion, you become a turtle. Drawback : you walk slower. Benefit : you're way more resistant to your ennemies' attacks.", "potion");
-        this.addPotion("jelly", "Jelly", "#9500b5", "potions.jelly();", "This skillfully prepared jelly explodes on contact of anything trying to go through it, dealing high damage. Using it will place it behind you.", "special");
-        this.addPotion("seed", "Seed", "#3dab3a", "potions.seed();", "This seed is able to make grow a candy tree. The candy tree is made of candies, and it takes a lot of time to cut it down. Using the seed will grow a tree in front of you, if there's enough place.", "special");
-        this.addPotion("cloning", "Cloning potion", "#6d6d6d", "potions.cloning();", "This cloning potion will, well... clone you. Your clone will have the same health points as you when you drank the potion, but he won't have your armor nor your sword. He will fight using a \"cloned sword\", which deals a correct amount of damage. The clone will be placed in front of you, if there's enough place.", "potion");
-        this.addPotion("superman", "Superman potion", "#ddef17", "potions.superman();", "This superman potion will give you a cape and make you look like superman for the rest of the quest !", "potion");
-        this.addPotion("gmooh", "G.M.O.O.H. potion", "#ff00c0", "potions.gmooh();", "This \"Get Me Out Of Here\" potion will teleport you somewhere else. The destination isn't predictable at all.", "potion");
-    },
-    
+    getCountdown : () => (objects.all.magicianHat.have) ? 12 : 22,
+    onload : () => {},
+
     updateOnPage : function(){
-        html.setInner("quest_potions", this.getText());
-        if(quest.weAreQuestingRightNow) this.updateCountdownOnPage();
+        html.setInner("quest_potions", this.getText())
+        if(quest.weAreQuestingRightNow)
+            html.setInner("quest_potions_countdowns", this.getCountdownText())
     },
-    
-    updateCountdownOnPage : function(){
-        html.setInner("quest_potions_countdowns", this.getCountdownText());
-    },
-    
+
     getCountdownText : function(){
         var text = "";
         
@@ -106,25 +79,13 @@ var potions = {
         return "";
     },
     
-    addPotion : function(name, buttonText, buttonColor, action, merchantSpeech, type){
-        this.list[name] = {buttonText:buttonText, buttonColor:buttonColor, action:action, shown:false, nbrOwned:0, merchantSpeech:merchantSpeech, type:type};
-    },
-    
-    makeJelly : function(){
-        return land.create(data.mobs.jelly)
-    },
 
-    makeCandyTree : function(){
-        var hp = 0;
-        
-        // One chance out of 100 to spawn the Yggdrasil \o/
-        if(r_oneOutOf(100)){
-            return land.create(data.mobs.yggdrasil);
-        } else {
-            return land.create(data.mobs.tree);
-        }
-    },
-    
+    makeJelly : () => land.create(data.mobs.jelly),
+
+    makeCandyTree : () => (r_oneOutOf(100))
+        ? land.create(data.mobs.yggdrasil)
+        : land.create(data.mobs.tree),
+
     heal : function(howMuch){
         // We get the character index
         var id = quest.getCharacterIndex();
@@ -409,24 +370,24 @@ var potions = {
     
     gmooh : function(){
         if(this.list.gmooh.nbrOwned > 0){
-        // We tell the quest that we're using a gmooh potion, then when quest.move will be executed, our gmoohEffect() function will be called
-        quest.gmooh = true;
-        
-        // We delete all tired time
-        quest.setTiredTime(0);
-        quest.setTiredFound(0);
-        
-        // We update the quest and the potions on page
-        quest.updateOnPage();
-        this.updateOnPage();
-    }
+            // We tell the quest that we're using a gmooh potion, then when quest.move will be executed, our gmoohEffect() function will be called
+            quest.gmooh = true;
+
+            // We delete all tired time
+            quest.setTiredTime(0);
+            quest.setTiredFound(0);
+
+            // We update the quest and the potions on page
+            quest.updateOnPage();
+            this.updateOnPage();
+        }
     },
     
     // When this function is called, quest.stop() was done just before, so we can launch a new quest if we want ;)
     gmoohEffect : function(){
         this.list.gmooh.nbrOwned -= 1;
         quest.setTiredTime(0);
-        land_name = [
+        const land_name = [
             "The peaceful forest",
             "cowLevel",
             "sea",
@@ -434,5 +395,4 @@ var potions = {
         ][r_int(1+3)]
         quest.begin(false, land.getLandIndexFromName(land_name));
     }
-    
-};
+}
