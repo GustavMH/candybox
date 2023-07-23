@@ -1,4 +1,5 @@
 range = (n) => Array(n).fill(1).map((_, i) => i)
+getXY = (block, x, y) => block[y][x]
 
 layer_text = (lower_text, upper_text, x, y) =>
     /* Add text atop another array of lines of text */

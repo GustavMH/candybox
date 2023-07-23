@@ -4,6 +4,7 @@ const quest = {
     candiesFound : 0, // Number of candies found during a quest
     speed : 0, // Speed of the character during a quest
     things : [], // Array containing all the things present in a quest
+    effects: {},
     tiredTime : 0, // Number of seconds we need to spend before doing another quest
     tiredFound : 0, // Number of seconds we will need to wait after finishing the current quest
     potionUseCountdown : 0, // Number of movements we have to wait before using another potion

@@ -1,20 +1,19 @@
-const get_text = (things, {level, path}) => {
-    console.log(level, path)
-
+const get_text = (things, {level, path}, effects={}) => {
+    const non_chars = Object.values(effects).flat()
     const characters = things
           .map(({type, text}, i) => [type != "none" ? [text] : false, ...path[i]])
           .filter(([a]) => a)
 
     return layer_texts(
         level,
-        characters
+        [...effects, ...characters]
     ).join("\n")
 }
 
 const getText = {
     peacefulForest: () => get_text(quest.things, data.lands.peacefulForest),
     mountGoblin: () => get_text(quest.things, data.lands.mountGoblin),
-
+    underwaterCave: () => get_text(quest.thing, data.lands.underwaterCave, quest.effects)
     developperComputer : function(){
         const textBefore = (index == this.size-2)
               ? "<b>You must press a certain key to kill the developper.</b>\n\n" : ""
@@ -162,22 +161,4 @@ const getText = {
 
         return before + text + after;
     },
-    underwaterCave: function(){
-        const bubbles = underwaterCave.bubbles
-              .map(({ x, y }) => [["&deg"], x, y]);
-
-        const characters = quest.things
-              .map(({type, text}, i) => [type != "none" ? text : false /* TODO path translation */])
-              .filter(([a]) => a)
-
-        return layer_texts(
-            data.ascii.underwaterCave,
-            [
-                ...bubbles,
-                ...characters,
-                ...(quest.things[51].type != "mob")
-                    ? [[data.ascii.whale, 4, 15]] : []
-            ]
-        )
-    }
 }

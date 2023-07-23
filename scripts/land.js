@@ -3,7 +3,6 @@ const land = {
     ponyTime : false,
 
     create : function(opts) {
-        console.log(opts)
         const pony_opts = this.ponyTime ? { text: "PON", description: "A pony" } : {}
 
         const hp_opts = {
