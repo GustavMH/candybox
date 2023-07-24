@@ -35,13 +35,12 @@ const underwaterCave = {
             { inverse_probability: 2, start_index: 3, end_index: 26, type: "fish" },
             { inverse_probability: 3, start_index: 26, end_index: 36, type: "eel" },
             { inverse_probability: 2, start_index: 36, end_index: 47, type: "fish" },
-            { inverse_probability: 1, start_index: 51, end_index: 52, type: "whale" },
-            { inverse_probability: (10/9), start_index: 48, end_index: 51, type: "octopus" }
+            { inverse_probability: (10/9), start_index: 48, end_index: 51, type: "octopus" },
+            { inverse_probability: 1, start_index: 51, end_index: 52, type: "theWhale" },
         ]
 
         quest.things.forEach((_, i) => {
-            const interval = intervals.find(({ start_index }) => i >= start_index) || {}
-            console.log(interval)
+            const interval = intervals.find(({ end_index }) => i <= end_index) || quest.makeNoneThing()
             const { inverse_probability, type } = interval
             if (r_oneOutOf(inverse_probability))
                 quest.things[i] = land.create(data.mobs[type])

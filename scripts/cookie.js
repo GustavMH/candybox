@@ -242,9 +242,9 @@ var cookie = {
 		main.setNbrOfSecondsSinceLastMinInterval(Number(var_list[28]));
 		main.setNbrOfSecondsSinceLastHourInterval(Number(var_list[29]));
 		main.setNbrOfSecondsSinceLastDayInterval(Number(var_list[30]));
-		mountGoblin.setBasicChestProbability(Number(var_list[31]));
-		peacefulForest.setBasicChestProbability(Number(var_list[32]));
-		peacefulForest.setPoniesEncountered(Number(var_list[33]));
+		mountGoblin.basicChestProbability = Number(var_list[31])
+		peacefulForest.basicChestProbability = Number(var_list[32])
+		peacefulForest.poniesEncountered = Number(var_list[33])
 		//
 		
 		objects.setHaveObject("key", setPhpStuff(Number(var_list[34])));

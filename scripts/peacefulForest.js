@@ -1,73 +1,41 @@
-var peacefulForest = {
-    // Variables
+const peacefulForest = {
     basicChestProbability : 100,
     poniesEncountered : 0,
     
-    // Functions
     onload : function(){
-        land.addLand("The peaceful forest", 30, 0, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
+        land.addLand("The peaceful forest", 30, 0, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
-    
-    setBasicChestProbability : function(value){
-        this.basicChestProbability = value;
-    },
-    wpy: function() {
 
+    wpy: function() {
     },
+
     move : function(){
-        // Iterate over all things
-        for(var i = 0; i < quest.things.length; i++){
-            // If it's a wood poney (wood poneeeey \o/)
-            if(quest.things[i].text == "WPY"){
-                // We make it move if possible
-                if(r_coin()){
-                    // If we can move it to the right
-                    if(quest.things[i+1].type == "none"){
-                        // We move it to the right
-                        quest.things[i+1] = quest.things[i];
-                        quest.things[i] = quest.makeNoneThing();
-                    }
-                }
-                else{
-                    // If we can move it to the left
-                    if(quest.things[i-1].type == "none"){
-                        // We move it to the left
-                        quest.things[i-1] = quest.things[i];
-                        quest.things[i] = quest.makeNoneThing();
-                    }
+        quest.things.forEach(({ text }, i) => {
+            if(text == "WPY") {
+                const direction = r_coin() ? -1 : 1
+                if(quest.things[i+direction].type == "none"){
+                    quest.things[i+direction] = quest.things[i]
+                    quest.things[i] = quest.makeNoneThing()
                 }
             }
-        }
+        })
     },
     
     load : function(){
-        var addedAPoney = false; // Will be true if we added a pony. Useful to avoid adding two ponies in the same quest
-        
-        for(var i = 1; i < quest.things.length; i++){
-            if(r_coin()){
-                // 1 chance out of x we spawn a wood poney !!!! (if we didn't already add one)
-                if(r_oneOutOf(300) && addedAPoney == false){
-                    addedAPoney = true;
-                    quest.things[i] = land.create(data.mobs.woodPony)
-                }
-                // 1 chance out of x we spawn a CHS (chest !!)
-                else if(r_oneOutOf(this.basicChestProbability)){
-                    this.setBasicChestProbability(this.basicChestProbability + 50);
-                    quest.things[i] = land.create(data.mobs.basicChest)
-                }
-                // Else we spawn a tree
-                else quest.things[i] = land.create(data.mobs.tree);
-            }
-        }
-        
-        if(addedAPoney){
-            this.setPoniesEncountered(this.poniesEncountered + 1);
-        }
+        const intervals = [
+            // oneOutOf prob, start, end, type
+            { inv_prob: 600, prob_add: -601, start: 0, end: 30, type: "woodPony" },
+            { inv_prob: 100, prob_add: 100, start: 0, end: 30, type: "basicChest" },
+            { inv_prob: 2, start: 0, end: 30, type: "tree" },
+        ]
+
+        quest.things
+            .map((_, i) => intervals
+                 .filter(({start, end}) => start <= i && i < end)
+                 .reduce((acc, {inv_prob, type}, j) => acc || (r_oneOutOf(inv_prob) && [i, type]), false))
+            .filter(a => a)
+            .forEach(([i, type]) => quest.things[i] = land.create(data.mobs[type]))
     },
-    
-    setPoniesEncountered : function(value){
-        this.poniesEncountered = value;
-    },
-    
+
     getText : getText.peacefulForest
-};
+}
