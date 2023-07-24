@@ -30,11 +30,31 @@ const peacefulForest = {
         ]
 
         quest.things
-            .map((_, i) => intervals
-                 .filter(({start, end}) => start <= i && i < end)
-                 .reduce((acc, {inv_prob, type}, j) => acc || (r_oneOutOf(inv_prob) && [i, type]), false))
-            .filter(a => a)
-            .forEach(([i, type]) => quest.things[i] = land.create(data.mobs[type]))
+            .reduce(([intervals, res], _, i) => {
+                  const spawn = intervals.reduce(
+                      (spawn, { inv_prob, prob_add, start, end, type }, interval_idx) => {
+                          if (!spawn &&
+                              (start <= i && i < end) &&
+                              (r_oneOutOf(inv_prob)))
+                              return [interval_idx, i, type]
+                      }, false)
+
+                  if (spawn) {
+                      const [interval_idx] = spawn
+                      const interval       = intervals[interval_idx]
+                      return [
+                          replace_at_idx(
+                              intervals,
+                              interval_idx,
+                              { inv_prob: interval.inv_prob + interval.prob_add, ...interval}
+                          ),
+                          [...res, spawn]
+                      ]
+                  }
+
+                  return [intervals, res]
+              }, [intervals, []])[1]
+            .forEach(([_, i, type]) => quest.things[i] = land.create(data.mobs[type]))
     },
 
     getText : getText.peacefulForest

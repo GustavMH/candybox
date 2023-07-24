@@ -1,20 +1,21 @@
-range = (n) => Array(n).fill(1).map((_, i) => i)
-getXY = (block, x, y) => block[y][x]
+const range = (n) => Array(n).fill(1).map((_, i) => i)
+const getXY = (block, x, y) => block[y][x]
+const replace_at_idx = (arr, i, elem) => Object.assign(arr, {[i]: elem})
 
-layer_text = (lower_text, upper_text, x, y) =>
+const layer_text = (lower_text, upper_text, x, y) =>
     /* Add text atop another array of lines of text */
     lower_text.map(
         (line, i) => [...line].map(
             (c, j) => upper_text[i-y]?.[j-x] || c
         ).join(""))
 
-layer_texts = (lower_text, upper_texts) =>
+const layer_texts = (lower_text, upper_texts) =>
     upper_texts.reduce(
         (acc, [text, x, y]) => layer_text(acc, text, x, y),
         lower_text
     )
 
-make_mask = (upper, masks, y) => [[upper[y].map((c, i) => i in masks ? c : false)], 0, y]
+const make_mask = (upper, masks, y) => [[upper[y].map((c, i) => i in masks ? c : false)], 0, y]
 
 /* EXAMPLE USE
 print_block = (block) => console.log(block.join("\n"))
@@ -27,14 +28,14 @@ print_block(block_b)
 print_block(layer_text(block_a, block_b, 4, 2))
 */
 
-center_line = (line, size) => {
+const center_line = (line, size) => {
     pad = (size - line.length) / 2
     pad_l = " ".repeat(Math.floor(pad))
     pad_r = " ".repeat(Math.ceil(pad))
     return pad_l + line + pad_r
 }
 
-format_speech = (text, size) => {
+const format_speech = (text, size) => {
     // split chunk center join
     center = text
         .split(" ")
