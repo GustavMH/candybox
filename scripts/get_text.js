@@ -6,14 +6,14 @@ const get_text = (things, {level, path}, effects={}) => {
 
     return layer_texts(
         level,
-        [...effects, ...characters]
+        [...non_chars, ...characters]
     ).join("\n")
 }
 
 const getText = {
     peacefulForest: () => get_text(quest.things, data.lands.peacefulForest),
     mountGoblin: () => get_text(quest.things, data.lands.mountGoblin),
-    underwaterCave: () => get_text(quest.thing, data.lands.underwaterCave, quest.effects)
+    underwaterCave: () => get_text(quest.things, data.lands.underwaterCave, quest.effects),
     developperComputer : function(){
         const textBefore = (index == this.size-2)
               ? "<b>You must press a certain key to kill the developper.</b>\n\n" : ""

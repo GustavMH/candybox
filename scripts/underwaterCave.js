@@ -1,4 +1,4 @@
-var underwaterCave = {
+const underwaterCave = {
     size : 54,
     bubbles : [],
     
@@ -21,8 +21,9 @@ var underwaterCave = {
         })
 
         // We add bubbles if there isn't enough
+        const lines = this.getText()
         if(quest.effects.bubbles.length < 4) {
-            const [x, y] = r_choice(data.land.underwaterCave.bubblesStartingPositions)
+            const [x, y] = r_choice(data.lands.underwaterCave.bubblesStartingPositions)
             if(getXY(lines,x,y) == " " && getXY(lines,x,y-1) == " ")
                 quest.effects.bubbles.push([["&deg"], x, y])
         }
@@ -31,15 +32,18 @@ var underwaterCave = {
     load : function(){
         const intervals = [
             // oneOutOf prob, start, end, type
-            [2,       3, 26, "fish"   ],
-            [3,      26, 36, "eel"    ],
-            [2,      36, 47, "fish"   ],
-            [1,      51, 52, "whale"  ],
-            [(10/9), 48, 51, "octopus"]
+            { inverse_probability: 2, start_index: 3, end_index: 26, type: "fish" },
+            { inverse_probability: 3, start_index: 26, end_index: 36, type: "eel" },
+            { inverse_probability: 2, start_index: 36, end_index: 47, type: "fish" },
+            { inverse_probability: 1, start_index: 51, end_index: 52, type: "whale" },
+            { inverse_probability: (10/9), start_index: 48, end_index: 51, type: "octopus" }
         ]
+
         quest.things.forEach((_, i) => {
-            const [prob, _1, _2, type] = intervals.find(([_, start]) => i >= start)
-            if (r_oneOutOf(prob))
+            const interval = intervals.find(({ start_index }) => i >= start_index) || {}
+            console.log(interval)
+            const { inverse_probability, type } = interval
+            if (r_oneOutOf(inverse_probability))
                 quest.things[i] = land.create(data.mobs[type])
         })
     },
