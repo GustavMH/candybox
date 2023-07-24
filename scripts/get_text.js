@@ -10,8 +10,28 @@ const get_text = (things, {level, path}, effects={}) => {
     ).join("\n")
 }
 
+const spawn_by_interval = (things, intervals) => things
+      .reduce(([intervals, res], _, i) => {
+          const idx = intervals
+                .findIndex(({ inv_prob, start, end }) =>
+                    (start <= i && i < end) && (r_oneOutOf(inv_prob)))
+
+          if (idx != -1) {
+              const { inv_prob, prob_add, type } = intervals[idx]
+              return [
+                  replace_at_idx(
+                      intervals,
+                      idx, { ...intervals[idx], inv_prob: inv_prob + prob_add }
+                  ),
+                  [...res, [i, type]]
+              ]
+          } else
+              return [intervals, res]
+      }, [intervals, []])
+      .at(1)
+      .forEach(([i, type]) => quest.things[i] = land.create(data.mobs[type]))
+
 const getText = {
-    peacefulForest: () => get_text(quest.things, data.lands.peacefulForest),
     mountGoblin: () => get_text(quest.things, data.lands.mountGoblin),
     underwaterCave: () => get_text(quest.things, data.lands.underwaterCave, quest.effects),
     developperComputer : function(){
