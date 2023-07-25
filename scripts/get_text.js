@@ -37,7 +37,6 @@ const spawn_by_interval = (things, intervals) => things
       .forEach(([i, type]) => quest.things[i] = land.create(data.mobs[type]))
 
 const getText = {
-    underwaterCave: () => get_text(quest.things, data.lands.underwaterCave, quest.effects),
     developperComputer : function(){
         const textBefore = (index == this.size-2)
               ? "<b>You must press a certain key to kill the developper.</b>\n\n" : ""

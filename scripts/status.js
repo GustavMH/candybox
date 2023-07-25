@@ -21,22 +21,18 @@ const status2 = {
         /* MAKE rectangle text blocks, join horizontally */
         const char_idx = quest.getCharacterIndex()
 
-        if (char_idx != -1) {
-            const character  = quest.things[char_idx]
-            const next_field = quest.things[char_idx + 1]
+        const character  = quest.things[char_idx]
+        const next_field = quest.things[char_idx + 1]
 
-            const blocks = (next_field && next_field.type != "none")
-                  ? [
-                      block_from_thing(character),
-                      ...next_field.type == "mob"  ? [lines_to_block(["", "VERSUS", "", ""])] : [],
-                      ...next_field.type == "ally" ? [lines_to_block(["", "WITH",   "", ""])] : [],
-                      block_from_thing(next_field)
-                  ]
-                  : [block_from_thing(character)]
+        const blocks = (next_field && next_field.type != "none")
+              ? [
+                  block_from_thing(character),
+                  ...next_field.type == "mob"  ? [lines_to_block(["", "VERSUS", "", ""])] : [],
+                  ...next_field.type == "ally" ? [lines_to_block(["", "WITH",   "", ""])] : [],
+                  block_from_thing(next_field)
+              ]
+              : [block_from_thing(character)]
 
-            return blocks[0].map((_,i) => blocks.map(lines => lines[i]).join(" | ")).join("\n")
-        } else {
-            return ""
-        }
+        return blocks[0].map((_,i) => blocks.map(lines => lines[i]).join(" | ")).join("\n")
     }
 }

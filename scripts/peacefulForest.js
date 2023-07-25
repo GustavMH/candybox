@@ -11,7 +11,8 @@ const peacefulForest = {
         quest.things.forEach(({ text }, i) => {
             if(text == "WPY") {
                 const direction = r_coin() ? -1 : 1
-                if(quest.things[i+direction].type == "none"){
+                if(quest.things[i+direction] &&
+                   quest.things[i+direction].type == "none"){
                     quest.things[i+direction] = quest.things[i]
                     quest.things[i] = quest.makeNoneThing()
                 }
