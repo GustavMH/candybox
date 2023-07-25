@@ -1,15 +1,14 @@
 var cookie = {
-	
 	cookieHandler : null,
 	
-    createCookie : function(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-	}
-	document.cookie = name + "=" + value + expires + "; path=/";
+	createCookie : function(name,value,days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + value + expires + "; path=/";
 	},
 
 	readCookie : function(name) {
@@ -28,23 +27,21 @@ var cookie = {
 	},
 
 	autoSave : function() {
-		
 		cookie.createCookie("CandyCookie", cookie.getData(), 365);
-		
 	},
 	
 	getData : function() {
 		
 		return "" + ((code === undefined || code == null || code.length == "") ? 0 : code) +
 					":" + sword.name +
-					":" + getPhpStuff(sword.specialSword) +
+					":" + bool_to_n(sword.specialSword) +
 					":" + sword.specialPower +
 					":" + candies.nbrOwned +
 					":" + candies.nbrThrown +
 					":" + candies.nbrEaten +
 					":" + candies.nbrTotal +
 					":" + candies.candiesPerSecond +
-					":" + getPhpStuff(candiesConverter.activated) +
+					":" + bool_to_n(candiesConverter.activated) +
 					":" + cauldron.bookPage +
 					":" + cauldron.candiesInTheCauldron +
 					":" + cauldron.lollipopsInTheCauldron +
@@ -53,8 +50,8 @@ var cookie = {
 					":" + farm.currentFlagIndex +
 					":" + farm.plantingButtonsStep +
 					":" + forge.step +
-					":" + getPhpStuff(shop.buy10LollipopsButtonShown) +
-					":" + getPhpStuff(shop.shown) +
+					":" + bool_to_n(shop.buy10LollipopsButtonShown) +
+					":" + bool_to_n(shop.shown) +
 					":" + shop.ticklingStep +
 					":" + shop.clickingOnLollipopStep +
 					":" + hut.step +
@@ -69,36 +66,36 @@ var cookie = {
 					":" + mountGoblin.basicChestProbability +
 					":" + peacefulForest.basicChestProbability +
 					":" + peacefulForest.poniesEncountered +
-					":" + getPhpStuff(objects.all.key.have) +
-					":" + getPhpStuff(objects.all.hutMap.have) +
-					":" + getPhpStuff(objects.all.wellMap.have) +
-					":" + getPhpStuff(objects.all.swampMap.have) +
-					":" + getPhpStuff(objects.all.boots.have) +
-					":" + getPhpStuff(objects.all.magicianHat.have) +
-					":" + getPhpStuff(objects.all.pinkRing.have) +
-					":" + getPhpStuff(objects.all.forgeMap.have) +
-					":" + getPhpStuff(objects.all.candiesConverter.have) +
-					":" + getPhpStuff(objects.all.plateArmour.have) +
-					":" + getPhpStuff(objects.all.cauldron.have) +
-					":" + getPhpStuff(objects.all.magicalHorn.have) +
-					":" + getPhpStuff(objects.all.hornOfPlenty.have) +
-					":" + getPhpStuff(objects.all.oldAmulet.have) +
-					":" + getPhpStuff(potions.list.health.shown) +
-					":" + getPhpStuff(potions.list.escape.shown) +
-					":" + getPhpStuff(potions.list.berserk.shown) +
-					":" + getPhpStuff(potions.list.fireScroll.shown) +
-					":" + getPhpStuff(potions.list.acidRainScroll.shown) +
-					":" + getPhpStuff(potions.list.teleportScroll.shown) +
-					":" + getPhpStuff(potions.list.earthquakeScroll.shown) +
-					":" + getPhpStuff(potions.list.impInvocationScroll.shown) +
-					":" + getPhpStuff(potions.list.majorHealth.shown) +
-					":" + getPhpStuff(potions.list.invulnerability.shown) +
-					":" + getPhpStuff(potions.list.turtle.shown) +
-					":" + getPhpStuff(potions.list.jelly.shown) +
-					":" + getPhpStuff(potions.list.seed.shown) +
-					":" + getPhpStuff(potions.list.cloning.shown) +
-					":" + getPhpStuff(potions.list.superman.shown) +
-					":" + getPhpStuff(potions.list.gmooh.shown) +
+					":" + bool_to_n(objects.all.key.have) +
+					":" + bool_to_n(objects.all.hutMap.have) +
+					":" + bool_to_n(objects.all.wellMap.have) +
+					":" + bool_to_n(objects.all.swampMap.have) +
+					":" + bool_to_n(objects.all.boots.have) +
+					":" + bool_to_n(objects.all.magicianHat.have) +
+					":" + bool_to_n(objects.all.pinkRing.have) +
+					":" + bool_to_n(objects.all.forgeMap.have) +
+					":" + bool_to_n(objects.all.candiesConverter.have) +
+					":" + bool_to_n(objects.all.plateArmour.have) +
+					":" + bool_to_n(objects.all.cauldron.have) +
+					":" + bool_to_n(objects.all.magicalHorn.have) +
+					":" + bool_to_n(objects.all.hornOfPlenty.have) +
+					":" + bool_to_n(objects.all.oldAmulet.have) +
+					":" + bool_to_n(potions.list.health.shown) +
+					":" + bool_to_n(potions.list.escape.shown) +
+					":" + bool_to_n(potions.list.berserk.shown) +
+					":" + bool_to_n(potions.list.fireScroll.shown) +
+					":" + bool_to_n(potions.list.acidRainScroll.shown) +
+					":" + bool_to_n(potions.list.teleportScroll.shown) +
+					":" + bool_to_n(potions.list.earthquakeScroll.shown) +
+					":" + bool_to_n(potions.list.impInvocationScroll.shown) +
+					":" + bool_to_n(potions.list.majorHealth.shown) +
+					":" + bool_to_n(potions.list.invulnerability.shown) +
+					":" + bool_to_n(potions.list.turtle.shown) +
+					":" + bool_to_n(potions.list.jelly.shown) +
+					":" + bool_to_n(potions.list.seed.shown) +
+					":" + bool_to_n(potions.list.cloning.shown) +
+					":" + bool_to_n(potions.list.superman.shown) +
+					":" + bool_to_n(potions.list.gmooh.shown) +
 					":" + potions.list.health.nbrOwned +
 					":" + potions.list.escape.nbrOwned +
 					":" + potions.list.berserk.nbrOwned +
@@ -123,8 +120,8 @@ var cookie = {
 					":" + tabs.animation +
 					":" + wishingWell.speech +
 					":" + wishingWell.step +
-					":" + getPhpStuff(yourself.canSurpass) +
-					":" + getPhpStuff(developperComputer.won);
+					":" + bool_to_n(yourself.canSurpass) +
+					":" + bool_to_n(developperComputer.won);
 		
 	},
 	
@@ -149,44 +146,32 @@ var cookie = {
 	
 	updateData : function(var_list) {
 	
-		if(Number(var_list[0]) == 0)
-		{
+		if(Number(var_list[0]) == 0) {
 			code = "";
-		}
-		else
-		{
+		} else {
 			code = var_list[0];
 		}
 
-		if(var_list[1] != "none")
-		{
+		if(var_list[1] != "none") {
 			sword.setName(var_list[1]);
-		}
-		else
-		{
+		} else {
 			sword.name = var_list[1];
 		}
 		
-		sword.setSpecialSword(setPhpStuff(Number(var_list[2])));
+		sword.setSpecialSword(n_to_bool(Number(var_list[2])));
 		
 		sword.setSpecialPower(Number(var_list[3]));
         candies.setNbrOwned(Number(var_list[4]));
 		
-		if(Number(var_list[5]) != 0)
-		{
+		if(Number(var_list[5]) != 0) {
 			candies.setNbrThrown(Number(var_list[5]));
-		}
-		else
-		{
+		} else {
 			candies.nbrThrown = Number(var_list[5]);
 		}
 		
-        if(Number(var_list[6]) != 0)
-		{
+        if(Number(var_list[6]) != 0) {
 			candies.setNbrEaten(Number(var_list[6]));
-		}
-		else
-		{
+		} else {
 			candies.nbrEaten = Number(var_list[6]);
 		}
         
@@ -194,17 +179,14 @@ var cookie = {
 		candies.setNbrTotal(Number(var_list[7]));
 		
         candies.setCandiesPerSecond(Number(var_list[8]));
-		candiesConverter.setActivated(setPhpStuff(Number(var_list[9])));
+		candiesConverter.setActivated(n_to_bool(Number(var_list[9])));
 		cauldron.setBookPage(Number(var_list[10]));
         cauldron.setCandiesInTheCauldron(Number(var_list[11]));
         cauldron.setLollipopsInTheCauldron(Number(var_list[12]));
   
-		if(Number(var_list[13]) != 0)
-		{
+		if(Number(var_list[13]) != 0) {
 			chocolateBars.setNbrOwned(Number(var_list[13]));
-		}
-		else
-		{
+		} else {
 			chocolateBars.nbrOwned = Number(var_list[13]);
 		}
 		
@@ -214,8 +196,8 @@ var cookie = {
 		farm.setCurrentFlagIndex(Number(var_list[15]));
 		farm.setPlantingButtonsStep(Number(var_list[16]));
 		forge.setStep(Number(var_list[17]));
-		shop.setBuy10LollipopsButtonShown(setPhpStuff(Number(var_list[18])));
-		shop.setShown(setPhpStuff(Number(var_list[19])));
+		shop.setBuy10LollipopsButtonShown(n_to_bool(Number(var_list[18])));
+		shop.setShown(n_to_bool(Number(var_list[19])));
 		shop.setTicklingStep(Number(var_list[20]));
 		
 		
@@ -225,12 +207,9 @@ var cookie = {
 		hut.setSpeech(var_list[23]); //vermutlich string
 		inventory.magicianHatLetter = var_list[24]; //char
 		
-		if(Number(var_list[25]) != 0)
-		{
+		if(Number(var_list[25]) != 0) {
 			lollipops.setNbrOwned(Number(var_list[25]));
-		}
-		else
-		{
+		} else {
 			lollipops.nbrOwned = Number(var_list[25]);
 		}
 		
@@ -247,31 +226,64 @@ var cookie = {
 		peacefulForest.poniesEncountered = Number(var_list[33])
 		//
 		
-		objects.setHaveObject("key", setPhpStuff(Number(var_list[34])));
-        objects.setHaveObject("boots", setPhpStuff(Number(var_list[38])));
-        objects.setHaveObject("swampMap", setPhpStuff(Number(var_list[37])));
-        objects.setHaveObject("hutMap", setPhpStuff(Number(var_list[35])));
-        objects.setHaveObject("wellMap", setPhpStuff(Number(var_list[36])));
-        objects.setHaveObject("magicianHat", setPhpStuff(Number(var_list[39])));
-        objects.setHaveObject("pinkRing", setPhpStuff(Number(var_list[40])));
-        objects.setHaveObject("forgeMap", setPhpStuff(Number(var_list[41])));
-        objects.setHaveObject("candiesConverter", setPhpStuff(Number(var_list[42])));
-        objects.setHaveObject("plateArmour", setPhpStuff(Number(var_list[43])));
-        objects.setHaveObject("cauldron", setPhpStuff(Number(var_list[44])));
-        objects.setHaveObject("magicalHorn", setPhpStuff(Number(var_list[45])));
-        objects.setHaveObject("hornOfPlenty", setPhpStuff(Number(var_list[46])));
-        objects.setHaveObject("oldAmulet", setPhpStuff(Number(var_list[47])));
+		objects.setHaveObject("key", n_to_bool(Number(var_list[34])));
+        objects.setHaveObject("boots", n_to_bool(Number(var_list[38])));
+        objects.setHaveObject("swampMap", n_to_bool(Number(var_list[37])));
+        objects.setHaveObject("hutMap", n_to_bool(Number(var_list[35])));
+        objects.setHaveObject("wellMap", n_to_bool(Number(var_list[36])));
+        objects.setHaveObject("magicianHat", n_to_bool(Number(var_list[39])));
+        objects.setHaveObject("pinkRing", n_to_bool(Number(var_list[40])));
+        objects.setHaveObject("forgeMap", n_to_bool(Number(var_list[41])));
+        objects.setHaveObject("candiesConverter", n_to_bool(Number(var_list[42])));
+        objects.setHaveObject("plateArmour", n_to_bool(Number(var_list[43])));
+        objects.setHaveObject("cauldron", n_to_bool(Number(var_list[44])));
+        objects.setHaveObject("magicalHorn", n_to_bool(Number(var_list[45])));
+        objects.setHaveObject("hornOfPlenty", n_to_bool(Number(var_list[46])));
+        objects.setHaveObject("oldAmulet", n_to_bool(Number(var_list[47])));
 		
 		//
-		potions.setPotionShown(potions.list.impInvocationScroll, setPhpStuff(Number(var_list[55]))); potions.setPotionShown(potions.list.earthquakeScroll, setPhpStuff(Number(var_list[54]))); potions.setPotionShown(potions.list.teleportScroll, setPhpStuff(Number(var_list[53]))); potions.setPotionShown(potions.list.fireScroll, setPhpStuff(Number(var_list[51]))); potions.setPotionShown(potions.list.acidRainScroll, setPhpStuff(Number(var_list[52]))); potions.updateOnPage();
-		potions.setPotionShown(potions.list.gmooh, setPhpStuff(Number(var_list[63]))); potions.setPotionShown(potions.list.superman, setPhpStuff(Number(var_list[62]))); potions.setPotionShown(potions.list.cloning, setPhpStuff(Number(var_list[61]))); potions.setPotionShown(potions.list.seed, setPhpStuff(Number(var_list[60]))); potions.setPotionShown(potions.list.jelly, setPhpStuff(Number(var_list[59]))); potions.setPotionShown(potions.list.turtle, setPhpStuff(Number(var_list[58]))); potions.setPotionShown(potions.list.invulnerability, setPhpStuff(Number(var_list[57]))); potions.setPotionShown(potions.list.majorHealth, setPhpStuff(Number(var_list[56]))); potions.setPotionShown(potions.list.berserk, setPhpStuff(Number(var_list[50]))); potions.setPotionShown(potions.list.escape, setPhpStuff(Number(var_list[49]))); potions.setPotionShown(potions.list.health, setPhpStuff(Number(var_list[48]))); potions.updateOnPage();
+		potions.setPotionShown(potions.list.impInvocationScroll, n_to_bool(Number(var_list[55])))
+		potions.setPotionShown(potions.list.earthquakeScroll, n_to_bool(Number(var_list[54])))
+		potions.setPotionShown(potions.list.teleportScroll, n_to_bool(Number(var_list[53])))
+		potions.setPotionShown(potions.list.fireScroll, n_to_bool(Number(var_list[51])))
+		potions.setPotionShown(potions.list.acidRainScroll, n_to_bool(Number(var_list[52])))
+		potions.updateOnPage()
+
+		potions.setPotionShown(potions.list.gmooh, n_to_bool(Number(var_list[63])))
+		potions.setPotionShown(potions.list.superman, n_to_bool(Number(var_list[62])))
+		potions.setPotionShown(potions.list.cloning, n_to_bool(Number(var_list[61])))
+		potions.setPotionShown(potions.list.seed, n_to_bool(Number(var_list[60])))
+		potions.setPotionShown(potions.list.jelly, n_to_bool(Number(var_list[59])))
+		potions.setPotionShown(potions.list.turtle, n_to_bool(Number(var_list[58])))
+		potions.setPotionShown(potions.list.invulnerability, n_to_bool(Number(var_list[57])))
+		potions.setPotionShown(potions.list.majorHealth, n_to_bool(Number(var_list[56])))
+		potions.setPotionShown(potions.list.berserk, n_to_bool(Number(var_list[50])))
+		potions.setPotionShown(potions.list.escape, n_to_bool(Number(var_list[49])))
+		potions.setPotionShown(potions.list.health, n_to_bool(Number(var_list[48])))
+		potions.updateOnPage()
 		//
         
-        potions.setPotionNbrOwned(potions.list.impInvocationScroll, Number(var_list[71])); potions.setPotionNbrOwned(potions.list.earthquakeScroll, Number(var_list[70])); potions.setPotionNbrOwned(potions.list.teleportScroll, Number(var_list[69])); potions.setPotionNbrOwned(potions.list.fireScroll, Number(var_list[67])); potions.setPotionNbrOwned(potions.list.acidRainScroll, Number(var_list[68])); potions.updateOnPage();
-        potions.setPotionNbrOwned(potions.list.gmooh, Number(var_list[79])); potions.setPotionNbrOwned(potions.list.superman, Number(var_list[78])); potions.setPotionNbrOwned(potions.list.cloning, Number(var_list[77])); potions.setPotionNbrOwned(potions.list.seed, Number(var_list[76])); potions.setPotionNbrOwned(potions.list.jelly, Number(var_list[75])); potions.setPotionNbrOwned(potions.list.turtle, Number(var_list[74])); potions.setPotionNbrOwned(potions.list.invulnerability, Number(var_list[73])); potions.setPotionNbrOwned(potions.list.majorHealth, Number(var_list[72])); potions.setPotionNbrOwned(potions.list.berserk, Number(var_list[66])); potions.setPotionNbrOwned(potions.list.escape, Number(var_list[65])); potions.setPotionNbrOwned(potions.list.health, Number(var_list[64])); potions.updateOnPage();
-        
-        
-        quest.setMaxLandOrder(Number(var_list[80]));
+		potions.setPotionNbrOwned(potions.list.impInvocationScroll, Number(var_list[71]))
+		potions.setPotionNbrOwned(potions.list.earthquakeScroll, Number(var_list[70]))
+		potions.setPotionNbrOwned(potions.list.teleportScroll, Number(var_list[69]))
+		potions.setPotionNbrOwned(potions.list.fireScroll, Number(var_list[67]))
+		potions.setPotionNbrOwned(potions.list.acidRainScroll, Number(var_list[68]))
+		potions.updateOnPage()
+
+		potions.setPotionNbrOwned(potions.list.gmooh, Number(var_list[79]))
+		potions.setPotionNbrOwned(potions.list.superman, Number(var_list[78]))
+		potions.setPotionNbrOwned(potions.list.cloning, Number(var_list[77]))
+		potions.setPotionNbrOwned(potions.list.seed, Number(var_list[76]))
+		potions.setPotionNbrOwned(potions.list.jelly, Number(var_list[75]))
+		potions.setPotionNbrOwned(potions.list.turtle, Number(var_list[74]))
+		potions.setPotionNbrOwned(potions.list.invulnerability, Number(var_list[73]))
+		potions.setPotionNbrOwned(potions.list.majorHealth, Number(var_list[72]))
+		potions.setPotionNbrOwned(potions.list.berserk, Number(var_list[66]))
+		potions.setPotionNbrOwned(potions.list.escape, Number(var_list[65]))
+		potions.setPotionNbrOwned(potions.list.health, Number(var_list[64]))
+		potions.updateOnPage()
+
+		quest.setMaxLandOrder(Number(var_list[80]));
         
         quest.setTiredTime(Number(var_list[81]));
 		
@@ -286,9 +298,8 @@ var cookie = {
 		yourself.setCanSurpass(Number(var_list[88]));
 		//
 		
-        developperComputer.setWon(setPhpStuff(setPhpStuff(Number(var_list[89]))));
-        
-        
+        developperComputer.setWon(n_to_bool(Number(var_list[89])));
+
         inventory.updateOnPage();
 		buttons.checkHomeEnabled();
 	

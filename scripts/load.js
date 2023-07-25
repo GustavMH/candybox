@@ -1,11 +1,11 @@
 var code = "";
 
-function getPhpStuff(boolean){
+function bool_to_n(boolean){
     if(boolean == true) return 1;
     return 0;
 }
 
-function setPhpStuff(int){
+function n_to_bool(int){
     if(int == 1) return true;
     return false;
 }
