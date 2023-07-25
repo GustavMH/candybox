@@ -39,7 +39,7 @@ var main = {
         quest.onloadAfter(); // This must be call after other loads because it needs the different quests to be loaded
         
         // Loading save from cookie
-        if(cookie.readCookie("CandyCookie") != null) {
+        if(cookie.read("CandyCookie") != null) {
             cookie.setData();
         } else {
             console.log("INFO: Couldn't find a Cookie.");

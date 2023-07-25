@@ -16,9 +16,8 @@ function load() {
 
 function restart() {
 	clearInterval(cookie.cookiehandler);
-	cookie.eraseCookie("CandyCookie");
-	//location.reload();
-	window.location.reload(true); 
+	cookie.erase("CandyCookie");
+	window.location.reload(true);
 }
 
 function readFile (evt) {
@@ -59,7 +58,7 @@ function readFile (evt) {
 		}
 		
 		//reset all
-		cookie.eraseCookie("CandyCookie");
+		cookie.erase("CandyCookie");
 		main.onload();
 		
 		

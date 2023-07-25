@@ -1,33 +1,33 @@
 var cookie = {
 	cookieHandler : null,
 	
-	createCookie : function(name,value,days) {
-		var expires = "";
+	create : function(name,value,days) {
+		var expires = ""
 		if (days) {
-			var date = new Date();
-			date.setTime(date.getTime() + (days*24*60*60*1000));
-			expires = "; expires=" + date.toUTCString();
+			var date = new Date()
+			date.setTime(date.getTime() + (days*24*60*60*1000))
+			expires = "; expires=" + date.toUTCString()
 		}
-		document.cookie = name + "=" + value + expires + "; path=/";
+		document.cookie = name + "=" + value + expires + "; path=/"
 	},
 
-	readCookie : function(name) {
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
+	read : function(name) {
+		var nameEQ = name + "="
+		var ca = document.cookie.split(';')
 		for(var i=0;i < ca.length;i++) {
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			var c = ca[i]
+			while (c.charAt(0)==' ') c = c.substring(1,c.length)
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length)
 		}
-		return null;
+		return null
 	},
 
-	eraseCookie : function(name) {
-		cookie.createCookie(name,"",-1);
+	erase : function(name) {
+		cookie.create(name,"",-1)
 	},
 
 	autoSave : function() {
-		cookie.createCookie("CandyCookie", cookie.getData(), 365);
+		cookie.create("CandyCookie", cookie.getData(), 365)
 	},
 	
 	getData : function() {
@@ -121,7 +121,7 @@ var cookie = {
 					":" + wishingWell.speech +
 					":" + wishingWell.step +
 					":" + bool_to_n(yourself.canSurpass) +
-					":" + bool_to_n(developperComputer.won);
+					":" + bool_to_n(developperComputer.won)
 		
 	},
 	
@@ -129,17 +129,17 @@ var cookie = {
 		
 		var var_list = []
 		
-		var payload = cookie.readCookie("CandyCookie");
-		var_list = payload.split(":");
+		var payload = cookie.read("CandyCookie")
+		var_list = payload.split(":")
 
 		if(var_list.length != 90)
 		{
-			alert("ERROR: Corrupt Candycookie Length:" + var_list.length);
+			alert("ERROR: Corrupt Candycookie Length:" + var_list.length)
 			console.log("ERROR: Corrupt Candycookie Length:" + var_list.length); 
-			return null;
+			return null
 		}
 		
-		cookie.updateData(var_list);
+		cookie.updateData(var_list)
 		
 		
 	},
@@ -147,99 +147,99 @@ var cookie = {
 	updateData : function(var_list) {
 	
 		if(Number(var_list[0]) == 0) {
-			code = "";
+			code = ""
 		} else {
-			code = var_list[0];
+			code = var_list[0]
 		}
 
 		if(var_list[1] != "none") {
-			sword.setName(var_list[1]);
+			sword.setName(var_list[1])
 		} else {
-			sword.name = var_list[1];
+			sword.name = var_list[1]
 		}
 		
-		sword.setSpecialSword(n_to_bool(Number(var_list[2])));
+		sword.setSpecialSword(n_to_bool(Number(var_list[2])))
 		
-		sword.setSpecialPower(Number(var_list[3]));
-        candies.setNbrOwned(Number(var_list[4]));
+		sword.setSpecialPower(Number(var_list[3]))
+        candies.setNbrOwned(Number(var_list[4]))
 		
 		if(Number(var_list[5]) != 0) {
-			candies.setNbrThrown(Number(var_list[5]));
+			candies.setNbrThrown(Number(var_list[5]))
 		} else {
-			candies.nbrThrown = Number(var_list[5]);
+			candies.nbrThrown = Number(var_list[5])
 		}
 		
         if(Number(var_list[6]) != 0) {
-			candies.setNbrEaten(Number(var_list[6]));
+			candies.setNbrEaten(Number(var_list[6]))
 		} else {
-			candies.nbrEaten = Number(var_list[6]);
+			candies.nbrEaten = Number(var_list[6])
 		}
         
 		
-		candies.setNbrTotal(Number(var_list[7]));
+		candies.setNbrTotal(Number(var_list[7]))
 		
-        candies.setCandiesPerSecond(Number(var_list[8]));
-		candiesConverter.setActivated(n_to_bool(Number(var_list[9])));
-		cauldron.setBookPage(Number(var_list[10]));
-        cauldron.setCandiesInTheCauldron(Number(var_list[11]));
-        cauldron.setLollipopsInTheCauldron(Number(var_list[12]));
+        candies.setCandiesPerSecond(Number(var_list[8]))
+		candiesConverter.setActivated(n_to_bool(Number(var_list[9])))
+		cauldron.setBookPage(Number(var_list[10]))
+        cauldron.setCandiesInTheCauldron(Number(var_list[11]))
+        cauldron.setLollipopsInTheCauldron(Number(var_list[12]))
   
 		if(Number(var_list[13]) != 0) {
-			chocolateBars.setNbrOwned(Number(var_list[13]));
+			chocolateBars.setNbrOwned(Number(var_list[13]))
 		} else {
-			chocolateBars.nbrOwned = Number(var_list[13]);
+			chocolateBars.nbrOwned = Number(var_list[13])
 		}
 		
-        farm.setLollipopsPlanted(Number(var_list[14]));
+        farm.setLollipopsPlanted(Number(var_list[14]))
 		
 		
-		farm.setCurrentFlagIndex(Number(var_list[15]));
-		farm.setPlantingButtonsStep(Number(var_list[16]));
-		forge.setStep(Number(var_list[17]));
-		shop.setBuy10LollipopsButtonShown(n_to_bool(Number(var_list[18])));
-		shop.setShown(n_to_bool(Number(var_list[19])));
-		shop.setTicklingStep(Number(var_list[20]));
+		farm.setCurrentFlagIndex(Number(var_list[15]))
+		farm.setPlantingButtonsStep(Number(var_list[16]))
+		forge.setStep(Number(var_list[17]))
+		shop.setBuy10LollipopsButtonShown(n_to_bool(Number(var_list[18])))
+		shop.setShown(n_to_bool(Number(var_list[19])))
+		shop.setTicklingStep(Number(var_list[20]))
 		
 		
-		shop.setClickingOnLollipopStep(Number(var_list[21]));
+		shop.setClickingOnLollipopStep(Number(var_list[21]))
 		
-		hut.setStep(Number(var_list[22]));
+		hut.setStep(Number(var_list[22]))
 		hut.setSpeech(var_list[23]); //vermutlich string
 		inventory.magicianHatLetter = var_list[24]; //char
 		
 		if(Number(var_list[25]) != 0) {
-			lollipops.setNbrOwned(Number(var_list[25]));
+			lollipops.setNbrOwned(Number(var_list[25]))
 		} else {
-			lollipops.nbrOwned = Number(var_list[25]);
+			lollipops.nbrOwned = Number(var_list[25])
 		}
 		
 		//
-		lollipops.setNbrInStock(Number(var_list[26]));
+		lollipops.setNbrInStock(Number(var_list[26]))
 		
-		lollipops.setNbrBought(Number(var_list[27]));
+		lollipops.setNbrBought(Number(var_list[27]))
 		
-		main.setNbrOfSecondsSinceLastMinInterval(Number(var_list[28]));
-		main.setNbrOfSecondsSinceLastHourInterval(Number(var_list[29]));
-		main.setNbrOfSecondsSinceLastDayInterval(Number(var_list[30]));
+		main.setNbrOfSecondsSinceLastMinInterval(Number(var_list[28]))
+		main.setNbrOfSecondsSinceLastHourInterval(Number(var_list[29]))
+		main.setNbrOfSecondsSinceLastDayInterval(Number(var_list[30]))
 		mountGoblin.basicChestProbability = Number(var_list[31])
 		peacefulForest.basicChestProbability = Number(var_list[32])
 		peacefulForest.poniesEncountered = Number(var_list[33])
 		//
 		
-		objects.setHaveObject("key", n_to_bool(Number(var_list[34])));
-        objects.setHaveObject("boots", n_to_bool(Number(var_list[38])));
-        objects.setHaveObject("swampMap", n_to_bool(Number(var_list[37])));
-        objects.setHaveObject("hutMap", n_to_bool(Number(var_list[35])));
-        objects.setHaveObject("wellMap", n_to_bool(Number(var_list[36])));
-        objects.setHaveObject("magicianHat", n_to_bool(Number(var_list[39])));
-        objects.setHaveObject("pinkRing", n_to_bool(Number(var_list[40])));
-        objects.setHaveObject("forgeMap", n_to_bool(Number(var_list[41])));
-        objects.setHaveObject("candiesConverter", n_to_bool(Number(var_list[42])));
-        objects.setHaveObject("plateArmour", n_to_bool(Number(var_list[43])));
-        objects.setHaveObject("cauldron", n_to_bool(Number(var_list[44])));
-        objects.setHaveObject("magicalHorn", n_to_bool(Number(var_list[45])));
-        objects.setHaveObject("hornOfPlenty", n_to_bool(Number(var_list[46])));
-        objects.setHaveObject("oldAmulet", n_to_bool(Number(var_list[47])));
+		objects.setHaveObject("key", n_to_bool(Number(var_list[34])))
+        objects.setHaveObject("boots", n_to_bool(Number(var_list[38])))
+        objects.setHaveObject("swampMap", n_to_bool(Number(var_list[37])))
+        objects.setHaveObject("hutMap", n_to_bool(Number(var_list[35])))
+        objects.setHaveObject("wellMap", n_to_bool(Number(var_list[36])))
+        objects.setHaveObject("magicianHat", n_to_bool(Number(var_list[39])))
+        objects.setHaveObject("pinkRing", n_to_bool(Number(var_list[40])))
+        objects.setHaveObject("forgeMap", n_to_bool(Number(var_list[41])))
+        objects.setHaveObject("candiesConverter", n_to_bool(Number(var_list[42])))
+        objects.setHaveObject("plateArmour", n_to_bool(Number(var_list[43])))
+        objects.setHaveObject("cauldron", n_to_bool(Number(var_list[44])))
+        objects.setHaveObject("magicalHorn", n_to_bool(Number(var_list[45])))
+        objects.setHaveObject("hornOfPlenty", n_to_bool(Number(var_list[46])))
+        objects.setHaveObject("oldAmulet", n_to_bool(Number(var_list[47])))
 		
 		//
 		potions.setPotionShown(potions.list.impInvocationScroll, n_to_bool(Number(var_list[55])))
@@ -283,26 +283,25 @@ var cookie = {
 		potions.setPotionNbrOwned(potions.list.health, Number(var_list[64]))
 		potions.updateOnPage()
 
-		quest.setMaxLandOrder(Number(var_list[80]));
+		quest.setMaxLandOrder(Number(var_list[80]))
         
-        quest.setTiredTime(Number(var_list[81]));
+        quest.setTiredTime(Number(var_list[81]))
 		
 		//
-		spells.setFasterCandiesFibo(Number(var_list[82]), Number(var_list[83]));
+		spells.setFasterCandiesFibo(Number(var_list[82]), Number(var_list[83]))
 
-		swamp.setStep(Number(var_list[84]));
-		tabs.setAnimation(var_list[85]);
+		swamp.setStep(Number(var_list[84]))
+		tabs.setAnimation(var_list[85])
 		
-		wishingWell.setSpeech(var_list[86]);
-		wishingWell.setStep(Number(var_list[87]));
-		yourself.setCanSurpass(Number(var_list[88]));
+		wishingWell.setSpeech(var_list[86])
+		wishingWell.setStep(Number(var_list[87]))
+		yourself.setCanSurpass(Number(var_list[88]))
 		//
 		
-        developperComputer.setWon(n_to_bool(Number(var_list[89])));
+        developperComputer.setWon(n_to_bool(Number(var_list[89])))
 
-        inventory.updateOnPage();
-		buttons.checkHomeEnabled();
+        inventory.updateOnPage()
+		buttons.checkHomeEnabled()
 	
 	}
-	
-};
+}
