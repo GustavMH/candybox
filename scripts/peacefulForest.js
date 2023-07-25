@@ -1,8 +1,7 @@
 const peacefulForest = {
-    basicChestProbability : 100,
     poniesEncountered : 0,
     
-    onload : function(){
+    onload : function() {
         land.addLand("The peaceful forest", 30, 0, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
 

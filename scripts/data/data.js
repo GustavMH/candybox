@@ -65,9 +65,9 @@ data = {
             path: [[0,0],[3,0],[6,0],[9,0],[12,0],[15,0],[18,0],[21,0],[24,0],[27,0],[30,0],[33,0],[36,0],[39,0],[42,0],[45,0],[48,0],[51,0],[54,0],[57,0],[60,0],[63,0],[66,0],[69,0],[72,0],[75,0],[78,0],[81,0],[84,0],[87,0]],
             spawning_intervals: [
                 // oneOutOf prob, start, end, type
-                { inv_prob: 600, prob_add: -601, start: 0, end: 30, type: "woodPony" },
-                { inv_prob: 100, prob_add: 100, start: 0, end: 30, type: "basicChest" },
-                { inv_prob: 2, prob_add: 0, start: 0, end: 30, type: "tree" },
+                { inv_prob: 600, prob_add: -601, after: 1, before: 30, type: "woodPony" },
+                { inv_prob: 100, prob_add: 100, after: 1, before: 30, type: "basicChest" },
+                { inv_prob: 2, prob_add: 0, after: 1, before: 30, type: "tree" },
             ]
         },
         mountGoblin: {
@@ -79,6 +79,13 @@ data = {
                 "_________/ \\/ \\/ \\  /  /   \\   /    /       \\ /  /     \\/  /   \\  / \\/ \\/ \\_________"
             ],
             path: [[0,4],[3,4],[6,4],[9,3],[12,3],[15,3],[18,2],[21,2],[24,2],[27,1],[30,1],[33,1],[36,0],[39,0],[42,0],[45,0],[48,1],[51,1],[54,1],[57,2],[60,2],[63,2],[66,3],[69,3],[72,3],[75,4],[78,4],[81,4],[84,4],[87,4]],
+            spawning_intervals: [
+                // oneOutOf prob, start, end, type
+                { inv_prob: 100, prob_add: 100, before: 11, after: 15, type: "basicChest" },
+                { inv_prob: 14,  prob_add: 0,   before: 11, after: 15, type: "nastyGoblin" },
+                { inv_prob: 2,   prob_add: 0,   before: 11, after: 15, type: "sickGoblin" },
+                { inv_prob: 2,   prob_add: 0,   before: 15, after: 11, type: "tenaciousGoblin" }
+            ]
         },
         underwaterCave: {
             level: [

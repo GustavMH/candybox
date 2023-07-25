@@ -13,8 +13,13 @@ const get_text = (things, {level, path}, effects={}) => {
 const spawn_by_interval = (things, intervals) => things
       .reduce(([intervals, res], _, i) => {
           const idx = intervals
-                .findIndex(({ inv_prob, start, end }) =>
-                    (start <= i && i < end) && (r_oneOutOf(inv_prob)))
+                .findIndex(({ inv_prob, after, before }) => {
+                    const included = before > after
+                          ?  (after <= i && i < before)
+                          : !(after <= i && i < before)
+
+                    return included && r_oneOutOf(inv_prob)
+                })
 
           if (idx != -1) {
               const { inv_prob, prob_add, type } = intervals[idx]
@@ -32,7 +37,6 @@ const spawn_by_interval = (things, intervals) => things
       .forEach(([i, type]) => quest.things[i] = land.create(data.mobs[type]))
 
 const getText = {
-    mountGoblin: () => get_text(quest.things, data.lands.mountGoblin),
     underwaterCave: () => get_text(quest.things, data.lands.underwaterCave, quest.effects),
     developperComputer : function(){
         const textBefore = (index == this.size-2)

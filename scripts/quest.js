@@ -116,10 +116,8 @@ const quest = {
         return 500 * (1/2)**((objects.all.boots.have ? 1 : 0) + (this.beserk ? 1 : 0))
     },
     
-    getCharacterIndex : function(){
-        for(i = 0; i < this.things.length; i++){
-            if(this.things[i].type == "character") return i;
-        }
+    getCharacterIndex : function() {
+        return this.things.findIndex(({type}) => type == "character")
     },
     
     move : function(){

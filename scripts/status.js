@@ -1,67 +1,42 @@
 /* TODO why 2? */
 const status2 = {
-    
-    getText : function(){
-        var statusLines = [];
-        
-        var character = this.getLinesFromThingIndex(quest.getCharacterIndex());
-        if(quest.getCharacterIndex() + 1 < quest.things.length && quest.things[quest.getCharacterIndex() + 1].type != "none"){
-            statusLines.push(this.formatLines(character));
-            if(quest.things[quest.getCharacterIndex() + 1].type == "mob") // If it's a mob
-                statusLines.push(this.formatLines(["", "VERSUS", "", ""]));
-            if(quest.things[quest.getCharacterIndex() + 1].type == "ally") // If it's an ally
-                statusLines.push(this.formatLines(["", " WITH ", "", ""]));
-            statusLines.push(this.getLinesFromThingIndex(quest.getCharacterIndex() + 1));
-        }
-        else{
-            statusLines.push(character);
-        }
-        
-        return this.formatStatusLines(statusLines);
-    },
-    
-    formatLines : function(lines){
-        var max_len = 0;
-        for(var i = 0; i < lines.length; i++){
-            if(lines[i].length > max_len) max_len = lines[i].length;
-        }
-        
-        for(var i = 0; i < lines.length; i++){
-            if(lines[i].length < max_len){
-                for(var j = lines[i].length; j < max_len; j++){
-                    lines[i] += " ";
-                }
-            }
-            lines[i] += " | ";
-        }
-        return lines;
-    },
-    
-    formatStatusLines : function(lines){
-        var text = "";
-        var stop = false;
-        var i = 0;
-        while(stop == false){
-            stop = true;
-            text += "\n";
-            for(var j = 0; j < lines.length; j++){
-                if(lines[j].length > i){
-                    text += lines[j][i];
-                    stop = false; // While we have something to add, we continue
-                }
-            }
-            i++;
-        }
-        return text;
-    },
-    
-    getLinesFromThingIndex : function(i){
-        var lines = [];
-        lines.push("  " + quest.things[i].text);
-        lines.push("HP : " + quest.things[i].hp + "/" + quest.things[i].max_hp);
-        lines.push("Weapon : " + quest.things[i].weapon);
-        lines.push("\"" + quest.things[i].description + "\"");
-        return lines;
-    }
+    getText : function() {
+        const lines_to_block = (lines) => {
+            const max_len = lines
+                  .map(line => line.length)
+                  .reduce((a,b) => Math.max(a,b), 0)
 
+            return lines.map(line => line.padEnd(max_len))
+        }
+
+        const block_from_thing = (t) => {
+            return lines_to_block([
+                `${t.text}`,
+                `HP : ${t.hp}/${t.max_hp}`,
+                `Weapon : ${t.weapon}`,
+                `${t.description}`
+            ])
+        }
+
+        /* MAKE rectangle text blocks, join horizontally */
+        const char_idx = quest.getCharacterIndex()
+
+        if (char_idx != -1) {
+            const character  = quest.things[char_idx]
+            const next_field = quest.things[char_idx + 1]
+
+            const blocks = (next_field && next_field.type != "none")
+                  ? [
+                      block_from_thing(character),
+                      ...next_field.type == "mob"  ? [lines_to_block(["", "VERSUS", "", ""])] : [],
+                      ...next_field.type == "ally" ? [lines_to_block(["", "WITH",   "", ""])] : [],
+                      block_from_thing(next_field)
+                  ]
+                  : [block_from_thing(character)]
+
+            return blocks[0].map((_,i) => blocks.map(lines => lines[i]).join(" | ")).join("\n")
+        } else {
+            return ""
+        }
+    }
 }
