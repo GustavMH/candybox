@@ -5,12 +5,12 @@ var cowLevel = {
 
     // Functions
     onload : function(){
-        land.addLand("cowLevel", this.size, -1, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
+        land.addLand("cowLevel", this.size, -1, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
     
     move : function(){
         // Get the character index
-        var index = quest.getCharacterIndex();
+        var index = quest.getCharacterIndex()
         
         // Iterate over all things
         for(var i = 0; i < this.size; i++){
@@ -21,18 +21,18 @@ var cowLevel = {
                     // If we can move it to the right
                     if(quest.things[i+1].type == "none"){
                         // We move it to the right
-                        quest.things[i+1] = quest.things[i];
-                        quest.things[i] = quest.makeNoneThing();
+                        quest.things[i+1] = quest.things[i]
+                        quest.things[i] = quest.makeNoneThing()
                         // We increase index to avoid iterating over the same thing again
-                        i += 1;
+                        i += 1
                     }
                 }
                 else{
                     // If we can move it to the left
                     if(quest.things[i-1].type == "none"){
                         // We move it to the left
-                        quest.things[i-1] = quest.things[i];
-                        quest.things[i] = quest.makeNoneThing();
+                        quest.things[i-1] = quest.things[i]
+                        quest.things[i] = quest.makeNoneThing()
                     }
                 }
             }
@@ -54,4 +54,4 @@ var cowLevel = {
     },
     
     getText : getText.cow
-};
+}

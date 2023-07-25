@@ -70,7 +70,7 @@ const getText = {
 
         const text = layer_texts("      ", characters).join("")
 
-        return `<span style='font-size:50px;'>${text}</span>`;
+        return `<span style='font-size:50px;'>${text}</span>`
     },
     developperGarden: function() {
         const characters = quest.things
@@ -97,7 +97,7 @@ const getText = {
         /* fact should be centered */
         const before = center_line(`"${this.currentFact}"`, size) + "\n\n\n\n"
 
-        return before + text;
+        return before + text
     },
     castleEntrance: function(){
         const land = data.lands.castleEntrance
@@ -182,6 +182,6 @@ const getText = {
             "</span>"
         ].join("")
 
-        return before + text + after;
+        return before + text + after
     },
 }

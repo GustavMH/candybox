@@ -1,21 +1,21 @@
-var code = "";
+var code = ""
 
 const bool_to_n = (bool) => bool ? 1 : 0
 const n_to_bool = (n) => n == 1
 
 function save() {
-	var date = new Date();
+	var date = new Date()
 	
-	var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var hour = date.getHours();
-    var min = date.getMinutes();
-	var year = date.getFullYear() + "";
+	var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var min = date.getMinutes()
+	var year = date.getFullYear() + ""
 
-    month = (month < 10 ? "0" : "") + month;
-    day = (day < 10 ? "0" : "") + day;
-    hour = (hour < 10 ? "0" : "") + hour;
-    min = (min < 10 ? "0" : "") + min;
+    month = (month < 10 ? "0" : "") + month
+    day = (day < 10 ? "0" : "") + day
+    hour = (hour < 10 ? "0" : "") + hour
+    min = (min < 10 ? "0" : "") + min
 	
 	var save_text = "code: " + ((code === undefined || code == null || code.length == "") ? 0 : code) + "\n" + 
 					"swordName: " + sword.name + "\n" + 
@@ -106,9 +106,9 @@ function save() {
 					"wishingWellSpeech: " + wishingWell.speech + "\n" + 
 					"wishingWellStep: " + wishingWell.step + "\n" + 
 					"yourselfCanSurpass: " + bool_to_n(yourself.canSurpass) + "\n" + 
-					"developperComputerWon: " + bool_to_n(developperComputer.won);
+					"developperComputerWon: " + bool_to_n(developperComputer.won)
 	
-	var filename = "candybox_" + year.substring(2, 4) + month + day + "_" + hour + "-" + min;
-	var blob = new Blob([save_text], {type: "text/plain;charset=utf-8"});
-	saveAs(blob, filename+".cs");
+	var filename = "candybox_" + year.substring(2, 4) + month + day + "_" + hour + "-" + min
+	var blob = new Blob([save_text], {type: "text/plain;charset=utf-8"})
+	saveAs(blob, filename+".cs")
 }

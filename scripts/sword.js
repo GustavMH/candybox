@@ -22,7 +22,7 @@ const sword = {
     },
     
     setSpecialSword : function(value){
-        this.specialSword = value;
+        this.specialSword = value
     },
     
     setSpecialPower : function(value){
@@ -41,79 +41,79 @@ const sword = {
     enchantImpInvocation : function(){
         if(potions.list.impInvocationScroll.nbrOwned > 0){
             this.specialWord = true
-            this.setName("Sword of Summoning");
-            potions.list.impInvocationScroll.nbrOwned -= 1;
-            potions.updateOnPage();
-            forge.setStep(2);
+            this.setName("Sword of Summoning")
+            potions.list.impInvocationScroll.nbrOwned -= 1
+            potions.updateOnPage()
+            forge.setStep(2)
         }
     },
 
     
     enchantFire : function() {
         if(potions.list.fireScroll.nbrOwned >= 1){
-            this.setName("Sword of Flames");
-            potions.list.fireScroll.nbrOwned -= 1;
+            this.setName("Sword of Flames")
+            potions.list.fireScroll.nbrOwned -= 1
 
-            this.setSpecialSword(true);
-            potions.updateOnPage();
-            forge.setStep(2);
+            this.setSpecialSword(true)
+            potions.updateOnPage()
+            forge.setStep(2)
         }
     },
     
     enchantHealth : function() {
         if(potions.list.health.nbrOwned >= 1){
-            this.setName("Sword of Life");
-            potions.list.health.nbrOwned -= 1;
+            this.setName("Sword of Life")
+            potions.list.health.nbrOwned -= 1
 
-            this.setSpecialSword(true);
-            potions.updateOnPage();
-            forge.setStep(2);
+            this.setSpecialSword(true)
+            potions.updateOnPage()
+            forge.setStep(2)
         }
     },
     
     sharpen : function(){
-        this.setName("sharp chocolate sword");
-        forge.setStep(1);
+        this.setName("sharp chocolate sword")
+        forge.setStep(1)
     },
     
     coat : function(){
         if(chocolateBars.nbrOwned >= 1){
-            chocolateBars.setNbrOwned(chocolateBars.nbrOwned - 1);
-            this.setName("chocolate sword");
+            chocolateBars.setNbrOwned(chocolateBars.nbrOwned - 1)
+            this.setName("chocolate sword")
 
-            html.hideButton("coat");
+            html.hideButton("coat")
         }
     },
     
     encrust : function(){
         if(candies.nbrOwned >= 101){
-            candies.setNbrOwned(candies.nbrOwned - 101);
-            this.setName("candy diamond sword");
+            candies.setNbrOwned(candies.nbrOwned - 101)
+            this.setName("candy diamond sword")
 
-            html.hideButton("encrust");
+            html.hideButton("encrust")
         }
     },
     
     polish : function(){
         if(lollipops.nbrOwned >= 30){
-            lollipops.setNbrOwned(lollipops.nbrOwned - 30);
-            this.setName("polished candy diamond sword");
+            lollipops.setNbrOwned(lollipops.nbrOwned - 30)
+            this.setName("polished candy diamond sword")
 
-            html.hideButton("polish");
+            html.hideButton("polish")
         }
     },
     
     setName : function(value) {
-        this.name = value;
+        this.name = value
         const order = data.shop_selling_order
         shop.showProduct(order[1+order.findIndex((a) => a == this.name)])
 
         // Other stuff
-        html.setInner("sword", `You currently have a ${this.name}.`);
-        quest.defineMood();
-        html.setElementVisibility("sword", true);
-        html.setElementVisibility("quest_form", true);
-        buttons.checkSword();
-        inventory.updateOnPage();
+        html.setInner("sword", `You currently have a ${this.name}.`)
+        quest.defineMood()
+        html.setElementVisibility("sword", true)
+        html.setElementVisibility("quest_form", true)
+        buttons.checkSword()
+        inventory.updateOnPage()
     }
-};
+}

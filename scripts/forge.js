@@ -18,29 +18,29 @@ const forge = {
             "<button onClick=\"forge.leave();\">Leave the forge</button>"
         ].join("\n")
 
-        html.setInner("map", text);
-        buttons.checkForge();
+        html.setInner("map", text)
+        buttons.checkForge()
     },
     
     setStep : function(value){
-        this.step = value;
+        this.step = value
         this.speech = [
             data.text.forge.enchant.init,
             data.text.forge.enchant[sword.name]
         ][this.step]
 
-        if(this.shown) this.updateOnPage();
+        if(this.shown) this.updateOnPage()
     },
   
     enter : function(){
-        objects.leave();
-        this.shown = true;
-        this.updateOnPage();
+        objects.leave()
+        this.shown = true
+        this.updateOnPage()
     },
     
     leave : function(){
-        this.shown = false;
-        html.setInner("map", "");
+        this.shown = false
+        html.setInner("map", "")
     }
     
-};
+}

@@ -4,33 +4,33 @@ var developperMoat = {
     timeSpent : 0,
 
     onload : function(){
-        land.addLand("Developper's moat", this.size, 10, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
+        land.addLand("Developper's moat", this.size, 10, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
     
     move : function(){
         // Get the character's index
-        var index = quest.getCharacterIndex();
+        var index = quest.getCharacterIndex()
         
         // If the character is above where the platform moves
         if(index > 5 && index < 18){
             // If the character isn't on the platform
             if(index > 6 + this.platformPosition + 1 || index < 6 + this.platformPosition){
-                quest.escaping = true;
+                quest.escaping = true
             }
         }
         
         // Increase the platform position
         if(this.timeSpent > 5){
-            if(this.platformPosition < 10) this.platformPosition = Math.floor((this.timeSpent - 5) / 3);
+            if(this.platformPosition < 10) this.platformPosition = Math.floor((this.timeSpent - 5) / 3)
         }
         
         // Increase the time spent
-        this.timeSpent += 1;
+        this.timeSpent += 1
     },
     
     load : function(){
-        this.platformPosition = 0;
-        this.timeSpent = 0;
+        this.platformPosition = 0
+        this.timeSpent = 0
     },
     
     getText : getText.developperMoat

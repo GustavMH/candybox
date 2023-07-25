@@ -6,28 +6,28 @@ var developperGarden = {
     },
     
     move : function(){
-        var targetIndex = -1;
+        var targetIndex = -1
         
         // We make the gnomes shooting
         for(var i = 0; i < this.size; i++){
             if(quest.things[i].text == "CGG") {
                 if(targetIndex != -1){ // If we have a target
-                    quest.things[targetIndex].hp -= 30;
+                    quest.things[targetIndex].hp -= 30
                     if(quest.things[targetIndex].hp <= 0){
                         if(quest.things[targetIndex].type != "character")
-                            quest.things[targetIndex] = quest.makeNoneThing();
+                            quest.things[targetIndex] = quest.makeNoneThing()
                         else
-                            quest.things[targetIndex].hp = 1;
-                        targetIndex = -1;
+                            quest.things[targetIndex].hp = 1
+                        targetIndex = -1
                     }
                 }
             } else if(quest.things[i].type != "none") {
-                targetIndex = i;
+                targetIndex = i
             }
         }
         
         // Increase the time spent
-        this.timeSpent += 1;
+        this.timeSpent += 1
     },
     
     load : function() {

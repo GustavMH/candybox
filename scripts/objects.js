@@ -19,22 +19,22 @@ var objects = {
     },
     
     leave : function(){
-        hut.leave();
-        wishingWell.leave();
-        swamp.leave();
-        forge.leave();
+        hut.leave()
+        wishingWell.leave()
+        swamp.leave()
+        forge.leave()
     },
     
     // Functions
     setHaveObject : function(name, value){
         // We set the new "have" value
-        this.all[name].have = value;
+        this.all[name].have = value
         
         // We check the buttons related to objects, since they may have changed
-        buttons.checkObjects();
+        buttons.checkObjects()
         
         // We update the inventory
-        inventory.updateOnPage();
+        inventory.updateOnPage()
     }
     
-};
+}

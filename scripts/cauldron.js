@@ -29,30 +29,30 @@ var cauldron = {
 
     registerAction : function(type, nbrCandies, nbrLollipops, timer){
         // We add the action to the list
-        this.actionsList.push({type:type, nbrCandies:nbrCandies, nbrLollipops:nbrLollipops, timer:timer});
+        this.actionsList.push({type:type, nbrCandies:nbrCandies, nbrLollipops:nbrLollipops, timer:timer})
 
         // We delete one action if there's too much actions in the list
         if(this.actionsList.length > 3){
-            this.actionsList.splice(0, 1);
+            this.actionsList.splice(0, 1)
         }
     },
 
     onload : function(){
-        this.setBookPage(0);
+        this.setBookPage(0)
     },
 
     checkVisibility : function(){
         if(objects.all.cauldron.have){
             // Show the cauldron tab, which have to be hidden before this point
-            tabs.enable(3);
+            tabs.enable(3)
 
             // And we update everything on page
-            this.updateCauldronOnPage();
-            this.updateBookOnPage();
-            this.updateActionsInfoOnPage();
-            this.updateActionsPutOnPage();
-            this.updateActionsInCauldronOnPage();
-            this.updateActionsOnPage();
+            this.updateCauldronOnPage()
+            this.updateBookOnPage()
+            this.updateActionsInfoOnPage()
+            this.updateActionsPutOnPage()
+            this.updateActionsInCauldronOnPage()
+            this.updateActionsOnPage()
         }
     },
 
@@ -72,22 +72,22 @@ var cauldron = {
         // If the new value is correct
         if(value >= 0 && value <= this.maxBookPage){
             // We set it
-            this.bookPage = value;
+            this.bookPage = value
             // We set the text of the pages
             page = value * 2
             this.textLeftPage  = data.ascii.book_pages[page]
             this.textRightPage = data.ascii.book_pages[page + 1]
             // We update the book on page
-            this.updateBookOnPage();
+            this.updateBookOnPage()
         }
     },
 
     previousPage : function(){
-        this.setBookPage(this.bookPage-1);
+        this.setBookPage(this.bookPage-1)
     },
 
     nextPage : function(){
-        this.setBookPage(this.bookPage+1);
+        this.setBookPage(this.bookPage+1)
     },
 
     drawBook : function(){
@@ -115,7 +115,7 @@ var cauldron = {
         this.textCauldron = layer_text(this.textCauldron, data.ascii.cauldron, x, y)
 
         // We add the smoke
-        this.drawSmoke();
+        this.drawSmoke()
     },
 
     drawSmoke : function(){
@@ -145,15 +145,15 @@ var cauldron = {
                 this.smoke.on = false
         }
 
-        this.updateCauldronOnPage();
+        this.updateCauldronOnPage()
     },
     increaseActionTimer : function(){
-        this.setActionTimer(this.actionTimer + 1);
+        this.setActionTimer(this.actionTimer + 1)
     },
     
     setActionTimer : function(value){
         // We set the value
-        this.actionTimer = value;
+        this.actionTimer = value
         /* TODO mere kompakt branching */
         
         // We change on the page
@@ -178,39 +178,39 @@ var cauldron = {
     },
     
     setWeAreMixing : function(value){
-        this.weAreMixing = value;
+        this.weAreMixing = value
 
         if(!value){
-            this.registerAction("mix", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
+            this.registerAction("mix", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer)
         } else {
-            this.disableActionsButtons();
-            html.setInner("cauldron_action_text", "Mixing... <span id=\"cauldron_timer\"></span><br/><br/>");
-            this.setActionTimer(0);
+            this.disableActionsButtons()
+            html.setInner("cauldron_action_text", "Mixing... <span id=\"cauldron_timer\"></span><br/><br/>")
+            this.setActionTimer(0)
 
-            this.candiesWhenWeBeganAction = this.candiesInTheCauldron;
-            this.lollipopsWhenWeBeganAction = this.lollipopsInTheCauldron;
+            this.candiesWhenWeBeganAction = this.candiesInTheCauldron
+            this.lollipopsWhenWeBeganAction = this.lollipopsInTheCauldron
         }
     },
     
     setWeAreBoiling : function(value){
-        this.weAreBoiling = value;
+        this.weAreBoiling = value
 
         if(!value){
-            this.registerAction("boil", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer);
+            this.registerAction("boil", this.candiesWhenWeBeganAction, this.lollipopsWhenWeBeganAction, this.actionTimer)
         } else {
-            this.disableActionsButtons();
-            html.setInner("cauldron_action_text", "Boiling... <span id=\"cauldron_timer\"></span><br/><br/>");
-            this.setActionTimer(0);
+            this.disableActionsButtons()
+            html.setInner("cauldron_action_text", "Boiling... <span id=\"cauldron_timer\"></span><br/><br/>")
+            this.setActionTimer(0)
 
-            this.candiesWhenWeBeganAction = this.candiesInTheCauldron;
-            this.lollipopsWhenWeBeganAction = this.lollipopsInTheCauldron;
+            this.candiesWhenWeBeganAction = this.candiesInTheCauldron
+            this.lollipopsWhenWeBeganAction = this.lollipopsInTheCauldron
         }
     },
     
     putIntoBottles : function(){
         // We create the vars which will store the results for a final drawing on the page
-        var resultsList = [];
-        var resultsText = "";
+        var resultsList = []
+        var resultsText = ""
         
         // We store actions into vars for easier use
         const [ac_0, ac_1, ac_2] = this.actionsList
@@ -358,71 +358,71 @@ var cauldron = {
             for(var i = 0; i < resultsList.length; i++){
                 if(resultsList[i].special != true){
                     if(resultsList[i].nbr > 1){
-                        resultsText += "You made " + resultsList[i].nbr + " " + resultsList[i].type + " potions !<br/>";
+                        resultsText += "You made " + resultsList[i].nbr + " " + resultsList[i].type + " potions !<br/>"
                     }
                     else{
-                        resultsText += "You made a " + resultsList[i].type + " potion.<br/>";
+                        resultsText += "You made a " + resultsList[i].type + " potion.<br/>"
                     }
                 }
                 else{
                     if(resultsList[i].nbr > 1){
-                        resultsText += "You made " + resultsList[i].nbr + " " + resultsList[i].plural + " !<br/>";
+                        resultsText += "You made " + resultsList[i].nbr + " " + resultsList[i].plural + " !<br/>"
                     }
                     else{
-                        resultsText += "You made a " + resultsList[i].type + ".<br/>";
+                        resultsText += "You made a " + resultsList[i].type + ".<br/>"
                     }
                 }
             }
-            html.setInner("cauldron_results_text", resultsText);
+            html.setInner("cauldron_results_text", resultsText)
         }
         else{
-            html.setInner("cauldron_results_text", "You don't manage to get anything interesting with that preparation.<br/>Did you follow the manual's instructions ?");
+            html.setInner("cauldron_results_text", "You don't manage to get anything interesting with that preparation.<br/>Did you follow the manual's instructions ?")
         }
         
         // We empty the cauldron
-        this.setCandiesInTheCauldron(0);
-        this.setLollipopsInTheCauldron(0);
+        this.setCandiesInTheCauldron(0)
+        this.setLollipopsInTheCauldron(0)
         
         // We reset the actions list
-        this.actionsList = [{type:"none"}, {type:"none"}, {type:"none"}];
+        this.actionsList = [{type:"none"}, {type:"none"}, {type:"none"}]
     },
     
     convertCandiesToPotionsForTheCloningPotion : function(howMuch){
-        return Math.floor(howMuch / 1337);
+        return Math.floor(howMuch / 1337)
     },
     
     disableActionsButtons : function(){
-        html.disableButton("cauldron_mix");
-        html.disableButton("cauldron_put_into_bottles");
-        html.disableButton("cauldron_boil");
+        html.disableButton("cauldron_mix")
+        html.disableButton("cauldron_put_into_bottles")
+        html.disableButton("cauldron_boil")
 
-        html.enableButton("cauldron_stop");
+        html.enableButton("cauldron_stop")
     },
     
     enableActionsButtons : function(){
-        html.enableButton("cauldron_mix");
-        html.enableButton("cauldron_put_into_bottles");
-        html.enableButton("cauldron_boil");
+        html.enableButton("cauldron_mix")
+        html.enableButton("cauldron_put_into_bottles")
+        html.enableButton("cauldron_boil")
 
-        html.disableButton("cauldron_stop");
+        html.disableButton("cauldron_stop")
     },
     
     stopActions : function(){
         // Stop all actions
         if (this.weAreMxing)   this.setWeAreMixing(false)
-        if (this.weAreBoiling) this.setWeAreBoiling(false);
+        if (this.weAreBoiling) this.setWeAreBoiling(false)
         
         // Re enable buttons
-        this.enableActionsButtons();
+        this.enableActionsButtons()
         
         // Empty the action text
-        html.setInner("cauldron_action_text", "");
+        html.setInner("cauldron_action_text", "")
     },
     
     putInTheCauldron : function(){
         // We get the values of the text inputs
-        const str_candies   = html.getElement("cauldron_candies_quantity").value;
-        const str_lollipops = html.getElement("cauldron_lollipops_quantity").value;
+        const str_candies   = html.getElement("cauldron_candies_quantity").value
+        const str_lollipops = html.getElement("cauldron_lollipops_quantity").value
         
         // We get the quantities
         const n_candies   = str_candies   != "" ? parseInt(str_candies)   : 0
@@ -438,47 +438,47 @@ var cauldron = {
 
         if (val_error) html.setInner("cauldron_comment", val_error)
         else {
-            html.getElement("cauldron_candies_quantity")  .value = "";
-            html.getElement("cauldron_lollipops_quantity").value = "";
+            html.getElement("cauldron_candies_quantity")  .value = ""
+            html.getElement("cauldron_lollipops_quantity").value = ""
 
-            candies.  setNbrOwned(candies.nbrOwned   - n_candies);
-            lollipops.setNbrOwned(lollipops.nbrOwned - n_lollipops);
+            candies.  setNbrOwned(candies.nbrOwned   - n_candies)
+            lollipops.setNbrOwned(lollipops.nbrOwned - n_lollipops)
 
-            this.setCandiesInTheCauldron  (this.candiesInTheCauldron   + n_candies);
-            this.setLollipopsInTheCauldron(this.lollipopsInTheCauldron + n_lollipops);
+            this.setCandiesInTheCauldron  (this.candiesInTheCauldron   + n_candies)
+            this.setLollipopsInTheCauldron(this.lollipopsInTheCauldron + n_lollipops)
         }
     },
 
     setCandiesInTheCauldron : function(value){
-        this.candiesInTheCauldron = value;
-        this.updateActionsInCauldronOnPage();
+        this.candiesInTheCauldron = value
+        this.updateActionsInCauldronOnPage()
     },
     
     setLollipopsInTheCauldron : function(value){
-        this.lollipopsInTheCauldron = value;
-        this.updateActionsInCauldronOnPage();
+        this.lollipopsInTheCauldron = value
+        this.updateActionsInCauldronOnPage()
     },
     
     updateCauldronOnPage : function(){
-        this.resetCauldronText();
-        this.drawCauldron();
-        html.setInner("cauldron_cauldron", this.textCauldron.join(""));
+        this.resetCauldronText()
+        this.drawCauldron()
+        html.setInner("cauldron_cauldron", this.textCauldron.join(""))
     },
     
     updateBookOnPage : function(){
-        this.resetBookText();
-        this.drawBook();
-        html.setInner("cauldron_book", this.textBook.join(""));
+        this.resetBookText()
+        this.drawBook()
+        html.setInner("cauldron_book", this.textBook.join(""))
     },
     
     updateActionsInfoOnPage : function(){
-        html.setInner("cauldron_actions_info", data.text.brewing_actions.info);
+        html.setInner("cauldron_actions_info", data.text.brewing_actions.info)
         html.setInner("candies_n", candies.nbrOwned)
         html.setInner("lollipops_n", lollipops.nbrOwned)
     },
     
     updateActionsPutOnPage : function(){
-        html.setInner("cauldron_actions_put", data.text.brewing_actions.put);
+        html.setInner("cauldron_actions_put", data.text.brewing_actions.put)
     },
     
     updateActionsInCauldronOnPage : function(){
@@ -488,6 +488,6 @@ var cauldron = {
     },
     
     updateActionsOnPage : function(){
-        html.setInner("cauldron_actions", data.text.brewing_actions.actions);
+        html.setInner("cauldron_actions", data.text.brewing_actions.actions)
     },
-};
+}

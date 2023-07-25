@@ -19,30 +19,30 @@ var swamp = {
     },
     
     enter : function(){
-        objects.leave();
-        this.shown = true;
-        this.updateOnPage();
+        objects.leave()
+        this.shown = true
+        this.updateOnPage()
     },
     
     leave : function(){
-        this.shown = false;
-        html.setInner("map", "");
+        this.shown = false
+        html.setInner("map", "")
     },
 
     setComment : function(value){
-        html.setInner("swamp_comment", value);
+        html.setInner("swamp_comment", value)
         window.setTimeout(html.setInner("swamp_comment", ""), 1000)
     },
     
     setStep : function(value){
-        this.step = value;
+        this.step = value
         // If the swamp is shown
         if(this.shown){
             // We update on page
-            this.updateOnPage();
+            this.updateOnPage()
             // We possibly focus
             if(this.step >= 4 && this.step <= 16){
-                html.focusElement("answer");
+                html.focusElement("answer")
             }
         }
     },

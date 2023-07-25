@@ -9,43 +9,43 @@ var chuckNorris = {
 
     // Functions
     onload : function(){
-        land.addLand("Chuck Norris", this.size, 8, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
+        land.addLand("Chuck Norris", this.size, 8, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
     
     setNextPunch : function(){
-        this.nextPunch = 3 + r_int(1+7);
+        this.nextPunch = 3 + r_int(1+7)
     },
     
     move : function(){
         // Get indexes 
-        var index = quest.getCharacterIndex();
-        var norrisIndex = this.getChuckNorrisIndex();
+        var index = quest.getCharacterIndex()
+        var norrisIndex = this.getChuckNorrisIndex()
         
         // Increase the fact step
-        this.timeSpent += 1;
+        this.timeSpent += 1
         if(this.timeSpent % 15)
-            this.currentFact = r_choice(data.chuckNorrisFacts);
+            this.currentFact = r_choice(data.chuckNorrisFacts)
 
         // Possibly make some special action
         if(norrisIndex != -1){
             if(this.firstContact == false && index >= 20){
                 if(quest.things[norrisIndex - 1].type == "none"){
-                    quest.things[norrisIndex - 1] = quest.things[norrisIndex];
-                    quest.things[norrisIndex] = quest.makeNoneThing();
-                } else this.firstContact = true;
+                    quest.things[norrisIndex - 1] = quest.things[norrisIndex]
+                    quest.things[norrisIndex] = quest.makeNoneThing()
+                } else this.firstContact = true
             } else if(this.firstContact == true) {
                 // Punch
                 if(index > 0 && this.timeSpent % this.nextPunch == 0 && index == norrisIndex - 1 && quest.things[index - 1].type == "none"){
-                    quest.things[index - 1] = quest.things[index];
-                    quest.things[index] = quest.things[norrisIndex];
-                    quest.things[norrisIndex] = quest.makeNoneThing();
-                    this.setNextPunch();
+                    quest.things[index - 1] = quest.things[index]
+                    quest.things[index] = quest.things[norrisIndex]
+                    quest.things[norrisIndex] = quest.makeNoneThing()
+                    this.setNextPunch()
                 }
             }
         }
         
         // Increase the time spent
-        this.timeSpent += 1;
+        this.timeSpent += 1
     },
     
     getChuckNorrisIndex : function() {
@@ -53,10 +53,10 @@ var chuckNorris = {
     },
 
     load : function(){
-        this.setNextPunch();
+        this.setNextPunch()
         quest.things[30] = land.create(data.mobs.chuckNorris)
-        this.firstContact = false;
-        this.timeSpent = 0;
+        this.firstContact = false
+        this.timeSpent = 0
     },
 
     getText : getText.chuckNorris

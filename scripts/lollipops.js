@@ -9,23 +9,23 @@ var lollipops = {
     // Functions
     buy1 : function(){
         if(candies.nbrOwned >= shop.oneLollipopPrice && this.nbrInStock >= 1){
-            candies.setNbrOwned(candies.nbrOwned - shop.oneLollipopPrice);
-            this.setNbrOwned(this.nbrOwned + 1);
-            this.setNbrBought(this.nbrBought + 1);
-            this.setNbrInStock(this.nbrInStock - 1);
-            shop.setMerchantSpeech("Thanks for buyin'! Here's your " + this.getFlavour() + " flavor lollipop.");
+            candies.setNbrOwned(candies.nbrOwned - shop.oneLollipopPrice)
+            this.setNbrOwned(this.nbrOwned + 1)
+            this.setNbrBought(this.nbrBought + 1)
+            this.setNbrInStock(this.nbrInStock - 1)
+            shop.setMerchantSpeech("Thanks for buyin'! Here's your " + this.getFlavour() + " flavor lollipop.")
         }
     },
     
     buy10 : function(){
         if(candies.nbrOwned >= shop.tenLollipopsPrice && this.nbrInStock >= 10){
-            candies.setNbrOwned(candies.nbrOwned - shop.tenLollipopsPrice);
-            this.setNbrOwned(this.nbrOwned + 10);
-            this.setNbrBought(this.nbrBought + 10);
-            this.setNbrInStock(this.nbrInStock - 10);
-            shop.setMerchantSpeech("Thanks for buyin'! Here's your ten lollipops. Various flavours.");
+            candies.setNbrOwned(candies.nbrOwned - shop.tenLollipopsPrice)
+            this.setNbrOwned(this.nbrOwned + 10)
+            this.setNbrBought(this.nbrBought + 10)
+            this.setNbrInStock(this.nbrInStock - 10)
+            shop.setMerchantSpeech("Thanks for buyin'! Here's your ten lollipops. Various flavours.")
         }
-        else shop.setMerchantSpeech("I'm sorry, we don't have enough lollipops in stock to sell you ten of them. We currently have " + this.nbrInStock + " lollipops in stock.");
+        else shop.setMerchantSpeech("I'm sorry, we don't have enough lollipops in stock to sell you ten of them. We currently have " + this.nbrInStock + " lollipops in stock.")
     },
     
     getFlavour : function(){
@@ -53,52 +53,52 @@ var lollipops = {
         const r = Math.random()
         const chances = all_chances[Math.floor(this.nbrBought / 50)] || all_chances[17]
 
-        if (r < chances[0]) return r_choice(flavours.fruits);
-        if (r < chances[1]) return r_choice(flavours.uncommon);
-        if (r < chances[2]) return r_choice(flavours.unrealistic);
+        if (r < chances[0]) return r_choice(flavours.fruits)
+        if (r < chances[1]) return r_choice(flavours.uncommon)
+        if (r < chances[2]) return r_choice(flavours.unrealistic)
 
-        return r_choice(flavours.abstract);
+        return r_choice(flavours.abstract)
     },
     
     delivery : function(){
-        this.setNbrInStock(this.nbrInStock + 15 + r_int(1+10));
+        this.setNbrInStock(this.nbrInStock + 15 + r_int(1+10))
         window.setTimeout(this.delivery.bind(this), 900000); // One delivery every 15 minutes
     },
     
     setNbrOwned : function(value){
-        this.nbrOwned = value;
+        this.nbrOwned = value
 
         text = this.nbrOwned != 1
             ? `You have ${this.nbrOwned} lollipops!`
             : "You have 1 lollipop!"
 
-        html.setInner("lollipops", text);
-        html.setElementVisibility("lollipops", true);
-        buttons.checkLollipops();
-        cauldron.updateActionsInfoOnPage();
-        computer.updateLollipops();
+        html.setInner("lollipops", text)
+        html.setElementVisibility("lollipops", true)
+        buttons.checkLollipops()
+        cauldron.updateActionsInfoOnPage()
+        computer.updateLollipops()
     },
     
     setNbrBought : function(value){
-        this.nbrBought = value;
+        this.nbrBought = value
     },
     
     setNbrInStock : function(value){
         // Set the value
-        this.nbrInStock = value;
+        this.nbrInStock = value
         
         // If > 100, decrease it
-        if(this.nbrInStock > 140) this.nbrInStock = 140;
+        if(this.nbrInStock > 140) this.nbrInStock = 140
         
         // Handle lollipops stock shortage
         if(this.stockShortage == false && this.nbrInStock == 0){
-            this.stockShortage = true;
-            buttons.checkLollipopsStockShortage();
+            this.stockShortage = true
+            buttons.checkLollipopsStockShortage()
         }
         else if(this.stockShortage == true && this.nbrInStock != 0){
-            this.stockShortage = false;
-            buttons.checkLollipopsStockShortage();
+            this.stockShortage = false
+            buttons.checkLollipopsStockShortage()
         }
     }
     
-};
+}

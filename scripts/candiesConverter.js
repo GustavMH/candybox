@@ -9,48 +9,48 @@ var candiesConverter = {
         // If we have the candies conveter
         if(objects.all.candiesConverter.have){
             // We show it on the page
-            html.setElementDisplay("candies_converter", "inline");
+            html.setElementDisplay("candies_converter", "inline")
         }
     },
     
     checkedValueChange : function(){
         if(html.getElement("candies_converter_checkbox").checked){
-            this.setActivated(true);
+            this.setActivated(true)
         }
         else{
-            this.setActivated(false);
+            this.setActivated(false)
         }
     },
     
     convert : function(){
-        var howMany = 0;
+        var howMany = 0
         
         // If we are activated and have candies to convert
         if(this.activated && candies.nbrOwned > 0){
             // We calculate how many candies we will convert
             if(this.speed > candies.nbrOwned){
-                howMany = candies.nbrOwned;
+                howMany = candies.nbrOwned
             }
-            else howMany = this.speed;
+            else howMany = this.speed
             
             // We convert them
-            candies.setNbrOwned(candies.nbrOwned - howMany);
-            lollipops.setNbrOwned(lollipops.nbrOwned + howMany);
+            candies.setNbrOwned(candies.nbrOwned - howMany)
+            lollipops.setNbrOwned(lollipops.nbrOwned + howMany)
             
             // We increment the speed
-            if(this.speed < 10000) this.speed += 1;
-            else this.speed *= 2;
+            if(this.speed < 10000) this.speed += 1
+            else this.speed *= 2
         }
         // Else
         else{
             // We reset speed
-            this.speed = 1;
+            this.speed = 1
         }
     },
     
     setActivated : function(value){
-        this.activated = value;
-        html.getElement("candies_converter_checkbox").checked = value;
+        this.activated = value
+        html.getElement("candies_converter_checkbox").checked = value
     }
     
-};
+}

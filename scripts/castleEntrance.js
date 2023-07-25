@@ -10,15 +10,15 @@ var castleEntrance = {
     },
 
     onload : function(){
-        land.addLand("Castle's entrance", this.size, 3, this.load.bind(this), this.getText.bind(this), this.move.bind(this));
+        land.addLand("Castle's entrance", this.size, 3, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
     
     move : function() {
         // Make enemies go toward the left
         for(var i = 0; i < quest.things.length; i++){
             if(quest.things[i].type == "mob" && quest.things[i-1].type == "none"){
-                quest.things[i-1] = quest.things[i];
-                quest.things[i] = quest.makeNoneThing();
+                quest.things[i-1] = quest.things[i]
+                quest.things[i] = quest.makeNoneThing()
             }
         }
         
@@ -46,19 +46,19 @@ var castleEntrance = {
                 // If the magic ball just hit the player !
                 if(x - (index*3 + 1) == 0 && y == 19){
                     // No more magic ball
-                    this.magicBall.exists = false;
+                    this.magicBall.exists = false
                     
                     // We teleport the player
-                    quest.things[0] = quest.things[index];
-                    quest.things[index] = quest.makeNoneThing();
+                    quest.things[0] = quest.things[index]
+                    quest.things[index] = quest.makeNoneThing()
                 } else {
                     // If the magic ball is at the right of the player or is above the steps (it mustn't be above the steps)
-                    if(x > index*3 + 1 || x > 77) x -= 1;
+                    if(x > index*3 + 1 || x > 77) x -= 1
                     // Else, if it's at the left
-                    if(x < index*3 + 1) x += 1;
+                    if(x < index*3 + 1) x += 1
                     // If the magic ball isn't already just above the lawn and we're not too far from the play horizontally
                     if(y < 19 && Math.abs(x - index*3) < (19 - y)*3){
-                        y += 1;
+                        y += 1
                     }
                 }
             } else this.magicBall = {
@@ -69,13 +69,13 @@ var castleEntrance = {
         }
         
         // We increment the time spent
-        this.timeSpent += 1;
+        this.timeSpent += 1
     },
     
     load : function(){
         [10,12,15,16].forEach(i => quest.things[i] = land.create(data.mobs.guard))
 
-        this.timeSpent = 0;
+        this.timeSpent = 0
     },
 
     getText : getText.castleEntrance

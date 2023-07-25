@@ -36,7 +36,7 @@ const land = {
     },
     
     addLand : function(name, size, order, loadFunction, getTextFunction, moveFunction) {
-        this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction});
+        this.list.push({name:name, size:size, order:order, unlocked:false, loadFunction:loadFunction, getTextFunction:getTextFunction, moveFunction:moveFunction})
     },
     
     getLandIndexFromOrder : function(input_order) {
@@ -48,7 +48,7 @@ const land = {
     },
     
     updateListOnPage : function(maxOrder){
-        var index, list, option;
+        var index, list, option
         
         // We iterate over all order from 0 to maxOrder
         for(var i = 0; i <= maxOrder; i++){
@@ -65,16 +65,16 @@ const land = {
                     list.add(option, null)
                 }
                 // We set that it is unlocked now
-                cur_land.unlocked = true;
+                cur_land.unlocked = true
             }
         }
     },
     
     getText : function(){
-        return this.list[quest.currentLandIndex].getTextFunction();
+        return this.list[quest.currentLandIndex].getTextFunction()
     },
     
     load : function(){
-        return this.list[quest.currentLandIndex].loadFunction();
+        return this.list[quest.currentLandIndex].loadFunction()
     }
-};
+}

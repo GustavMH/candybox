@@ -15,34 +15,34 @@ const shop = {
     },
     
     check : function(){
-        if(candies.nbrOwned >= this.oneLollipopPrice) this.setShown(true);
+        if(candies.nbrOwned >= this.oneLollipopPrice) this.setShown(true)
         if(candies.nbrOwned >= 150){
             // If we don't have any sword and there's no sword to sell yet, we show the wooden sword
             if(sword.name == "none" && this.currentSwordButtonId == "none") {
-                this.showProduct("wooden sword");
+                this.showProduct("wooden sword")
             }
         }
     },
     
     setBuy10LollipopsButtonShown : function(value) {
-        this.buy10LollipopsButtonShown = value;
+        this.buy10LollipopsButtonShown = value
     },
     
     clickedOnHat : function() {
         text = data.text.merchant.tickle[this.ticklingStep]
         if (text) this.setMerchantSpeech(text)
         if (this.ticklingStep == 3)
-            candies.setNbrOwned(candies.nbrOwned + 100);
+            candies.setNbrOwned(candies.nbrOwned + 100)
 
-        this.setTicklingStep(this.ticklingStep + 1);
+        this.setTicklingStep(this.ticklingStep + 1)
     },
     
     setTicklingStep : function(value){
-        this.ticklingStep = value;
+        this.ticklingStep = value
     },
     
     setClickingOnLollipopStep : function(value) {
-        this.clickingOnLollipopStep = value;
+        this.clickingOnLollipopStep = value
 
         /* Reduces price based of no. of times top of lollipop is clicked */
         price_mod = Math.min(Math.max(0, value - 4), 10)
@@ -77,43 +77,43 @@ const shop = {
             this.currentSwordButtonId = button_id
             this.currentSwordPrice = price
         } else {
-            html.setElementVisibility(id, true);
-            html.setElementDisplay(id, "block");
+            html.setElementVisibility(id, true)
+            html.setElementDisplay(id, "block")
         }
     },
     
     show : function() {
         // We show the shop
         if(!html.isElementVisible("shop")) { // If the shop isn't already visible
-            html.setElementVisibility("shop", true);
-            this.setMerchantSpeech("Hello, I'm the candy merchant. I would do anything for candies. My lollipops are delicious!");
+            html.setElementVisibility("shop", true)
+            this.setMerchantSpeech("Hello, I'm the candy merchant. I would do anything for candies. My lollipops are delicious!")
         }
         
         // And the lollipop we can buy :)
-        this.showProduct("lollipop");
+        this.showProduct("lollipop")
     },
     
     setShown : function(value){
         // If the new value is true but it was false before, we show the shop
-        if(value == true && this.shown == false) this.show();
+        if(value == true && this.shown == false) this.show()
 
         // We change the value
-        this.shown = value;
+        this.shown = value
     },
     
     hideProduct : function(id){
         // If it's a special product
         if(id == "sword"){
-            this.currentSwordButtonId = "none";
-            html.setInner("sword_with_button", "");
+            this.currentSwordButtonId = "none"
+            html.setInner("sword_with_button", "")
         } else {
-            html.setElementVisibility(id, false);
-            html.setElementDisplay(id, "none");
+            html.setElementVisibility(id, false)
+            html.setElementDisplay(id, "none")
         }
     },
     
     setMerchantSpeech : function(text){
-        html.setInner("merchant_speech", format_speech(text, 20, " "));
+        html.setInner("merchant_speech", format_speech(text, 20, " "))
     }
     
-};
+}

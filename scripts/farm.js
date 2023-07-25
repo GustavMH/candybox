@@ -17,26 +17,26 @@ var farm = {
         }
         else{ // When we're counting in lp/sec, this function is used instead of the other one. It will stabilize the curve.
             var prod = (this.lollipopsPlanted - 122) * 500; // 194 will give 86000
-            if(prod < this.maxLollipopsPerDay) this.lollipopsPerDay = prod;
-            else this.lollipopsPerDay = this.maxLollipopsPerDay;
+            if(prod < this.maxLollipopsPerDay) this.lollipopsPerDay = prod
+            else this.lollipopsPerDay = this.maxLollipopsPerDay
         }
     },
     
     setPlantingButtonsStep : function(value){
         // Set the value
-        this.plantingButtonsStep = value;
+        this.plantingButtonsStep = value
 
         button_fn = (n) => `<button class='home_button' id='plant_${n}_lp' onClick='farm.plantLollipops(${n});'>${n}</button>`
         const inner_text = range(value).map((_, n) => button_fn(10**n)).join("")
         html.setInner("lp_buttons", `Plant ${inner_text} lp`)
 
         // Check the buttons
-        buttons.checkLollipopsPlantingButtons();
+        buttons.checkLollipopsPlantingButtons()
     },
     
     clickedOnTheBigLollipop : function(){
         // Increment the current flag index
-        this.setCurrentFlagIndex(this.currentFlagIndex + 1);
+        this.setCurrentFlagIndex(this.currentFlagIndex + 1)
     },
     
     setCurrentFlagIndex : function(value){
@@ -44,30 +44,30 @@ var farm = {
         this.currentFlagIndex = value % this.flags.length
 
         // Update on the page
-        html.setInner("farm_big_lollipop", this.flags[this.currentFlagIndex]);
+        html.setInner("farm_big_lollipop", this.flags[this.currentFlagIndex])
     },
     
     checkVisibility : function(){
-        if(objects.all.key.have) html.setElementVisibility("farm", true);
+        if(objects.all.key.have) html.setElementVisibility("farm", true)
     },
     
     plantLollipops : function(number){
         if(lollipops.nbrOwned >= number) {
-            lollipops.setNbrOwned(lollipops.nbrOwned - number);
-            this.setLollipopsPlanted(this.lollipopsPlanted + number);
+            lollipops.setNbrOwned(lollipops.nbrOwned - number)
+            this.setLollipopsPlanted(this.lollipopsPlanted + number)
         }
     },
     
     setLollipopsPlanted : function(value){
         // We change the value
-        this.lollipopsPlanted = value;
+        this.lollipopsPlanted = value
         
         // We update on page
-        html.setInner("lp_planted", "Lp planted : " + this.lollipopsPlanted);
+        html.setInner("lp_planted", "Lp planted : " + this.lollipopsPlanted)
         
         // We re calculate stuff
-        this.calculateLollipopsPerDay();
-        this.calculateLollipopsProductionFromLollipopsPerDay();
+        this.calculateLollipopsPerDay()
+        this.calculateLollipopsProductionFromLollipopsPerDay()
     },
     
     calculateLollipopsProductionFromLollipopsPerDay : function() {
@@ -83,22 +83,22 @@ var farm = {
     },
 
     setProductionDelayType: function(value){
-        this.productionDelayType = value;
+        this.productionDelayType = value
     },
     
     setLollipopsProduction : function(value){
         /* TODO bug sets production to n/none */
-        this.lollipopsProduction = value;
-        html.setInner("lp_production", "Production : " + this.lollipopsProduction + " lp/" + this.productionDelayType);
+        this.lollipopsProduction = value
+        html.setInner("lp_production", "Production : " + this.lollipopsProduction + " lp/" + this.productionDelayType)
     },
     
     setMaxLollipopsPerDay : function(value){
         // We set the max lollipops per day
-        this.maxLollipopsPerDay = value;
+        this.maxLollipopsPerDay = value
         
         // We re calculate stuff
-        this.calculateLollipopsPerDay();
-        this.calculateLollipopsProductionFromLollipopsPerDay();
+        this.calculateLollipopsPerDay()
+        this.calculateLollipopsProductionFromLollipopsPerDay()
     }
     
-};
+}
