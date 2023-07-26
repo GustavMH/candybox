@@ -1,3 +1,6 @@
+const bool_to_n = (bool) => bool ? 1 : 0
+const n_to_bool = (n) => n == 1
+
 const range = (n) => Array(n).fill(1).map((_, i) => i)
 const getXY = (block, x, y) => block[y][x]
 const replace_at_idx = (arr, i, elem) => Object.assign(arr, {[i]: elem})

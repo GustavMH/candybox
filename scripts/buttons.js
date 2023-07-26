@@ -67,7 +67,7 @@ const buttons = {
             // We enable the tab bar
             html.setElementDisplay("tabBar", "")
             // And we enable some tabs
-	        tabs.enable(0)
+            tabs.enable(0)
             tabs.enable(1)
             tabs.enable(2)
             // And we show the switch tabs button
@@ -128,67 +128,31 @@ const buttons = {
     },
     
     checkComputer : function(){
-        if(lollipops.nbrOwned >= 1000000){
-            html.showButton("computer_bug_1")
-            html.showButton("computer_comment_1")
-        }
-        else{
-            html.hideButton("computer_bug_1")
-        }
-        
-        if(lollipops.nbrOwned >= 10000000){
-            html.showButton("computer_bug_2")
-            html.showButton("computer_comment_2")
-        }
-        else{
-            html.hideButton("computer_bug_2")
-        }
-        
-        if(lollipops.nbrOwned >= 100000000){
-            html.showButton("computer_bug_3")
-            html.showButton("computer_comment_3")
-        }
-        else{
-            html.hideButton("computer_bug_3")
-        }
-        
-        if(lollipops.nbrOwned >= 1000000000){
-            html.showButton("computer_bug_4")
-            html.showButton("computer_comment_4")
-        }
-        else{
-            html.hideButton("computer_bug_4")
-        }
-        
-        if(lollipops.nbrOwned >= 10000000000){
-            html.showButton("computer_bug_5")
-            html.showButton("computer_comment_5")
+        Array(8).fill("").forEach((_, i) => {
+            const n = 10**(6+i)
+            if (lollipops.nbrOwned >= n) {
+                html.showButton(`computer_bug_${1+i}`)
+                html.showButton(`computer_comment_${1+i}`)
+            } else {
+                html.hideButton(`computer_bug_${1+i}`)
+            }
+        })
+
+        if(lollipops.nbrOwned >= (10**10))
             html.showButton("computer_note")
-        }
-        else{
-            html.hideButton("computer_bug_5")
-        }
-        
-        if(lollipops.nbrOwned >= 100000000000) html.showButton("computer_bug_6")
-        else html.hideButton("computer_bug_6")
-        
-        if(lollipops.nbrOwned >= 1000000000000) html.showButton("computer_bug_7")
-        else html.hideButton("computer_bug_7")
-        
-        if(lollipops.nbrOwned >= 10000000000000) html.showButton("computer_bug_8")
-        else html.hideButton("computer_bug_8")
     },
     
-    checkCoatSwordButton : function(){
+    checkCoatSwordButton : function() {
         // Show the coat the diamond blbl sword button
-        if(chocolateBars.nbrOwned >= 1 && sword.name == "polished candy diamond sword"){
+        if(chocolateBars.nbrOwned >= 1 &&
+           sword.name == "polished candy diamond sword") {
             html.showButton("coat")
             this.enableButton("coat")
             html.setElementDisplay("encrust", "none")
             html.setElementDisplay("polish", "none")
             html.setElementDisplay("coat", "inline")
-        }
-        else html.disableButton("coat")
+        } else
+            html.disableButton("coat")
     },
     
     checkChocolateBars : function(){
@@ -228,41 +192,17 @@ const buttons = {
     },
     
     checkObjects : function(){
-        // Show the button to go to the swamp map
-        if(objects.all.swampMap.have){
-            html.setElementDisplay("go_to_swamp", "block")
-            html.showButton("go_to_swamp")
-            this.enableButton("go_to_swamp")
-        }
-        // Show the button to go to the hut
-        if(objects.all.hutMap.have){
-            html.setElementDisplay("go_to_hut", "block")
-            html.showButton("go_to_hut")
-            this.enableButton("go_to_hut")
-        }
-        // Show the button to go to the wishing well
-        if(objects.all.wellMap.have){
-            html.setElementDisplay("go_to_well", "block")
-            html.showButton("go_to_well")
-            this.enableButton("go_to_well")
-        }
-        // Show the button to go to the forge
-        if(objects.all.forgeMap.have){
-            html.setElementDisplay("go_to_forge", "block")
-            html.showButton("go_to_forge")
-            this.enableButton("go_to_forge")
-        }
-        
-        // Check the farm visibility
+        ["swamp", "hut", "well", "forge"].forEach(place => {
+            if(objects.all[place + "Map"].have){
+                html.setElementDisplay("go_to_" + place, "block")
+                html.showButton("go_to_" + place)
+                this.enableButton("go_to_" + place)
+            }
+        })
+
         farm.checkVisibility()
-        
-        // Check some farm's buttons
         this.checkLollipopsPlantingButtons()
-        
-        // Check the candies converter visibility
         candiesConverter.checkVisibility()
-        
-        // Check the cauldron visibility
         cauldron.checkVisibility()
     },
     
@@ -299,15 +239,15 @@ const buttons = {
                     html.showButton("hut_throw_lollipops")
                     if(lollipops.nbrOwned >= 10){
                         this.enableButton("hut_throw_lollipops")
-                    }
-                    else html.disableButton("hut_throw_lollipops")
+                    } else
+                        html.disableButton("hut_throw_lollipops")
                 break
                 case 2:
                     for(var i = 0; i < spells.list.length; i++){
                         if(hut.canThisSpellBeUsed(i)){
                             this.enableButton("hut_spell_" + i)
-                        }
-                        else html.disableButton("hut_spell_" + i)
+                        } else
+                            html.disableButton("hut_spell_" + i)
                     }
                     // Special surpass button
                     if(quest.maxLandOrder == 7 && yourself.canSurpass == false){

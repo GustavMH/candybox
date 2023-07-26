@@ -1,8 +1,5 @@
 var code = ""
 
-const bool_to_n = (bool) => bool ? 1 : 0
-const n_to_bool = (n) => n == 1
-
 function save() {
 	var date = new Date()
 	

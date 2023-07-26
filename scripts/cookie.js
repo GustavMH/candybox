@@ -122,30 +122,21 @@ var cookie = {
 					":" + wishingWell.step +
 					":" + bool_to_n(yourself.canSurpass) +
 					":" + bool_to_n(developperComputer.won)
-		
 	},
 	
 	setData : function() {
-		
-		var var_list = []
-		
-		var payload = cookie.read("CandyCookie")
-		var_list = payload.split(":")
+		const payload = cookie.read("CandyCookie")
+		const var_list = payload.split(":")
 
-		if(var_list.length != 90)
-		{
+		if(var_list.length != 90) {
 			alert("ERROR: Corrupt Candycookie Length:" + var_list.length)
-			console.log("ERROR: Corrupt Candycookie Length:" + var_list.length); 
-			return null
+			console.log("ERROR: Corrupt Candycookie Length:" + var_list.length)
+		} else {
+			cookie.updateData(var_list)
 		}
-		
-		cookie.updateData(var_list)
-		
-		
 	},
 	
 	updateData : function(var_list) {
-	
 		if(Number(var_list[0]) == 0) {
 			code = ""
 		} else {
@@ -159,7 +150,6 @@ var cookie = {
 		}
 		
 		sword.setSpecialSword(n_to_bool(Number(var_list[2])))
-		
 		sword.setSpecialPower(Number(var_list[3]))
         candies.setNbrOwned(Number(var_list[4]))
 		

@@ -8,11 +8,11 @@ var candies = {
     candiesPerSecond : 1,
     
     // Functions
-    onload : function(){
+    onload : function() {
         candies.setNbrOwned(0); // We first have 0 candies
     },
     
-    eat : function(){
+    eat : function() {
         this.setNbrEaten(this.nbrEaten + this.nbrOwned)
         this.setNbrOwned(0)
     },
@@ -23,10 +23,9 @@ var candies = {
     
     setNbrOwned : function(value){
         // If this is an increase, we increase nbr total too
-        if(value > this.nbrOwned){
+        if(value > this.nbrOwned)
             this.setNbrTotal(this.nbrTotal + value - this.nbrOwned)
-        }
-        
+
         this.nbrOwned = value
 
         text = this.nbrOwned != 1
@@ -54,8 +53,7 @@ var candies = {
         this.candiesPerSecond = value
     },
     
-    setNbrThrown : (n_thrown) => {
-        console.log(n_thrown)
+    setNbrThrown : function(n_thrown) {
         this.nbrThrown = n_thrown
 
         // We choose which smiley we want to add at the end of the sentence
@@ -66,16 +64,14 @@ var candies = {
 
         darkMode.check()
 
-        text = n_thrown != 1
-            ? `You threw ${this.nbrThrown} candies on the ground ${smiley}`
-            : `You threw 1 candy on the ground ${smiley}`
-        
-        html.setInner("candies_thrown", text)
-        html.setElementVisibility("candies_thrown", true)
+        if (n_thrown != 0) {
+            text = `You threw ${this.nbrThrown} candies on the ground ${smiley}`
+            html.setInner("candies_thrown", text)
+            html.setElementVisibility("candies_thrown", true)
+        }
     },
     
     throw10Candies : function(){
-        console.log(this)
         if(this.nbrOwned >= 10){ // If we have at least 10 candies
             this.setNbrOwned(this.nbrOwned - 10)
             this.setNbrThrown(this.nbrThrown + 10)
