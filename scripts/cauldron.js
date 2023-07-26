@@ -32,7 +32,7 @@ var cauldron = {
         this.actionsList.push({type:type, nbrCandies:nbrCandies, nbrLollipops:nbrLollipops, timer:timer})
 
         // We delete one action if there's too much actions in the list
-        if(this.actionsList.length > 3){
+        if(ths.actionsList.length > 3){
             this.actionsList.splice(0, 1)
         }
     },
@@ -359,26 +359,19 @@ var cauldron = {
                 if(resultsList[i].special != true){
                     if(resultsList[i].nbr > 1){
                         resultsText += "You made " + resultsList[i].nbr + " " + resultsList[i].type + " potions !<br/>"
-                    }
-                    else{
+                    } else
                         resultsText += "You made a " + resultsList[i].type + " potion.<br/>"
-                    }
-                }
-                else{
+                } else {
                     if(resultsList[i].nbr > 1){
                         resultsText += "You made " + resultsList[i].nbr + " " + resultsList[i].plural + " !<br/>"
-                    }
-                    else{
+                    } else
                         resultsText += "You made a " + resultsList[i].type + ".<br/>"
-                    }
                 }
             }
             html.setInner("cauldron_results_text", resultsText)
-        }
-        else{
+        } else
             html.setInner("cauldron_results_text", "You don't manage to get anything interesting with that preparation.<br/>Did you follow the manual's instructions ?")
-        }
-        
+
         // We empty the cauldron
         this.setCandiesInTheCauldron(0)
         this.setLollipopsInTheCauldron(0)

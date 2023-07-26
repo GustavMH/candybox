@@ -226,24 +226,24 @@ var cookie = {
 
 		// OFFSET 34
 
-		const items = [
+		const _items = [
 			"key", "hutMap", "wellMap", "swampMap", "boots", "magicianHat",
 			"pinkRing", "forgeMap", "candiesConverter", "plateArmour", "cauldron",
 			"magicalHorn", "hornOfPlenty", "oldAmulet"
 		]
 
-		items.map((item, i) => {
+		_items.map((item, i) => {
 			objects.setHaveObject(item, n_to_bool(Number(var_list[i+34])))
 		})
 
-		const potions = [
+		const _potions = [
 			"health", "escape", "berserk", "fireScroll", "acidRainScroll",
 			"teleportScroll", "earthquakeScroll", "impInvocationScroll",
 			"majorHealth", "invulnerability", "turtle", "jelly", "seed",
 			"cloning", "superman", "gmooh"
 		]
 
-		potions.map((potion, i) => {
+		_potions.map((potion, i) => {
 			potions.setPotionShown(potions.list[potion], n_to_bool(Number(var_list[i+48])))
 			potions.setPotionNbrOwned(potions.list[potion], Number(var_list[i+64]))
 		})

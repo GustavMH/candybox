@@ -1,6 +1,4 @@
 var farm = {
-    
-    // Variables
     lollipopsPlanted : 0, // The number of lollipops planted in the farm
     productionDelayType : "none", // On which delay does the farm product lollipops (day, hour, min, sec...)
     lollipopsPerDay : 0, // How many lollipops the farm produce every day
@@ -14,11 +12,13 @@ var farm = {
     calculateLollipopsPerDay : function(){
         if(this.lollipopsPlanted <= 293){ // sqrt(86400) = 293
             this.lollipopsPerDay = Math.pow(this.lollipopsPlanted, 2); // 293 will give 85849
-        }
-        else{ // When we're counting in lp/sec, this function is used instead of the other one. It will stabilize the curve.
-            var prod = (this.lollipopsPlanted - 122) * 500; // 194 will give 86000
-            if(prod < this.maxLollipopsPerDay) this.lollipopsPerDay = prod
-            else this.lollipopsPerDay = this.maxLollipopsPerDay
+        } else { // When we're counting in lp/sec, this function is used instead of the other one. It will stabilize the curve.
+            const prod = (this.lollipopsPlanted - 122) * 500; // 194 will give 86000
+
+            if (prod < this.maxLollipopsPerDay)
+                this.lollipopsPerDay = prod
+            else
+                this.lollipopsPerDay = this.maxLollipopsPerDay
         }
     },
     
@@ -27,7 +27,9 @@ var farm = {
         this.plantingButtonsStep = value
 
         button_fn = (n) => `<button class='home_button' id='plant_${n}_lp' onClick='farm.plantLollipops(${n});'>${n}</button>`
+
         const inner_text = range(value).map((_, n) => button_fn(10**n)).join("")
+
         html.setInner("lp_buttons", `Plant ${inner_text} lp`)
 
         // Check the buttons
@@ -79,13 +81,9 @@ var farm = {
         ].find(([lpd]) => this.lollipopsPerDay < lpd)
 
         this.setLollipopsProduction(Math.floor(this.lollipopsPerDay / divisor ))
-        this.setProductionDelayType(delay_type)
+        this.productionDelayType = delay_type
     },
 
-    setProductionDelayType: function(value){
-        this.productionDelayType = value
-    },
-    
     setLollipopsProduction : function(value){
         /* TODO bug sets production to n/none */
         this.lollipopsProduction = value

@@ -7,11 +7,11 @@
 <html>
     <head>
         <title>Candy box !</title>
-		<meta name="title" content="Candy Box">
-		<meta name="keywords" content="Candy,Box,Candybox,Original,Legacy,1,Candybox 1,Candy Box 1,Candy Box,game,ascii,save">
-		<meta name="author" content="aniwey">
-		<meta name="description" content="Candy Box is a role-playing browser video game featuring ASCII art. It was developed by indie game developer aniwey.">
-		<meta http-equiv="Cache-control" content="no-cache">
+        <meta name="title" content="Candy Box">
+        <meta name="keywords" content="Candy,Box,Candybox,Original,Legacy,1,Candybox 1,Candy Box 1,Candy Box,game,ascii,save">
+        <meta name="author" content="aniwey">
+        <meta name="description" content="Candy Box is a role-playing browser video game featuring ASCII art. It was developed by indie game developer aniwey.">
+        <meta http-equiv="Cache-control" content="no-cache">
         <link rel="shortcut icon" href="./favicon.ico"/> <!-- Favicon by HacksawUnit \o/ Thanks to him ! -->
         <!-- ascii data -->
         <script type="text/javascript" src="./scripts/data/data.js"></script>
@@ -71,39 +71,39 @@
         <script type="text/javascript" src="./scripts/lollipops.js"></script>
         
         <!-- Objects stuff -->
-		<!-- The objects.js file -->
-		<script type="text/javascript" src="./scripts/objects.js"></script>
-		<!-- Files used by objects -->
-		<script type="text/javascript" src="./scripts/spells.js"></script>
-		<!-- Objects themselves -->
-		<script type="text/javascript" src="./scripts/farm.js"></script>
-		<script type="text/javascript" src="./scripts/hut.js"></script>
-		<script type="text/javascript" src="./scripts/swamp.js"></script>
-		<script type="text/javascript" src="./scripts/wishingWell.js"></script>
-		<script type="text/javascript" src="./scripts/forge.js"></script>
-		<script type="text/javascript" src="./scripts/candiesConverter.js"></script>
-		<script type="text/javascript" src="./scripts/cauldron.js"></script>
-		<script type="text/javascript" src="./scripts/computer.js"></script>
+        <!-- The objects.js file -->
+        <script type="text/javascript" src="./scripts/objects.js"></script>
+        <!-- Files used by objects -->
+        <script type="text/javascript" src="./scripts/spells.js"></script>
+        <!-- Objects themselves -->
+        <script type="text/javascript" src="./scripts/farm.js"></script>
+        <script type="text/javascript" src="./scripts/hut.js"></script>
+        <script type="text/javascript" src="./scripts/swamp.js"></script>
+        <script type="text/javascript" src="./scripts/wishingWell.js"></script>
+        <script type="text/javascript" src="./scripts/forge.js"></script>
+        <script type="text/javascript" src="./scripts/candiesConverter.js"></script>
+        <script type="text/javascript" src="./scripts/cauldron.js"></script>
+        <script type="text/javascript" src="./scripts/computer.js"></script>
 
-		<script type="text/javascript" src="./scripts/save.js"></script>
-				
-		<!-- Additions for Save/Load Mod -->
-		<script type="text/javascript" src="./libs/modernizr.js"></script>
-		<script type="text/javascript" src="./scripts/load.js"></script>
-		<script type="text/javascript" src="./scripts/cookie.js"></script>
+        <script type="text/javascript" src="./scripts/save.js"></script>
 
-		<!-- Additions for Dark Mode -->
-		<script type="text/javascript" src="./scripts/darkMode.js"></script>
+        <!-- Additions for Save/Load Mod -->
+        <script type="text/javascript" src="./libs/modernizr.js"></script>
+        <script type="text/javascript" src="./scripts/load.js"></script>
+        <script type="text/javascript" src="./scripts/cookie.js"></script>
 
-		<!-- The main js file which calls the other ones -->
+        <!-- Additions for Dark Mode -->
+        <script type="text/javascript" src="./scripts/darkMode.js"></script>
+
+        <!-- The main js file which calls the other ones -->
         <script type="text/javascript" src="./scripts/main.js"></script>
 
         <!-- Design -->
         <link rel="stylesheet" type="text/css" href="./design.css"/>
     </head>
     <body>
-	
-	
+
+
         <button class="toggle" style="visibility:hidden"></button>
         <!-- ******** -->
         <!-- TAB LIST -->
@@ -133,7 +133,7 @@
                     <span id="farm" style="visibility:hidden">
 <pre>
                  _.-^-._     .'''.
-              .-'   _   '-. | <span id="farm_big_lollipop" onclick="farm.clickedOnTheBigLollipop();"> ~ </span> |
+              .-'   _   '-. | <span id="farm_big_lollipop" onclick="farm.currentFlagIndex += 1;"> ~ </span> |
              /     |_|     \ '._.'
             /               \  |
            /|     _____     |\ |
@@ -161,10 +161,10 @@
             
             <div>
                 <button class="home_button" id="saveButton" onclick="save();" style="visibility:visible">Save</button><span id="save"></span>
-				<button class="home_button" id="loadButton" onclick="load();" style="visibility:visible">Load</button><span id="load"></span>
-				<button class="home_button" id="restartButton" onclick="restart();" style="visibility:visible">Restart Game</button><span id="restart">
+                <button class="home_button" id="loadButton" onclick="load();" style="visibility:visible">Load</button><span id="load"></span>
+                <button class="home_button" id="restartButton" onclick="restart();" style="visibility:visible">Restart Game</button><span id="restart">
                         <button class="home_button dark_mode_toggle" id="darkModeToggle" onclick="darkMode.toggle();" style="visibility:hidden">Dark Mode: OFF</button></span><br/><br/>
-				<input type="file" style="display:none" id="my_file" name="file" enctype="multipart/form-data" />
+                <input type="file" style="display:none" id="my_file" name="file" enctype="multipart/form-data" />
                 <span id="candies"></span><br/>
                 <pre id="candies_converter" style="display:none">
   |
