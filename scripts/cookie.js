@@ -231,46 +231,15 @@ var cookie = {
         objects.setHaveObject("hornOfPlenty", n_to_bool(Number(var_list[46])))
         objects.setHaveObject("oldAmulet", n_to_bool(Number(var_list[47])))
 		
-		//
-		potions.setPotionShown(potions.list.impInvocationScroll, n_to_bool(Number(var_list[55])))
-		potions.setPotionShown(potions.list.earthquakeScroll, n_to_bool(Number(var_list[54])))
-		potions.setPotionShown(potions.list.teleportScroll, n_to_bool(Number(var_list[53])))
-		potions.setPotionShown(potions.list.fireScroll, n_to_bool(Number(var_list[51])))
-		potions.setPotionShown(potions.list.acidRainScroll, n_to_bool(Number(var_list[52])))
-		potions.updateOnPage()
+		// OFFSET 48
+		const potions = ["health", "escape", "berserk", "fireScroll", "acidRainScroll", "teleportScroll", "earthquakeScroll",
+		 "impInvocationScroll", "majorHealth", "invulnerability", "turtle", "jelly", "seed",
+		 "cloning", "superman", "gmooh"]
 
-		potions.setPotionShown(potions.list.gmooh, n_to_bool(Number(var_list[63])))
-		potions.setPotionShown(potions.list.superman, n_to_bool(Number(var_list[62])))
-		potions.setPotionShown(potions.list.cloning, n_to_bool(Number(var_list[61])))
-		potions.setPotionShown(potions.list.seed, n_to_bool(Number(var_list[60])))
-		potions.setPotionShown(potions.list.jelly, n_to_bool(Number(var_list[59])))
-		potions.setPotionShown(potions.list.turtle, n_to_bool(Number(var_list[58])))
-		potions.setPotionShown(potions.list.invulnerability, n_to_bool(Number(var_list[57])))
-		potions.setPotionShown(potions.list.majorHealth, n_to_bool(Number(var_list[56])))
-		potions.setPotionShown(potions.list.berserk, n_to_bool(Number(var_list[50])))
-		potions.setPotionShown(potions.list.escape, n_to_bool(Number(var_list[49])))
-		potions.setPotionShown(potions.list.health, n_to_bool(Number(var_list[48])))
-		potions.updateOnPage()
-		//
-        
-		potions.setPotionNbrOwned(potions.list.impInvocationScroll, Number(var_list[71]))
-		potions.setPotionNbrOwned(potions.list.earthquakeScroll, Number(var_list[70]))
-		potions.setPotionNbrOwned(potions.list.teleportScroll, Number(var_list[69]))
-		potions.setPotionNbrOwned(potions.list.fireScroll, Number(var_list[67]))
-		potions.setPotionNbrOwned(potions.list.acidRainScroll, Number(var_list[68]))
-		potions.updateOnPage()
-
-		potions.setPotionNbrOwned(potions.list.gmooh, Number(var_list[79]))
-		potions.setPotionNbrOwned(potions.list.superman, Number(var_list[78]))
-		potions.setPotionNbrOwned(potions.list.cloning, Number(var_list[77]))
-		potions.setPotionNbrOwned(potions.list.seed, Number(var_list[76]))
-		potions.setPotionNbrOwned(potions.list.jelly, Number(var_list[75]))
-		potions.setPotionNbrOwned(potions.list.turtle, Number(var_list[74]))
-		potions.setPotionNbrOwned(potions.list.invulnerability, Number(var_list[73]))
-		potions.setPotionNbrOwned(potions.list.majorHealth, Number(var_list[72]))
-		potions.setPotionNbrOwned(potions.list.berserk, Number(var_list[66]))
-		potions.setPotionNbrOwned(potions.list.escape, Number(var_list[65]))
-		potions.setPotionNbrOwned(potions.list.health, Number(var_list[64]))
+		potions.map((potion, i) => {
+			potions.setPotionShown(potions.list[potion], n_to_bool(Number(var_list[i+48])))
+			potions.setPotionNbrOwned(potions.list[potion], Number(var_list[i+64]))
+		})
 		potions.updateOnPage()
 
 		quest.setMaxLandOrder(Number(var_list[80]))
