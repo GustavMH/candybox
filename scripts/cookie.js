@@ -1,3 +1,10 @@
+function save() {
+	const save_text = this.getData()
+	const filename = "candybox_" + (new Date()).toISOString().substr(0,16)
+	const blob = new Blob([save_text], {type: "text/plain;charset=utf-8"})
+	saveAs(blob, filename+".cs")
+}
+
 var cookie = {
 	cookieHandler : null,
 	
@@ -16,8 +23,10 @@ var cookie = {
 		var ca = document.cookie.split(';')
 		for(var i=0;i < ca.length;i++) {
 			var c = ca[i]
-			while (c.charAt(0)==' ') c = c.substring(1,c.length)
-			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length)
+			while (c.charAt(0)==' ')
+				c = c.substring(1,c.length)
+			if (c.indexOf(nameEQ) == 0)
+				return c.substring(nameEQ.length,c.length)
 		}
 		return null
 	},
@@ -31,7 +40,6 @@ var cookie = {
 	},
 	
 	getData : function() {
-		
 		return "" + ((code === undefined || code == null || code.length == "") ? 0 : code) +
 					":" + sword.name +
 					":" + bool_to_n(sword.specialSword) +

@@ -11,7 +11,6 @@ const restart = () => {
 }
 
 function readFile (evt) {
-	
 	var files = evt.target.files
 	var file = files[0];           
 	var reader = new FileReader()
