@@ -215,26 +215,25 @@ var cookie = {
 		peacefulForest.basicChestProbability = Number(var_list[32])
 		peacefulForest.poniesEncountered = Number(var_list[33])
 		//
-		
-		objects.setHaveObject("key", n_to_bool(Number(var_list[34])))
-        objects.setHaveObject("boots", n_to_bool(Number(var_list[38])))
-        objects.setHaveObject("swampMap", n_to_bool(Number(var_list[37])))
-        objects.setHaveObject("hutMap", n_to_bool(Number(var_list[35])))
-        objects.setHaveObject("wellMap", n_to_bool(Number(var_list[36])))
-        objects.setHaveObject("magicianHat", n_to_bool(Number(var_list[39])))
-        objects.setHaveObject("pinkRing", n_to_bool(Number(var_list[40])))
-        objects.setHaveObject("forgeMap", n_to_bool(Number(var_list[41])))
-        objects.setHaveObject("candiesConverter", n_to_bool(Number(var_list[42])))
-        objects.setHaveObject("plateArmour", n_to_bool(Number(var_list[43])))
-        objects.setHaveObject("cauldron", n_to_bool(Number(var_list[44])))
-        objects.setHaveObject("magicalHorn", n_to_bool(Number(var_list[45])))
-        objects.setHaveObject("hornOfPlenty", n_to_bool(Number(var_list[46])))
-        objects.setHaveObject("oldAmulet", n_to_bool(Number(var_list[47])))
-		
-		// OFFSET 48
-		const potions = ["health", "escape", "berserk", "fireScroll", "acidRainScroll", "teleportScroll", "earthquakeScroll",
-		 "impInvocationScroll", "majorHealth", "invulnerability", "turtle", "jelly", "seed",
-		 "cloning", "superman", "gmooh"]
+
+		// OFFSET 34
+
+		const items = [
+			"key", "hutMap", "wellMap", "swampMap", "boots", "magicianHat",
+			"pinkRing", "forgeMap", "candiesConverter", "plateArmour", "cauldron",
+			"magicalHorn", "hornOfPlenty", "oldAmulet"
+		]
+
+		items.map((item, i) => {
+			objects.setHaveObject(item, n_to_bool(Number(var_list[i+34])))
+		})
+
+		const potions = [
+			"health", "escape", "berserk", "fireScroll", "acidRainScroll",
+			"teleportScroll", "earthquakeScroll", "impInvocationScroll",
+			"majorHealth", "invulnerability", "turtle", "jelly", "seed",
+			"cloning", "superman", "gmooh"
+		]
 
 		potions.map((potion, i) => {
 			potions.setPotionShown(potions.list[potion], n_to_bool(Number(var_list[i+48])))
