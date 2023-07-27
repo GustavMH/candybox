@@ -1,4 +1,4 @@
-const get_text = (things, {level, path}, effects={}) => {
+const get_text = (things, {level, path, mask, mask_y}, effects={}) => {
     const non_chars = Object.values(effects).flat()
     const characters = things
           .map(({type, text}, i) => [type != "none" ? [text] : false, ...path[i]])
@@ -6,7 +6,11 @@ const get_text = (things, {level, path}, effects={}) => {
 
     return layer_texts(
         level,
-        [...non_chars, ...characters]
+        [
+          ...non_chars,
+          ...characters,
+          ...mask ? [make_mask(level, mask, mask_y)] : []
+        ]
     ).join("\n")
 }
 
@@ -37,6 +41,23 @@ const spawn_by_interval = (things, intervals) => things
       .forEach(([i, type]) => quest.things[i] = land.create(data.mobs[type]))
 
 const getText = {
+    castleEntrance: function(){
+        const land = data.lands.castleEntrance
+        const characters = quest.things
+              .map(({type, text}, i) => [type != "none" ? text : false, i*3, height(land.height, i)])
+              .filter(([a]) => a)
+
+        /* TODO should be a character */
+        const { x, y, exists } = castleEntrance.magicBall
+        const magic_ball = [exists ? ["*"] : false, x, y]
+
+        return layer_texts(
+            data.ascii.castleEntrance,
+            [...characters,
+             magic_ball,
+             make_mask(data.ascii.castleEntrance, land.mask, 18)]
+        ).join("")
+    },
     developperComputer : function(){
         const textBefore = (index == this.size-2)
               ? "<b>You must press a certain key to kill the developper.</b>\n\n" : ""
@@ -98,23 +119,6 @@ const getText = {
         const before = center_line(`"${this.currentFact}"`, size) + "\n\n\n\n"
 
         return before + text
-    },
-    castleEntrance: function(){
-        const land = data.lands.castleEntrance
-        const characters = quest.things
-              .map(({type, text}, i) => [type != "none" ? text : false, i*3, height(land.height, i)])
-              .filter(([a]) => a)
-
-        /* TODO should be a character */
-        const { x, y, exists } = castleEntrance.magicBall
-        const magic_ball = [exists ? ["*"] : false, x, y]
-
-        return layer_texts(
-            data.ascii.castleEntrance,
-            [...characters,
-             magic_ball,
-             make_mask(data.ascii.castleEntrance, land.mask, 18)]
-        ).join("")
     },
     cow: function(){
         const characters = quest.things

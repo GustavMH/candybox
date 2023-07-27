@@ -4,9 +4,11 @@ const underwaterCave = {
         land.addLand("Underwater cave", 54, 2, this.load.bind(this), this.getText.bind(this), this.move.bind(this))
     },
     move : function(){
+        /* TODO Effect are first active after first move*/
+
         /* Add the whale ascii */
-        quest.effects.whale = (quest.things[51].type != "mob")
-            ? [[data.ascii.whale, 4, 15]] : []
+        quest.effects.whale = (quest.things[51].type == "mob")
+            ? [[data.ascii.whale, 2, 15]] : []
 
         // We make bubbles go up
         quest.effects.bubbles.forEach(([x,y], i) => {
@@ -24,6 +26,7 @@ const underwaterCave = {
                 quest.effects.bubbles.push([["&deg"], x, y])
         }
     },
+    /* TODO BUG spawning density seems low */
     load : () => spawn_by_interval(quest.things, data.lands.underwaterCave.spawning_intervals),
     getText : () => get_text(quest.things, data.lands.underwaterCave, quest.effects)
 }

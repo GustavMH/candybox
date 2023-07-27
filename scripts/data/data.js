@@ -118,16 +118,24 @@ data = {
             bubblesStartingPositions: [[10,9],[13,9],[18,11],[20,11],[22,11],[24,11],[26,11],[30,10],[32,10],[34,10],[38,9],[41,8],[43,8],[54,7],[56,7],[57,5],[59,5],[63,18],[61,18],[59,18],[57,18],[55,18],[53,18],[51,18],[49,19],[47,19],[45,19],[43,19],[41,19],[38,18],[36,18],[34,18],[32,18],[30,18],[27,19],[25,19],[23,19],[21,19],[18,20],[16,20],[14,20],[12,20],[10,20],[7,19],[5,19],[3,19]],
             spawning_intervals: [
                 // oneOutOf prob, start, end, type
-                { inverse_probability: 2, start_index: 3, end_index: 26, type: "fish" },
-                { inverse_probability: 3, start_index: 26, end_index: 36, type: "eel" },
-                { inverse_probability: 2, start_index: 36, end_index: 47, type: "fish" },
-                { inverse_probability: (10/9), start_index: 48, end_index: 51, type: "octopus" },
-                { inverse_probability: 1, start_index: 51, end_index: 52, type: "theWhale" },
+                { inv_prob: 2,      prob_add: 0, after: 3,  before: 26, type: "fish" },
+                { inv_prob: 3,      prob_add: 0, after: 26, before: 36, type: "eel" },
+                { inv_prob: 2,      prob_add: 0, after: 36, before: 47, type: "fish" },
+                { inv_prob: (10/9), prob_add: 0, after: 48, before: 51, type: "octopus" },
+                { inv_prob: 1,      prob_add: 0, after: 51, before: 52, type: "theWhale" },
             ]
         },
         castleEntrance: {
             height: [[0,20], [26,19], [27, 18]],
-            mask: [28, 29, 30]
+            mask: [28, 29, 30],
+            mask_y: 19,
+            spawning_intervals: [
+                // oneOutOf prob, start, end, type
+                { inv_prob: 1, prob_add: 0, after: 10,  before: 11, type: "guard" },
+                { inv_prob: 1, prob_add: 0, after: 12,  before: 13, type: "guard" },
+                { inv_prob: 1, prob_add: 0, after: 15,  before: 16, type: "guard" },
+                { inv_prob: 1, prob_add: 0, after: 16,  before: 17, type: "guard" }
+            ]
         },
         castleStairs: {
             height: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18],[18,19]]
@@ -209,7 +217,7 @@ data = {
         eel: {type: "mob", text: "EEL", max_hp: 3, hp: 3, weapon: "electric tail", description: "An eel. Weak, but aggressive.", drops: {"candies": [50, 50+50]}},
         fish: {type: "mob", text: "F~H", max_hp: [9, 12, 1], hp: [9, 12, 1], weapon: "fins", description: "A fish. Easy to beat.", drops: {"candies": 5}},
         octopus: {type: "mob", text: "OCT", max_hp: 45, hp: 45, weapon: "tentacles", description: "An octopus guardian. It looks dangerous.", drops: {}},
-        theWhale: {type: "mob", text: "The Whale.", max_hp: 100, hp: 100, weapon: "giant tail", description: "The Whale does not like to be disturbed.", drops: {"candies": [400, 400+400], "key": 1, "hutMap": 1, "swampMap": 1, "boots": 1, "wellMap": 1, "magicianHat": 1, "pinkRing": 1, "forgeMap": 1}},
+        theWhale: {type: "mob", text: "__/", max_hp: 100, hp: 100, weapon: "giant tail", description: "The Whale does not like to be disturbed.", drops: {"candies": [400, 400+400], "key": 1, "hutMap": 1, "swampMap": 1, "boots": 1, "wellMap": 1, "magicianHat": 1, "pinkRing": 1, "forgeMap": 1}},
         woodPony: {type: "mob", text: "WPY", max_hp: 12, hp: 12, weapon: "hooves", description: "A wood poney ! It's a poney ! It the woods !", drops: {"candies": 42}},
         sickGoblin: {type: "mob", text: "GSB", max_hp: 20, hp: [5, 10, 1], weapon: "claws", description: "A sick goblin. It smells.", drops: {"candies": [3, 3+3]}},
         nastyGoblin: {type: "mob", text: "GOB", max_hp: 20, hp: 20, weapon: "claws", description: "A nasty goblin.", drops: {"candies": [3, 3+3]}},
