@@ -115,5 +115,4 @@ const shop = {
     setMerchantSpeech : function(text){
         html.setInner("merchant_speech", format_speech(text, 20, " "))
     }
-    
 }

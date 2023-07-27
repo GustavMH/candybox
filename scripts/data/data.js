@@ -152,6 +152,7 @@ data = {
         [{ type: "mix", n_lollipops: null, n_candies: 100, duration: [11, 19] }]
     ],
     shop_selling_order: [
+        "products_after_swords",
         "wooden sword",
         "copper sword",
         "iron sword",

@@ -106,12 +106,12 @@ const sword = {
     setName : function(value) {
         this.name = value
         const order = data.shop_selling_order
-        shop.showProduct(order[1+order.findIndex((a) => a == this.name)])
+        const next_sword_name = order[1+order.findIndex((a) => a == this.name)]
 
-        // Other stuff
+        shop.showProduct(next_sword_name)
         html.setInner("sword", `You currently have a ${this.name}.`)
-        quest.defineMood()
         html.setElementVisibility("sword", true)
+        quest.defineMood()
         html.setElementVisibility("quest_form", true)
         buttons.checkSword()
         inventory.updateOnPage()
